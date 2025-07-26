@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="h-full bg-white">
+  <%- include('../partials/head') %>
+  <%- defineContent('head') %>
+</head>
+<body class="h-full" >
+<div>
+    <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
+    <%- include('../ui/sidebars/mobile') %>
+  
+    <!-- Static sidebar for desktop -->
+    <%- include('../ui/sidebars/desktop') %>
+  
+    <div class="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-4 shadow-xs sm:px-6 lg:hidden">
+      <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" id="open-sidebar-button">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+      <div class="flex-1 text-sm/6 font-semibold text-gray-900"><%= title || 'Dashboard' %></div>
+      <a href="/profile">
+        <span class="sr-only">Il tuo profilo</span>
+        <% if (user && user.avatar) { %>
+          <img class="size-8 rounded-full bg-gray-50" src="<%= user.avatar %>" alt="<%= user.name %>">
+        <% } else { %>
+          <div class="size-8 rounded-full bg-gray-50 flex items-center justify-center">
+            <span class="text-gray-500 text-sm"><%= user ? user.name.charAt(0).toUpperCase() : 'U' %></span>
+          </div>
+        <% } %>
+      </a>
+    </div>
+  
+    <main class="lg:pl-72">
+      <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+        <!-- Main area -->
+
+        <%- include('../ui/sectionHeadings/simple') %>
+
+        <%- body %>
+        
+      </div>
+    </main>
+  </div>
+
+  <%- script %>
+  <script src="/js/sidebar.js"></script>
+</body>
+</html>
+  

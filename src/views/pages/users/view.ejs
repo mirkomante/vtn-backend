@@ -1,0 +1,61 @@
+<% if (typeof successMessage !== 'undefined' && successMessage) { %>
+  <%- include('../../ui/alerts/simple', { message: successMessage }) %>
+<% } %>
+
+<div class="px-4 sm:px-0">
+    <h3 class="text-base/7 font-semibold text-gray-900">Informazioni Utente</h3>
+    <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">Dettagli personali dell'utente.</p>
+  </div>
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Nome completo</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= user.name || 'Non specificato' %></span>
+          <span class="ml-4 shrink-0">
+            <button type="button" class="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500">Modifica</button>
+          </span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Ruolo</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= user.role %></span>
+          <span class="ml-4 shrink-0">
+            <button type="button" class="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500">Modifica</button>
+          </span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Email</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= user.email %></span>
+          <span class="ml-4 shrink-0">
+            <button type="button" class="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500">Modifica</button>
+          </span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Provider di autenticazione</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= user.authProvider %></span>
+          <span class="ml-4 shrink-0">
+            <button type="button" class="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500">Modifica</button>
+          </span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Data di creazione</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= new Date(user.createdAt).toLocaleDateString('it-IT') %></span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Ultimo aggiornamento</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= new Date(user.updatedAt).toLocaleDateString('it-IT') %></span>
+        </dd>
+      </div>
+    </dl>
+  </div>
+  

@@ -1,0 +1,12 @@
+<% if (!hasUsers) { %>
+  <%- include('../../ui/emptyStates/simple', emptyState) %>
+<% } else { %>
+  <%- include('../../ui/tables/stickyHeader', {
+    title: 'Utenti',
+    description: 'Lista di tutti gli utenti registrati nel sistema.',
+    actionButton: {
+      text: 'Aggiungi utente',
+      href: '/admin/utenti/nuovo'
+    }
+  }) %>
+<% } %> 
