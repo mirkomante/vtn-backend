@@ -8,10 +8,55 @@
       text: 'Aggiungi utente',
       href: '/admin/utenti/nuovo'
     },
-    tableId: 'users-table'
+    tableId: 'users-table',
+    tableData: tableData,
+    items: users,
+    tableConfig: {
+      idField: 'id',
+      labelField: 'givenName',
+      detailUrl: '/admin/utenti/dettagli/:id',
+      editUrl: '/admin/utenti/modifica/:id',
+      editMultipleButton: {
+        text: 'Modifica'
+      },
+      actionButton: {
+        text: 'Elimina',
+        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      },
+      endpoint: '/admin/utenti',
+      method: 'DELETE',
+      confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
+      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
+      successMessage: 'Eliminati {count} utente/i con successo',
+      errorMessage: 'Errore durante l\'eliminazione',
+      getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim()
+    },
+    breadcrumbs: breadcrumbs
   }) %>
 <% } %>
 
+<script>
+  window['users-tableConfig'] = <%- JSON.stringify({
+    idField: 'id',
+    labelField: 'givenName',
+    detailUrl: '/admin/utenti/dettagli/:id',
+    editUrl: '/admin/utenti/modifica/:id',
+    editMultipleButton: {
+      text: 'Modifica'
+    },
+    actionButton: {
+      text: 'Elimina',
+      classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+    },
+    endpoint: '/admin/utenti',
+    method: 'DELETE',
+    confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
+    confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
+    successMessage: 'Eliminati {count} utente/i con successo',
+    errorMessage: 'Errore durante l\'eliminazione',
+    getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim()
+  }) %>
+</script>
 <script src="/js/selectableTable.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {

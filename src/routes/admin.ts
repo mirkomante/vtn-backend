@@ -1,8 +1,8 @@
 import express from 'express';
 import { mainMenuItems } from '../config/mainMenu';
-import { sectionMenuItems } from '../config/sectionMenu';
 import { adminItems } from '../config/sectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
+import { uiIcons } from '../config/uiIcons';
 import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
@@ -65,7 +65,12 @@ router.get('/utenti', async (req, res) => {
       emptyState: {
         title: 'Nessun utente trovato',
         description: 'Non ci sono utenti registrati nel sistema.',
-        buttonText: 'Aggiungi utente'
+        buttonText: 'Aggiungi utente',
+        buttonHref: '/admin/utenti/nuovo',
+        iconName: 'cartella-plus',
+        icon: uiIcons['cartella-plus'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
       }
     });
   } catch (error) {
@@ -402,9 +407,9 @@ router.post('/utenti/modifica/:id', async (req, res) => {
 
 // Route per soft delete di uno o più utenti
 router.delete('/utenti', async (req, res) => {
-  const { userIds } = req.body;
+  const { itemIds } = req.body;
   
-  if (!userIds || !Array.isArray(userIds) || userIds.length === 0) {
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
     return res.status(400).json({ 
       success: false, 
       message: 'Nessun utente selezionato per la cancellazione' 
@@ -415,7 +420,7 @@ router.delete('/utenti', async (req, res) => {
     // Verifica che tutti gli utenti esistano e non siano già cancellati
     const existingUsers = await prisma.user.findMany({
       where: { 
-        id: { in: userIds },
+        id: { in: itemIds },
         deletedAt: null
       }
     });
@@ -439,7 +444,7 @@ router.delete('/utenti', async (req, res) => {
     });
 
     const deletedCount = validUserIds.length;
-    const skippedCount = userIds.length - validUserIds.length;
+    const skippedCount = itemIds.length - validUserIds.length;
     
     let message = `Eliminati ${deletedCount} utente/i con successo`;
     if (skippedCount > 0) {
@@ -504,7 +509,12 @@ router.get('/utenti/cancellati', async (req, res) => {
       emptyState: {
         title: 'Nessun utente cancellato',
         description: 'Non ci sono utenti cancellati nel sistema.',
-        buttonText: 'Torna agli utenti'
+        buttonText: 'Torna agli utenti',
+        buttonHref: '/admin/utenti',
+        iconName: 'tabella',
+        icon: uiIcons['tabella'],
+        buttonIconName: 'freccia-sx',
+        buttonIcon: uiIcons['freccia-sx']
       }
     });
   } catch (error) {
@@ -523,9 +533,9 @@ router.get('/utenti/cancellati', async (req, res) => {
 
 // Route per ripristinare uno o più utenti cancellati
 router.post('/utenti/restore', async (req, res) => {
-  const { userIds } = req.body;
+  const { itemIds } = req.body;
   
-  if (!userIds || !Array.isArray(userIds) || userIds.length === 0) {
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
     return res.status(400).json({ 
       success: false, 
       message: 'Nessun utente selezionato per il ripristino' 
@@ -536,7 +546,7 @@ router.post('/utenti/restore', async (req, res) => {
     // Verifica che tutti gli utenti esistano ed siano cancellati
     const existingUsers = await prisma.user.findMany({
       where: { 
-        id: { in: userIds },
+        id: { in: itemIds },
         deletedAt: {
           not: null
         }
@@ -562,7 +572,7 @@ router.post('/utenti/restore', async (req, res) => {
     });
 
     const restoredCount = validUserIds.length;
-    const skippedCount = userIds.length - validUserIds.length;
+    const skippedCount = itemIds.length - validUserIds.length;
     
     let message = `Ripristinati ${restoredCount} utente/i con successo`;
     if (skippedCount > 0) {

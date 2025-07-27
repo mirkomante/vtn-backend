@@ -1,82 +1,55 @@
-<%- include('../../ui/tables/selectableTable', {
-  title: 'Utenti Cancellati',
-  description: 'Lista degli utenti cancellati dal sistema.',
-  actionButton: null,
-  tableId: 'deleted-users-table',
-  tableData: tableData,
-  users: users,
-  breadcrumbs: breadcrumbs
-}) %>
-
-<%- contentFor('scripts') %>
-<script src="/js/selectableTable.js"></script>
-<script>
-  // Override della funzione deleteSelectedUsers per il ripristino
-  function deleteSelectedUsers() {
-    const tableId = 'deleted-users-table'
-    const usersTable = document.getElementById(tableId)
-    const checkboxes = [...usersTable.querySelectorAll("tbody input[type='checkbox']:checked")]
-    
-    if (checkboxes.length === 0) {
-      alert('Nessun utente selezionato per il ripristino')
-      return
-    }
-
-    // Raccogli gli ID degli utenti selezionati
-    const selectedUserIds = checkboxes.map(checkbox => {
-      const row = checkbox.closest('tr')
-      return row.dataset.userId || row.getAttribute('data-user-id')
-    }).filter(id => id)
-
-    if (selectedUserIds.length === 0) {
-      alert('Impossibile identificare gli utenti selezionati')
-      return
-    }
-
-    // Conferma il ripristino
-    const userCount = selectedUserIds.length
-    const confirmMessage = userCount === 1 
-      ? 'Sei sicuro di voler ripristinare questo utente?' 
-      : `Sei sicuro di voler ripristinare ${userCount} utenti?`
-    
-    if (!confirm(confirmMessage)) {
-      return
-    }
-
-    // Esegui il ripristino
-    fetch('/admin/utenti/restore', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+<% if (!hasUsers) { %>
+  <%- include('../../ui/emptyStates/simple', emptyState) %>
+<% } else { %>
+  <%- include('../../ui/tables/selectableTable', {
+    title: 'Utenti Cancellati',
+    description: 'Lista degli utenti cancellati dal sistema.',
+    actionButton: null,
+    tableId: 'deleted-users-table',
+    tableData: tableData,
+    items: users,
+    tableConfig: {
+      idField: 'id',
+      labelField: 'givenName',
+      detailUrl: '/admin/utenti/dettagli/:id',
+      editUrl: '/admin/utenti/modifica/:id',
+      editMultipleButton: null, // Rimuove il bottone modifica
+      actionButton: {
+        text: 'Ripristina',
+        classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
       },
-      body: JSON.stringify({
-        userIds: selectedUserIds
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Mostra messaggio di successo
-        alert(data.message)
-        // Ricarica la pagina per aggiornare la lista
-        window.location.reload()
-      } else {
-        alert('Errore durante il ripristino: ' + data.message)
-      }
-    })
-    .catch(error => {
-      console.error('Errore:', error)
-      alert('Si è verificato un errore durante il ripristino')
-    })
-  }
+      endpoint: '/admin/utenti/restore',
+      method: 'POST',
+      confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+      confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+      successMessage: 'Ripristinati {count} utente/i con successo',
+      errorMessage: 'Errore durante il ripristino',
+      getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
+      disableClickableNames: true // Nuovo parametro per disabilitare i nomi cliccabili
+    },
+    breadcrumbs: breadcrumbs
+  }) %>
+<% } %>
 
-  // Cambia il testo del bottone elimina selezionati
-  document.addEventListener('DOMContentLoaded', function() {
-    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn')
-    if (deleteSelectedBtn) {
-      deleteSelectedBtn.textContent = 'Ripristina selezionati'
-      deleteSelectedBtn.classList.remove('bg-red-600', 'ring-red-600', 'hover:bg-red-700')
-      deleteSelectedBtn.classList.add('bg-green-600', 'ring-green-600', 'hover:bg-green-700')
-    }
-  })
-</script> 
+<script>
+  window['deleted-users-tableConfig'] = <%- JSON.stringify({
+    idField: 'id',
+    labelField: 'givenName',
+    detailUrl: '/admin/utenti/dettagli/:id',
+    editUrl: '/admin/utenti/modifica/:id',
+    editMultipleButton: null,
+    actionButton: {
+      text: 'Ripristina',
+      classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+    },
+    endpoint: '/admin/utenti/restore',
+    method: 'POST',
+    confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+    confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+    successMessage: 'Ripristinati {count} utente/i con successo',
+    errorMessage: 'Errore durante il ripristino',
+    getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
+    disableClickableNames: true
+  }) %>
+</script>
+<script src="/js/selectableTable.js"></script> 

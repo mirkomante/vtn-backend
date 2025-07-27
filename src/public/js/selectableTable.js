@@ -1,105 +1,165 @@
-function initializeSelectableTable(tableId) {
-  let usersTable = document.getElementById(tableId)
-  let toggleAllCheckbox = usersTable.querySelector("thead input[type='checkbox']")
-  let checkboxes = [...usersTable.querySelectorAll("tbody input[type='checkbox']")]
+function initializeSelectableTable(tableId, config) {
+  const table = document.getElementById(tableId)
+  if (!table) {
+    console.error(`Tabella con ID "${tableId}" non trovata`)
+    return
+  }
+
+  const toggleAllCheckbox = table.querySelector("thead input[type='checkbox']")
+  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']")]
+
+  if (!toggleAllCheckbox || checkboxes.length === 0) {
+    console.error(`Elementi checkbox non trovati nella tabella "${tableId}"`)
+    return
+  }
 
   toggleAllCheckbox.addEventListener('change', (event) => {
     checkboxes.forEach((checkbox) => {
       checkbox.checked = event.target.checked
     })
-    updateDeleteButtonVisibility()
+    updateActionButtonsVisibility()
   })
   
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
-      let allChecked = checkboxes.every((checkbox) => checkbox.checked)
-      let someChecked = checkboxes.some((checkbox) => checkbox.checked)
+      const allChecked = checkboxes.every((checkbox) => checkbox.checked)
+      const someChecked = checkboxes.some((checkbox) => checkbox.checked)
       toggleAllCheckbox.checked = someChecked
       toggleAllCheckbox.indeterminate = someChecked && !allChecked
-      updateDeleteButtonVisibility()
+      updateActionButtonsVisibility()
     })
   })
 
-  // Funzione per aggiornare la visibilità del bottone elimina
-  function updateDeleteButtonVisibility() {
-    const deleteSelectedBtn = document.getElementById('deleteSelectedBtn')
-    if (deleteSelectedBtn) {
-      const hasCheckedItems = checkboxes.some(checkbox => checkbox.checked)
-      deleteSelectedBtn.disabled = !hasCheckedItems
+  function updateActionButtonsVisibility() {
+    const actionSelectedBtn = document.getElementById('actionSelectedBtn')
+    const editMultipleBtn = document.getElementById('editMultipleBtn')
+    
+    const hasCheckedItems = checkboxes.some(checkbox => checkbox.checked)
+    
+    if (actionSelectedBtn) {
+      actionSelectedBtn.disabled = !hasCheckedItems
+    }
+    
+    if (editMultipleBtn) {
+      editMultipleBtn.disabled = !hasCheckedItems
     }
   }
 
-  // Inizializza la visibilità del bottone
-  updateDeleteButtonVisibility()
+  updateActionButtonsVisibility()
 }
 
-// Funzione per eliminare gli utenti selezionati
-function deleteSelectedUsers() {
-  const tableId = 'users-table' // o il tableId passato come parametro
-  const usersTable = document.getElementById(tableId)
-  const checkboxes = [...usersTable.querySelectorAll("tbody input[type='checkbox']:checked")]
+function executeTableAction(tableId, config) {
+  const table = document.getElementById(tableId)
+  if (!table) {
+    console.error(`Tabella con ID "${tableId}" non trovata`)
+    return
+  }
+
+  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']:checked")]
   
   if (checkboxes.length === 0) {
-    alert('Nessun utente selezionato per la cancellazione')
+    alert('Nessun elemento selezionato')
     return
   }
 
-  // Raccogli gli ID degli utenti selezionati
-  const selectedUserIds = checkboxes.map(checkbox => {
+  const selectedIds = checkboxes.map(checkbox => {
     const row = checkbox.closest('tr')
-    return row.dataset.userId || row.getAttribute('data-user-id')
-  }).filter(id => id) // Rimuovi eventuali valori null/undefined
+    return row.dataset.itemId
+  }).filter(id => id)
 
-  if (selectedUserIds.length === 0) {
-    alert('Impossibile identificare gli utenti selezionati')
+  if (selectedIds.length === 0) {
+    alert('Impossibile identificare gli elementi selezionati')
     return
   }
 
-  // Conferma la cancellazione
-  const userCount = selectedUserIds.length
-  const confirmMessage = userCount === 1 
-    ? 'Sei sicuro di voler eliminare questo utente?' 
-    : `Sei sicuro di voler eliminare ${userCount} utenti?`
+  const itemCount = selectedIds.length
+  const confirmMessage = itemCount === 1 
+    ? config.confirmMessage 
+    : config.confirmMessageMultiple.replace('{count}', itemCount)
   
   if (!confirm(confirmMessage)) {
     return
   }
 
-  // Esegui la cancellazione
-  fetch('/admin/utenti', {
-    method: 'DELETE',
+  fetch(config.endpoint, {
+    method: config.method,
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userIds: selectedUserIds
+      itemIds: selectedIds
     })
   })
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      // Mostra messaggio di successo
-      alert(data.message)
-      // Ricarica la pagina per aggiornare la lista
+      const successMessage = config.successMessage.replace('{count}', data.deletedCount || data.restoredCount || itemCount)
+      alert(successMessage)
       window.location.reload()
     } else {
-      alert('Errore durante l\'eliminazione: ' + data.message)
+      alert('Errore: ' + data.message)
     }
   })
   .catch(error => {
     console.error('Errore:', error)
-    alert('Si è verificato un errore durante l\'eliminazione')
+    alert(config.errorMessage || 'Si è verificato un errore')
   })
 }
 
-// Inizializza la tabella quando il DOM è caricato
-document.addEventListener('DOMContentLoaded', function() {
-  // Inizializza la tabella selezionabile
-  initializeSelectableTable('users-table')
-  
-  // Aggiungi event listener al bottone elimina selezionati
-  const deleteSelectedBtn = document.getElementById('deleteSelectedBtn')
-  if (deleteSelectedBtn) {
-    deleteSelectedBtn.addEventListener('click', deleteSelectedUsers)
+function executeEditMultiple(tableId, config) {
+  const table = document.getElementById(tableId)
+  if (!table) {
+    console.error(`Tabella con ID "${tableId}" non trovata`)
+    return
   }
+
+  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']:checked")]
+  
+  if (checkboxes.length === 0) {
+    alert('Nessun elemento selezionato per la modifica')
+    return
+  }
+
+  const selectedIds = checkboxes.map(checkbox => {
+    const row = checkbox.closest('tr')
+    return row.dataset.itemId
+  }).filter(id => id)
+
+  if (selectedIds.length === 0) {
+    alert('Impossibile identificare gli elementi selezionati')
+    return
+  }
+
+  // Per ora reindirizza alla modifica del primo elemento selezionato
+  // In futuro si può implementare una modifica multipla vera e propria
+  const firstId = selectedIds[0]
+  const editUrl = config.editUrl.replace(':id', firstId)
+  window.location.href = editUrl
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Inizializza tutte le tabelle selezionabili presenti nella pagina
+  const tables = document.querySelectorAll('[id$="-table"]')
+  
+  tables.forEach(table => {
+    const tableId = table.id
+    const configKey = tableId + 'Config'
+    const config = window[configKey]
+    
+    if (config) {
+      initializeSelectableTable(tableId, config)
+      
+      // Event listener per il bottone azione principale (Elimina/Ripristina)
+      const actionSelectedBtn = document.getElementById('actionSelectedBtn')
+      if (actionSelectedBtn) {
+        actionSelectedBtn.addEventListener('click', () => executeTableAction(tableId, config))
+      }
+      
+      // Event listener per il bottone modifica multipla (solo se presente)
+      const editMultipleBtn = document.getElementById('editMultipleBtn')
+      if (editMultipleBtn) {
+        editMultipleBtn.addEventListener('click', () => executeEditMultiple(tableId, config))
+      }
+    }
+  })
 }) 

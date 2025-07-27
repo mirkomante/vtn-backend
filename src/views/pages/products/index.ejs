@@ -22,15 +22,8 @@
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="group/table relative">
           <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white group-has-checked/table:flex sm:left-12">
-            <% if (tableConfig.editMultipleButton) { %>
-              <button type="button" id="editMultipleBtn" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">
-                <%= tableConfig.editMultipleButton.text || 'Modifica' %>
-              </button>
-            <% } %>
-            <button type="button" id="actionSelectedBtn" 
-                    class="inline-flex items-center rounded-sm px-2 py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= tableConfig.actionButton.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>">
-              <%= tableConfig.actionButton.text || 'Elimina' %>
-            </button>
+            <button type="button" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">Modifica multipla</button>
+            <button type="button" id="actionSelectedBtn" class="inline-flex items-center rounded-sm bg-red-600 px-2 py-1 text-sm font-semibold text-white shadow-xs ring-1 ring-red-600 ring-inset hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-red-600"><%= tableConfig.actionButtonText || 'Elimina selezionati' %></button>
           </div>
 
           <table id="<%= tableId %>" class="min-w-full table-fixed divide-y divide-gray-300">
@@ -50,6 +43,9 @@
                     <%= head.label %>
                   </th>
                 <% }); %>
+                <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-3">
+                  <span class="sr-only">Azioni</span>
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
@@ -69,20 +65,19 @@
                   <% tableData.fields.forEach((field, index) => { %>
                     <td class="<%= !tableData.tableHeads[index].mobile ? 'hidden sm:table-cell' : '' %> px-3 py-4 text-sm whitespace-nowrap text-gray-500 <%= field.name === tableConfig.labelField ? 'font-medium text-gray-900 group-has-checked:text-indigo-600' : '' %>">
                       <% if (field.name === tableConfig.labelField) { %>
-                        <% if (tableConfig.disableClickableNames) { %>
-                          <span class="text-gray-900">
-                            <%= tableConfig.getDisplayValue ? tableConfig.getDisplayValue(item) : item[field.name] %>
-                          </span>
-                        <% } else { %>
-                          <a href="<%= tableConfig.detailUrl.replace(':id', item[tableConfig.idField]) %>" class="text-indigo-600 hover:text-indigo-900">
-                            <%= tableConfig.getDisplayValue ? tableConfig.getDisplayValue(item) : item[field.name] %>
-                          </a>
-                        <% } %>
+                        <a href="<%= tableConfig.detailUrl.replace(':id', item[tableConfig.idField]) %>" class="text-indigo-600 hover:text-indigo-900">
+                          <%= tableConfig.getDisplayValue ? tableConfig.getDisplayValue(item) : item[field.name] %>
+                        </a>
                       <% } else { %>
                         <%= item[field.name] %>
                       <% } %>
                     </td>
                   <% }); %>
+                  <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-3">
+                    <div class="flex justify-end space-x-2">
+                      <a href="<%= tableConfig.editUrl.replace(':id', item[tableConfig.idField]) %>" class="text-indigo-600 hover:text-indigo-900">Modifica</a>
+                    </div>
+                  </td>
                 </tr>
               <% }); %>
             </tbody>
@@ -91,4 +86,22 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+```
+
+<script>
+  window['products-tableConfig'] = <%- JSON.stringify({
+    idField: 'id',
+    labelField: 'title',
+    detailUrl: '/admin/prodotti/dettagli/:id',
+    editUrl: '/admin/prodotti/modifica/:id',
+    actionButtonText: 'Elimina selezionati',
+    endpoint: '/admin/prodotti',
+    method: 'DELETE',
+    confirmMessage: 'Sei sicuro di voler eliminare questo prodotto?',
+    confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} prodotti?',
+    successMessage: 'Eliminati {count} prodotto/i con successo',
+    errorMessage: 'Errore durante l\'eliminazione',
+    getDisplayValue: (product) => product.title
+  }) %>
+</script>
