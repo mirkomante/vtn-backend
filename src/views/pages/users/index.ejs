@@ -1,12 +1,20 @@
 <% if (!hasUsers) { %>
   <%- include('../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
-  <%- include('../../ui/tables/stickyHeader', {
+  <%- include('../../ui/tables/selectableTable', {
     title: 'Utenti',
     description: 'Lista di tutti gli utenti registrati nel sistema.',
     actionButton: {
       text: 'Aggiungi utente',
       href: '/admin/utenti/nuovo'
-    }
+    },
+    tableId: 'users-table'
   }) %>
-<% } %> 
+<% } %>
+
+<script src="/js/selectableTable.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeSelectableTable('users-table')
+  })
+</script> 

@@ -1,8 +1,13 @@
-<div class="px-4 sm:px-6 lg:px-8">
+<div class="pt-5">
+
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold text-gray-900"><%= title || 'Utenti' %></h1>
-      <p class="mt-2 text-sm text-gray-700"><%= description || 'Lista di tutti gli utenti registrati nel sistema.' %></p>
+      <% if (breadcrumbs) { %>
+        <%- include('../breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
+      <% } else { %>
+        <h1 class="text-base font-semibold text-gray-900"><%= title || 'Utenti' %></h1>
+        <p class="mt-2 text-sm text-gray-700"><%= description || 'Lista di tutti gli utenti registrati nel sistema.' %></p>
+      <% } %>
     </div>
     <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
       <% if (actionButton) { %>
@@ -59,9 +64,9 @@
                     </div>
                   </td>
                   <% tableData.fields.forEach((field, index) => { %>
-                    <td class="<%= !tableData.tableHeads[index].mobile ? 'hidden sm:table-cell' : '' %> px-3 py-4 text-sm whitespace-nowrap text-gray-500 <%= field.name === 'name' ? 'font-medium text-gray-900 group-has-checked:text-indigo-600' : '' %>">
-                      <% if (field.name === 'name') { %>
-                        <a href="/admin/utenti/dettagli/<%= user.id %>" class="text-indigo-600 hover:text-indigo-900"><%= user[field.name] %></a>
+                    <td class="<%= !tableData.tableHeads[index].mobile ? 'hidden sm:table-cell' : '' %> px-3 py-4 text-sm whitespace-nowrap text-gray-500 <%= field.name === 'givenName' ? 'font-medium text-gray-900 group-has-checked:text-indigo-600' : '' %>">
+                      <% if (field.name === 'givenName') { %>
+                        <a href="/admin/utenti/dettagli/<%= user.id %>" class="text-indigo-600 hover:text-indigo-900"><%= `${user.givenName || ''} ${user.familyName || ''}`.trim() %></a>
                       <% } else { %>
                         <%= user[field.name] %>
                       <% } %>

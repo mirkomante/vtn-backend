@@ -35,11 +35,18 @@ export const configurePassport = (passport: any) => {
 
       if (!user) {
         if (isFirstUser) {
+          // Estrai nome e cognome dal displayName di Google
+          const displayName = profile.displayName || '';
+          const nameParts = displayName.split(' ');
+          const givenName = nameParts[0] || '';
+          const familyName = nameParts.slice(1).join(' ') || '';
+          
           user = await prisma.user.create({
             data: {
               googleId: profile.id,
               email: profile.emails![0].value,
-              name: profile.displayName,
+              givenName: givenName,
+              familyName: familyName,
               role: 'admin',
               auth: 'admin',
               authProvider: 'google',

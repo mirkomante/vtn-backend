@@ -26,14 +26,14 @@
           <img class="size-8 rounded-full bg-gray-50" src="<%= user.avatar %>" alt="<%= user.name %>">
         <% } else { %>
           <div class="size-8 rounded-full bg-gray-50 flex items-center justify-center">
-            <span class="text-gray-500 text-sm"><%= user ? user.name.charAt(0).toUpperCase() : 'U' %></span>
+            <span class="text-gray-500 text-sm"><%= user ? (user.givenName ? user.givenName.charAt(0).toUpperCase() : 'U') : 'U' %></span>
           </div>
         <% } %>
       </a>
     </div>
   
     <main class="lg:pl-72">
-      <div class="px-4 py-10 sm:px-6 lg:px-8 lg:py-6">
+      <div class="px-8 py-10 sm:px-6 lg:px-8 lg:py-6">
         <!-- Main area -->
 
         <%- include('../ui/sectionHeadings/simple') %>
