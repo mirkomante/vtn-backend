@@ -46,6 +46,11 @@ export const adminItems: MenuItem[] = [
     label: 'Utenti',
     link: '/admin/utenti',
     icon: 'utenti'
+  },
+  {
+    label: 'Cancellati',
+    link: '/admin/utenti/cancellati',
+    icon: 'cestino'
   }
 ];
 

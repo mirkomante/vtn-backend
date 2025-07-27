@@ -24,7 +24,7 @@
         <div class="group/table relative">
           <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white group-has-checked/table:flex sm:left-12">
             <button type="button" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">Modifica multipla</button>
-            <button type="button" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">Elimina tutti</button>
+            <button type="button" id="deleteSelectedBtn" class="inline-flex items-center rounded-sm bg-red-600 px-2 py-1 text-sm font-semibold text-white shadow-xs ring-1 ring-red-600 ring-inset hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-red-600">Elimina selezionati</button>
           </div>
 
           <table id="<%= tableId || 'users-table' %>" class="min-w-full table-fixed divide-y divide-gray-300">
@@ -45,13 +45,13 @@
                   </th>
                 <% }); %>
                 <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-3">
-                  <span class="sr-only">Modifica</span>
+                  <span class="sr-only">Azioni</span>
                 </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
               <% users.forEach(user => { %>
-                <tr class="group has-checked:bg-gray-50">
+                <tr class="group has-checked:bg-gray-50" data-user-id="<%= user.id %>">
                   <td class="relative px-7 sm:w-12 sm:px-6">
                     <div class="absolute inset-y-0 left-0 hidden w-0.5 bg-indigo-600 group-has-checked:block"></div>
 
@@ -73,7 +73,9 @@
                     </td>
                   <% }); %>
                   <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-3">
-                    <a href="/admin/utenti/modifica/<%= user.id %>" class="text-indigo-600 hover:text-indigo-900">Modifica<span class="sr-only">, <%= user.displayName || user.name %></span></a>
+                    <div class="flex justify-end space-x-2">
+                      <a href="/admin/utenti/modifica/<%= user.id %>" class="text-indigo-600 hover:text-indigo-900">Modifica</a>
+                    </div>
                   </td>
                 </tr>
               <% }); %>

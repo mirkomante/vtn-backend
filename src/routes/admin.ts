@@ -33,6 +33,9 @@ router.get('/utenti', async (req, res) => {
   
   try {
     const users = await prisma.user.findMany({
+      where: {
+        deletedAt: null // Esclude gli utenti cancellati
+      },
       select: {
         id: true,
         givenName: true,
@@ -168,8 +171,11 @@ router.get('/utenti/dettagli/:id', async (req, res) => {
   let sectionMenu = adminItems;
   
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.params.id }
+    const user = await prisma.user.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null // Esclude utenti cancellati
+      }
     });
 
     if (!user) {
@@ -228,8 +234,11 @@ router.get('/utenti/modifica/:id', async (req, res) => {
   let sectionMenu = adminItems;
   
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.params.id }
+    const user = await prisma.user.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null // Esclude utenti cancellati
+      }
     });
 
     if (!user) {
@@ -387,6 +396,190 @@ router.post('/utenti/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante l\'aggiornamento dell\'utente',
       formData: req.body
+    });
+  }
+});
+
+// Route per soft delete di uno o più utenti
+router.delete('/utenti', async (req, res) => {
+  const { userIds } = req.body;
+  
+  if (!userIds || !Array.isArray(userIds) || userIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun utente selezionato per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutti gli utenti esistano e non siano già cancellati
+    const existingUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: userIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingUsers.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun utente valido trovato per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutti gli utenti validi
+    const validUserIds = existingUsers.map(user => user.id);
+    await prisma.user.updateMany({
+      where: { 
+        id: { in: validUserIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validUserIds.length;
+    const skippedCount = userIds.length - validUserIds.length;
+    
+    let message = `Eliminati ${deletedCount} utente/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} utente/i già cancellati o non trovati.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione degli utenti:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// Route per visualizzare gli utenti cancellati
+router.get('/utenti/cancellati', async (req, res) => {
+  const currentPath = '/admin/utenti/cancellati';
+  let sectionMenu = adminItems;
+  
+  try {
+    const deletedUsers = await prisma.user.findMany({
+      where: {
+        deletedAt: {
+          not: null
+        }
+      },
+      select: {
+        id: true,
+        givenName: true,
+        familyName: true,
+        email: true,
+        role: true,
+        authProvider: true,
+        deletedAt: true,
+        createdAt: true,
+        updatedAt: true
+      }
+    });
+
+    res.render('pages/users/deleted', {
+      title: 'Utenti Cancellati',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: utentiTableData,
+      users: deletedUsers,
+      hasUsers: deletedUsers.length > 0,
+      breadcrumbs: [
+        { label: 'Admin', href: '/admin' },
+        { label: 'Utenti', href: '/admin/utenti' },
+        { label: 'Cancellati', href: '/admin/utenti/cancellati' }
+      ],
+      emptyState: {
+        title: 'Nessun utente cancellato',
+        description: 'Non ci sono utenti cancellati nel sistema.',
+        buttonText: 'Torna agli utenti'
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero degli utenti cancellati:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      error: 'Si è verificato un errore nel recupero degli utenti cancellati'
+    });
+  }
+});
+
+// Route per ripristinare uno o più utenti cancellati
+router.post('/utenti/restore', async (req, res) => {
+  const { userIds } = req.body;
+  
+  if (!userIds || !Array.isArray(userIds) || userIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun utente selezionato per il ripristino' 
+    });
+  }
+  
+  try {
+    // Verifica che tutti gli utenti esistano ed siano cancellati
+    const existingUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: userIds },
+        deletedAt: {
+          not: null
+        }
+      }
+    });
+
+    if (existingUsers.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun utente cancellato trovato per il ripristino' 
+      });
+    }
+
+    // Ripristina tutti gli utenti validi
+    const validUserIds = existingUsers.map(user => user.id);
+    await prisma.user.updateMany({
+      where: { 
+        id: { in: validUserIds }
+      },
+      data: { 
+        deletedAt: null 
+      }
+    });
+
+    const restoredCount = validUserIds.length;
+    const skippedCount = userIds.length - validUserIds.length;
+    
+    let message = `Ripristinati ${restoredCount} utente/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} utente/i non trovati o già ripristinati.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      restoredCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nel ripristino degli utenti:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante il ripristino' 
     });
   }
 });
