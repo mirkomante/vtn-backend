@@ -6,6 +6,8 @@ import { uiIcons } from '../config/uiIcons';
 import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
+import { userFormData } from '../config/sectionFormData';
+import { FormDataSchema } from "./sectionFormSchema";
 
 const router = express.Router();
 
@@ -58,6 +60,7 @@ router.get('/utenti', async (req, res) => {
       tableData: utentiTableData,
       users,
       hasUsers: users.length > 0,
+      successMessage: req.query.success ? decodeURIComponent(req.query.success as string) : undefined,
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' }
@@ -91,20 +94,23 @@ router.get('/utenti/nuovo', (req, res) => {
   const currentPath = '/admin/utenti/nuovo';
   let sectionMenu = adminItems;
 
-      res.render('pages/users/new', {
-      title: 'Nuovo Utente',
-      layout: 'layouts/sections',
-      mainMenu: mainMenuItems,
-      sectionMenu,
-      sectionIcons,
-      currentPath,
-      breadcrumbs: [
-        { label: 'Admin', href: '/admin' },
-        { label: 'Utenti', href: '/admin/utenti' },
-        { label: 'Nuovo Utente', href: '/admin/utenti/nuovo' }
-      ],
-      isEdit: false
-    });
+  // Prepara la configurazione per il nuovo utente
+  const formConfig = userFormData.getFormData(userFormData, false);
+
+  res.render('pages/users/new', {
+    title: 'Nuovo Utente',
+    layout: 'layouts/sections',
+    mainMenu: mainMenuItems,
+    sectionMenu,
+    sectionIcons,
+    currentPath,
+    formConfig,
+    breadcrumbs: [
+      { label: 'Admin', href: '/admin' },
+      { label: 'Utenti', href: '/admin/utenti' },
+      { label: 'Nuovo Utente', href: '/admin/utenti/nuovo' }
+    ]
+  });
 });
 
 router.post('/utenti/nuovo', async (req, res) => {
@@ -117,6 +123,8 @@ router.post('/utenti/nuovo', async (req, res) => {
     });
 
     if (existingUser) {
+      const formConfig = userFormData.getFormData(userFormData, false, null, req.body);
+      
       return res.status(400).render('pages/users/new', {
         title: 'Nuovo Utente',
         layout: 'layouts/sections',
@@ -124,14 +132,13 @@ router.post('/utenti/nuovo', async (req, res) => {
         sectionMenu: adminItems,
         sectionIcons,
         currentPath: '/admin/utenti/nuovo',
+        formConfig,
         breadcrumbs: [
           { label: 'Admin', href: '/admin' },
           { label: 'Utenti', href: '/admin/utenti' },
           { label: 'Nuovo Utente', href: '/admin/utenti/nuovo' }
         ],
-        error: 'Un utente con questa email esiste già',
-        formData: req.body,
-        isEdit: false
+        error: 'Un utente con questa email esiste già'
       });
     }
 
@@ -152,6 +159,9 @@ router.post('/utenti/nuovo', async (req, res) => {
     res.redirect(`/admin/utenti/dettagli/${newUser.id}?success=Utente creato con successo`);
   } catch (error) {
     console.error('Errore nella creazione dell\'utente:', error);
+    
+    const formConfig = userFormData.getFormData(userFormData, false, null, req.body);
+    
     res.status(500).render('pages/users/new', {
       title: 'Nuovo Utente',
       layout: 'layouts/sections',
@@ -159,14 +169,13 @@ router.post('/utenti/nuovo', async (req, res) => {
       sectionMenu: adminItems,
       sectionIcons,
       currentPath: '/admin/utenti/nuovo',
+      formConfig,
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
         { label: 'Nuovo Utente', href: '/admin/utenti/nuovo' }
       ],
-      error: 'Si è verificato un errore durante la creazione dell\'utente',
-      formData: req.body,
-      isEdit: false
+      error: 'Si è verificato un errore durante la creazione dell\'utente'
     });
   }
 });
@@ -234,6 +243,146 @@ router.get('/utenti/dettagli/:id', async (req, res) => {
   }
 });
 
+// Route per modifica massiva utenti - DEVE ESSERE PRIMA di /utenti/modifica/:id
+router.get('/utenti/modifica-massa', async (req, res) => {
+  const currentPath = '/admin/utenti/modifica-massa';
+  let sectionMenu = adminItems;
+  
+  const userIds = req.query.ids ? (req.query.ids as string).split(',') : [];
+  
+  if (userIds.length === 0) {
+    return res.redirect('/admin/utenti');
+  }
+  
+  try {
+    const selectedUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: userIds },
+        deletedAt: null
+      },
+      select: {
+        id: true,
+        givenName: true,
+        familyName: true,
+        email: true,
+        role: true,
+        auth: true
+      }
+    });
+
+    if (selectedUsers.length === 0) {
+      return res.redirect('/admin/utenti');
+    }
+
+    // Prepara la configurazione per la modifica massiva
+    const formConfig = userFormData.getFormData(userFormData, false, null, null, true, selectedUsers);
+
+    res.render('pages/users/editBulk', {
+      title: 'Modifica Massiva Utenti',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      selectedUsers,
+      formConfig,
+      breadcrumbs: [
+        { label: 'Admin', href: '/admin' },
+        { label: 'Utenti', href: '/admin/utenti' },
+        { label: 'Modifica Massiva', href: '#' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero degli utenti per modifica massiva:', error);
+    res.redirect('/admin/utenti');
+  }
+});
+
+// Route POST per modifica massiva utenti - DEVE ESSERE PRIMA di /utenti/modifica/:id
+router.post('/utenti/modifica-massa', async (req, res) => {
+  const { itemIds, ruolo, auth } = req.body;
+  
+  let userIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    userIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    userIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (userIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun utente selezionato per la modifica' 
+    });
+  }
+  
+  try {
+    const existingUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: userIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingUsers.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun utente valido trovato per la modifica' 
+      });
+    }
+
+    // Prepara i dati per l'aggiornamento (solo i campi forniti)
+    const updateData: any = {};
+    
+    if (ruolo && ruolo.trim() !== '') {
+      updateData.role = ruolo;
+      updateData.auth = ruolo;
+    }
+    
+    if (auth && auth.trim() !== '') {
+      updateData.auth = auth;
+    }
+
+    // Se non ci sono dati da aggiornare, restituisci errore
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' 
+      });
+    }
+
+    await prisma.user.updateMany({
+      where: { 
+        id: { in: userIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingUsers.length;
+    const skippedCount = userIds.length - existingUsers.length;
+    
+    let message = `Aggiornati ${updatedCount} utenti con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} utenti non trovati o già cancellati.`;
+    }
+    
+    res.json({ 
+      success: true, 
+      message,
+      updatedCount,
+      skippedCount
+    });
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore interno del server durante la modifica massiva' 
+    });
+  }
+});
+
+// Route per modifica singola utente - DEVE ESSERE DOPO le route specifiche
 router.get('/utenti/modifica/:id', async (req, res) => {
   const currentPath = '/admin/utenti/modifica';
   let sectionMenu = adminItems;
@@ -263,6 +412,9 @@ router.get('/utenti/modifica/:id', async (req, res) => {
       });
     }
 
+    // Prepara la configurazione per la modifica
+    const formConfig = userFormData.getFormData(userFormData, true, user);
+
     res.render('pages/users/edit', {
       title: 'Modifica Utente',
       layout: 'layouts/sections',
@@ -271,11 +423,11 @@ router.get('/utenti/modifica/:id', async (req, res) => {
       sectionIcons,
       currentPath,
       user,
-      isEdit: true,
+      formConfig,
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
-        { label: user.name || 'Modifica Utente', href: `/admin/utenti/modifica/${user.id}` }
+        { label: user.givenName || 'Modifica Utente', href: `/admin/utenti/modifica/${user.id}` }
       ]
     });
   } catch (error) {
@@ -331,6 +483,8 @@ router.post('/utenti/modifica/:id', async (req, res) => {
       });
 
       if (userWithSameEmail) {
+        const formConfig = userFormData.getFormData(userFormData, true, existingUser, req.body);
+        
         return res.status(400).render('pages/users/edit', {
           title: 'Modifica Utente',
           layout: 'layouts/sections',
@@ -339,14 +493,13 @@ router.post('/utenti/modifica/:id', async (req, res) => {
           sectionIcons,
           currentPath: '/admin/utenti/modifica',
           user: existingUser,
-          isEdit: true,
+          formConfig,
           breadcrumbs: [
             { label: 'Admin', href: '/admin' },
             { label: 'Utenti', href: '/admin/utenti' },
-            { label: `${existingUser.givenName || ''} ${existingUser.familyName || ''}`.trim() || 'Modifica Utente', href: `/admin/utenti/modifica/${userId}` }
+            { label: existingUser.givenName || 'Modifica Utente', href: `/admin/utenti/modifica/${existingUser.id}` }
           ],
-          error: 'Un utente con questa email esiste già',
-          formData: req.body
+          error: 'Un altro utente con questa email esiste già'
         });
       }
     }
@@ -356,10 +509,11 @@ router.post('/utenti/modifica/:id', async (req, res) => {
       givenName: nome,
       familyName: cognome,
       email,
-      role: ruolo
+      role: ruolo,
+      auth: ruolo
     };
 
-    // Aggiungi la password solo se è stata fornita
+    // Aggiungi la password solo se fornita
     if (password && password.trim() !== '') {
       updateData.password = password; // Nota: in produzione dovresti hashare la password
     }
@@ -375,15 +529,7 @@ router.post('/utenti/modifica/:id', async (req, res) => {
   } catch (error) {
     console.error('Errore nell\'aggiornamento dell\'utente:', error);
     
-    // Prova a recuperare l'utente per il rendering dell'errore
-    let userForError = null;
-    try {
-      userForError = await prisma.user.findUnique({
-        where: { id: userId }
-      });
-    } catch (findError) {
-      console.error('Errore nel recupero dell\'utente per errore:', findError);
-    }
+    const formConfig = userFormData.getFormData(userFormData, true, existingUser, req.body);
     
     res.status(500).render('pages/users/edit', {
       title: 'Modifica Utente',
@@ -392,15 +538,14 @@ router.post('/utenti/modifica/:id', async (req, res) => {
       sectionMenu: adminItems,
       sectionIcons,
       currentPath: '/admin/utenti/modifica',
-      user: userForError,
-      isEdit: true,
+      user: existingUser,
+      formConfig,
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
-        { label: userForError ? `${userForError.givenName || ''} ${userForError.familyName || ''}`.trim() : 'Modifica Utente', href: `/admin/utenti/modifica/${userId}` }
+        { label: existingUser?.givenName || 'Modifica Utente', href: `/admin/utenti/modifica/${userId}` }
       ],
-      error: 'Si è verificato un errore durante l\'aggiornamento dell\'utente',
-      formData: req.body
+      error: 'Si è verificato un errore durante l\'aggiornamento dell\'utente'
     });
   }
 });

@@ -130,11 +130,18 @@ function executeEditMultiple(tableId, config) {
     return
   }
 
-  // Per ora reindirizza alla modifica del primo elemento selezionato
-  // In futuro si può implementare una modifica multipla vera e propria
-  const firstId = selectedIds[0]
-  const editUrl = config.editUrl.replace(':id', firstId)
-  window.location.href = editUrl
+  // Se è selezionato solo un elemento, vai alla modifica singola
+  if (selectedIds.length === 1) {
+    const editUrl = config.editUrl.replace(':id', selectedIds[0])
+    window.location.href = editUrl
+    return
+  }
+
+  // Se sono selezionati più elementi, vai alla modifica massiva
+  const bulkEditUrl = config.bulkEditUrl || '/admin/utenti/modifica-massa'
+  const url = new URL(bulkEditUrl, window.location.origin)
+  url.searchParams.set('ids', selectedIds.join(','))
+  window.location.href = url.toString()
 }
 
 document.addEventListener('DOMContentLoaded', function() {

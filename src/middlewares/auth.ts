@@ -11,9 +11,21 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 
 // Middleware per verificare se l'utente è admin
 export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  if (req.isAuthenticated() && req.user && (req.user as any).auth === 'admin') {
-    return next();
+  console.log('=== MIDDLEWARE ISADMIN CHIAMATO ===');
+  console.log('User:', req.user);
+  console.log('Session:', req.session);
+  console.log('Is authenticated:', req.isAuthenticated());
+  
+  if (!req.isAuthenticated()) {
+    console.log('Utente non autenticato, redirect a login');
+    return res.redirect('/auth/login');
   }
-  req.flash('error', 'Non hai i permessi necessari per accedere a questa pagina');
-  res.redirect('/');
+  
+  if (req.user && req.user.role !== 'admin') {
+    console.log('Utente non admin, accesso negato');
+    return res.status(403).send('Accesso negato');
+  }
+  
+  console.log('Utente autenticato e admin, procedi');
+  next();
 }; 
