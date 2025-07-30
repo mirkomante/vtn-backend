@@ -66,10 +66,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 import indexRoutes from './routes/index';
 import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
+import ristoranteMenuRoutes from './routes/ristoranteMenu';
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
+app.use('/ristorante-menu', ristoranteMenuRoutes);
 
 export default app; 

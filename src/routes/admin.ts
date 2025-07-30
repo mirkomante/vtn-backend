@@ -7,7 +7,6 @@ import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
 import { userFormData } from '../config/sectionFormData';
-import { FormDataSchema } from "./sectionFormSchema";
 
 const router = express.Router();
 
