@@ -19,8 +19,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
-      <div class="flex-1 text-sm/6 font-semibold text-gray-900"><%= title || 'Dashboard' %></div>
-      <a href="/profile">
+      <a href="/profile" class="ml-auto">
         <span class="sr-only">Il tuo profilo</span>
         <% if (user && user.avatar) { %>
           <img class="size-8 rounded-full bg-gray-50" src="<%= user.avatar %>" alt="<%= user.name %>">
@@ -34,20 +33,21 @@
   
     <main class="lg:pl-72">
       <div class="px-8 py-6 sm:px-6 lg:px-8">
-        <!-- Section Heading sempre presente -->
+        
+        <!-- Breadcrumbs se presenti (sempre in cima) -->
+        <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
+          <div class="mb-6">
+            <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
+          </div>
+        <% } %>
+
+        <!-- Section Heading e Tabs -->
         <%- include('../ui/sectionHeadings/simple') %>
 
         <!-- Section Tabs se presenti -->
         <% if (typeof sectionTabs !== 'undefined' && sectionTabs) { %>
           <div class="mt-6">
             <%- include('../ui/sectionTabs/tabsWithUnderline', { sectionTabs }) %>
-          </div>
-        <% } %>
-
-        <!-- Breadcrumbs se presenti -->
-        <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
-          <div class="mt-4">
-            <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
           </div>
         <% } %>
 

@@ -32,4 +32,32 @@ document.addEventListener('DOMContentLoaded', function() {
             closeSidebar();
         }
     });
+});
+
+// Gestione tabs con select mobile
+document.addEventListener('DOMContentLoaded', function() {
+  const tabSelects = document.querySelectorAll('select[aria-label="Seleziona una sezione"]');
+  
+  tabSelects.forEach(select => {
+    select.addEventListener('change', function() {
+      const selectedValue = this.value;
+      if (selectedValue) {
+        window.location.href = selectedValue;
+      }
+    });
+  });
+
+  // Miglioramento scroll breadcrumbs
+  const breadcrumbContainer = document.querySelector('.overflow-x-auto');
+  if (breadcrumbContainer) {
+    // Auto-scroll per mostrare l'ultimo elemento se necessario
+    const lastBreadcrumb = breadcrumbContainer.querySelector('li:last-child');
+    if (lastBreadcrumb) {
+      lastBreadcrumb.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest', 
+        inline: 'end' 
+      });
+    }
+  }
 }); 

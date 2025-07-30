@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
   
   res.render('pages/ristorante-menu/index', {
     title: 'Menu Ristorante',
+    description: 'Gestisci il menu del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
@@ -32,6 +33,7 @@ router.get('/menu-fissi', (req, res) => {
   
   res.render('pages/ristorante-menu/menu-fissi', {
     title: 'Menu Fissi',
+    description: 'Gestisci i menu fissi del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
@@ -50,6 +52,7 @@ router.get('/piatti', (req, res) => {
   
   res.render('pages/ristorante-menu/piatti', {
     title: 'Piatti',
+    description: 'Gestisci i piatti del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
@@ -68,6 +71,7 @@ router.get('/servizi', (req, res) => {
   
   res.render('pages/ristorante-menu/servizi', {
     title: 'Servizi',
+    description: 'Gestisci i servizi del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
@@ -84,14 +88,15 @@ router.get('/servizi', (req, res) => {
 router.get('/impostazioni', (req, res) => {
   const currentPath = '/ristorante-menu/impostazioni';
   let sectionMenu = ristoranteMenuItems;
-  let subSectionMenu = ristoranteMenuImpostazioniSubItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
   res.render('pages/ristorante-menu/impostazioni', {
-    title: 'Impostazioni',
+    title: 'Impostazioni Menu',
+    description: 'Gestisci le configurazioni del menu ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
-    subSectionMenu,
+    sectionTabs,
     sectionIcons,
     currentPath,
     breadcrumbs: [
@@ -105,14 +110,15 @@ router.get('/impostazioni', (req, res) => {
 router.get('/impostazioni/categoria-menu-fisso', (req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso';
   let sectionMenu = ristoranteMenuItems;
-  let subSectionMenu = ristoranteMenuImpostazioniSubItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
   res.render('pages/ristorante-menu/impostazioni/categoria-menu-fisso', {
     title: 'Categoria Menu Fisso',
+    description: 'Gestisci le categorie per i menu fissi del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
-    subSectionMenu,
+    sectionTabs,
     sectionIcons,
     currentPath,
     breadcrumbs: [
@@ -126,14 +132,15 @@ router.get('/impostazioni/categoria-menu-fisso', (req, res) => {
 router.get('/impostazioni/categoria-piatti', (req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/categoria-piatti';
   let sectionMenu = ristoranteMenuItems;
-  let subSectionMenu = ristoranteMenuImpostazioniSubItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
   res.render('pages/ristorante-menu/impostazioni/categoria-piatti', {
     title: 'Categoria Piatti',
+    description: 'Gestisci le categorie per i piatti del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
-    subSectionMenu,
+    sectionTabs,
     sectionIcons,
     currentPath,
     breadcrumbs: [
@@ -147,14 +154,15 @@ router.get('/impostazioni/categoria-piatti', (req, res) => {
 router.get('/impostazioni/allergeni', (req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/allergeni';
   let sectionMenu = ristoranteMenuItems;
-  let subSectionMenu = ristoranteMenuImpostazioniSubItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
   res.render('pages/ristorante-menu/impostazioni/allergeni', {
     title: 'Allergeni',
+    description: 'Gestisci gli allergeni per i piatti del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
-    subSectionMenu,
+    sectionTabs,
     sectionIcons,
     currentPath,
     breadcrumbs: [
@@ -171,6 +179,7 @@ router.get('/cancellati', (req, res) => {
   
   res.render('pages/ristorante-menu/cancellati', {
     title: 'Elementi Cancellati',
+    description: 'Visualizza e gestisci gli elementi cancellati del menu',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
