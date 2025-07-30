@@ -2,8 +2,6 @@
   <%- include('../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
   <%- include('../../ui/tables/selectableTable', {
-    title: 'Utenti Cancellati',
-    description: 'Lista degli utenti cancellati dal sistema.',
     actionButton: null,
     tableId: 'deleted-users-table',
     tableData: tableData,
@@ -26,8 +24,7 @@
       errorMessage: 'Errore durante il ripristino',
       getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
       disableClickableNames: true // Nuovo parametro per disabilitare i nomi cliccabili
-    },
-    breadcrumbs: breadcrumbs
+    }
   }) %>
 <% } %>
 

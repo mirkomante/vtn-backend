@@ -1,0 +1,66 @@
+<% if (filters && filters.length > 0) { %>
+  <div class="flex flex-wrap items-center gap-4">
+    <% filters.forEach(filter => { %>
+      <div class="flex items-center space-x-2">
+        <% if (filter.label) { %>
+          <label for="<%= filter.id %>" class="text-sm font-medium text-gray-700">
+            <%= filter.label %>
+          </label>
+        <% } %>
+        
+        <% if (filter.type === 'select') { %>
+          <select 
+            id="<%= filter.id %>" 
+            name="<%= filter.name %>"
+            class="rounded-md border-gray-300 py-1.5 pl-3 pr-8 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            <%= filter.multiple ? 'multiple' : '' %>
+          >
+            <% if (filter.placeholder) { %>
+              <option value=""><%= filter.placeholder %></option>
+            <% } %>
+            <% filter.options.forEach(option => { %>
+              <option value="<%= option.value %>" <%= option.selected ? 'selected' : '' %>>
+                <%= option.label %>
+              </option>
+            <% }); %>
+          </select>
+        <% } else if (filter.type === 'input') { %>
+          <input 
+            type="<%= filter.inputType || 'text' %>"
+            id="<%= filter.id %>"
+            name="<%= filter.name %>"
+            placeholder="<%= filter.placeholder || '' %>"
+            value="<%= filter.value || '' %>"
+            class="rounded-md border-gray-300 py-1.5 px-3 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          />
+        <% } else if (filter.type === 'date') { %>
+          <input 
+            type="date"
+            id="<%= filter.id %>"
+            name="<%= filter.name %>"
+            value="<%= filter.value || '' %>"
+            class="rounded-md border-gray-300 py-1.5 px-3 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          />
+        <% } %>
+      </div>
+    <% }); %>
+    
+    <div class="flex items-center space-x-2">
+      <button 
+        type="submit"
+        class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Filtra
+      </button>
+      
+      <% if (hasActiveFilters) { %>
+        <a 
+          href="<%= clearFiltersUrl || window.location.pathname %>"
+          class="inline-flex items-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          Pulisci
+        </a>
+      <% } %>
+    </div>
+  </div>
+<% } %>

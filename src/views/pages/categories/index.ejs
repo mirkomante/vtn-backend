@@ -2,8 +2,6 @@
   <%- include('../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
   <%- include('../../ui/tables/selectableTable', {
-    title: 'Utenti',
-    description: 'Lista di tutti gli utenti registrati nel sistema.',
     actionButton: {
       text: 'Aggiungi utente',
       href: '/admin/utenti/nuovo'
@@ -24,8 +22,7 @@
       successMessage: 'Eliminati {count} utente/i con successo',
       errorMessage: 'Errore durante l\'eliminazione',
       getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim()
-    },
-    breadcrumbs: breadcrumbs
+    }
   }) %>
 <% } %>
 

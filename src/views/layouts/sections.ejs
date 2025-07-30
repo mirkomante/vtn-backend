@@ -33,12 +33,28 @@
     </div>
   
     <main class="lg:pl-72">
-      <div class="px-8 py-6 sm:px-6 lg:px-8 ">
-        <!-- Main area -->
-
+      <div class="px-8 py-6 sm:px-6 lg:px-8">
+        <!-- Section Heading sempre presente -->
         <%- include('../ui/sectionHeadings/simple') %>
 
-        <%- body %>
+        <!-- Section Tabs se presenti -->
+        <% if (typeof sectionTabs !== 'undefined' && sectionTabs) { %>
+          <div class="mt-6">
+            <%- include('../ui/sectionTabs/tabsWithUnderline', { sectionTabs }) %>
+          </div>
+        <% } %>
+
+        <!-- Breadcrumbs se presenti -->
+        <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
+          <div class="mt-4">
+            <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
+          </div>
+        <% } %>
+
+        <!-- Main content area -->
+        <div class="mt-6">
+          <%- body %>
+        </div>
         
       </div>
     </main>
