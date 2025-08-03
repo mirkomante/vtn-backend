@@ -69,38 +69,99 @@ function initBulkEditForm() {
     }
   }
   
-  // Gestione toggle button
-  function initToggleButtons() {
+  // Gestione toggle e checkbox a stati
+  function initToggleAndStateCheckboxes() {
     toggleFields.forEach(toggle => {
       const container = toggle.closest('.toggle-container');
       if (!container) return;
       
-      const toggleElement = container.querySelector('.group');
-      const toggleSpan = container.querySelector('span');
+      // Controlla se è un toggle box originale o un checkbox a stati
+      const isStateCheckbox = toggle.classList.contains('opacity-0') && 
+                             container.querySelector('.checkbox-visual');
       
-      function updateToggleState() {
-        if (toggle.checked) {
-          toggleElement.classList.add('has-checked', 'bg-indigo-600');
-          toggleSpan.classList.add('translate-x-5');
-        } else {
-          toggleElement.classList.remove('has-checked', 'bg-indigo-600');
-          toggleSpan.classList.remove('translate-x-5');
+      if (isStateCheckbox) {
+        // Gestione checkbox a stati per modifica massiva con elemento visivo personalizzato
+        const checkboxVisual = container.querySelector('.checkbox-visual');
+        const checkboxIcon = container.querySelector('svg');
+        const checkIcon = container.querySelector('.check-icon');
+        const indeterminateIcon = container.querySelector('.indeterminate-icon');
+        
+        function updateCheckboxVisual() {
+          if (toggle.hasAttribute('data-indeterminate') || toggle.indeterminate) {
+            // Stato indeterminate
+            checkboxVisual.classList.remove('bg-white', 'border-gray-300');
+            checkboxVisual.classList.add('bg-indigo-600', 'border-indigo-600');
+            checkIcon.style.display = 'none';
+            indeterminateIcon.style.display = 'block';
+            checkboxIcon.classList.remove('opacity-0');
+            checkboxIcon.classList.add('opacity-100');
+          } else if (toggle.checked) {
+            // Stato checked
+            checkboxVisual.classList.remove('bg-white', 'border-gray-300');
+            checkboxVisual.classList.add('bg-indigo-600', 'border-indigo-600');
+            checkIcon.style.display = 'block';
+            indeterminateIcon.style.display = 'none';
+            checkboxIcon.classList.remove('opacity-0');
+            checkboxIcon.classList.add('opacity-100');
+          } else {
+            // Stato unchecked
+            checkboxVisual.classList.remove('bg-indigo-600', 'border-indigo-600');
+            checkboxVisual.classList.add('bg-white', 'border-gray-300');
+            checkboxIcon.classList.remove('opacity-100');
+            checkboxIcon.classList.add('opacity-0');
+          }
         }
-      }
-      
-      // Inizializza lo stato
-      updateToggleState();
-      
-      // Aggiungi event listener
-      toggle.addEventListener('change', () => {
+        
+        // Inizializza lo stato
+        if (toggle.hasAttribute('data-indeterminate')) {
+          toggle.indeterminate = true;
+          toggle.removeAttribute('data-indeterminate');
+        }
+        updateCheckboxVisual();
+        
+        function updateCheckboxState() {
+          // Rimuovi lo stato indeterminate quando l'utente clicca
+          if (toggle.indeterminate) {
+            toggle.indeterminate = false;
+            toggle.checked = true; // Passa da indeterminate a checked
+          }
+          updateCheckboxVisual();
+        }
+        
+        // Aggiungi event listener
+        toggle.addEventListener('change', () => {
+          updateCheckboxState();
+          updateSubmitButton();
+        });
+      } else {
+        // Gestione toggle box originale
+        const toggleElement = container.querySelector('.group');
+        const toggleSpan = container.querySelector('span');
+        
+        function updateToggleState() {
+          if (toggle.checked) {
+            toggleElement.classList.add('has-checked', 'bg-indigo-600');
+            toggleSpan.classList.add('translate-x-5');
+          } else {
+            toggleElement.classList.remove('has-checked', 'bg-indigo-600');
+            toggleSpan.classList.remove('translate-x-5');
+          }
+        }
+        
+        // Inizializza lo stato
         updateToggleState();
-        updateSubmitButton();
-      });
+        
+        // Aggiungi event listener
+        toggle.addEventListener('change', () => {
+          updateToggleState();
+          updateSubmitButton();
+        });
+      }
     });
   }
   
   updateSubmitButton();
-  initToggleButtons();
+  initToggleAndStateCheckboxes();
   
   // Event listeners per select fields
   selectFields.forEach(select => {

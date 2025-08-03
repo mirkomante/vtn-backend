@@ -174,13 +174,30 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         }
         
         if (isBulkEdit && field.bulkEditable) {
+          // Calcola il valore iniziale per i campi toggle nella modifica massiva
+          let initialValue = '';
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map(item => item[field.name]);
+            const allTrue = values.every(val => val === true || val === 'true' || val === 'on');
+            const allFalse = values.every(val => val === false || val === 'false' || val === '' || val === null || val === undefined);
+            
+            if (allTrue) {
+              initialValue = true;
+            } else if (allFalse) {
+              initialValue = false;
+            } else {
+              // Stato misto - indeterminate
+              initialValue = 'indeterminate';
+            }
+          }
+          
           return {
             ...field,
             label: field.bulkLabel || field.label,
             description: field.bulkDescription || field.description,
             placeholder: field.bulkPlaceholder || field.placeholder,
             required: field.bulkRequired || false,
-            value: ''
+            value: initialValue
           };
         }
         
@@ -191,7 +208,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         submit: {
           ...data.buttons.submit,
           text: isBulkEdit 
-            ? `Modifica ${selectedItems?.length || 0} categorie` 
+            ? 'Modifica' 
             : isEdit 
               ? 'Modifica' 
               : 'Salva'
@@ -308,13 +325,30 @@ export const categoriaPiattiFormData: FormDataSchema = {
         }
         
         if (isBulkEdit && field.bulkEditable) {
+          // Calcola il valore iniziale per i campi toggle nella modifica massiva
+          let initialValue = '';
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map(item => item[field.name]);
+            const allTrue = values.every(val => val === true || val === 'true' || val === 'on');
+            const allFalse = values.every(val => val === false || val === 'false' || val === '' || val === null || val === undefined);
+            
+            if (allTrue) {
+              initialValue = true;
+            } else if (allFalse) {
+              initialValue = false;
+            } else {
+              // Stato misto - indeterminate
+              initialValue = 'indeterminate';
+            }
+          }
+          
           return {
             ...field,
             label: field.bulkLabel || field.label,
             description: field.bulkDescription || field.description,
             placeholder: field.bulkPlaceholder || field.placeholder,
             required: field.bulkRequired || false,
-            value: ''
+            value: initialValue
           };
         }
         
@@ -325,7 +359,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
         submit: {
           ...data.buttons.submit,
           text: isBulkEdit 
-            ? `Modifica ${selectedItems?.length || 0} categorie` 
+            ? 'Modifica' 
             : isEdit 
               ? 'Modifica' 
               : 'Salva'
