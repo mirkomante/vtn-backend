@@ -667,6 +667,25 @@ router.get('/utenti/cancellati', async (req, res) => {
       tableData: utentiTableData,
       users: deletedUsers,
       hasUsers: deletedUsers.length > 0,
+      tableConfigJson: JSON.stringify({
+        tableId: 'deleted-users-table',
+        idField: 'id',
+        labelField: 'givenName',
+        detailUrl: '/admin/utenti/dettagli/:id',
+        editUrl: '/admin/utenti/modifica/:id',
+        editMultipleButton: null,
+        actionButton: {
+          text: 'Ripristina',
+          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+        },
+        endpoint: '/admin/utenti/restore',
+        method: 'POST',
+        confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+        successMessage: 'Ripristinati {count} utente/i con successo',
+        errorMessage: 'Errore durante il ripristino',
+        disableClickableNames: true
+      }),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },

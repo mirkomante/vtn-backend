@@ -26,27 +26,4 @@
       disableClickableNames: true // Nuovo parametro per disabilitare i nomi cliccabili
     }
   }) %>
-<% } %>
-
-<script>
-  window['deleted-users-tableConfig'] = <%- JSON.stringify({
-    idField: 'id',
-    labelField: 'givenName',
-    detailUrl: '/admin/utenti/dettagli/:id',
-    editUrl: '/admin/utenti/modifica/:id',
-    editMultipleButton: null,
-    actionButton: {
-      text: 'Ripristina',
-      classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
-    },
-    endpoint: '/admin/utenti/restore',
-    method: 'POST',
-    confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
-    confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
-    successMessage: 'Ripristinati {count} utente/i con successo',
-    errorMessage: 'Errore durante il ripristino',
-    getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
-    disableClickableNames: true
-  }) %>
-</script>
-<script src="/js/selectableTable.js"></script> 
+<% } %> 
