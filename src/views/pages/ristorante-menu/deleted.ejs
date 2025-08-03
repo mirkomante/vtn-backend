@@ -1,0 +1,96 @@
+<% if (isSectionEmpty) { %>
+  <%- include('../../ui/emptyStates/simple', emptyState) %>
+<% } else { %>
+  <!-- Tabella con filtri integrati -->
+  <%- include('../../ui/tables/selectableTable', {
+    actionButton: null,
+    tableId: 'deleted-items-table',
+    tableData: tableData,
+    items: deletedItems,
+    showFilters: true,
+    filters: [
+      {
+        id: 'type',
+        name: 'type',
+        label: 'Tipo',
+        type: 'select',
+        placeholder: 'Tutti i tipi',
+        options: [
+          { value: '', label: 'Tutti i tipi' },
+          { value: 'categoria-piatti', label: 'Categoria Piatti', selected: currentTypeFilter === 'categoria-piatti' },
+          { value: 'categoria-menu-fisso', label: 'Categoria Menu Fisso', selected: currentTypeFilter === 'categoria-menu-fisso' },
+          { value: 'allergene', label: 'Allergene', selected: currentTypeFilter === 'allergene' },
+          { value: 'piatto', label: 'Piatto', selected: currentTypeFilter === 'piatto' },
+          { value: 'servizio-accessorio', label: 'Servizio Accessorio', selected: currentTypeFilter === 'servizio-accessorio' },
+          { value: 'menu-fisso', label: 'Menu Fisso', selected: currentTypeFilter === 'menu-fisso' }
+        ]
+      }
+    ],
+    hasActiveFilters: !!currentTypeFilter,
+    clearFiltersUrl: '/ristorante-menu/cancellati',
+    showEmptyMessage: isFilteredEmpty,
+    emptyMessage: {
+      title: 'Nessun elemento trovato',
+      description: 'Non ci sono elementi che corrispondono ai filtri applicati.',
+      icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="${uiIcons['ricerca'].viewBox}" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="${uiIcons['ricerca'].path}" />
+      </svg>`
+    },
+    tableConfig: {
+      idField: 'id',
+      labelField: 'nome',
+      editMultipleButton: null,
+      actionButton: {
+        text: 'Ripristina',
+        classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+      },
+      endpoint: '/ristorante-menu/restore',
+      method: 'POST',
+      confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+      confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+      successMessage: 'Ripristinati {count} elemento/i con successo',
+      errorMessage: 'Errore durante il ripristino',
+      disableClickableNames: true
+    }
+  }) %>
+<% } %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Configurazione della tabella
+  const tableConfig = {
+    tableId: 'deleted-items-table',
+    idField: 'id',
+    labelField: 'nome',
+    editMultipleButton: null,
+    actionButton: {
+      text: 'Ripristina',
+      classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+    },
+    endpoint: '/ristorante-menu/restore',
+    method: 'POST',
+    confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+    confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+    successMessage: 'Ripristinati {count} elemento/i con successo',
+    errorMessage: 'Errore durante il ripristino',
+    disableClickableNames: true,
+    onBeforeAction: function(selectedItems) {
+      // Raccogli i tipi degli elementi selezionati
+      const itemTypes = selectedItems.map(item => item.type);
+      
+      // Aggiungi i tipi alla richiesta
+      const requestData = {
+        itemIds: selectedItems.map(item => item.id),
+        itemTypes: itemTypes
+      };
+      
+      return requestData;
+    }
+  };
+  
+  // Inizializza la tabella
+  if (typeof initSelectableTable === 'function') {
+    initSelectableTable(tableConfig);
+  }
+});
+</script>

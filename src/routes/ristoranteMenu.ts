@@ -4,6 +4,8 @@ import { mainMenuItems } from '../config/mainMenu';
 import { ristoranteMenuItems } from '../config/sectionMenu';
 import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
+import { uiIcons } from '../config/uiIcons';
+import { elementiCancellatiTableData } from '../config/sectionTableData';
 import { isAuthenticated } from '../middlewares/auth';
 import { 
   allergeniConfig, 
@@ -1816,23 +1818,299 @@ router.delete('/impostazioni/categoria-piatti', async (req, res) => {
   }
 });
 
-router.get('/cancellati', (req, res) => {
+// Route per visualizzare gli elementi cancellati
+router.get('/cancellati', async (req, res) => {
   const currentPath = '/ristorante-menu/cancellati';
   let sectionMenu = ristoranteMenuItems;
   
-  res.render('pages/ristorante-menu/cancellati', {
-    title: 'Elementi Cancellati',
-    description: 'Visualizza e gestisci gli elementi cancellati del menu',
-    layout: 'layouts/sections',
-    mainMenu: mainMenuItems,
-    sectionMenu,
-    sectionIcons,
-    currentPath,
-    breadcrumbs: [
-      { label: 'Menu Ristorante', href: '/ristorante-menu' },
-      { label: 'Cancellati', href: '/ristorante-menu/cancellati' }
-    ]
-  });
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 50;
+    const offset = (page - 1) * limit;
+    const typeFilter = req.query.type as string;
+    
+    // Query base
+    let whereClause = '';
+    if (typeFilter) {
+      whereClause = `WHERE type = '${typeFilter}'`;
+    }
+    
+    // Query per il conteggio totale (senza filtri)
+    const totalCountQuery = `SELECT COUNT(*) as count FROM "ElementiCancellati"`;
+    const totalCountResult = await prisma.$queryRawUnsafe<[{ count: bigint }]>(totalCountQuery);
+    const totalItemsInSystem = Number(totalCountResult[0].count);
+    
+    // Query per il conteggio con filtri applicati
+    const filteredCountQuery = `SELECT COUNT(*) as count FROM "ElementiCancellati" ${whereClause}`;
+    const filteredCountResult = await prisma.$queryRawUnsafe<[{ count: bigint }]>(filteredCountQuery);
+    const filteredCount = Number(filteredCountResult[0].count);
+    
+    // Query per i dati
+    const dataQuery = `
+      SELECT * FROM "ElementiCancellati" 
+      ${whereClause}
+      ORDER BY "deletedAt" DESC 
+      LIMIT ${limit} OFFSET ${offset}
+    `;
+    const deletedItems = await prisma.$queryRawUnsafe(dataQuery);
+
+    // Determina se mostrare empty state o tabella vuota
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && filteredCount === 0;
+    const hasItems = deletedItems.length > 0;
+
+    res.render('pages/ristorante-menu/deleted', {
+      title: 'Elementi Cancellati',
+      description: 'Visualizza e gestisci gli elementi cancellati del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      uiIcons,
+      currentPath,
+      deletedItems,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      currentTypeFilter: typeFilter,
+      tableData: elementiCancellatiTableData,
+      pagination: {
+        currentPage: page,
+        totalPages: Math.ceil(filteredCount / limit),
+        totalItems: filteredCount,
+        itemsPerPage: limit
+      },
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cancellati', href: '/ristorante-menu/cancellati' }
+      ],
+      emptyState: {
+        title: 'Nessun elemento cancellato',
+        description: 'Non ci sono elementi cancellati nel sistema.',
+        buttonText: 'Torna al menu',
+        buttonHref: '/ristorante-menu',
+        iconName: 'tabella',
+        icon: uiIcons['tabella'],
+        buttonIconName: 'freccia-sx',
+        buttonIcon: uiIcons['freccia-sx']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero degli elementi cancellati:', error);
+    
+    // Gestione errore senza view separata
+    res.render('pages/ristorante-menu/deleted', {
+      title: 'Errore',
+      description: 'Si è verificato un errore nel recupero degli elementi cancellati',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      uiIcons,
+      currentPath,
+      deletedItems: [],
+      hasItems: false,
+      isSectionEmpty: true,
+      isFilteredEmpty: false,
+      currentTypeFilter: '',
+      tableData: elementiCancellatiTableData,
+      error: 'Si è verificato un errore nel recupero degli elementi cancellati',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cancellati', href: '/ristorante-menu/cancellati' }
+      ],
+      emptyState: {
+        title: 'Errore',
+        description: 'Si è verificato un errore nel recupero degli elementi cancellati',
+        buttonText: 'Riprova',
+        buttonHref: '/ristorante-menu/cancellati',
+        iconName: 'tabella',
+        icon: uiIcons['tabella'],
+        buttonIconName: 'freccia-sx',
+        buttonIcon: uiIcons['freccia-sx']
+      }
+    });
+  }
+});
+
+// Route per ripristinare uno o più elementi cancellati
+router.post('/restore', async (req, res) => {
+  const { itemIds, itemTypes } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0 || 
+      !itemTypes || !Array.isArray(itemTypes) || itemTypes.length !== itemIds.length) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Dati mancanti per il ripristino' 
+    });
+  }
+  
+  try {
+    let totalRestored = 0;
+    let totalSkipped = 0;
+    const results = [];
+
+    // Raggruppa gli elementi per tipo
+    const itemsByType = {};
+    itemIds.forEach((id, index) => {
+      const type = itemTypes[index];
+      if (!itemsByType[type]) {
+        itemsByType[type] = [];
+      }
+      itemsByType[type].push(id);
+    });
+
+    // Ripristina elementi per ogni tipo
+    for (const [type, ids] of Object.entries(itemsByType)) {
+      let restored = 0;
+      let skipped = 0;
+
+      switch (type) {
+        case 'categoria-piatti':
+          const existingCategoriePiatti = await prisma.categoriaPiatti.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingCategoriePiatti.length > 0) {
+            const validIds = existingCategoriePiatti.map(item => item.id);
+            await prisma.categoriaPiatti.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'categoria-menu-fisso':
+          const existingCategorieMenuFisso = await prisma.categoriaMenuFisso.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingCategorieMenuFisso.length > 0) {
+            const validIds = existingCategorieMenuFisso.map(item => item.id);
+            await prisma.categoriaMenuFisso.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'allergene':
+          const existingAllergeni = await prisma.allergene.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingAllergeni.length > 0) {
+            const validIds = existingAllergeni.map(item => item.id);
+            await prisma.allergene.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'piatto':
+          const existingPiatti = await prisma.piatto.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingPiatti.length > 0) {
+            const validIds = existingPiatti.map(item => item.id);
+            await prisma.piatto.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'servizio-accessorio':
+          const existingServizi = await prisma.servizioAccessorio.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingServizi.length > 0) {
+            const validIds = existingServizi.map(item => item.id);
+            await prisma.servizioAccessorio.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'menu-fisso':
+          const existingMenuFissi = await prisma.menuFisso.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingMenuFissi.length > 0) {
+            const validIds = existingMenuFissi.map(item => item.id);
+            await prisma.menuFisso.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+      }
+
+      totalRestored += restored;
+      totalSkipped += skipped;
+      results.push({ type, restored, skipped });
+    }
+
+    let message = `Ripristinati ${totalRestored} elemento/i con successo`;
+    if (totalSkipped > 0) {
+      message += `. ${totalSkipped} elemento/i non trovati o già ripristinati.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      restoredCount: totalRestored,
+      skippedCount: totalSkipped,
+      results
+    });
+  } catch (error) {
+    console.error('Errore nel ripristino degli elementi:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante il ripristino' 
+    });
+  }
 });
 
 export default router; 
