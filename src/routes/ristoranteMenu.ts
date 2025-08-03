@@ -1874,6 +1874,24 @@ router.get('/cancellati', async (req, res) => {
       isFilteredEmpty,
       currentTypeFilter: typeFilter,
       tableData: elementiCancellatiTableData,
+      tableConfigJson: JSON.stringify({
+        tableId: 'deleted-items-table',
+        idField: 'id',
+        labelField: 'nome',
+        editMultipleButton: null,
+        actionButton: {
+          text: 'Ripristina',
+          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+        },
+        endpoint: '/ristorante-menu/restore',
+        method: 'POST',
+        confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+        successMessage: 'Ripristinati {count} elemento/i con successo',
+        errorMessage: 'Errore durante il ripristino',
+        disableClickableNames: true,
+        tableData: elementiCancellatiTableData
+      }),
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(filteredCount / limit),
@@ -1914,6 +1932,24 @@ router.get('/cancellati', async (req, res) => {
       isFilteredEmpty: false,
       currentTypeFilter: '',
       tableData: elementiCancellatiTableData,
+      tableConfigJson: JSON.stringify({
+        tableId: 'deleted-items-table',
+        idField: 'id',
+        labelField: 'nome',
+        editMultipleButton: null,
+        actionButton: {
+          text: 'Ripristina',
+          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
+        },
+        endpoint: '/ristorante-menu/restore',
+        method: 'POST',
+        confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+        successMessage: 'Ripristinati {count} elemento/i con successo',
+        errorMessage: 'Errore durante il ripristino',
+        disableClickableNames: true,
+        tableData: elementiCancellatiTableData
+      }),
       error: 'Si è verificato un errore nel recupero degli elementi cancellati',
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },

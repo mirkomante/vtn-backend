@@ -130,13 +130,90 @@ function initializeSelectableTable(tableId, config) {
   // Funzione per eseguire l'azione bulk
   async function performBulkAction(itemIds, config) {
     try {
+      // Prepara i dati di base
+      let requestData = { itemIds };
+      
+      // Gestione speciale per la tabella dei cancellati che ha bisogno di itemTypes
+      if (config.tableId === 'deleted-items-table') {
+        try {
+          // Raccogli i tipi degli elementi selezionati
+          const itemTypes = [];
+          itemIds.forEach(id => {
+            const row = document.querySelector(`tr[data-item-id="${id}"]`);
+            if (row) {
+              // Estrai il campo type dai dati della riga
+              const type = row.getAttribute('data-type');
+              if (type) {
+                itemTypes.push(type);
+              } else {
+                // Fallback: cerca nella seconda colonna (type_label)
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 1) {
+                  const typeCell = cells[1];
+                  const typeText = typeCell.textContent.trim();
+                  // Mappa il testo visualizzato al valore del campo type
+                  const typeMap = {
+                    'Categoria Piatti': 'categoria-piatti',
+                    'Categoria Menu Fisso': 'categoria-menu-fisso',
+                    'Allergene': 'allergene',
+                    'Piatto': 'piatto',
+                    'Servizio Accessorio': 'servizio-accessorio',
+                    'Menu Fisso': 'menu-fisso'
+                  };
+                  const mappedType = typeMap[typeText] || typeText;
+                  itemTypes.push(mappedType);
+                }
+              }
+            }
+          });
+          
+          // Aggiungi i tipi alla richiesta
+          requestData.itemTypes = itemTypes;
+        } catch (error) {
+          console.error('selectableTable.js: Errore nel raccogliere i tipi:', error);
+        }
+      }
+      // Se è definita onBeforeAction, chiamala per personalizzare i dati
+      else if (config.onBeforeAction && typeof config.onBeforeAction === 'function') {
+        try {
+          // Raccogli gli elementi selezionati con i loro dati
+          const selectedItems = [];
+          itemIds.forEach(id => {
+            const row = document.querySelector(`tr[data-item-id="${id}"]`);
+            if (row) {
+              const item = {};
+              // Estrai i dati dalla riga
+              const cells = row.querySelectorAll('td');
+              cells.forEach((cell, index) => {
+                if (index > 0) { // Salta la prima cella (checkbox)
+                  const fieldName = config.tableData?.fields?.[index - 1]?.name;
+                  if (fieldName) {
+                    item[fieldName] = cell.textContent.trim();
+                  }
+                }
+              });
+              item.id = id;
+              selectedItems.push(item);
+            }
+          });
+          
+          // Chiama onBeforeAction per personalizzare i dati
+          const customData = config.onBeforeAction(selectedItems);
+          if (customData && typeof customData === 'object') {
+            requestData = { ...requestData, ...customData };
+          }
+        } catch (error) {
+          console.error('selectableTable.js: Errore in onBeforeAction:', error);
+        }
+      }
+      
       const response = await fetch(config.endpoint, {
         method: config.method,
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'same-origin',
-        body: JSON.stringify({ itemIds })
+        body: JSON.stringify(requestData)
       });
 
       const result = await response.json();
