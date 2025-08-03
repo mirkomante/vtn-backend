@@ -60,6 +60,29 @@ router.get('/utenti', async (req, res) => {
       users,
       hasUsers: users.length > 0,
       successMessage: req.query.success ? decodeURIComponent(req.query.success as string) : undefined,
+      errorMessage: req.query.error ? decodeURIComponent(req.query.error as string) : undefined,
+      tableConfigJson: JSON.stringify({
+        tableId: 'users-table',
+        idField: 'id',
+        labelField: 'givenName',
+        detailUrl: '/admin/utenti/dettagli/:id',
+        editUrl: '/admin/utenti/modifica/:id',
+        bulkEditUrl: '/admin/utenti/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/admin/utenti',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
+        successMessage: 'Eliminati {count} utente/i con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        disableClickableNames: false
+      }),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' }
@@ -309,10 +332,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
   }
   
   if (userIds.length === 0) {
-    return res.status(400).json({ 
-      success: false, 
-      message: 'Nessun utente selezionato per la modifica' 
-    });
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+    }
+    return res.redirect('/admin/utenti?error=Nessun utente selezionato per la modifica');
   }
   
   try {
@@ -324,10 +347,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Nessun utente valido trovato per la modifica' 
-      });
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+      }
+      return res.redirect('/admin/utenti?error=Nessun utente valido trovato per la modifica');
     }
 
     // Prepara i dati per l'aggiornamento (solo i campi forniti)
@@ -344,10 +367,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
 
     // Se non ci sono dati da aggiornare, restituisci errore
     if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' 
-      });
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+      }
+      return res.redirect('/admin/utenti?error=Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.');
     }
 
     await prisma.user.updateMany({
@@ -365,19 +388,18 @@ router.post('/utenti/modifica-massa', async (req, res) => {
       message += `. ${skippedCount} utenti non trovati o già cancellati.`;
     }
     
-    res.json({ 
-      success: true, 
-      message,
-      updatedCount,
-      skippedCount
-    });
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: true, message });
+    }
+    
+    res.redirect(`/admin/utenti?success=${encodeURIComponent(message)}`);
     
   } catch (error) {
     console.error('Errore durante la modifica massiva:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Errore interno del server durante la modifica massiva' 
-    });
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    }
+    res.redirect('/admin/utenti?error=Errore interno del server durante la modifica massiva');
   }
 });
 

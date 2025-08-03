@@ -1,172 +1,161 @@
+console.log('selectableTable.js: Script caricato');
+
 function initializeSelectableTable(tableId, config) {
-  const table = document.getElementById(tableId)
+  const table = document.getElementById(tableId);
   if (!table) {
-    console.error(`Tabella con ID "${tableId}" non trovata`)
-    return
+    return;
   }
 
-  const toggleAllCheckbox = table.querySelector("thead input[type='checkbox']")
-  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']")]
+  // Trova gli elementi della tabella
+  const selectAllCheckbox = document.querySelector(`input[id='${tableId}-select-all']`);
+  const itemCheckboxes = document.querySelectorAll(`input[name='${tableId}-item']`);
+  const editMultipleBtn = document.getElementById(`${tableId}-editMultipleBtn`);
+  const actionSelectedBtn = document.getElementById(`${tableId}-actionSelectedBtn`);
 
-  if (!toggleAllCheckbox || checkboxes.length === 0) {
-    console.error(`Elementi checkbox non trovati nella tabella "${tableId}"`)
-    return
+  // Controlla se la tabella ha modifica massiva (ha editMultipleBtn)
+  const hasBulkEdit = !!editMultipleBtn;
+
+  if (!selectAllCheckbox || !actionSelectedBtn) {
+    return;
   }
 
-  toggleAllCheckbox.addEventListener('change', (event) => {
-    checkboxes.forEach((checkbox) => {
-      checkbox.checked = event.target.checked
-    })
-    updateActionButtonsVisibility()
-  })
-  
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => {
-      const allChecked = checkboxes.every((checkbox) => checkbox.checked)
-      const someChecked = checkboxes.some((checkbox) => checkbox.checked)
-      toggleAllCheckbox.checked = someChecked
-      toggleAllCheckbox.indeterminate = someChecked && !allChecked
-      updateActionButtonsVisibility()
-    })
-  })
+  // Funzione per aggiornare lo stato dei bottoni
+  function updateButtonStates() {
+    const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
+    const hasCheckedItems = checkedItems.length > 0;
+    const allChecked = checkedItems.length === itemCheckboxes.length && itemCheckboxes.length > 0;
 
-  function updateActionButtonsVisibility() {
-    const actionSelectedBtn = document.getElementById('actionSelectedBtn')
-    const editMultipleBtn = document.getElementById('editMultipleBtn')
-    
-    const hasCheckedItems = checkboxes.some(checkbox => checkbox.checked)
-    
-    if (actionSelectedBtn) {
-      actionSelectedBtn.disabled = !hasCheckedItems
+    // Aggiorna lo stato del checkbox "seleziona tutto"
+    selectAllCheckbox.checked = allChecked;
+    selectAllCheckbox.indeterminate = hasCheckedItems && !allChecked;
+
+    // Abilita/disabilita i bottoni
+    if (hasBulkEdit) {
+      editMultipleBtn.disabled = !hasCheckedItems;
     }
+    actionSelectedBtn.disabled = !hasCheckedItems;
+  }
+
+  // Event listener per il checkbox "seleziona tutto"
+  selectAllCheckbox.addEventListener('change', function() {
+    itemCheckboxes.forEach(checkbox => {
+      checkbox.checked = this.checked;
+    });
+    updateButtonStates();
+  });
+
+  // Event listeners per i checkbox individuali
+  itemCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      updateButtonStates();
+    });
+  });
+
+  // Event listener per il bottone di modifica multipla
+  if (hasBulkEdit) {
+    editMultipleBtn.addEventListener('click', function() {
+      const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
+      if (checkedItems.length === 0) return;
+
+      const itemIds = Array.from(checkedItems).map(cb => cb.value);
+      const idsParam = itemIds.join(',');
+      
+      // Costruisci l'URL di modifica massiva
+      let bulkEditUrl = config.bulkEditUrl;
+      if (bulkEditUrl.includes(':ids')) {
+        bulkEditUrl = bulkEditUrl.replace(':ids', idsParam);
+      } else {
+        bulkEditUrl += `?ids=${idsParam}`;
+      }
+      
+      window.location.href = bulkEditUrl;
+    });
+  }
+
+  // Event listener per il bottone di azione (elimina)
+  actionSelectedBtn.addEventListener('click', function() {
+    const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
+    if (checkedItems.length === 0) return;
+
+    const itemIds = Array.from(checkedItems).map(cb => cb.value);
+    const count = checkedItems.length;
     
-    if (editMultipleBtn) {
-      editMultipleBtn.disabled = !hasCheckedItems
+    // Messaggio di conferma
+    const confirmMessage = count === 1 
+      ? config.confirmMessage 
+      : config.confirmMessageMultiple.replace('{count}', count);
+    
+    if (!confirm(confirmMessage)) {
+      return;
+    }
+
+    // Esegui l'azione
+    performBulkAction(itemIds, config);
+  });
+
+  // Funzione per eseguire l'azione bulk
+  async function performBulkAction(itemIds, config) {
+    try {
+      const response = await fetch(config.endpoint, {
+        method: config.method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ itemIds })
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        const successMessage = config.successMessage.replace('{count}', itemIds.length);
+        alert(successMessage);
+        window.location.reload();
+      } else {
+        alert(result.message || config.errorMessage);
+      }
+    } catch (error) {
+      console.error('selectableTable.js: Errore durante l\'azione bulk:', error);
+      alert(config.errorMessage);
     }
   }
 
-  updateActionButtonsVisibility()
+  // Inizializza lo stato
+  updateButtonStates();
 }
 
-function executeTableAction(tableId, config) {
-  const table = document.getElementById(tableId)
-  if (!table) {
-    console.error(`Tabella con ID "${tableId}" non trovata`)
-    return
-  }
-
-  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']:checked")]
-  
-  if (checkboxes.length === 0) {
-    alert('Nessun elemento selezionato')
-    return
-  }
-
-  const selectedIds = checkboxes.map(checkbox => {
-    const row = checkbox.closest('tr')
-    return row.dataset.itemId
-  }).filter(id => id)
-
-  if (selectedIds.length === 0) {
-    alert('Impossibile identificare gli elementi selezionati')
-    return
-  }
-
-  const itemCount = selectedIds.length
-  const confirmMessage = itemCount === 1 
-    ? config.confirmMessage 
-    : config.confirmMessageMultiple.replace('{count}', itemCount)
-  
-  if (!confirm(confirmMessage)) {
-    return
-  }
-
-  fetch(config.endpoint, {
-    method: config.method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      itemIds: selectedIds
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      const successMessage = config.successMessage.replace('{count}', data.deletedCount || data.restoredCount || itemCount)
-      alert(successMessage)
-      window.location.reload()
-    } else {
-      alert('Errore: ' + data.message)
-    }
-  })
-  .catch(error => {
-    console.error('Errore:', error)
-    alert(config.errorMessage || 'Si è verificato un errore')
-  })
-}
-
-function executeEditMultiple(tableId, config) {
-  const table = document.getElementById(tableId)
-  if (!table) {
-    console.error(`Tabella con ID "${tableId}" non trovata`)
-    return
-  }
-
-  const checkboxes = [...table.querySelectorAll("tbody input[type='checkbox']:checked")]
-  
-  if (checkboxes.length === 0) {
-    alert('Nessun elemento selezionato per la modifica')
-    return
-  }
-
-  const selectedIds = checkboxes.map(checkbox => {
-    const row = checkbox.closest('tr')
-    return row.dataset.itemId
-  }).filter(id => id)
-
-  if (selectedIds.length === 0) {
-    alert('Impossibile identificare gli elementi selezionati')
-    return
-  }
-
-  // Se è selezionato solo un elemento, vai alla modifica singola
-  if (selectedIds.length === 1) {
-    const editUrl = config.editUrl.replace(':id', selectedIds[0])
-    window.location.href = editUrl
-    return
-  }
-
-  // Se sono selezionati più elementi, vai alla modifica massiva
-  const bulkEditUrl = config.bulkEditUrl || '/admin/utenti/modifica-massa'
-  const url = new URL(bulkEditUrl, window.location.origin)
-  url.searchParams.set('ids', selectedIds.join(','))
-  window.location.href = url.toString()
-}
-
+// Inizializzazione quando il DOM è caricato
 document.addEventListener('DOMContentLoaded', function() {
-  // Inizializza tutte le tabelle selezionabili presenti nella pagina
-  const tables = document.querySelectorAll('[id$="-table"]')
+  // Cerca tutte le tabelle con ID che terminano con '-table'
+  const tables = document.querySelectorAll('table[id$="-table"]');
   
   tables.forEach(table => {
-    const tableId = table.id
-    const configKey = tableId + 'Config'
-    const config = window[configKey]
+    const tableId = table.id;
+    
+    // Cerca la configurazione per questa tabella
+    const configKey = tableId + '-config';
+    const config = window[configKey];
     
     if (config) {
-      initializeSelectableTable(tableId, config)
-      
-      // Event listener per il bottone azione principale (Elimina/Ripristina)
-      const actionSelectedBtn = document.getElementById('actionSelectedBtn')
-      if (actionSelectedBtn) {
-        actionSelectedBtn.addEventListener('click', () => executeTableAction(tableId, config))
-      }
-      
-      // Event listener per il bottone modifica multipla (solo se presente)
-      const editMultipleBtn = document.getElementById('editMultipleBtn')
-      if (editMultipleBtn) {
-        editMultipleBtn.addEventListener('click', () => executeEditMultiple(tableId, config))
-      }
+      initializeSelectableTable(tableId, config);
     }
-  })
-}) 
+  });
+  
+  // Fallback: se non ci sono tabelle ma ci sono configurazioni, prova dopo un breve delay
+  if (tables.length === 0) {
+    const configKeys = Object.keys(window).filter(key => key.endsWith('-config'));
+    
+    if (configKeys.length > 0) {
+      setTimeout(() => {
+        const retryTables = document.querySelectorAll('table[id$="-table"]');
+        retryTables.forEach(table => {
+          const tableId = table.id;
+          const config = window[tableId + '-config'];
+          if (config) {
+            initializeSelectableTable(tableId, config);
+          }
+        });
+      }, 100);
+    }
+  }
+}); 

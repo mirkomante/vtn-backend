@@ -1,9 +1,22 @@
 import express from 'express';
+import { PrismaClient } from '@prisma/client';
 import { mainMenuItems } from '../config/mainMenu';
 import { ristoranteMenuItems } from '../config/sectionMenu';
 import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { isAuthenticated } from '../middlewares/auth';
+import { 
+  allergeniConfig, 
+  categoriaMenuFissoConfig, 
+  categoriaPiattiConfig 
+} from '../config/subSectionConfig';
+import { 
+  allergeneFormData, 
+  categoriaMenuFissoFormData, 
+  categoriaPiattiFormData 
+} from '../config/subSectionFormData';
+
+const prisma = new PrismaClient();
 
 const router = express.Router();
 
@@ -107,70 +120,1700 @@ router.get('/impostazioni', (req, res) => {
 });
 
 // === SOTTOSEZIONI IMPOSTAZIONI ===
-router.get('/impostazioni/categoria-menu-fisso', (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso';
+router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    // Recuperare le categorie menu fisso dal database (escludendo quelle cancellate)
+    const categorieMenuFisso = await prisma.categoriaMenuFisso.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    const config = { ...categoriaMenuFissoConfig };
+    config.hasItems = categorieMenuFisso.length > 0;
+    config.items = categorieMenuFisso;
+    
+    // Gestire messaggi di successo/errore
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Categoria Menu Fisso',
+      description: 'Gestisci le categorie per i menu fissi del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' }
+      ],
+      successMessage,
+      errorMessage,
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie menu fisso:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+router.get('/impostazioni/categoria-piatti', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/categoria-piatti';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    // Recuperare le categorie piatti dal database (escludendo quelle cancellate)
+    const categoriePiatti = await prisma.categoriaPiatti.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    const config = { ...categoriaPiattiConfig };
+    config.hasItems = categoriePiatti.length > 0;
+    config.items = categoriePiatti;
+    
+    // Gestire messaggi di successo/errore
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Categoria Piatti',
+      description: 'Gestisci le categorie per i piatti del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' }
+      ],
+      successMessage,
+      errorMessage,
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie piatti:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+router.get('/impostazioni/allergeni', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/allergeni';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    // Recuperare gli allergeni dal database (escludendo quelli cancellati)
+    const allergeni = await prisma.allergene.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    const config = { ...allergeniConfig };
+    config.hasItems = allergeni.length > 0;
+    config.items = allergeni;
+    
+    // Gestire messaggi di successo/errore
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Allergeni',
+      description: 'Gestisci gli allergeni per i piatti del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' }
+      ],
+      successMessage,
+      errorMessage,
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero degli allergeni:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === ROUTE CRUD ALLERGENI ===
+router.get('/impostazioni/allergeni/nuovo', (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/allergeni/nuovo';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
-  
-  res.render('pages/ristorante-menu/impostazioni/categoria-menu-fisso', {
-    title: 'Categoria Menu Fisso',
-    description: 'Gestisci le categorie per i menu fissi del ristorante',
+
+  const formConfig = allergeneFormData.getFormData(allergeneFormData, false);
+
+  res.render('pages/ristorante-menu/impostazioni/new', {
+    title: 'Nuovo Allergene',
+    description: 'Crea un nuovo allergene per i piatti del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionTabs,
     sectionIcons,
     currentPath,
+    formConfig,
+    itemType: 'Allergene',
+    backUrl: '/ristorante-menu/impostazioni/allergeni',
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-      { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' }
+      { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+      { label: 'Nuovo Allergene', href: '/ristorante-menu/impostazioni/allergeni/nuovo' }
     ]
   });
 });
 
-router.get('/impostazioni/categoria-piatti', (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti';
+router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  
+  try {
+    // Verifica se esiste già un allergene con lo stesso nome
+    const existingAllergene = await prisma.allergene.findUnique({
+      where: { nome }
+    });
+
+    if (existingAllergene) {
+      const formConfig = allergeneFormData.getFormData(allergeneFormData, false, null, req.body);
+      
+      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+        title: 'Nuovo Allergene',
+        description: 'Crea un nuovo allergene per i piatti del ristorante',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/allergeni/nuovo',
+        formConfig,
+        itemType: 'Allergene',
+        backUrl: '/ristorante-menu/impostazioni/allergeni',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+          { label: 'Nuovo Allergene', href: '/ristorante-menu/impostazioni/allergeni/nuovo' }
+        ],
+        error: 'Un allergene con questo nome esiste già'
+      });
+    }
+
+    const allergene = await prisma.allergene.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}?success=Allergene creato con successo`);
+  } catch (error) {
+    console.error('Errore nella creazione dell\'allergene:', error);
+    
+    const formConfig = allergeneFormData.getFormData(allergeneFormData, false, null, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+      title: 'Nuovo Allergene',
+      description: 'Crea un nuovo allergene per i piatti del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/allergeni/nuovo',
+      formConfig,
+      itemType: 'Allergene',
+      backUrl: '/ristorante-menu/impostazioni/allergeni',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: 'Nuovo Allergene', href: '/ristorante-menu/impostazioni/allergeni/nuovo' }
+      ],
+      error: 'Si è verificato un errore durante la creazione dell\'allergene'
+    });
+  }
+});
+
+router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/allergeni/dettagli';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
-  res.render('pages/ristorante-menu/impostazioni/categoria-piatti', {
-    title: 'Categoria Piatti',
-    description: 'Gestisci le categorie per i piatti del ristorante',
+  try {
+    const allergene = await prisma.allergene.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!allergene) {
+      return res.status(404).render('error', {
+        title: 'Allergene non trovato',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+          { label: 'Allergene non trovato', href: `/ristorante-menu/impostazioni/allergeni/dettagli/${req.params.id}` }
+        ],
+        error: 'L\'allergene richiesto non esiste'
+      });
+    }
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Allergene',
+      description: 'Informazioni dettagliate dell\'allergene',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: allergene,
+      itemType: 'Allergene',
+      backUrl: '/ristorante-menu/impostazioni/allergeni',
+      detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
+      editUrl: `/ristorante-menu/impostazioni/allergeni/modifica/${allergene.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: allergene.nome, href: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}` }
+      ],
+      successMessage: req.query.success
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei dettagli allergene:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/allergeni/dettagli/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero dei dettagli dell\'allergene'
+    });
+  }
+});
+
+router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/allergeni/modifica';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  try {
+    const allergene = await prisma.allergene.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!allergene) {
+      return res.status(404).render('error', {
+        title: 'Allergene non trovato',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+          { label: 'Allergene non trovato', href: `/ristorante-menu/impostazioni/allergeni/modifica/${req.params.id}` }
+        ],
+        error: 'L\'allergene richiesto non esiste'
+      });
+    }
+
+    const formConfig = allergeneFormData.getFormData(allergeneFormData, true, allergene);
+
+    res.render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Allergene',
+      description: 'Modifica i dettagli dell\'allergene',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: allergene,
+      formConfig,
+      itemType: 'Allergene',
+      detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: allergene.nome, href: `/ristorante-menu/impostazioni/allergeni/modifica/${allergene.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dell\'allergene per modifica:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/allergeni/modifica/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero dell\'allergene'
+    });
+  }
+});
+
+router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const allergeneId = req.params.id;
+  
+  try {
+    const existingAllergene = await prisma.allergene.findUnique({
+      where: { id: allergeneId }
+    });
+
+    if (!existingAllergene) {
+      return res.status(404).render('error', {
+        title: 'Allergene non trovato',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+          { label: 'Allergene non trovato', href: `/ristorante-menu/impostazioni/allergeni/modifica/${allergeneId}` }
+        ],
+        error: 'L\'allergene richiesto non esiste'
+      });
+    }
+
+    if (nome !== existingAllergene.nome) {
+      const allergeneWithSameName = await prisma.allergene.findUnique({
+        where: { nome }
+      });
+
+      if (allergeneWithSameName) {
+        const formConfig = allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body);
+        
+        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+          title: 'Modifica Allergene',
+          description: 'Modifica i dettagli dell\'allergene',
+          layout: 'layouts/sections',
+          mainMenu: mainMenuItems,
+          sectionMenu: ristoranteMenuItems,
+          sectionTabs: ristoranteMenuImpostazioniSubItems,
+          sectionIcons,
+          currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
+          item: existingAllergene,
+          formConfig,
+          itemType: 'Allergene',
+          detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${existingAllergene.id}`,
+          breadcrumbs: [
+            { label: 'Menu Ristorante', href: '/ristorante-menu' },
+            { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+            { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+            { label: existingAllergene.nome, href: `/ristorante-menu/impostazioni/allergeni/modifica/${existingAllergene.id}` }
+          ],
+          error: 'Un altro allergene con questo nome esiste già'
+        });
+      }
+    }
+
+    const updatedAllergene = await prisma.allergene.update({
+      where: { id: allergeneId },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/allergeni/dettagli/${updatedAllergene.id}?success=Allergene aggiornato con successo`);
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento dell\'allergene:', error);
+    
+    const formConfig = allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Allergene',
+      description: 'Modifica i dettagli dell\'allergene',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
+      item: existingAllergene,
+      formConfig,
+      itemType: 'Allergene',
+      detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
+        { label: existingAllergene?.nome || 'Modifica Allergene', href: `/ristorante-menu/impostazioni/allergeni/modifica/${allergeneId}` }
+      ],
+      error: 'Si è verificato un errore durante l\'aggiornamento dell\'allergene'
+    });
+  }
+});
+
+// Route per eliminazione singola allergene
+router.delete('/impostazioni/allergeni/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.allergene.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+    
+    res.json({ success: true, message: 'Allergene eliminato con successo' });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione dell\'allergene:', error);
+    res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+  }
+});
+
+// Route per eliminazione multipla allergeni
+router.delete('/impostazioni/allergeni', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun allergene selezionato per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutti gli allergeni esistano e non siano già cancellati
+    const existingAllergeni = await prisma.allergene.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingAllergeni.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun allergene valido trovato per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutti gli allergeni validi
+    const validAllergeneIds = existingAllergeni.map(allergene => allergene.id);
+    await prisma.allergene.updateMany({
+      where: { 
+        id: { in: validAllergeneIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validAllergeneIds.length;
+    const skippedCount = itemIds.length - validAllergeneIds.length;
+    
+    let message = `Eliminati ${deletedCount} allergene/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} allergene/i già cancellati o non trovati.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione degli allergeni:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD CATEGORIE MENU FISSO ===
+router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+  const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false);
+
+  res.render('pages/ristorante-menu/impostazioni/new', {
+    title: 'Nuova Categoria Menu Fisso',
+    description: 'Crea una nuova categoria per i menu fissi del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionTabs,
     sectionIcons,
     currentPath,
+    formConfig,
+    itemType: 'Categoria Menu Fisso',
+    backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-      { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' }
+      { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+      { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo' }
     ]
   });
 });
 
-router.get('/impostazioni/allergeni', (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/allergeni';
+router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  
+  try {
+    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
+      where: { nome }
+    });
+
+    if (existingCategoria) {
+      const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
+      
+      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+        title: 'Nuova Categoria Menu Fisso',
+        description: 'Crea una nuova categoria per i menu fissi del ristorante',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+        formConfig,
+        itemType: 'Categoria Menu Fisso',
+        backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+          { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo' }
+        ],
+        error: 'Una categoria con questo nome esiste già'
+      });
+    }
+
+    const categoria = await prisma.categoriaMenuFisso.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}?success=Categoria creata con successo`);
+  } catch (error) {
+    console.error('Errore nella creazione della categoria:', error);
+    
+    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+      title: 'Nuova Categoria Menu Fisso',
+      description: 'Crea una nuova categoria per i menu fissi del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+      formConfig,
+      itemType: 'Categoria Menu Fisso',
+      backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo' }
+      ],
+      error: 'Si è verificato un errore durante la creazione della categoria'
+    });
+  }
+});
+
+router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
   
-  res.render('pages/ristorante-menu/impostazioni/allergeni', {
-    title: 'Allergeni',
-    description: 'Gestisci gli allergeni per i piatti del ristorante',
+  try {
+    const categoria = await prisma.categoriaMenuFisso.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!categoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${req.params.id}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Categoria Menu Fisso',
+      description: 'Informazioni dettagliate della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: categoria,
+      itemType: 'Categoria Menu Fisso',
+      backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
+      editUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}` }
+      ],
+      successMessage: req.query.success
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei dettagli categoria:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero dei dettagli della categoria'
+    });
+  }
+});
+
+router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  try {
+    const categoria = await prisma.categoriaMenuFisso.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!categoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${req.params.id}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, categoria);
+
+    res.render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Categoria Menu Fisso',
+      description: 'Modifica i dettagli della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: categoria,
+      formConfig,
+      itemType: 'Categoria Menu Fisso',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero della categoria per modifica:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero della categoria'
+    });
+  }
+});
+
+router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  const categoriaId = req.params.id;
+  
+  try {
+    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
+      where: { id: categoriaId }
+    });
+
+    if (!existingCategoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoriaId}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    if (nome !== existingCategoria.nome) {
+      const categoriaWithSameName = await prisma.categoriaMenuFisso.findUnique({
+        where: { nome }
+      });
+
+      if (categoriaWithSameName) {
+        const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body);
+        
+        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+          title: 'Modifica Categoria Menu Fisso',
+          description: 'Modifica i dettagli della categoria',
+          layout: 'layouts/sections',
+          mainMenu: mainMenuItems,
+          sectionMenu: ristoranteMenuItems,
+          sectionTabs: ristoranteMenuImpostazioniSubItems,
+          sectionIcons,
+          currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
+          item: existingCategoria,
+          formConfig,
+          itemType: 'Categoria Menu Fisso',
+          detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${existingCategoria.id}`,
+          breadcrumbs: [
+            { label: 'Menu Ristorante', href: '/ristorante-menu' },
+            { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+            { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+            { label: existingCategoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${existingCategoria.id}` }
+          ],
+          error: 'Un\'altra categoria con questo nome esiste già'
+        });
+      }
+    }
+
+    const updatedCategoria = await prisma.categoriaMenuFisso.update({
+      where: { id: categoriaId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${updatedCategoria.id}?success=Categoria aggiornata con successo`);
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della categoria:', error);
+    
+    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Categoria Menu Fisso',
+      description: 'Modifica i dettagli della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
+      item: existingCategoria,
+      formConfig,
+      itemType: 'Categoria Menu Fisso',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoriaId}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: existingCategoria?.nome || 'Modifica Categoria', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoriaId}` }
+      ],
+      error: 'Si è verificato un errore durante l\'aggiornamento della categoria'
+    });
+  }
+});
+
+// Route per modifica massiva categorie menu fisso
+router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  const categoriaIds = req.query.ids ? (req.query.ids as string).split(',') : [];
+  
+  if (categoriaIds.length === 0) {
+    return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso');
+  }
+  
+  try {
+    const selectedCategorie = await prisma.categoriaMenuFisso.findMany({
+      where: { 
+        id: { in: categoriaIds },
+        deletedAt: null
+      },
+      select: {
+        id: true,
+        nome: true,
+        descrizione: true,
+        inLista: true
+      }
+    });
+
+    if (selectedCategorie.length === 0) {
+      return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso');
+    }
+
+    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, null, true, selectedCategorie);
+
+    res.render('pages/ristorante-menu/impostazioni/editBulk', {
+      title: 'Modifica Massiva Categorie Menu Fisso',
+      description: 'Modifica lo stato delle categorie selezionate',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      selectedItems: selectedCategorie,
+      formConfig,
+      itemType: 'Categoria Menu Fisso',
+      backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
+        { label: 'Modifica Massiva', href: '#' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie per modifica massiva:', error);
+    res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso');
+  }
+});
+
+router.post('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res) => {
+  const { itemIds, inLista } = req.body;
+  
+  let categoriaIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    categoriaIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    categoriaIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (categoriaIds.length === 0) {
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Nessuna categoria selezionata per la modifica' });
+    }
+    return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso?error=Nessuna categoria selezionata per la modifica');
+  }
+  
+  try {
+    const existingCategorie = await prisma.categoriaMenuFisso.findMany({
+      where: { 
+        id: { in: categoriaIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingCategorie.length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessuna categoria valida trovata per la modifica' });
+      }
+      return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso?error=Nessuna categoria valida trovata per la modifica');
+    }
+
+    const updateData: any = {};
+    
+    if (inLista !== undefined) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento' });
+      }
+      return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso?error=Nessun campo valido fornito per l\'aggiornamento');
+    }
+
+    await prisma.categoriaMenuFisso.updateMany({
+      where: { 
+        id: { in: categoriaIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingCategorie.length;
+    const skippedCount = categoriaIds.length - existingCategorie.length;
+    
+    let message = `Aggiornate ${updatedCount} categorie con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} categorie non trovate o già cancellate.`;
+    }
+    
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: true, message });
+    }
+    
+    res.redirect(`/ristorante-menu/impostazioni/categoria-menu-fisso?success=${encodeURIComponent(message)}`);
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    }
+    res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso?error=Errore interno del server durante la modifica massiva');
+  }
+});
+
+// Route per eliminazione singola categoria menu fisso
+router.delete('/impostazioni/categoria-menu-fisso/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.categoriaMenuFisso.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+    
+    res.json({ success: true, message: 'Categoria eliminata con successo' });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della categoria:', error);
+    res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+  }
+});
+
+// Route per eliminazione multipla categorie menu fisso
+router.delete('/impostazioni/categoria-menu-fisso', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna categoria selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le categorie esistano e non siano già cancellate
+    const existingCategorie = await prisma.categoriaMenuFisso.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingCategorie.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna categoria valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le categorie validi
+    const validCategoriaIds = existingCategorie.map(categoria => categoria.id);
+    await prisma.categoriaMenuFisso.updateMany({
+      where: { 
+        id: { in: validCategoriaIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validCategoriaIds.length;
+    const skippedCount = itemIds.length - validCategoriaIds.length;
+    
+    let message = `Eliminate ${deletedCount} categoria/e con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} categoria/e già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle categorie:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD CATEGORIE PIATTI ===
+router.get('/impostazioni/categoria-piatti/nuovo', (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/nuovo';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+  const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false);
+
+  res.render('pages/ristorante-menu/impostazioni/new', {
+    title: 'Nuova Categoria Piatti',
+    description: 'Crea una nuova categoria per i piatti del ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionTabs,
     sectionIcons,
     currentPath,
+    formConfig,
+    itemType: 'Categoria Piatti',
+    backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-      { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' }
+      { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+      { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-piatti/nuovo' }
     ]
   });
+});
+
+router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  
+  try {
+    const existingCategoria = await prisma.categoriaPiatti.findUnique({
+      where: { nome }
+    });
+
+    if (existingCategoria) {
+      const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body);
+      
+      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+        title: 'Nuova Categoria Piatti',
+        description: 'Crea una nuova categoria per i piatti del ristorante',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+        formConfig,
+        itemType: 'Categoria Piatti',
+        backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+          { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-piatti/nuovo' }
+        ],
+        error: 'Una categoria con questo nome esiste già'
+      });
+    }
+
+    const categoria = await prisma.categoriaPiatti.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}?success=Categoria creata con successo`);
+  } catch (error) {
+    console.error('Errore nella creazione della categoria:', error);
+    
+    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+      title: 'Nuova Categoria Piatti',
+      description: 'Crea una nuova categoria per i piatti del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+      formConfig,
+      itemType: 'Categoria Piatti',
+      backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-piatti/nuovo' }
+      ],
+      error: 'Si è verificato un errore durante la creazione della categoria'
+    });
+  }
+});
+
+router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/dettagli';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  try {
+    const categoria = await prisma.categoriaPiatti.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!categoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${req.params.id}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Categoria Piatti',
+      description: 'Informazioni dettagliate della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: categoria,
+      itemType: 'Categoria Piatti',
+      backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
+      editUrl: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoria.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}` }
+      ],
+      successMessage: req.query.success
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei dettagli categoria:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero dei dettagli della categoria'
+    });
+  }
+});
+
+router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/modifica';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  try {
+    const categoria = await prisma.categoriaPiatti.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!categoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionTabs,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${req.params.id}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, categoria);
+
+    res.render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Categoria Piatti',
+      description: 'Modifica i dettagli della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: categoria,
+      formConfig,
+      itemType: 'Categoria Piatti',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoria.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero della categoria per modifica:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero della categoria'
+    });
+  }
+});
+
+router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  const categoriaId = req.params.id;
+  
+  try {
+    const existingCategoria = await prisma.categoriaPiatti.findUnique({
+      where: { id: categoriaId }
+    });
+
+    if (!existingCategoria) {
+      return res.status(404).render('error', {
+        title: 'Categoria non trovata',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionTabs: ristoranteMenuImpostazioniSubItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/impostazioni/categoria-piatti/modifica',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+          { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoriaId}` }
+        ],
+        error: 'La categoria richiesta non esiste'
+      });
+    }
+
+    if (nome !== existingCategoria.nome) {
+      const categoriaWithSameName = await prisma.categoriaPiatti.findUnique({
+        where: { nome }
+      });
+
+      if (categoriaWithSameName) {
+        const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body);
+        
+        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+          title: 'Modifica Categoria Piatti',
+          description: 'Modifica i dettagli della categoria',
+          layout: 'layouts/sections',
+          mainMenu: mainMenuItems,
+          sectionMenu: ristoranteMenuItems,
+          sectionTabs: ristoranteMenuImpostazioniSubItems,
+          sectionIcons,
+          currentPath: '/ristorante-menu/impostazioni/categoria-piatti/modifica',
+          item: existingCategoria,
+          formConfig,
+          itemType: 'Categoria Piatti',
+          detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${existingCategoria.id}`,
+          breadcrumbs: [
+            { label: 'Menu Ristorante', href: '/ristorante-menu' },
+            { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+            { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+            { label: existingCategoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${existingCategoria.id}` }
+          ],
+          error: 'Un\'altra categoria con questo nome esiste già'
+        });
+      }
+    }
+
+    const updatedCategoria = await prisma.categoriaPiatti.update({
+      where: { id: categoriaId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.redirect(`/ristorante-menu/impostazioni/categoria-piatti/dettagli/${updatedCategoria.id}?success=Categoria aggiornata con successo`);
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della categoria:', error);
+    
+    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body);
+    
+    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+      title: 'Modifica Categoria Piatti',
+      description: 'Modifica i dettagli della categoria',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionTabs: ristoranteMenuImpostazioniSubItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/impostazioni/categoria-piatti/modifica',
+      item: existingCategoria,
+      formConfig,
+      itemType: 'Categoria Piatti',
+      detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoriaId}`,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: existingCategoria?.nome || 'Modifica Categoria', href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoriaId}` }
+      ],
+      error: 'Si è verificato un errore durante l\'aggiornamento della categoria'
+    });
+  }
+});
+
+// Route per modifica massiva categorie piatti
+router.get('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => {
+  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa';
+  let sectionMenu = ristoranteMenuItems;
+  let sectionTabs = ristoranteMenuImpostazioniSubItems;
+  
+  const categoriaIds = req.query.ids ? (req.query.ids as string).split(',') : [];
+  
+  if (categoriaIds.length === 0) {
+    return res.redirect('/ristorante-menu/impostazioni/categoria-piatti');
+  }
+  
+  try {
+    const selectedCategorie = await prisma.categoriaPiatti.findMany({
+      where: { 
+        id: { in: categoriaIds },
+        deletedAt: null
+      },
+      select: {
+        id: true,
+        nome: true,
+        descrizione: true,
+        inLista: true
+      }
+    });
+
+    if (selectedCategorie.length === 0) {
+      return res.redirect('/ristorante-menu/impostazioni/categoria-piatti');
+    }
+
+    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, null, true, selectedCategorie);
+
+    res.render('pages/ristorante-menu/impostazioni/editBulk', {
+      title: 'Modifica Massiva Categorie Piatti',
+      description: 'Modifica lo stato delle categorie selezionate',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      selectedItems: selectedCategorie,
+      formConfig,
+      itemType: 'Categoria Piatti',
+      backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
+        { label: 'Modifica Massiva', href: '#' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie per modifica massiva:', error);
+    res.redirect('/ristorante-menu/impostazioni/categoria-piatti');
+  }
+});
+
+router.post('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => {
+  const { itemIds, inLista } = req.body;
+  
+  let categoriaIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    categoriaIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    categoriaIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (categoriaIds.length === 0) {
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Nessuna categoria selezionata per la modifica' });
+    }
+    return res.redirect('/ristorante-menu/impostazioni/categoria-piatti?error=Nessuna categoria selezionata per la modifica');
+  }
+  
+  try {
+    const existingCategorie = await prisma.categoriaPiatti.findMany({
+      where: { 
+        id: { in: categoriaIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingCategorie.length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessuna categoria valida trovata per la modifica' });
+      }
+      return res.redirect('/ristorante-menu/impostazioni/categoria-piatti?error=Nessuna categoria valida trovata per la modifica');
+    }
+
+    const updateData: any = {};
+    
+    if (inLista !== undefined) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento' });
+      }
+      return res.redirect('/ristorante-menu/impostazioni/categoria-piatti?error=Nessun campo valido fornito per l\'aggiornamento');
+    }
+
+    await prisma.categoriaPiatti.updateMany({
+      where: { 
+        id: { in: categoriaIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingCategorie.length;
+    const skippedCount = categoriaIds.length - existingCategorie.length;
+    
+    let message = `Aggiornate ${updatedCount} categorie con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} categorie non trovate o già cancellate.`;
+    }
+    
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: true, message });
+    }
+    
+    res.redirect(`/ristorante-menu/impostazioni/categoria-piatti?success=${encodeURIComponent(message)}`);
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    }
+    res.redirect('/ristorante-menu/impostazioni/categoria-piatti?error=Errore interno del server durante la modifica massiva');
+  }
+});
+
+// Route per eliminazione singola categoria piatti
+router.delete('/impostazioni/categoria-piatti/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.categoriaPiatti.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+    
+    res.json({ success: true, message: 'Categoria eliminata con successo' });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della categoria:', error);
+    res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+  }
+});
+
+// Route per eliminazione multipla categorie piatti
+router.delete('/impostazioni/categoria-piatti', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna categoria selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le categorie esistano e non siano già cancellate
+    const existingCategorie = await prisma.categoriaPiatti.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingCategorie.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna categoria valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le categorie validi
+    const validCategoriaIds = existingCategorie.map(categoria => categoria.id);
+    await prisma.categoriaPiatti.updateMany({
+      where: { 
+        id: { in: validCategoriaIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validCategoriaIds.length;
+    const skippedCount = itemIds.length - validCategoriaIds.length;
+    
+    let message = `Eliminate ${deletedCount} categoria/e con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} categoria/e già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle categorie:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
 });
 
 router.get('/cancellati', (req, res) => {

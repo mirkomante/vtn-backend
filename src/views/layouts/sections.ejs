@@ -60,8 +60,19 @@
     </main>
   </div>
 
-  <%- script %>
+  <% if (typeof pageScripts !== 'undefined') { %>
+    <%- pageScripts %>
+  <% } %>
   <script src="/js/sidebar.js"></script>
+  <script src="/js/selectableTable.js"></script>
+  
+  <!-- Definisci la configurazione della tabella se disponibile -->
+  <% if (typeof tableConfigJson !== 'undefined') { %>
+    <script>
+      const tableConfig = <%- tableConfigJson %>;
+      window[tableConfig.tableId + '-config'] = tableConfig;
+    </script>
+  <% } %>
 </body>
 </html>
   

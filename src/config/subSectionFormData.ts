@@ -1,0 +1,344 @@
+import { FormDataSchema } from "./sectionFormSchema";
+
+// Configurazione form per allergeni
+export const allergeneFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/impostazioni/allergeni/nuovo',
+    id: 'allergeneForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Allergene',
+      required: true,
+      placeholder: 'Glutine',
+      errorMessage: 'Il nome dell\'allergene è obbligatorio'
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione dell\'allergene (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri'
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/impostazioni/allergeni',
+      classes: 'text-sm font-semibold leading-6 text-gray-900'
+    }
+  },
+  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+    return {
+      formConfig: {
+        ...data.formConfig,
+        action: isEdit 
+          ? `/ristorante-menu/impostazioni/allergeni/modifica/${item?.id}` 
+          : '/ristorante-menu/impostazioni/allergeni/nuovo'
+      },
+      fields: data.fields.map((field: any) => {
+        let value = '';
+        
+        if (formData && formData[field.name]) {
+          value = formData[field.name];
+        } else if (isEdit && item) {
+          value = item[field.name] || '';
+        }
+        
+        return { ...field, value };
+      }),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isEdit ? 'Modifica' : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isEdit 
+            ? `/ristorante-menu/impostazioni/allergeni/dettagli/${item?.id}` 
+            : '/ristorante-menu/impostazioni/allergeni'
+        }
+      }
+    };
+  }
+};
+
+// Configurazione form per categorie menu fisso
+export const categoriaMenuFissoFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+    id: 'categoriaMenuFissoForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Categoria',
+      required: true,
+      placeholder: 'Antipasti',
+      errorMessage: 'Il nome della categoria è obbligatorio'
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione della categoria (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri'
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'In lista',
+      required: false,
+      defaultValue: true,
+      bulkEditable: true,
+      bulkLabel: 'Imposta stato per tutte le categorie selezionate',
+      bulkHelpText: 'Questo stato verrà applicato a tutte le categorie selezionate.',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      classes: 'text-sm font-semibold leading-6 text-gray-900'
+    }
+  },
+  bulkEditConfig: {
+    title: 'Modifica Massiva Categorie Menu Fisso',
+    description: 'Modifica i campi selezionati per tutte le categorie scelte.',
+    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
+    successMessage: 'Aggiornate {count} categorie con successo',
+    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
+  },
+  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+    return {
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? data.bulkEditConfig.action 
+          : isEdit 
+            ? `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${item?.id}` 
+            : '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+        method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map((field: any) => {
+        let value: any = '';
+        
+        if (formData && formData[field.name] !== undefined) {
+          value = formData[field.name];
+        } else if (isEdit && item && !isBulkEdit) {
+          value = item[field.name] !== undefined ? item[field.name] : '';
+        } else if (!isEdit && !isBulkEdit && field.defaultValue !== undefined) {
+          // Per i campi toggle, usa il valore di default se non è in modalità edit
+          value = field.defaultValue;
+        } else if (!isEdit && !isBulkEdit && field.name === 'inLista') {
+          // Assicurati che inLista sia sempre true per nuove categorie
+          value = true;
+        }
+        
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        if (isBulkEdit && field.bulkEditable) {
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            description: field.bulkDescription || field.description,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: ''
+          };
+        }
+        
+        return { ...field, value };
+      }).filter((field: any) => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Modifica ${selectedItems?.length || 0} categorie` 
+            : isEdit 
+              ? 'Modifica' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/impostazioni/categoria-menu-fisso' 
+            : isEdit 
+              ? `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${item?.id}` 
+              : '/ristorante-menu/impostazioni/categoria-menu-fisso'
+        }
+      }
+    };
+  }
+};
+
+// Configurazione form per categorie piatti
+export const categoriaPiattiFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+    id: 'categoriaPiattiForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Categoria',
+      required: true,
+      placeholder: 'Primi Piatti',
+      errorMessage: 'Il nome della categoria è obbligatorio'
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione della categoria (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri'
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'In lista',
+      required: false,
+      defaultValue: true,
+      bulkEditable: true,
+      bulkLabel: 'Imposta stato per tutte le categorie selezionate',
+      bulkHelpText: 'Questo stato verrà applicato a tutte le categorie selezionate.',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/impostazioni/categoria-piatti',
+      classes: 'text-sm font-semibold leading-6 text-gray-900'
+    }
+  },
+  bulkEditConfig: {
+    title: 'Modifica Massiva Categorie Piatti',
+    description: 'Modifica i campi selezionati per tutte le categorie scelte.',
+    action: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
+    successMessage: 'Aggiornate {count} categorie con successo',
+    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
+  },
+  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+    return {
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? data.bulkEditConfig.action 
+          : isEdit 
+            ? `/ristorante-menu/impostazioni/categoria-piatti/modifica/${item?.id}` 
+            : '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+        method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map((field: any) => {
+        let value = '';
+        
+        if (formData && formData[field.name] !== undefined) {
+          value = formData[field.name];
+        } else if (isEdit && item && !isBulkEdit) {
+          value = item[field.name] !== undefined ? item[field.name] : '';
+        } else if (!isEdit && !isBulkEdit && field.defaultValue !== undefined) {
+          // Per i campi toggle, usa il valore di default se non è in modalità edit
+          value = field.defaultValue;
+        } else if (!isEdit && !isBulkEdit && field.name === 'inLista') {
+          // Assicurati che inLista sia sempre true per nuove categorie
+          value = true;
+        }
+        
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        if (isBulkEdit && field.bulkEditable) {
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            description: field.bulkDescription || field.description,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: ''
+          };
+        }
+        
+        return { ...field, value };
+      }).filter((field: any) => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Modifica ${selectedItems?.length || 0} categorie` 
+            : isEdit 
+              ? 'Modifica' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/impostazioni/categoria-piatti' 
+            : isEdit 
+              ? `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${item?.id}` 
+              : '/ristorante-menu/impostazioni/categoria-piatti'
+        }
+      }
+    };
+  }
+}; 

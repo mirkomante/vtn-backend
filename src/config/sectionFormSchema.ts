@@ -13,13 +13,15 @@ export interface FormHiddenField {
 }
 
 export interface FormField {
-  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio';
+  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'toggle';
   name: string;
   id: string;
   label: string;
+  description?: string;
   required?: boolean;
   placeholder?: string;
-  value?: string | number;
+  value?: string | number | boolean;
+  defaultValue?: boolean;
   errorMessage?: string;
   min?: number;
   max?: number;
@@ -29,6 +31,7 @@ export interface FormField {
   // Proprietà per la modifica massiva
   bulkEditable?: boolean;
   bulkLabel?: string;
+  bulkDescription?: string;
   bulkPlaceholder?: string;
   bulkHelpText?: string;
   bulkRequired?: boolean; // Se il campo è obbligatorio in modifica massiva

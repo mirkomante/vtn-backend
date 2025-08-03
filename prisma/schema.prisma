@@ -71,7 +71,6 @@ model Allergene {
   id          String   @id @default(uuid())
   nome        String   @unique
   descrizione String?
-  inLista     Boolean  @default(true)
   deletedAt   DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

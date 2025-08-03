@@ -1,14 +1,20 @@
 console.log('Bulk Edit Form Script caricato');
 
 function initBulkEditForm() {
-  const form = document.getElementById('userForm');
+  // Cerca il form - può essere userForm o altri form con ID specifici
+  const form = document.getElementById('userForm') || 
+               document.getElementById('categoriaMenuFissoForm') ||
+               document.getElementById('categoriaPiattiForm') ||
+               document.getElementById('allergeneForm') ||
+               document.querySelector('form[action*="/modifica-massa"]');
+               
   if (!form) {
-    console.error('Form non trovato!');
     return;
   }
   
   const submitButton = form.querySelector('button[type="submit"]');
   const selectFields = form.querySelectorAll('select');
+  const toggleFields = form.querySelectorAll('input[type="checkbox"]');
   
   // Ottieni la configurazione dal form (se disponibile)
   const formConfig = window.formConfig || {};
@@ -18,6 +24,7 @@ function initBulkEditForm() {
     let isValid = true;
     let hasAtLeastOneValue = false;
     
+    // Controlla i select fields
     selectFields.forEach(select => {
       const field = select.closest('div').querySelector('label');
       const fieldName = field ? field.textContent.trim() : select.name;
@@ -33,6 +40,12 @@ function initBulkEditForm() {
       if (select.value !== '') {
         hasAtLeastOneValue = true;
       }
+    });
+    
+    // Controlla i toggle fields
+    toggleFields.forEach(toggle => {
+      // Per i toggle, consideriamo che abbiano sempre un valore (true/false)
+      hasAtLeastOneValue = true;
     });
     
     // Se è richiesto almeno un campo, controlla che ce ne sia uno
@@ -56,8 +69,40 @@ function initBulkEditForm() {
     }
   }
   
-  updateSubmitButton();
+  // Gestione toggle button
+  function initToggleButtons() {
+    toggleFields.forEach(toggle => {
+      const container = toggle.closest('.toggle-container');
+      if (!container) return;
+      
+      const toggleElement = container.querySelector('.group');
+      const toggleSpan = container.querySelector('span');
+      
+      function updateToggleState() {
+        if (toggle.checked) {
+          toggleElement.classList.add('has-checked', 'bg-indigo-600');
+          toggleSpan.classList.add('translate-x-5');
+        } else {
+          toggleElement.classList.remove('has-checked', 'bg-indigo-600');
+          toggleSpan.classList.remove('translate-x-5');
+        }
+      }
+      
+      // Inizializza lo stato
+      updateToggleState();
+      
+      // Aggiungi event listener
+      toggle.addEventListener('change', () => {
+        updateToggleState();
+        updateSubmitButton();
+      });
+    });
+  }
   
+  updateSubmitButton();
+  initToggleButtons();
+  
+  // Event listeners per select fields
   selectFields.forEach(select => {
     select.addEventListener('change', () => {
       updateSubmitButton();
@@ -84,18 +129,23 @@ function initBulkEditForm() {
       }
     });
     
+    // Raccogli i toggle fields
+    toggleFields.forEach(toggle => {
+      data[toggle.name] = toggle.checked;
+    });
+    
     const urlParams = new URLSearchParams(window.location.search);
     const selectedIds = urlParams.get('ids');
     
     if (!selectedIds) {
-      showMessage('Nessun utente selezionato', 'error');
+      showMessage('Nessun elemento selezionato', 'error');
       return;
     }
     
     const itemIds = selectedIds.split(',').filter(id => id.trim() !== '');
     
     if (itemIds.length === 0) {
-      showMessage('Nessun utente valido selezionato', 'error');
+      showMessage('Nessun elemento valido selezionato', 'error');
       return;
     }
     
@@ -105,10 +155,27 @@ function initBulkEditForm() {
       submitButton.disabled = true;
       submitButton.textContent = 'Salvataggio...';
       
-      const response = await fetch('/admin/utenti/modifica-massa', {
+      // Determina l'endpoint in base al form
+      let endpoint = form.action;
+      if (!endpoint || endpoint === window.location.href) {
+        // Fallback: determina l'endpoint dal path corrente
+        const path = window.location.pathname;
+        if (path.includes('/admin/utenti')) {
+          endpoint = '/admin/utenti/modifica-massa';
+        } else if (path.includes('/categoria-menu-fisso')) {
+          endpoint = '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa';
+        } else if (path.includes('/categoria-piatti')) {
+          endpoint = '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa';
+        } else if (path.includes('/allergeni')) {
+          endpoint = '/ristorante-menu/impostazioni/allergeni/modifica-massa';
+        }
+      }
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         credentials: 'same-origin',
         body: JSON.stringify(data)
@@ -120,7 +187,10 @@ function initBulkEditForm() {
         showMessage(result.message, 'success');
         
         setTimeout(() => {
-          window.location.href = '/admin/utenti';
+          // Determina la pagina di ritorno
+          const backUrl = new URLSearchParams(window.location.search).get('backUrl') || 
+                         window.location.pathname.replace('/modifica-massa', '');
+          window.location.href = backUrl;
         }, 2000);
       } else {
         showMessage(result.message, 'error');

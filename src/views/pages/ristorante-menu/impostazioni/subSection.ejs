@@ -1,5 +1,5 @@
-<% if (!hasUsers) { %>
-  <%- include('../../ui/emptyStates/simple', emptyState) %>
+<% if (!hasItems || items.length === 0) { %>
+  <%- include('../../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
   <!-- Messaggio di successo se presente -->
   <% if (typeof successMessage !== 'undefined' && successMessage) { %>
@@ -25,34 +25,30 @@
     </div>
   <% } %>
   
-  <%- include('../../ui/tables/selectableTable', {
-    actionButton: {
-      text: 'Aggiungi utente',
-      href: '/admin/utenti/nuovo'
-    },
-    tableId: 'users-table',
+  <%- include('../../../ui/tables/selectableTable', {
+    actionButton: tableConfig.actionButton,
+    tableId: tableConfig.tableId,
     tableData: tableData,
-    items: users,
+    items: items,
     tableConfig: {
-      idField: 'id',
-      labelField: 'givenName',
-      detailUrl: '/admin/utenti/dettagli/:id',
-      editUrl: '/admin/utenti/modifica/:id',
-      bulkEditUrl: '/admin/utenti/modifica-massa',
-      editMultipleButton: {
-        text: 'Modifica'
-      },
-      actionButton: {
-        text: 'Elimina',
-        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
-      },
-      endpoint: '/admin/utenti',
-      method: 'DELETE',
-      confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
-      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
-      successMessage: 'Eliminati {count} utente/i con successo',
-      errorMessage: 'Errore durante l\'eliminazione',
-      disableClickableNames: false
-    }
+      idField: tableConfig.idField,
+      labelField: tableConfig.labelField,
+      detailUrl: tableConfig.detailUrl,
+      editUrl: tableConfig.editUrl,
+      bulkEditUrl: tableConfig.bulkEditUrl,
+      editMultipleButton: tableConfig.editMultipleButton,
+      actionButton: tableConfig.deleteButton || tableConfig.actionButton,
+      endpoint: tableConfig.endpoint,
+      method: tableConfig.method,
+      confirmMessage: tableConfig.confirmMessage,
+      confirmMessageMultiple: tableConfig.confirmMessageMultiple,
+      successMessage: tableConfig.successMessage,
+      errorMessage: tableConfig.errorMessage,
+      getDisplayValue: tableConfig.getDisplayValue,
+      disableClickableNames: tableConfig.disableClickableNames
+    },
+    filters: typeof filters !== 'undefined' ? filters : undefined,
+    hasActiveFilters: typeof hasActiveFilters !== 'undefined' ? hasActiveFilters : false,
+    clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined
   }) %>
 <% } %> 
