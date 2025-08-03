@@ -29,9 +29,20 @@ function initializeSelectableTable(tableId, config) {
     selectAllCheckbox.checked = allChecked;
     selectAllCheckbox.indeterminate = hasCheckedItems && !allChecked;
 
-    // Abilita/disabilita i bottoni
+    // Abilita/disabilita i bottoni e aggiorna il testo del pulsante di modifica
     if (hasBulkEdit) {
       editMultipleBtn.disabled = !hasCheckedItems;
+      
+      // Aggiorna il testo del pulsante in base al numero di elementi selezionati
+      if (hasCheckedItems) {
+        if (checkedItems.length === 1) {
+          editMultipleBtn.textContent = 'Modifica';
+        } else {
+          editMultipleBtn.textContent = `Modifica (${checkedItems.length})`;
+        }
+      } else {
+        editMultipleBtn.textContent = 'Modifica';
+      }
     }
     actionSelectedBtn.disabled = !hasCheckedItems;
   }
@@ -51,24 +62,47 @@ function initializeSelectableTable(tableId, config) {
     });
   });
 
-  // Event listener per il bottone di modifica multipla
+  // Event listener per il bottone di modifica
   if (hasBulkEdit) {
     editMultipleBtn.addEventListener('click', function() {
       const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
       if (checkedItems.length === 0) return;
 
       const itemIds = Array.from(checkedItems).map(cb => cb.value);
-      const idsParam = itemIds.join(',');
       
-      // Costruisci l'URL di modifica massiva
-      let bulkEditUrl = config.bulkEditUrl;
-      if (bulkEditUrl.includes(':ids')) {
-        bulkEditUrl = bulkEditUrl.replace(':ids', idsParam);
+      // Se è selezionato solo 1 elemento, apri la pagina di modifica del singolo elemento
+      if (checkedItems.length === 1) {
+        if (!config.editUrl) {
+          console.error('selectableTable.js: editUrl non configurato per la modifica singola');
+          alert('Errore: URL di modifica singola non configurato');
+          return;
+        }
+        
+        const singleItemId = itemIds[0];
+        let editUrl = config.editUrl;
+        if (editUrl.includes(':id')) {
+          editUrl = editUrl.replace(':id', singleItemId);
+        } else {
+          editUrl += `/${singleItemId}`;
+        }
+        window.location.href = editUrl;
       } else {
-        bulkEditUrl += `?ids=${idsParam}`;
+        // Altrimenti apri la pagina di modifica massiva
+        if (!config.bulkEditUrl) {
+          console.error('selectableTable.js: bulkEditUrl non configurato per la modifica massiva');
+          alert('Errore: URL di modifica massiva non configurato');
+          return;
+        }
+        
+        const idsParam = itemIds.join(',');
+        let bulkEditUrl = config.bulkEditUrl;
+        if (bulkEditUrl.includes(':ids')) {
+          bulkEditUrl = bulkEditUrl.replace(':ids', idsParam);
+        } else {
+          bulkEditUrl += `?ids=${idsParam}`;
+        }
+        window.location.href = bulkEditUrl;
       }
-      
-      window.location.href = bulkEditUrl;
     });
   }
 
