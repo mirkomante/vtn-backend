@@ -13,13 +13,22 @@
   </div>
 </div>
 
+<% if (typeof successMessage !== 'undefined' && successMessage) { %>
+  <%- include('../../../ui/alerts/simple', { message: successMessage }) %>
+<% } %>
+
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
+
 <div class="mx-auto max-w-2xl mt-8">
   <div class="space-y-10">
     <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
       <div class="md:col-span-2">
         <!-- Mostra gli elementi selezionati -->
         <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-          <h3 class="text-sm font-medium text-gray-900 mb-2"><%= itemType %> selezionati (<%= selectedItems.length %>)</h3>
+          <h3 class="text-sm font-medium text-gray-900 mb-2">Elementi selezionati (<%= selectedItems.length %>)</h3>
           <div class="text-sm text-gray-600">
             <% if (selectedItems.length <= 5) { %>
               <% selectedItems.forEach(item => { %>
@@ -31,12 +40,12 @@
                 <div class="mb-1">• <%= item.nome %></div>
               <% }); %>
               <div class="mt-2 text-gray-500">
-                ... e altri <%= selectedItems.length - 5 %> <%= itemType.toLowerCase() %>
+                ... e altri <%= selectedItems.length - 5 %> elementi
               </div>
               <!-- Lista completa espandibile -->
               <details class="mt-3">
                 <summary class="cursor-pointer text-indigo-600 hover:text-indigo-800">
-                  Mostra tutti i <%= itemType.toLowerCase() %>
+                  Mostra tutti gli elementi
                 </summary>
                 <div class="mt-2 space-y-1">
                   <% selectedItems.slice(5).forEach(item => { %>
@@ -48,7 +57,7 @@
           </div>
         </div>
         
-        <%- include('../../../ui/forms/simpleGenericForm', { ...formConfig, isBulkEdit: true }) %>
+        <%- include('../../../ui/forms/simpleGenericForm', formConfig) %>
       </div>
     </div>
   </div>

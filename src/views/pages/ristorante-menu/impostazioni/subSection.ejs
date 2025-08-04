@@ -25,8 +25,12 @@
     </div>
   <% } %>
   
+  <!-- Action Navigation -->
+  <% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+    <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+  <% } %>
+  
   <%- include('../../../ui/tables/selectableTable', {
-    actionButton: tableConfig.actionButton,
     tableId: tableConfig.tableId,
     tableData: tableData,
     items: items,

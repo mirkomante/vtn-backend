@@ -17,6 +17,7 @@ import {
   categoriaMenuFissoFormData, 
   categoriaPiattiFormData 
 } from '../config/subSectionFormData';
+import { createSubSectionActionNav } from '../config/actionNavConfig';
 
 const prisma = new PrismaClient();
 
@@ -146,6 +147,9 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
     const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
     const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
     
+    // Configurazione actionNav per questa sottosezione
+    const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'index');
+    
     res.render('pages/ristorante-menu/impostazioni/subSection', {
       title: 'Categoria Menu Fisso',
       description: 'Gestisci le categorie per i menu fissi del ristorante',
@@ -163,6 +167,7 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
+      actionNavConfig, // Passa la configurazione actionNav
       ...config
     });
   } catch (error) {
@@ -195,6 +200,9 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
     const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
     const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
     
+    // Configurazione actionNav per questa sottosezione
+    const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'index');
+    
     res.render('pages/ristorante-menu/impostazioni/subSection', {
       title: 'Categoria Piatti',
       description: 'Gestisci le categorie per i piatti del ristorante',
@@ -212,6 +220,7 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
+      actionNavConfig, // Passa la configurazione actionNav
       ...config
     });
   } catch (error) {
@@ -244,6 +253,9 @@ router.get('/impostazioni/allergeni', async (req, res) => {
     const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
     const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
     
+    // Configurazione actionNav per questa sottosezione
+    const actionNavConfig = createSubSectionActionNav('allergeni', 'index');
+    
     res.render('pages/ristorante-menu/impostazioni/subSection', {
       title: 'Allergeni',
       description: 'Gestisci gli allergeni per i piatti del ristorante',
@@ -261,6 +273,7 @@ router.get('/impostazioni/allergeni', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
+      actionNavConfig, // Passa la configurazione actionNav
       ...config
     });
   } catch (error) {
@@ -368,12 +381,13 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
   }
 });
 
+// Route per visualizzare allergene (corretta come users)
 router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/allergeni/dettagli';
-  let sectionMenu = ristoranteMenuItems;
-  let sectionTabs = ristoranteMenuImpostazioniSubItems;
-  
   try {
+    const currentPath = '/ristorante-menu/impostazioni/allergeni/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
     const allergene = await prisma.allergene.findFirst({
       where: { 
         id: req.params.id,
@@ -382,22 +396,7 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
     });
 
     if (!allergene) {
-      return res.status(404).render('error', {
-        title: 'Allergene non trovato',
-        layout: 'layouts/sections',
-        mainMenu: mainMenuItems,
-        sectionMenu,
-        sectionTabs,
-        sectionIcons,
-        currentPath,
-        breadcrumbs: [
-          { label: 'Menu Ristorante', href: '/ristorante-menu' },
-          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-          { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
-          { label: 'Allergene non trovato', href: `/ristorante-menu/impostazioni/allergeni/dettagli/${req.params.id}` }
-        ],
-        error: 'L\'allergene richiesto non esiste'
-      });
+      return res.status(404).send('Allergene non trovato');
     }
 
     res.render('pages/ristorante-menu/impostazioni/view', {
@@ -412,34 +411,17 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
       item: allergene,
       itemType: 'Allergene',
       backUrl: '/ristorante-menu/impostazioni/allergeni',
-      detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
       editUrl: `/ristorante-menu/impostazioni/allergeni/modifica/${allergene.id}`,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
         { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
         { label: allergene.nome, href: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}` }
-      ],
-      successMessage: req.query.success
+      ]
     });
   } catch (error) {
-    console.error('Errore nel recupero dei dettagli allergene:', error);
-    res.status(500).render('error', {
-      title: 'Errore',
-      layout: 'layouts/sections',
-      mainMenu: mainMenuItems,
-      sectionMenu,
-      sectionTabs,
-      sectionIcons,
-      currentPath,
-      breadcrumbs: [
-        { label: 'Menu Ristorante', href: '/ristorante-menu' },
-        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-        { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
-        { label: 'Errore', href: `/ristorante-menu/impostazioni/allergeni/dettagli/${req.params.id}` }
-      ],
-      error: 'Si è verificato un errore nel recupero dei dettagli dell\'allergene'
-    });
+    console.error('Errore nel recupero dell\'allergene:', error);
+    res.status(500).send('Errore interno del server');
   }
 });
 
@@ -476,6 +458,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
     }
 
     const formConfig = allergeneFormData.getFormData(allergeneFormData, true, allergene);
+    const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Allergene',
@@ -490,6 +473,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       formConfig,
       itemType: 'Allergene',
       detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
+      actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -553,6 +537,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
 
       if (allergeneWithSameName) {
         const formConfig = allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body);
+        const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
           title: 'Modifica Allergene',
@@ -565,6 +550,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
           currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
           item: existingAllergene,
           formConfig,
+          actionNavConfig,
           itemType: 'Allergene',
           detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${existingAllergene.id}`,
           breadcrumbs: [
@@ -703,6 +689,9 @@ router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
 
   const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false);
+  
+  // Configurazione actionNav per questa pagina
+  const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
 
   res.render('pages/ristorante-menu/impostazioni/new', {
     title: 'Nuova Categoria Menu Fisso',
@@ -716,6 +705,7 @@ router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
     formConfig,
     itemType: 'Categoria Menu Fisso',
     backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+    actionNavConfig, // Passa la configurazione actionNav
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -736,6 +726,9 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
     if (existingCategoria) {
       const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
       
+      // Configurazione actionNav per questa pagina
+      const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
+      
       return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
         title: 'Nuova Categoria Menu Fisso',
         description: 'Crea una nuova categoria per i menu fissi del ristorante',
@@ -748,6 +741,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
         formConfig,
         itemType: 'Categoria Menu Fisso',
         backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+        actionNavConfig, // Passa la configurazione actionNav
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -772,6 +766,9 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
     
     const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
     
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
+    
     res.status(500).render('pages/ristorante-menu/impostazioni/new', {
       title: 'Nuova Categoria Menu Fisso',
       description: 'Crea una nuova categoria per i menu fissi del ristorante',
@@ -784,6 +781,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       formConfig,
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      actionNavConfig, // Passa la configurazione actionNav
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -795,12 +793,13 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
   }
 });
 
+// Route per visualizzare categoria menu fisso (corretta come users)
 router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli';
-  let sectionMenu = ristoranteMenuItems;
-  let sectionTabs = ristoranteMenuImpostazioniSubItems;
-  
   try {
+    const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
     const categoria = await prisma.categoriaMenuFisso.findFirst({
       where: { 
         id: req.params.id,
@@ -809,22 +808,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
     });
 
     if (!categoria) {
-      return res.status(404).render('error', {
-        title: 'Categoria non trovata',
-        layout: 'layouts/sections',
-        mainMenu: mainMenuItems,
-        sectionMenu,
-        sectionTabs,
-        sectionIcons,
-        currentPath,
-        breadcrumbs: [
-          { label: 'Menu Ristorante', href: '/ristorante-menu' },
-          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-          { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
-          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${req.params.id}` }
-        ],
-        error: 'La categoria richiesta non esiste'
-      });
+      return res.status(404).send('Categoria non trovata');
     }
 
     res.render('pages/ristorante-menu/impostazioni/view', {
@@ -839,34 +823,17 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       item: categoria,
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
-      detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
       editUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}`,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
         { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}` }
-      ],
-      successMessage: req.query.success
+      ]
     });
   } catch (error) {
-    console.error('Errore nel recupero dei dettagli categoria:', error);
-    res.status(500).render('error', {
-      title: 'Errore',
-      layout: 'layouts/sections',
-      mainMenu: mainMenuItems,
-      sectionMenu,
-      sectionTabs,
-      sectionIcons,
-      currentPath,
-      breadcrumbs: [
-        { label: 'Menu Ristorante', href: '/ristorante-menu' },
-        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-        { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
-        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${req.params.id}` }
-      ],
-      error: 'Si è verificato un errore nel recupero dei dettagli della categoria'
-    });
+    console.error('Errore nel recupero della categoria:', error);
+    res.status(500).send('Errore interno del server');
   }
 });
 
@@ -903,6 +870,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
     }
 
     const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, categoria);
+    const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Categoria Menu Fisso',
@@ -917,6 +885,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       formConfig,
       itemType: 'Categoria Menu Fisso',
       detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
+      actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -980,6 +949,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
 
       if (categoriaWithSameName) {
         const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body);
+        const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
           title: 'Modifica Categoria Menu Fisso',
@@ -990,6 +960,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
           sectionTabs: ristoranteMenuImpostazioniSubItems,
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
+          actionNavConfig,
           item: existingCategoria,
           formConfig,
           itemType: 'Categoria Menu Fisso',
@@ -1356,12 +1327,13 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
   }
 });
 
+// Route per visualizzare categoria piatti (corretta come users)
 router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
-  const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/dettagli';
-  let sectionMenu = ristoranteMenuItems;
-  let sectionTabs = ristoranteMenuImpostazioniSubItems;
-  
   try {
+    const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
     const categoria = await prisma.categoriaPiatti.findFirst({
       where: { 
         id: req.params.id,
@@ -1370,22 +1342,7 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
     });
 
     if (!categoria) {
-      return res.status(404).render('error', {
-        title: 'Categoria non trovata',
-        layout: 'layouts/sections',
-        mainMenu: mainMenuItems,
-        sectionMenu,
-        sectionTabs,
-        sectionIcons,
-        currentPath,
-        breadcrumbs: [
-          { label: 'Menu Ristorante', href: '/ristorante-menu' },
-          { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-          { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
-          { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${req.params.id}` }
-        ],
-        error: 'La categoria richiesta non esiste'
-      });
+      return res.status(404).send('Categoria non trovata');
     }
 
     res.render('pages/ristorante-menu/impostazioni/view', {
@@ -1400,34 +1357,17 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
       item: categoria,
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
-      detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
       editUrl: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoria.id}`,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
         { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}` }
-      ],
-      successMessage: req.query.success
+      ]
     });
   } catch (error) {
-    console.error('Errore nel recupero dei dettagli categoria:', error);
-    res.status(500).render('error', {
-      title: 'Errore',
-      layout: 'layouts/sections',
-      mainMenu: mainMenuItems,
-      sectionMenu,
-      sectionTabs,
-      sectionIcons,
-      currentPath,
-      breadcrumbs: [
-        { label: 'Menu Ristorante', href: '/ristorante-menu' },
-        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
-        { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
-        { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${req.params.id}` }
-      ],
-      error: 'Si è verificato un errore nel recupero dei dettagli della categoria'
-    });
+    console.error('Errore nel recupero della categoria:', error);
+    res.status(500).send('Errore interno del server');
   }
 });
 
@@ -1464,6 +1404,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
     }
 
     const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, categoria);
+    const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Categoria Piatti',
@@ -1478,6 +1419,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       formConfig,
       itemType: 'Categoria Piatti',
       detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
+      actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1541,12 +1483,14 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
 
       if (categoriaWithSameName) {
         const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body);
+        const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
           title: 'Modifica Categoria Piatti',
           description: 'Modifica i dettagli della categoria',
           layout: 'layouts/sections',
           mainMenu: mainMenuItems,
+          actionNavConfig,
           sectionMenu: ristoranteMenuItems,
           sectionTabs: ristoranteMenuImpostazioniSubItems,
           sectionIcons,
