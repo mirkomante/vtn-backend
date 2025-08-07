@@ -54,6 +54,19 @@ export interface SubSectionConfig {
     errorMessage: string;
     includeScripts: boolean;
   };
+  // Configurazione per i titoli delle pagine interne
+  pageTitles?: {
+    view?: {
+      titleField: string; // Campo da usare come titolo (es. 'nome')
+      prefix?: string; // Prefisso opzionale (es. 'Dettagli')
+      suffix?: string; // Suffisso opzionale
+    };
+    edit?: {
+      titleField: string; // Campo da usare come titolo (es. 'nome')
+      prefix?: string; // Prefisso opzionale (es. 'Modifica')
+      suffix?: string; // Suffisso opzionale
+    };
+  };
 }
 
 // Configurazioni per allergeni
@@ -109,6 +122,17 @@ export const allergeniConfig: SubSectionConfig = {
     successMessage: 'Eliminati {count} allergene/i con successo',
     errorMessage: 'Errore durante l\'eliminazione',
     includeScripts: true
+  },
+  // Configurazione per i titoli delle pagine interne
+  pageTitles: {
+    view: {
+      titleField: 'nome',
+      prefix: 'Dettagli'
+    },
+    edit: {
+      titleField: 'nome',
+      prefix: 'Modifica'
+    }
   }
 };
 
@@ -117,10 +141,10 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
-    iconName: 'document-text',
+    iconName: 'rectangle-stack',
     icon: {
       viewBox: '0 0 24 24',
-      path: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
+      path: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
     },
     title: 'Nessuna categoria',
     description: 'Inizia creando la tua prima categoria per i menu fissi.',
@@ -169,6 +193,17 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
     successMessage: 'Eliminate {count} categoria/e con successo',
     errorMessage: 'Errore durante l\'eliminazione',
     includeScripts: true
+  },
+  // Configurazione per i titoli delle pagine interne
+  pageTitles: {
+    view: {
+      titleField: 'nome',
+      prefix: 'Dettagli'
+    },
+    edit: {
+      titleField: 'nome',
+      prefix: 'Modifica'
+    }
   }
 };
 
@@ -229,5 +264,43 @@ export const categoriaPiattiConfig: SubSectionConfig = {
     successMessage: 'Eliminate {count} categoria/e con successo',
     errorMessage: 'Errore durante l\'eliminazione',
     includeScripts: true
+  },
+  // Configurazione per i titoli delle pagine interne
+  pageTitles: {
+    view: {
+      titleField: 'nome',
+      prefix: 'Dettagli'
+    },
+    edit: {
+      titleField: 'nome',
+      prefix: 'Modifica'
+    }
   }
-}; 
+};
+
+// Funzione helper per generare i titoli delle pagine interne
+export function generatePageTitle(
+  config: SubSectionConfig, 
+  pageType: 'view' | 'edit', 
+  item: any
+): string {
+  const pageTitleConfig = config.pageTitles?.[pageType];
+  
+  if (!pageTitleConfig || !item) {
+    return '';
+  }
+  
+  const { titleField, prefix, suffix } = pageTitleConfig;
+  const fieldValue = item[titleField] || '';
+  
+  let title = '';
+  if (prefix) {
+    title += prefix + ' ';
+  }
+  title += fieldValue;
+  if (suffix) {
+    title += ' ' + suffix;
+  }
+  
+  return title;
+} 

@@ -10,7 +10,8 @@ import { isAuthenticated } from '../middlewares/auth';
 import { 
   allergeniConfig, 
   categoriaMenuFissoConfig, 
-  categoriaPiattiConfig 
+  categoriaPiattiConfig,
+  generatePageTitle
 } from '../config/subSectionConfig';
 import { 
   allergeneFormData, 
@@ -418,9 +419,11 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
     }
 
     const actionNavConfig = createSubSectionActionNav('allergeni', 'view', allergene.id);
+    const customTitle = generatePageTitle(allergeniConfig, 'view', allergene);
 
     res.render('pages/ristorante-menu/impostazioni/view', {
       title: 'Dettagli Allergene',
+      customTitle,
       description: 'Informazioni dettagliate dell\'allergene',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
@@ -483,9 +486,11 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
 
     const formConfig = allergeneFormData.getFormData(allergeneFormData, true, allergene);
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
+    const customTitle = generatePageTitle(allergeniConfig, 'edit', allergene);
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Allergene',
+      customTitle,
       description: 'Modifica i dettagli dell\'allergene',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
@@ -579,10 +584,10 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
           sectionTabs: ristoranteMenuImpostazioniSubItems,
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
-          item: existingAllergene,
-          formConfig,
           actionNavConfig,
           isInternalPage: true,
+          item: existingAllergene,
+          formConfig,
           itemType: 'Allergene',
           detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${existingAllergene.id}`,
           breadcrumbs: [
@@ -850,9 +855,11 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
     }
 
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'view', categoria.id);
+    const customTitle = generatePageTitle(categoriaMenuFissoConfig, 'view', categoria);
 
     res.render('pages/ristorante-menu/impostazioni/view', {
       title: 'Dettagli Categoria Menu Fisso',
+      customTitle,
       description: 'Informazioni dettagliate della categoria',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
@@ -913,9 +920,11 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
 
     const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, categoria);
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
+    const customTitle = generatePageTitle(categoriaMenuFissoConfig, 'edit', categoria);
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Categoria Menu Fisso',
+      customTitle,
       description: 'Modifica i dettagli della categoria',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
@@ -1409,9 +1418,11 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
     }
 
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'view', categoria.id);
+    const customTitle = generatePageTitle(categoriaPiattiConfig, 'view', categoria);
 
     res.render('pages/ristorante-menu/impostazioni/view', {
       title: 'Dettagli Categoria Piatti',
+      customTitle,
       description: 'Informazioni dettagliate della categoria',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
@@ -1474,9 +1485,11 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
 
     const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, categoria);
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
+    const customTitle = generatePageTitle(categoriaPiattiConfig, 'edit', categoria);
 
     res.render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Categoria Piatti',
+      customTitle,
       description: 'Modifica i dettagli della categoria',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
