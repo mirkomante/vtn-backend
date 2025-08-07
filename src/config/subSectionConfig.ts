@@ -190,7 +190,7 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
     method: 'DELETE',
     confirmMessage: 'Sei sicuro di voler eliminare questa categoria?',
     confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} categorie?',
-    successMessage: 'Eliminate {count} categoria/e con successo',
+    successMessage: 'Eliminate {count} categoria{count === 1 ? "" : "e"} con successo',
     errorMessage: 'Errore durante l\'eliminazione',
     includeScripts: true
   },
@@ -261,7 +261,7 @@ export const categoriaPiattiConfig: SubSectionConfig = {
     method: 'DELETE',
     confirmMessage: 'Sei sicuro di voler eliminare questa categoria?',
     confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} categorie?',
-    successMessage: 'Eliminate {count} categoria/e con successo',
+    successMessage: 'Eliminate {count} categoria{count === 1 ? "" : "e"} con successo',
     errorMessage: 'Errore durante l\'eliminazione',
     includeScripts: true
   },

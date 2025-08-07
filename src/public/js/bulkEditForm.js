@@ -208,7 +208,11 @@ function initBulkEditForm() {
       const message = bulkConfig.requireAtLeastOneField 
         ? 'Seleziona almeno un campo da modificare' 
         : 'Compila tutti i campi obbligatori';
-      showMessage(message, 'error');
+      if (window.showErrorToast) {
+        window.showErrorToast(message);
+      } else {
+        alert(message);
+      }
       return;
     }
     
@@ -230,14 +234,22 @@ function initBulkEditForm() {
     const selectedIds = urlParams.get('ids');
     
     if (!selectedIds) {
-      showMessage('Nessun elemento selezionato', 'error');
+      if (window.showErrorToast) {
+        window.showErrorToast('Nessun elemento selezionato');
+      } else {
+        alert('Nessun elemento selezionato');
+      }
       return;
     }
     
     const itemIds = selectedIds.split(',').filter(id => id.trim() !== '');
     
     if (itemIds.length === 0) {
-      showMessage('Nessun elemento valido selezionato', 'error');
+      if (window.showErrorToast) {
+        window.showErrorToast('Nessun elemento valido selezionato');
+      } else {
+        alert('Nessun elemento valido selezionato');
+      }
       return;
     }
     
@@ -276,7 +288,11 @@ function initBulkEditForm() {
       const result = await response.json();
       
       if (result.success) {
-        showMessage(result.message, 'success');
+        if (window.showSuccessToast) {
+          window.showSuccessToast(result.message);
+        } else {
+          alert(result.message);
+        }
         
         setTimeout(() => {
           // Determina la pagina di ritorno
@@ -285,14 +301,22 @@ function initBulkEditForm() {
           window.location.href = backUrl;
         }, 2000);
       } else {
-        showMessage(result.message, 'error');
+        if (window.showErrorToast) {
+          window.showErrorToast(result.message);
+        } else {
+          alert(result.message);
+        }
         submitButton.disabled = false;
         submitButton.textContent = 'Salva modifiche';
       }
       
     } catch (error) {
       console.error('Errore durante l\'invio:', error);
-      showMessage('Errore di connessione. Riprova.', 'error');
+      if (window.showErrorToast) {
+        window.showErrorToast('Errore di connessione. Riprova.');
+      } else {
+        alert('Errore di connessione. Riprova.');
+      }
       
       submitButton.disabled = false;
       submitButton.textContent = 'Salva modifiche';
@@ -300,23 +324,8 @@ function initBulkEditForm() {
   });
 }
 
-function showMessage(message, type) {
-  const messageDiv = document.createElement('div');
-  messageDiv.className = `fixed top-4 right-4 p-4 rounded-md shadow-lg z-50 ${
-    type === 'success' 
-      ? 'bg-green-500 text-white' 
-      : 'bg-red-500 text-white'
-  }`;
-  messageDiv.textContent = message;
-  
-  document.body.appendChild(messageDiv);
-  
-  setTimeout(() => {
-    if (messageDiv.parentNode) {
-      messageDiv.parentNode.removeChild(messageDiv);
-    }
-  }, 5000);
-}
+// La funzione showMessage è ora gestita dal sistema di toast generalizzato
+// Vedi toast.js per l'implementazione
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initBulkEditForm);

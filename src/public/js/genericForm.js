@@ -1,8 +1,8 @@
-console.log('subSectionForm.js: Script caricato');
+console.log('genericForm.js: Script caricato');
 
-function initSubSectionForm() {
-  // Cerca il form con pattern più specifici
-  const form = document.querySelector('form[id*="Form"], form[action*="/nuovo"], form[action*="/modifica"]');
+function initGenericForm() {
+  // Cerca il form generico
+  const form = document.querySelector('form');
   
   if (!form) {
     return;
@@ -118,35 +118,7 @@ function initSubSectionForm() {
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSubSectionForm);
+  document.addEventListener('DOMContentLoaded', initGenericForm);
 } else {
-  initSubSectionForm();
+  initGenericForm();
 }
-
-// Funzione per creare un toggle HTML
-function createToggleHTML(field) {
-  const isChecked = field.value === true || field.value === 'true' || field.value === 'on';
-  const toggleId = field.id || field.name;
-  
-  return `
-    <div class="flex items-center justify-between gap-3">
-      <div class="group relative inline-flex w-11 shrink-0 rounded-full bg-gray-200 p-0.5 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600 transition-colors duration-200 ease-in-out ${isChecked ? 'has-checked bg-indigo-600' : ''} focus-within:outline-2">
-        <span class="size-5 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out ${isChecked ? 'translate-x-5' : ''}"></span>
-        <input 
-          id="${toggleId}" 
-          type="checkbox" 
-          name="${field.name}" 
-          aria-labelledby="${toggleId}-label" 
-          aria-describedby="${toggleId}-description" 
-          class="absolute inset-0 appearance-none focus:outline-hidden"
-          ${isChecked ? 'checked' : ''}
-        />
-      </div>
-
-      <div class="text-sm">
-        <label id="${toggleId}-label" class="font-medium text-gray-900">${field.label}</label>
-        ${field.description ? `<span id="${toggleId}-description" class="text-gray-500">(${field.description})</span>` : ''}
-      </div>
-    </div>
-  `;
-} 

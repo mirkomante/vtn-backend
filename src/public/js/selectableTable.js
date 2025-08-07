@@ -234,14 +234,27 @@ function initializeSelectableTable(tableId, config) {
       
       if (result.success) {
         const successMessage = buttonConfig.successMessage.replace('{count}', itemIds.length);
-        alert(successMessage);
+        if (window.showSuccessToast) {
+          window.showSuccessToast(successMessage);
+        } else {
+          alert(successMessage);
+        }
         window.location.reload();
       } else {
-        alert(result.message || buttonConfig.errorMessage);
+        const errorMessage = result.message || buttonConfig.errorMessage;
+        if (window.showErrorToast) {
+          window.showErrorToast(errorMessage);
+        } else {
+          alert(errorMessage);
+        }
       }
     } catch (error) {
       console.error('selectableTable.js: Errore durante l\'azione bulk:', error);
-      alert(buttonConfig.errorMessage);
+      if (window.showErrorToast) {
+        window.showErrorToast(buttonConfig.errorMessage);
+      } else {
+        alert(buttonConfig.errorMessage);
+      }
     }
   }
 

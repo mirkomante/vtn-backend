@@ -383,9 +383,9 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     const updatedCount = existingUsers.length;
     const skippedCount = userIds.length - existingUsers.length;
     
-    let message = `Aggiornati ${updatedCount} utenti con successo`;
+    let message = `Aggiornati ${updatedCount} utente${updatedCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utenti non trovati o già cancellati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
     }
     
     if (req.xhr || req.headers.accept?.includes('application/json')) {
@@ -612,9 +612,9 @@ router.delete('/utenti', async (req, res) => {
     const deletedCount = validUserIds.length;
     const skippedCount = itemIds.length - validUserIds.length;
     
-    let message = `Eliminati ${deletedCount} utente/i con successo`;
+    let message = `Eliminati ${deletedCount} utente${deletedCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utente/i già cancellati o non trovati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} già cancellato${skippedCount === 1 ? '' : 'i'} o non trovato${skippedCount === 1 ? '' : 'i'}.`;
     }
 
     res.json({ 
@@ -759,9 +759,9 @@ router.post('/utenti/restore', async (req, res) => {
     const restoredCount = validUserIds.length;
     const skippedCount = itemIds.length - validUserIds.length;
     
-    let message = `Ripristinati ${restoredCount} utente/i con successo`;
+    let message = `Ripristinati ${restoredCount} utente${restoredCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utente/i non trovati o già ripristinati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già ripristinato${skippedCount === 1 ? '' : 'i'}.`;
     }
 
     res.json({ 

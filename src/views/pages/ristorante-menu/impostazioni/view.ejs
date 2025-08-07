@@ -1,5 +1,5 @@
-<% if (typeof successMessage !== 'undefined' && successMessage) { %>
-  <%- include('../../../ui/alerts/simple', { message: successMessage }) %>
+<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+  <%- include('../../../ui/alerts/simple', { message: success[0] }) %>
 <% } %>
 
 <!-- Action Navigation -->

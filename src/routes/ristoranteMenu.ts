@@ -1205,9 +1205,9 @@ router.post('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res
     const updatedCount = existingCategorie.length;
     const skippedCount = categoriaIds.length - existingCategorie.length;
     
-    let message = `Aggiornate ${updatedCount} categorie con successo`;
+    let message = `Aggiornate ${updatedCount} categoria${updatedCount === 1 ? '' : 'e'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} categorie non trovate o già cancellate.`;
+      message += `. ${skippedCount} categoria${skippedCount === 1 ? '' : 'e'} non trovata${skippedCount === 1 ? '' : 'e'} o già cancellata${skippedCount === 1 ? '' : 'e'}.`;
     }
     
     if (req.xhr || req.headers.accept?.includes('application/json')) {
@@ -1787,9 +1787,9 @@ router.post('/impostazioni/categoria-piatti/modifica-massa', async (req, res) =>
     const updatedCount = existingCategorie.length;
     const skippedCount = categoriaIds.length - existingCategorie.length;
     
-    let message = `Aggiornate ${updatedCount} categorie con successo`;
+    let message = `Aggiornate ${updatedCount} categoria${updatedCount === 1 ? '' : 'e'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} categorie non trovate o già cancellate.`;
+      message += `. ${skippedCount} categoria${skippedCount === 1 ? '' : 'e'} non trovata${skippedCount === 1 ? '' : 'e'} o già cancellata${skippedCount === 1 ? '' : 'e'}.`;
     }
     
     if (req.xhr || req.headers.accept?.includes('application/json')) {
@@ -1867,9 +1867,9 @@ router.delete('/impostazioni/categoria-piatti', async (req, res) => {
     const deletedCount = validCategoriaIds.length;
     const skippedCount = itemIds.length - validCategoriaIds.length;
     
-    let message = `Eliminate ${deletedCount} categoria/e con successo`;
+    let message = `Eliminate ${deletedCount} categoria${deletedCount === 1 ? '' : 'e'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} categoria/e già cancellate o non trovate.`;
+      message += `. ${skippedCount} categoria${skippedCount === 1 ? '' : 'e'} già cancellata${skippedCount === 1 ? '' : 'e'} o non trovata${skippedCount === 1 ? '' : 'e'}.`;
     }
 
     res.json({ 

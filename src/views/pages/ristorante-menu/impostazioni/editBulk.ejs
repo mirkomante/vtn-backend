@@ -1,5 +1,7 @@
-<% if (typeof successMessage !== 'undefined' && successMessage) { %>
-  <%- include('../../../ui/alerts/simple', { message: successMessage }) %>
+<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+  <div class="success-message" data-success-message="<%= success[0] %>" style="display: none;">
+    <%= success[0] %>
+  </div>
 <% } %>
 
 <!-- Action Navigation -->

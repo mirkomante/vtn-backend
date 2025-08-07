@@ -107,6 +107,25 @@ function initUserForm() {
 
   // Validazione iniziale (silenziosa)
   validateForm(false);
+
+  // Gestione submit del form con toast (solo validazione, non previene l'invio)
+  form.addEventListener('submit', (e) => {
+    if (!validateForm(true)) {
+      e.preventDefault();
+      if (window.showErrorToast) {
+        window.showErrorToast('Compila tutti i campi obbligatori correttamente');
+      }
+      return false;
+    }
+    
+    // Se la validazione passa, lascia che il form venga inviato normalmente
+    // Il server gestirà i messaggi di successo/errore
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Salvataggio...';
+    }
+  });
 }
 
 if (document.readyState === 'loading') {
