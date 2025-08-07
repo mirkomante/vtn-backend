@@ -1948,6 +1948,8 @@ router.get('/cancellati', async (req, res) => {
         idField: 'id',
         labelField: 'nome',
         editMultipleButton: null,
+        bulkEditUrl: null,
+        editUrl: null,
         actionButton: {
           text: 'Ripristina',
           classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
@@ -2006,6 +2008,8 @@ router.get('/cancellati', async (req, res) => {
         idField: 'id',
         labelField: 'nome',
         editMultipleButton: null,
+        bulkEditUrl: null,
+        editUrl: null,
         actionButton: {
           text: 'Ripristina',
           classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
