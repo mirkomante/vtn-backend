@@ -1,17 +1,8 @@
-<div class="pt-5">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold text-gray-900">Nuovo <%= itemType %></h1>
-      <p class="mt-2 text-sm text-gray-700">Crea un nuovo <%= itemType.toLowerCase() %> nel sistema.</p>
-    </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <a href="<%= backUrl %>" 
-         class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-        Torna alla lista
-      </a>
-    </div>
-  </div>
-</div>
+
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
 
 <div class="mx-auto max-w-2xl mt-8">
   <div class="space-y-10">

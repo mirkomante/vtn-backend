@@ -2,20 +2,10 @@
   <%- include('../../../ui/alerts/simple', { message: successMessage }) %>
 <% } %>
 
-<div class="pt-5">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold text-gray-900">Dettagli <%= itemType %></h1>
-      <p class="mt-2 text-sm text-gray-700">Informazioni dettagliate del <%= itemType.toLowerCase() %>.</p>
-    </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <a href="<%= backUrl %>" 
-         class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-        Torna alla lista
-      </a>
-    </div>
-  </div>
-</div>
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
 
 <div class="mx-auto max-w-4xl mt-8">
   <div class="mt-6 border-t border-gray-100">
@@ -57,12 +47,5 @@
         </dd>
       </div>
     </dl>
-  </div>
-  
-  <div class="mt-8 flex justify-end">
-    <a href="<%= editUrl %>" 
-       class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-      Modifica
-    </a>
   </div>
 </div> 

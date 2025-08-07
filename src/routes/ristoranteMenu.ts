@@ -811,6 +811,8 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       return res.status(404).send('Categoria non trovata');
     }
 
+    const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'view', categoria.id);
+
     res.render('pages/ristorante-menu/impostazioni/view', {
       title: 'Dettagli Categoria Menu Fisso',
       description: 'Informazioni dettagliate della categoria',
@@ -824,6 +826,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       editUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}`,
+      actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
