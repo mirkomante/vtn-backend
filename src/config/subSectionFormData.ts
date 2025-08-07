@@ -175,7 +175,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         
         if (isBulkEdit && field.bulkEditable) {
           // Calcola il valore iniziale per i campi toggle nella modifica massiva
-          let initialValue = '';
+          let initialValue: any = '';
           if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
             const values = selectedItems.map(item => item[field.name]);
             const allTrue = values.every(val => val === true || val === 'true' || val === 'on');
@@ -306,7 +306,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map((field: any) => {
-        let value = '';
+        let value: any = '';
         
         if (formData && formData[field.name] !== undefined) {
           value = formData[field.name];
@@ -326,7 +326,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
         
         if (isBulkEdit && field.bulkEditable) {
           // Calcola il valore iniziale per i campi toggle nella modifica massiva
-          let initialValue = '';
+          let initialValue: any = '';
           if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
             const values = selectedItems.map(item => item[field.name]);
             const allTrue = values.every(val => val === true || val === 'true' || val === 'on');

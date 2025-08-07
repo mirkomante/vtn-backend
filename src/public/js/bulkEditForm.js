@@ -113,25 +113,56 @@ function initBulkEditForm() {
         }
         
         // Inizializza lo stato
+        console.log('Initializing checkbox:', {
+          id: toggle.id,
+          checked: toggle.checked,
+          hasDataIndeterminate: toggle.hasAttribute('data-indeterminate'),
+          value: toggle.value
+        });
+        
         if (toggle.hasAttribute('data-indeterminate')) {
           toggle.indeterminate = true;
           toggle.removeAttribute('data-indeterminate');
         }
         updateCheckboxVisual();
         
-        function updateCheckboxState() {
+        // Aggiungi event listener al checkbox
+        toggle.addEventListener('change', () => {
+          console.log('Checkbox change event:', {
+            id: toggle.id,
+            checked: toggle.checked,
+            indeterminate: toggle.indeterminate,
+            value: toggle.value
+          });
+          
           // Rimuovi lo stato indeterminate quando l'utente clicca
           if (toggle.indeterminate) {
             toggle.indeterminate = false;
             toggle.checked = true; // Passa da indeterminate a checked
           }
           updateCheckboxVisual();
-        }
-        
-        // Aggiungi event listener
-        toggle.addEventListener('change', () => {
-          updateCheckboxState();
           updateSubmitButton();
+        });
+        
+        // Aggiungi event listener al div visivo per gestire i click
+        checkboxVisual.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log('Checkbox visual clicked:', {
+            id: toggle.id,
+            currentChecked: toggle.checked,
+            currentIndeterminate: toggle.indeterminate
+          });
+          
+          // Toggle lo stato del checkbox
+          if (toggle.indeterminate) {
+            toggle.indeterminate = false;
+            toggle.checked = true;
+          } else {
+            toggle.checked = !toggle.checked;
+          }
+          
+          // Trigger l'evento change manualmente
+          toggle.dispatchEvent(new Event('change'));
         });
       } else {
         // Gestione toggle box originale

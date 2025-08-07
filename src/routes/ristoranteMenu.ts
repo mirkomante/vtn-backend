@@ -293,7 +293,7 @@ router.get('/impostazioni/allergeni/nuovo', (req, res) => {
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
 
-  const formConfig = allergeneFormData.getFormData(allergeneFormData, false);
+  const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, false) : allergeneFormData;
   
   // Configurazione actionNav per questa pagina
   const actionNavConfig = createSubSectionActionNav('allergeni', 'new');
@@ -331,7 +331,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
     });
 
     if (existingAllergene) {
-      const formConfig = allergeneFormData.getFormData(allergeneFormData, false, null, req.body);
+      const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, false, null, req.body) : allergeneFormData;
       
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('allergeni', 'new');
@@ -370,7 +370,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
   } catch (error) {
     console.error('Errore nella creazione dell\'allergene:', error);
     
-    const formConfig = allergeneFormData.getFormData(allergeneFormData, false, null, req.body);
+    const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, false, null, req.body) : allergeneFormData;
     
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('allergeni', 'new');
@@ -484,7 +484,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       });
     }
 
-    const formConfig = allergeneFormData.getFormData(allergeneFormData, true, allergene);
+    const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, true, allergene) : allergeneFormData;
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
     const customTitle = generatePageTitle(allergeniConfig, 'edit', allergene);
 
@@ -572,7 +572,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       });
 
       if (allergeneWithSameName) {
-        const formConfig = allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body);
+        const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body) : allergeneFormData;
         const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
@@ -613,7 +613,17 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
   } catch (error) {
     console.error('Errore nell\'aggiornamento dell\'allergene:', error);
     
-    const formConfig = allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body);
+    // Recupera l'allergene per il rendering dell'errore
+    let existingAllergene = null;
+    try {
+      existingAllergene = await prisma.allergene.findUnique({
+        where: { id: allergeneId }
+      });
+    } catch (dbError) {
+      console.error('Errore nel recupero dell\'allergene per rendering errore:', dbError);
+    }
+    
+    const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body) : allergeneFormData;
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
     
     res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
@@ -628,7 +638,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       item: existingAllergene,
       formConfig,
       itemType: 'Allergene',
-      detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}`,
+      detailUrl: existingAllergene ? `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}` : undefined,
       actionNavConfig,
       isInternalPage: true,
       breadcrumbs: [
@@ -728,7 +738,7 @@ router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
 
-  const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false);
+  const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false) : categoriaMenuFissoFormData;
   
   // Configurazione actionNav per questa pagina
   const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
@@ -765,7 +775,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
     });
 
     if (existingCategoria) {
-      const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
+      const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body) : categoriaMenuFissoFormData;
       
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
@@ -806,7 +816,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
   } catch (error) {
     console.error('Errore nella creazione della categoria:', error);
     
-    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body);
+    const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, req.body) : categoriaMenuFissoFormData;
     
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
@@ -918,7 +928,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       });
     }
 
-    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, categoria);
+    const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, categoria) : categoriaMenuFissoFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
     const customTitle = generatePageTitle(categoriaMenuFissoConfig, 'edit', categoria);
 
@@ -1001,7 +1011,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
       });
 
       if (categoriaWithSameName) {
-        const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body);
+        const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body) : categoriaMenuFissoFormData;
         const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
@@ -1043,7 +1053,17 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
   } catch (error) {
     console.error('Errore nell\'aggiornamento della categoria:', error);
     
-    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body);
+    // Recupera la categoria per il rendering dell'errore
+    let existingCategoria = null;
+    try {
+      existingCategoria = await prisma.categoriaMenuFisso.findUnique({
+        where: { id: categoriaId }
+      });
+    } catch (dbError) {
+      console.error('Errore nel recupero della categoria per rendering errore:', dbError);
+    }
+    
+    const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body) : categoriaMenuFissoFormData;
     
     res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
       title: 'Modifica Categoria Menu Fisso',
@@ -1057,7 +1077,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
       item: existingCategoria,
       formConfig,
       itemType: 'Categoria Menu Fisso',
-      detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoriaId}`,
+      detailUrl: existingCategoria ? `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoriaId}` : undefined,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1099,7 +1119,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
       return res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso');
     }
 
-    const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, null, true, selectedCategorie);
+    const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, null, true, selectedCategorie) : categoriaMenuFissoFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'editBulk');
 
     res.render('pages/ristorante-menu/impostazioni/editBulk', {
@@ -1291,7 +1311,7 @@ router.get('/impostazioni/categoria-piatti/nuovo', (req, res) => {
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
 
-  const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false);
+  const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false) : categoriaPiattiFormData;
   
   // Configurazione actionNav per questa pagina
   const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'new');
@@ -1328,7 +1348,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
     });
 
     if (existingCategoria) {
-      const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body);
+      const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body) : categoriaPiattiFormData;
       
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'new');
@@ -1369,7 +1389,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
   } catch (error) {
     console.error('Errore nella creazione della categoria:', error);
     
-    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body);
+    const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, req.body) : categoriaPiattiFormData;
     
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'new');
@@ -1483,7 +1503,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       });
     }
 
-    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, categoria);
+    const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, categoria) : categoriaPiattiFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
     const customTitle = generatePageTitle(categoriaPiattiConfig, 'edit', categoria);
 
@@ -1571,7 +1591,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       });
 
       if (categoriaWithSameName) {
-        const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body);
+        const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body) : categoriaPiattiFormData;
         const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
         
         return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
@@ -1612,7 +1632,17 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
   } catch (error) {
     console.error('Errore nell\'aggiornamento della categoria:', error);
     
-    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body);
+    // Recupera la categoria per il rendering dell'errore
+    let existingCategoria = null;
+    try {
+      existingCategoria = await prisma.categoriaPiatti.findUnique({
+        where: { id: categoriaId }
+      });
+    } catch (dbError) {
+      console.error('Errore nel recupero della categoria per rendering errore:', dbError);
+    }
+    
+    const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body) : categoriaPiattiFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
     
     res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
@@ -1627,7 +1657,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       item: existingCategoria,
       formConfig,
       itemType: 'Categoria Piatti',
-      detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoriaId}`,
+      detailUrl: existingCategoria ? `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoriaId}` : undefined,
       actionNavConfig,
       isInternalPage: true,
       breadcrumbs: [
@@ -1671,7 +1701,7 @@ router.get('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => 
       return res.redirect('/ristorante-menu/impostazioni/categoria-piatti');
     }
 
-    const formConfig = categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, null, true, selectedCategorie);
+    const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, false, null, null, true, selectedCategorie) : categoriaPiattiFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'editBulk');
 
     res.render('pages/ristorante-menu/impostazioni/editBulk', {
@@ -1896,7 +1926,7 @@ router.get('/cancellati', async (req, res) => {
     // Determina se mostrare empty state o tabella vuota
     const isSectionEmpty = totalItemsInSystem === 0;
     const isFilteredEmpty = totalItemsInSystem > 0 && filteredCount === 0;
-    const hasItems = deletedItems.length > 0;
+    const hasItems = (deletedItems as any[]).length > 0;
 
     res.render('pages/ristorante-menu/deleted', {
       title: 'Elementi Cancellati',
@@ -2026,7 +2056,7 @@ router.post('/restore', async (req, res) => {
     const results = [];
 
     // Raggruppa gli elementi per tipo
-    const itemsByType = {};
+    const itemsByType: { [key: string]: string[] } = {};
     itemIds.forEach((id, index) => {
       const type = itemTypes[index];
       if (!itemsByType[type]) {
