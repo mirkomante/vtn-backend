@@ -411,7 +411,6 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
       item: allergene,
       itemType: 'Allergene',
       backUrl: '/ristorante-menu/impostazioni/allergeni',
-      editUrl: `/ristorante-menu/impostazioni/allergeni/modifica/${allergene.id}`,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -825,7 +824,6 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       item: categoria,
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
-      editUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}`,
       actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1049,6 +1047,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
     }
 
     const formConfig = categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, false, null, null, true, selectedCategorie);
+    const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'editBulk');
 
     res.render('pages/ristorante-menu/impostazioni/editBulk', {
       title: 'Modifica Massiva Categorie Menu Fisso',
@@ -1063,6 +1062,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
       formConfig,
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
+      actionNavConfig,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1360,7 +1360,6 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
       item: categoria,
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
-      editUrl: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoria.id}`,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
