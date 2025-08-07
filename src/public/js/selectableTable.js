@@ -12,10 +12,10 @@ function initializeSelectableTable(tableId, config) {
   const editMultipleBtn = document.getElementById(`${tableId}-editMultipleBtn`);
   const actionSelectedBtn = document.getElementById(`${tableId}-actionSelectedBtn`);
 
-  // Controlla se la tabella ha modifica massiva (ha editMultipleBtn)
-  const hasBulkEdit = !!editMultipleBtn;
+  // Controlla se la tabella ha modifica massiva (ha bulkEditUrl)
+  const hasBulkEdit = !!config.bulkEditUrl;
 
-  if (!selectAllCheckbox || !actionSelectedBtn) {
+  if (!selectAllCheckbox || !actionSelectedBtn || !editMultipleBtn) {
     return;
   }
 
@@ -29,8 +29,10 @@ function initializeSelectableTable(tableId, config) {
     selectAllCheckbox.checked = allChecked;
     selectAllCheckbox.indeterminate = hasCheckedItems && !allChecked;
 
-    // Abilita/disabilita i bottoni e aggiorna il testo del pulsante di modifica
+    // Gestione del bottone di modifica
     if (hasBulkEdit) {
+      // Se bulkEdit è abilitato, mostra sempre il bottone quando ci sono elementi selezionati
+      editMultipleBtn.style.display = hasCheckedItems ? 'inline-flex' : 'none';
       editMultipleBtn.disabled = !hasCheckedItems;
       
       // Aggiorna il testo del pulsante in base al numero di elementi selezionati
@@ -43,8 +45,62 @@ function initializeSelectableTable(tableId, config) {
       } else {
         editMultipleBtn.textContent = 'Modifica';
       }
+    } else {
+      // Se bulkEdit è disabilitato, mostra il bottone solo per un singolo elemento
+      if (hasCheckedItems && checkedItems.length === 1) {
+        editMultipleBtn.style.display = 'inline-flex';
+        editMultipleBtn.disabled = false;
+        editMultipleBtn.textContent = 'Modifica';
+      } else {
+        // Nascondi il bottone se non ci sono elementi selezionati o se ce ne sono più di uno
+        editMultipleBtn.style.display = 'none';
+      }
     }
+    
+    // Il bottone elimina deve essere sempre abilitato quando ci sono elementi selezionati
     actionSelectedBtn.disabled = !hasCheckedItems;
+  }
+
+  // Funzione per gestire il click del bottone modifica
+  function handleEditClick() {
+    const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
+    if (checkedItems.length === 0) return;
+
+    const itemIds = Array.from(checkedItems).map(cb => cb.value);
+    
+    // Se è selezionato solo 1 elemento, apri la pagina di modifica del singolo elemento
+    if (checkedItems.length === 1) {
+      if (!config.editUrl) {
+        console.error('selectableTable.js: editUrl non configurato per la modifica singola');
+        alert('Errore: URL di modifica singola non configurato');
+        return;
+      }
+      
+      const singleItemId = itemIds[0];
+      let editUrl = config.editUrl;
+      if (editUrl.includes(':id')) {
+        editUrl = editUrl.replace(':id', singleItemId);
+      } else {
+        editUrl += `/${singleItemId}`;
+      }
+      window.location.href = editUrl;
+    } else {
+      // Altrimenti apri la pagina di modifica massiva (solo se bulkEdit è abilitato)
+      if (!config.bulkEditUrl) {
+        console.error('selectableTable.js: bulkEditUrl non configurato per la modifica massiva');
+        alert('Errore: URL di modifica massiva non configurato');
+        return;
+      }
+      
+      const idsParam = itemIds.join(',');
+      let bulkEditUrl = config.bulkEditUrl;
+      if (bulkEditUrl.includes(':ids')) {
+        bulkEditUrl = bulkEditUrl.replace(':ids', idsParam);
+      } else {
+        bulkEditUrl += `?ids=${idsParam}`;
+      }
+      window.location.href = bulkEditUrl;
+    }
   }
 
   // Event listener per il checkbox "seleziona tutto"
@@ -63,48 +119,7 @@ function initializeSelectableTable(tableId, config) {
   });
 
   // Event listener per il bottone di modifica
-  if (hasBulkEdit) {
-    editMultipleBtn.addEventListener('click', function() {
-      const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
-      if (checkedItems.length === 0) return;
-
-      const itemIds = Array.from(checkedItems).map(cb => cb.value);
-      
-      // Se è selezionato solo 1 elemento, apri la pagina di modifica del singolo elemento
-      if (checkedItems.length === 1) {
-        if (!config.editUrl) {
-          console.error('selectableTable.js: editUrl non configurato per la modifica singola');
-          alert('Errore: URL di modifica singola non configurato');
-          return;
-        }
-        
-        const singleItemId = itemIds[0];
-        let editUrl = config.editUrl;
-        if (editUrl.includes(':id')) {
-          editUrl = editUrl.replace(':id', singleItemId);
-        } else {
-          editUrl += `/${singleItemId}`;
-        }
-        window.location.href = editUrl;
-      } else {
-        // Altrimenti apri la pagina di modifica massiva
-        if (!config.bulkEditUrl) {
-          console.error('selectableTable.js: bulkEditUrl non configurato per la modifica massiva');
-          alert('Errore: URL di modifica massiva non configurato');
-          return;
-        }
-        
-        const idsParam = itemIds.join(',');
-        let bulkEditUrl = config.bulkEditUrl;
-        if (bulkEditUrl.includes(':ids')) {
-          bulkEditUrl = bulkEditUrl.replace(':ids', idsParam);
-        } else {
-          bulkEditUrl += `?ids=${idsParam}`;
-        }
-        window.location.href = bulkEditUrl;
-      }
-    });
-  }
+  editMultipleBtn.addEventListener('click', handleEditClick);
 
   // Event listener per il bottone di azione (elimina)
   actionSelectedBtn.addEventListener('click', function() {
