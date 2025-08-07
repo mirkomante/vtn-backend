@@ -36,7 +36,7 @@
         
         <!-- Breadcrumbs se presenti (sempre in cima) -->
         <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
-          <div class="mb-6">
+          <div class="mb-8">
             <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
           </div>
         <% } %>
@@ -44,15 +44,13 @@
         <!-- Section Heading e Tabs -->
         <%- include('../ui/sectionHeadings/simple') %>
 
-        <!-- Section Tabs se presenti -->
-        <% if (typeof sectionTabs !== 'undefined' && sectionTabs) { %>
-          <div class="mt-6">
-            <%- include('../ui/sectionTabs/tabsWithUnderline', { sectionTabs }) %>
-          </div>
+        <!-- Section Tabs se presenti (solo nelle pagine di lista, non nelle pagine interne) -->
+        <% if (typeof sectionTabs !== 'undefined' && sectionTabs && !isInternalPage) { %>
+          <%- include('../ui/sectionTabs/tabsWithUnderline', { sectionTabs }) %>
         <% } %>
 
         <!-- Main content area -->
-        <div class="mt-6">
+        <div class="mt-8">
           <%- body %>
         </div>
         

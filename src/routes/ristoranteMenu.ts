@@ -115,6 +115,7 @@ router.get('/impostazioni', (req, res) => {
     sectionTabs,
     sectionIcons,
     currentPath,
+    isInternalPage: false,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' }
@@ -167,7 +168,8 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig,
+      isInternalPage: false,
       ...config
     });
   } catch (error) {
@@ -220,7 +222,8 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig,
+      isInternalPage: false,
       ...config
     });
   } catch (error) {
@@ -273,7 +276,8 @@ router.get('/impostazioni/allergeni', async (req, res) => {
       successMessage,
       errorMessage,
       tableConfigJson: JSON.stringify(config.tableConfig),
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig, 
+      isInternalPage: false,
       ...config
     });
   } catch (error) {
@@ -311,7 +315,8 @@ router.get('/impostazioni/allergeni/nuovo', (req, res) => {
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
       { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
       { label: 'Nuovo Allergene', href: '/ristorante-menu/impostazioni/allergeni/nuovo' }
-    ]
+    ],
+    isInternalPage: true // Aggiungi questa proprietà
   });
 });
 
@@ -381,7 +386,8 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
       formConfig,
       itemType: 'Allergene',
       backUrl: '/ristorante-menu/impostazioni/allergeni',
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -393,7 +399,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
   }
 });
 
-// Route per visualizzare allergene (corretta come users)
+// Route per visualizzare allergene 
 router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
   try {
     const currentPath = '/ristorante-menu/impostazioni/allergeni/dettagli/' + req.params.id;
@@ -426,6 +432,7 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
       itemType: 'Allergene',
       backUrl: '/ristorante-menu/impostazioni/allergeni',
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -463,6 +470,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
         sectionIcons,
         currentPath,
         actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -490,6 +498,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -509,13 +518,14 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       sectionIcons,
       currentPath,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
         { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
         { label: 'Errore', href: `/ristorante-menu/impostazioni/allergeni/modifica/${req.params.id}` }
       ],
-      error: 'Si è verificato un errore nel recupero dell\'allergene'
+      error: 'Si è verificato un errore nel recupero dell\'allergene',
     });
   }
 });
@@ -540,6 +550,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
         sectionIcons,
         currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
         actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -571,6 +582,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
           item: existingAllergene,
           formConfig,
           actionNavConfig,
+          isInternalPage: true,
           itemType: 'Allergene',
           detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${existingAllergene.id}`,
           breadcrumbs: [
@@ -613,6 +625,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}`,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -727,7 +740,8 @@ router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
     formConfig,
     itemType: 'Categoria Menu Fisso',
     backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
-    actionNavConfig, // Passa la configurazione actionNav
+    actionNavConfig,
+    isInternalPage: true,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -763,7 +777,8 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
         formConfig,
         itemType: 'Categoria Menu Fisso',
         backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
-        actionNavConfig, // Passa la configurazione actionNav
+        actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -803,7 +818,8 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       formConfig,
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -848,6 +864,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -889,7 +906,8 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
           { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
           { label: 'Categoria non trovata', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${req.params.id}` }
         ],
-        error: 'La categoria richiesta non esiste'
+        error: 'La categoria richiesta non esiste',
+        isInternalPage: true 
       });
     }
 
@@ -910,6 +928,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -933,7 +952,8 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
         { label: 'Categoria Menu Fisso', href: '/ristorante-menu/impostazioni/categoria-menu-fisso' },
         { label: 'Errore', href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${req.params.id}` }
       ],
-      error: 'Si è verificato un errore nel recupero della categoria'
+      error: 'Si è verificato un errore nel recupero della categoria',
+      isInternalPage: true 
     });
   }
 });
@@ -985,6 +1005,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
           actionNavConfig,
+          isInternalPage: true,
           item: existingCategoria,
           formConfig,
           itemType: 'Categoria Menu Fisso',
@@ -1086,6 +1107,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1277,7 +1299,8 @@ router.get('/impostazioni/categoria-piatti/nuovo', (req, res) => {
     formConfig,
     itemType: 'Categoria Piatti',
     backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
-    actionNavConfig, // Passa la configurazione actionNav
+    actionNavConfig,
+    isInternalPage: true,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1313,7 +1336,8 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
         formConfig,
         itemType: 'Categoria Piatti',
         backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
-        actionNavConfig, // Passa la configurazione actionNav
+        actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1353,7 +1377,8 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
       formConfig,
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
-      actionNavConfig, // Passa la configurazione actionNav
+      actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1398,6 +1423,7 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1435,6 +1461,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
         sectionIcons,
         currentPath,
         actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1462,6 +1489,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1481,6 +1509,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       sectionIcons,
       currentPath,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1512,6 +1541,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
         sectionIcons,
         currentPath: '/ristorante-menu/impostazioni/categoria-piatti/modifica',
         actionNavConfig,
+        isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
           { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1586,6 +1616,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoriaId}`,
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1644,6 +1675,7 @@ router.get('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => 
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
