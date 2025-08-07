@@ -92,14 +92,12 @@ export const allergeniConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/allergeni/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/allergeni/modifica/:id',
-    bulkEditUrl: '/ristorante-menu/impostazioni/allergeni/modifica-massa',
+    bulkEditUrl: undefined,
     actionButton: {
       text: 'Nuovo Allergene',
       href: '/ristorante-menu/impostazioni/allergeni/nuovo'
     },
-    editMultipleButton: {
-      text: 'Modifica'
-    },
+    editMultipleButton: undefined,
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
