@@ -1950,16 +1950,28 @@ router.get('/cancellati', async (req, res) => {
         editMultipleButton: null,
         bulkEditUrl: null,
         editUrl: null,
-        actionButton: {
-          text: 'Ripristina',
-          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
-        },
-        endpoint: '/ristorante-menu/restore',
-        method: 'POST',
-        confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
-        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
-        successMessage: 'Ripristinati {count} elemento/i con successo',
-        errorMessage: 'Errore durante il ripristino',
+        actionButtons: [
+          {
+            text: 'Ripristina',
+            classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+            endpoint: '/ristorante-menu/restore',
+            method: 'POST',
+            confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+            confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+            successMessage: 'Ripristinati {count} elemento/i con successo',
+            errorMessage: 'Errore durante il ripristino'
+          },
+          {
+            text: 'Elimina definitivamente',
+            classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+            endpoint: '/ristorante-menu/permanent-delete',
+            method: 'DELETE',
+            confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo elemento?',
+            confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} elementi?',
+            successMessage: 'Eliminati definitivamente {count} elemento/i',
+            errorMessage: 'Errore durante l\'eliminazione definitiva'
+          }
+        ],
         disableClickableNames: true,
         tableData: elementiCancellatiTableData
       }),
@@ -2010,16 +2022,28 @@ router.get('/cancellati', async (req, res) => {
         editMultipleButton: null,
         bulkEditUrl: null,
         editUrl: null,
-        actionButton: {
-          text: 'Ripristina',
-          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
-        },
-        endpoint: '/ristorante-menu/restore',
-        method: 'POST',
-        confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
-        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
-        successMessage: 'Ripristinati {count} elemento/i con successo',
-        errorMessage: 'Errore durante il ripristino',
+        actionButtons: [
+          {
+            text: 'Ripristina',
+            classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+            endpoint: '/ristorante-menu/restore',
+            method: 'POST',
+            confirmMessage: 'Sei sicuro di voler ripristinare questo elemento?',
+            confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} elementi?',
+            successMessage: 'Ripristinati {count} elemento/i con successo',
+            errorMessage: 'Errore durante il ripristino'
+          },
+          {
+            text: 'Elimina definitivamente',
+            classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+            endpoint: '/ristorante-menu/permanent-delete',
+            method: 'DELETE',
+            confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo elemento?',
+            confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} elementi?',
+            successMessage: 'Eliminati definitivamente {count} elemento/i',
+            errorMessage: 'Errore durante l\'eliminazione definitiva'
+          }
+        ],
         disableClickableNames: true,
         tableData: elementiCancellatiTableData
       }),
@@ -2218,6 +2242,170 @@ router.post('/restore', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante il ripristino' 
+    });
+  }
+});
+
+// Route per eliminazione fisica definitiva di uno o più elementi cancellati
+router.delete('/permanent-delete', async (req, res) => {
+  const { itemIds, itemTypes } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0 || 
+      !itemTypes || !Array.isArray(itemTypes) || itemTypes.length !== itemIds.length) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Dati mancanti per l\'eliminazione definitiva' 
+    });
+  }
+  
+  try {
+    let totalDeleted = 0;
+    let totalSkipped = 0;
+    const results = [];
+
+    // Raggruppa gli elementi per tipo
+    const itemsByType: { [key: string]: string[] } = {};
+    itemIds.forEach((id, index) => {
+      const type = itemTypes[index];
+      if (!itemsByType[type]) {
+        itemsByType[type] = [];
+      }
+      itemsByType[type].push(id);
+    });
+
+    // Elimina fisicamente elementi per ogni tipo
+    for (const [type, ids] of Object.entries(itemsByType)) {
+      let deleted = 0;
+      let skipped = 0;
+
+      switch (type) {
+        case 'categoria-piatti':
+          // Verifica che non ci siano piatti associati
+          const piattiAssociati = await prisma.piatto.findMany({
+            where: { 
+              categoriaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (piattiAssociati.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare categorie con piatti associati'
+            });
+            continue;
+          }
+          
+          const deletedCategoriePiatti = await prisma.categoriaPiatti.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedCategoriePiatti.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'categoria-menu-fisso':
+          // Verifica che non ci siano menu fissi associati
+          const menuFissiAssociati = await prisma.menuFisso.findMany({
+            where: { 
+              categoriaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (menuFissiAssociati.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare categorie con menu fissi associati'
+            });
+            continue;
+          }
+          
+          const deletedCategorieMenuFisso = await prisma.categoriaMenuFisso.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedCategorieMenuFisso.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'allergene':
+          const deletedAllergeni = await prisma.allergene.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedAllergeni.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'piatto':
+          const deletedPiatti = await prisma.piatto.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedPiatti.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'servizio-accessorio':
+          const deletedServizi = await prisma.servizioAccessorio.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedServizi.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'menu-fisso':
+          const deletedMenuFissi = await prisma.menuFisso.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedMenuFissi.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+      }
+
+      totalDeleted += deleted;
+      totalSkipped += skipped;
+      results.push({ type, deleted, skipped });
+    }
+
+    let message = `Eliminati definitivamente ${totalDeleted} elemento/i`;
+    if (totalSkipped > 0) {
+      message += `. ${totalSkipped} elemento/i non eliminati (già eliminati o con dipendenze).`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount: totalDeleted,
+      skippedCount: totalSkipped,
+      results
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione definitiva degli elementi:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'eliminazione definitiva' 
     });
   }
 });

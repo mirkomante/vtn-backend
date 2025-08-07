@@ -10,12 +10,32 @@ function initializeSelectableTable(tableId, config) {
   const selectAllCheckbox = document.querySelector(`input[id='${tableId}-select-all']`);
   const itemCheckboxes = document.querySelectorAll(`input[name='${tableId}-item']`);
   const editMultipleBtn = document.getElementById(`${tableId}-editMultipleBtn`);
-  const actionSelectedBtn = document.getElementById(`${tableId}-actionSelectedBtn`);
+  
+  // Trova tutti i bottoni di azione (supporto per bottoni multipli)
+  const actionButtons = [];
+  if (config.actionButtons && Array.isArray(config.actionButtons)) {
+    config.actionButtons.forEach((_, index) => {
+      const btn = document.getElementById(`${tableId}-actionBtn-${index}`);
+      if (btn) actionButtons.push(btn);
+    });
+  } else {
+    // Fallback per compatibilità
+    const actionSelectedBtn = document.getElementById(`${tableId}-actionSelectedBtn`);
+    if (actionSelectedBtn) actionButtons.push(actionSelectedBtn);
+  }
 
   // Controlla se la tabella ha modifica massiva (ha bulkEditUrl)
   const hasBulkEdit = !!config.bulkEditUrl;
+  // Controlla se la modifica singola è disponibile (ha editUrl)
+  const hasSingleEdit = !!config.editUrl;
 
-  if (!selectAllCheckbox || !actionSelectedBtn || !editMultipleBtn) {
+  // Controllo più flessibile: richiediamo solo selectAllCheckbox e almeno un bottone di azione
+  if (!selectAllCheckbox || actionButtons.length === 0) {
+    console.warn('selectableTable.js: Elementi richiesti non trovati', {
+      selectAllCheckbox: !!selectAllCheckbox,
+      actionButtonsCount: actionButtons.length,
+      editMultipleBtn: !!editMultipleBtn
+    });
     return;
   }
 
@@ -29,39 +49,44 @@ function initializeSelectableTable(tableId, config) {
     selectAllCheckbox.checked = allChecked;
     selectAllCheckbox.indeterminate = hasCheckedItems && !allChecked;
 
-    // Gestione del bottone di modifica
-    if (hasBulkEdit) {
-      // Se bulkEdit è abilitato, mostra sempre il bottone quando ci sono elementi selezionati
-      editMultipleBtn.style.display = hasCheckedItems ? 'inline-flex' : 'none';
-      editMultipleBtn.disabled = !hasCheckedItems;
-      
-      // Aggiorna il testo del pulsante in base al numero di elementi selezionati
-      if (hasCheckedItems) {
-        if (checkedItems.length === 1) {
+    // Gestione del bottone di modifica (solo se esiste e se la modifica è disponibile)
+    if (editMultipleBtn) {
+      // Nascondi sempre il bottone se non ci sono URL di modifica configurati
+      if (!hasBulkEdit && !hasSingleEdit) {
+        editMultipleBtn.style.display = 'none';
+      } else if (hasBulkEdit) {
+        // Se è disponibile la modifica massiva, mostra il bottone quando ci sono elementi selezionati
+        editMultipleBtn.style.display = hasCheckedItems ? 'inline-flex' : 'none';
+        editMultipleBtn.disabled = !hasCheckedItems;
+        
+        if (hasCheckedItems) {
+          if (checkedItems.length === 1) {
+            editMultipleBtn.textContent = 'Modifica';
+          } else {
+            editMultipleBtn.textContent = `Modifica (${checkedItems.length})`;
+          }
+        } else {
+          editMultipleBtn.textContent = 'Modifica';
+        }
+      } else if (hasSingleEdit) {
+        // Se è disponibile solo la modifica singola, mostra il bottone solo per un singolo elemento
+        if (hasCheckedItems && checkedItems.length === 1) {
+          editMultipleBtn.style.display = 'inline-flex';
+          editMultipleBtn.disabled = false;
           editMultipleBtn.textContent = 'Modifica';
         } else {
-          editMultipleBtn.textContent = `Modifica (${checkedItems.length})`;
+          editMultipleBtn.style.display = 'none';
         }
-      } else {
-        editMultipleBtn.textContent = 'Modifica';
-      }
-    } else {
-      // Se bulkEdit è disabilitato, mostra il bottone solo per un singolo elemento
-      if (hasCheckedItems && checkedItems.length === 1) {
-        editMultipleBtn.style.display = 'inline-flex';
-        editMultipleBtn.disabled = false;
-        editMultipleBtn.textContent = 'Modifica';
-      } else {
-        // Nascondi il bottone se non ci sono elementi selezionati o se ce ne sono più di uno
-        editMultipleBtn.style.display = 'none';
       }
     }
     
-    // Il bottone elimina deve essere sempre abilitato quando ci sono elementi selezionati
-    actionSelectedBtn.disabled = !hasCheckedItems;
+    // Aggiorna lo stato di tutti i bottoni di azione
+    actionButtons.forEach(btn => {
+      btn.disabled = !hasCheckedItems;
+    });
   }
 
-  // Funzione per gestire il click del bottone modifica
+  // Funzione per gestire il click del bottone modifica (solo se esiste)
   function handleEditClick() {
     const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
     if (checkedItems.length === 0) return;
@@ -118,32 +143,44 @@ function initializeSelectableTable(tableId, config) {
     });
   });
 
-  // Event listener per il bottone di modifica
-  editMultipleBtn.addEventListener('click', handleEditClick);
+  // Event listener per il bottone di modifica (solo se esiste e se la modifica è disponibile)
+  if (editMultipleBtn && (hasBulkEdit || hasSingleEdit)) {
+    editMultipleBtn.addEventListener('click', handleEditClick);
+  }
 
-  // Event listener per il bottone di azione (elimina)
-  actionSelectedBtn.addEventListener('click', function() {
-    const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
-    if (checkedItems.length === 0) return;
+  // Event listeners per i bottoni di azione
+  actionButtons.forEach((btn, index) => {
+    btn.addEventListener('click', function() {
+      const checkedItems = document.querySelectorAll(`input[name='${tableId}-item']:checked`);
+      if (checkedItems.length === 0) return;
 
-    const itemIds = Array.from(checkedItems).map(cb => cb.value);
-    const count = checkedItems.length;
-    
-    // Messaggio di conferma
-    const confirmMessage = count === 1 
-      ? config.confirmMessage 
-      : config.confirmMessageMultiple.replace('{count}', count);
-    
-    if (!confirm(confirmMessage)) {
-      return;
-    }
+      const itemIds = Array.from(checkedItems).map(cb => cb.value);
+      const count = checkedItems.length;
+      
+      // Determina quale configurazione di bottone usare
+      let buttonConfig;
+      if (config.actionButtons && Array.isArray(config.actionButtons)) {
+        buttonConfig = config.actionButtons[index];
+      } else {
+        buttonConfig = config; // Fallback per compatibilità
+      }
+      
+      // Messaggio di conferma
+      const confirmMessage = count === 1 
+        ? buttonConfig.confirmMessage 
+        : buttonConfig.confirmMessageMultiple.replace('{count}', count);
+      
+      if (!confirm(confirmMessage)) {
+        return;
+      }
 
-    // Esegui l'azione
-    performBulkAction(itemIds, config);
+      // Esegui l'azione con la configurazione del bottone specifico
+      performBulkAction(itemIds, buttonConfig);
+    });
   });
 
-  // Funzione per eseguire l'azione bulk
-  async function performBulkAction(itemIds, config) {
+  // Funzione per eseguire l'azione bulk (aggiornata per supportare configurazioni multiple)
+  async function performBulkAction(itemIds, buttonConfig) {
     try {
       // Prepara i dati di base
       let requestData = { itemIds };
@@ -151,22 +188,18 @@ function initializeSelectableTable(tableId, config) {
       // Gestione speciale per la tabella dei cancellati che ha bisogno di itemTypes
       if (config.tableId === 'deleted-items-table') {
         try {
-          // Raccogli i tipi degli elementi selezionati
           const itemTypes = [];
           itemIds.forEach(id => {
             const row = document.querySelector(`tr[data-item-id="${id}"]`);
             if (row) {
-              // Estrai il campo type dai dati della riga
               const type = row.getAttribute('data-type');
               if (type) {
                 itemTypes.push(type);
               } else {
-                // Fallback: cerca nella seconda colonna (type_label)
                 const cells = row.querySelectorAll('td');
                 if (cells.length > 1) {
                   const typeCell = cells[1];
                   const typeText = typeCell.textContent.trim();
-                  // Mappa il testo visualizzato al valore del campo type
                   const typeMap = {
                     'Categoria Piatti': 'categoria-piatti',
                     'Categoria Menu Fisso': 'categoria-menu-fisso',
@@ -182,48 +215,14 @@ function initializeSelectableTable(tableId, config) {
             }
           });
           
-          // Aggiungi i tipi alla richiesta
           requestData.itemTypes = itemTypes;
         } catch (error) {
           console.error('selectableTable.js: Errore nel raccogliere i tipi:', error);
         }
       }
-      // Se è definita onBeforeAction, chiamala per personalizzare i dati
-      else if (config.onBeforeAction && typeof config.onBeforeAction === 'function') {
-        try {
-          // Raccogli gli elementi selezionati con i loro dati
-          const selectedItems = [];
-          itemIds.forEach(id => {
-            const row = document.querySelector(`tr[data-item-id="${id}"]`);
-            if (row) {
-              const item = {};
-              // Estrai i dati dalla riga
-              const cells = row.querySelectorAll('td');
-              cells.forEach((cell, index) => {
-                if (index > 0) { // Salta la prima cella (checkbox)
-                  const fieldName = config.tableData?.fields?.[index - 1]?.name;
-                  if (fieldName) {
-                    item[fieldName] = cell.textContent.trim();
-                  }
-                }
-              });
-              item.id = id;
-              selectedItems.push(item);
-            }
-          });
-          
-          // Chiama onBeforeAction per personalizzare i dati
-          const customData = config.onBeforeAction(selectedItems);
-          if (customData && typeof customData === 'object') {
-            requestData = { ...requestData, ...customData };
-          }
-        } catch (error) {
-          console.error('selectableTable.js: Errore in onBeforeAction:', error);
-        }
-      }
       
-      const response = await fetch(config.endpoint, {
-        method: config.method,
+      const response = await fetch(buttonConfig.endpoint, {
+        method: buttonConfig.method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -234,15 +233,15 @@ function initializeSelectableTable(tableId, config) {
       const result = await response.json();
       
       if (result.success) {
-        const successMessage = config.successMessage.replace('{count}', itemIds.length);
+        const successMessage = buttonConfig.successMessage.replace('{count}', itemIds.length);
         alert(successMessage);
         window.location.reload();
       } else {
-        alert(result.message || config.errorMessage);
+        alert(result.message || buttonConfig.errorMessage);
       }
     } catch (error) {
       console.error('selectableTable.js: Errore durante l\'azione bulk:', error);
-      alert(config.errorMessage);
+      alert(buttonConfig.errorMessage);
     }
   }
 
