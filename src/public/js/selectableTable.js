@@ -1,5 +1,47 @@
 console.log('selectableTable.js: Script caricato');
 
+// Funzione di utilità per mostrare toast in modo coerente
+function showToastLocal(message, type = 'info') {
+  if (window.showToast) {
+    window.showToast(message, type);
+  } else if (window.toastManager) {
+    window.toastManager.show(message, type);
+  } else {
+    console.warn(`Sistema toast non disponibile per messaggio ${type}:`, message);
+  }
+}
+
+// Funzioni specifiche per tipo di toast
+function showSuccessToastLocal(message) {
+  if (window.showSuccessToast) {
+    window.showSuccessToast(message);
+  } else if (window.toastManager) {
+    window.toastManager.show(message, 'success');
+  } else {
+    console.warn('Sistema toast non disponibile per messaggio di successo:', message);
+  }
+}
+
+function showErrorToastLocal(message) {
+  if (window.showErrorToast) {
+    window.showErrorToast(message);
+  } else if (window.toastManager) {
+    window.toastManager.show(message, 'error');
+  } else {
+    console.error('Sistema toast non disponibile per messaggio di errore:', message);
+  }
+}
+
+function showInfoToastLocal(message) {
+  if (window.showInfoToast) {
+    window.showInfoToast(message);
+  } else if (window.toastManager) {
+    window.toastManager.show(message, 'info');
+  } else {
+    console.warn('Sistema toast non disponibile per messaggio informativo:', message);
+  }
+}
+
 function initializeSelectableTable(tableId, config) {
   const table = document.getElementById(tableId);
   if (!table) {
@@ -170,18 +212,102 @@ function initializeSelectableTable(tableId, config) {
         ? buttonConfig.confirmMessage 
         : buttonConfig.confirmMessageMultiple.replace('{count}', count);
       
-      if (!confirm(confirmMessage)) {
-        return;
-      }
-
-      // Esegui l'azione con la configurazione del bottone specifico
-      performBulkAction(itemIds, buttonConfig);
+      // Usa il sistema di conferma toast invece di confirm()
+      showConfirmDialog(confirmMessage, () => {
+        performBulkAction(itemIds, buttonConfig);
+      });
     });
   });
+
+  // Funzione per mostrare dialog di conferma con toast
+  function showConfirmDialog(message, onConfirm) {
+    // Crea un overlay per il dialog di conferma
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    overlay.id = 'confirm-overlay';
+    
+    // Determina il tipo di toast in base al messaggio
+    const isDestructive = message.includes('ATTENZIONE') || message.includes('irreversibile');
+    const toastType = isDestructive ? 'warning' : 'info';
+    
+    // Crea il dialog di conferma
+    const dialog = document.createElement('div');
+    dialog.className = 'bg-white rounded-lg shadow-xl p-6 max-w-md mx-4';
+    dialog.innerHTML = `
+      <div class="flex items-start">
+        <div class="flex-shrink-0">
+          ${isDestructive ? `
+            <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          ` : `
+            <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          `}
+        </div>
+        <div class="ml-3 w-0 flex-1">
+          <h3 class="text-lg font-medium text-gray-900">
+            ${isDestructive ? 'Conferma Azione' : 'Conferma'}
+          </h3>
+          <div class="mt-2">
+            <p class="text-sm text-gray-500">${message}</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 flex justify-end space-x-3">
+        <button type="button" id="confirm-cancel" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Annulla
+        </button>
+        <button type="button" id="confirm-ok" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDestructive ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}">
+          Conferma
+        </button>
+      </div>
+    `;
+    
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+    
+    // Event listeners per i bottoni
+    const cancelBtn = dialog.querySelector('#confirm-cancel');
+    const confirmBtn = dialog.querySelector('#confirm-ok');
+    
+    const cleanup = () => {
+      document.body.removeChild(overlay);
+    };
+    
+    cancelBtn.addEventListener('click', cleanup);
+    confirmBtn.addEventListener('click', () => {
+      cleanup();
+      onConfirm();
+    });
+    
+    // Chiudi con ESC
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape') {
+        cleanup();
+        document.removeEventListener('keydown', handleKeydown);
+      }
+    };
+    document.addEventListener('keydown', handleKeydown);
+    
+    // Focus sul bottone di conferma
+    setTimeout(() => confirmBtn.focus(), 100);
+  }
 
   // Funzione per eseguire l'azione bulk (aggiornata per supportare configurazioni multiple)
   async function performBulkAction(itemIds, buttonConfig) {
     try {
+      // Mostra indicatore di caricamento
+      showInfoToastLocal('Esecuzione in corso...');
+      
+      // Disabilita temporaneamente i bottoni per evitare click multipli
+      const allActionButtons = document.querySelectorAll(`#${tableId}-actionBtn-0, #${tableId}-actionBtn-1, #${tableId}-actionSelectedBtn`);
+      allActionButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      });
+      
       // Prepara i dati di base
       let requestData = { itemIds };
       
@@ -232,29 +358,53 @@ function initializeSelectableTable(tableId, config) {
 
       const result = await response.json();
       
+      // Riabilita i bottoni
+      allActionButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+      
       if (result.success) {
-        const successMessage = buttonConfig.successMessage.replace('{count}', itemIds.length);
-        if (window.showSuccessToast) {
-          window.showSuccessToast(successMessage);
-        } else {
-          alert(successMessage);
-        }
-        window.location.reload();
+        // Gestione avanzata dei placeholder nei messaggi di successo
+        let successMessage = buttonConfig.successMessage;
+        
+        // Sostituisce {count} con il numero effettivo
+        successMessage = successMessage.replace(/\{count\}/g, itemIds.length);
+        
+        // Valuta espressioni JavaScript nel formato {expression}
+        successMessage = successMessage.replace(/\{([^}]+)\}/g, (match, expression) => {
+          try {
+            // Sostituisce 'count' con il valore effettivo nell'espressione
+            const evaluatedExpression = expression.replace(/count/g, itemIds.length);
+            return eval(evaluatedExpression);
+          } catch (error) {
+            console.warn('Errore nella valutazione dell\'espressione:', expression, error);
+            return match; // Ritorna il placeholder originale se c'è un errore
+          }
+        });
+        
+        showSuccessToastLocal(successMessage);
+        
+        // Reload della pagina dopo un breve delay per permettere al toast di essere visto
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else {
         const errorMessage = result.message || buttonConfig.errorMessage;
-        if (window.showErrorToast) {
-          window.showErrorToast(errorMessage);
-        } else {
-          alert(errorMessage);
-        }
+        showErrorToastLocal(errorMessage);
       }
     } catch (error) {
       console.error('selectableTable.js: Errore durante l\'azione bulk:', error);
-      if (window.showErrorToast) {
-        window.showErrorToast(buttonConfig.errorMessage);
-      } else {
-        alert(buttonConfig.errorMessage);
-      }
+      
+      // Riabilita i bottoni in caso di errore
+      const allActionButtons = document.querySelectorAll(`#${tableId}-actionBtn-0, #${tableId}-actionBtn-1, #${tableId}-actionSelectedBtn`);
+      allActionButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+      
+      const errorMessage = buttonConfig.errorMessage || 'Si è verificato un errore durante l\'operazione';
+      showErrorToastLocal(errorMessage);
     }
   }
 

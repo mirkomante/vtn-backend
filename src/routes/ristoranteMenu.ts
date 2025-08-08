@@ -596,7 +596,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
             { label: 'Allergeni', href: '/ristorante-menu/impostazioni/allergeni' },
             { label: existingAllergene.nome, href: `/ristorante-menu/impostazioni/allergeni/modifica/${existingAllergene.id}` }
           ],
-          error: 'Un altro allergene con questo nome esiste già'
+          error: 'Un\'altra allergene con questo nome esiste già'
         });
       }
     }
@@ -1599,11 +1599,12 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
           description: 'Modifica i dettagli della categoria',
           layout: 'layouts/sections',
           mainMenu: mainMenuItems,
-          actionNavConfig,
           sectionMenu: ristoranteMenuItems,
           sectionTabs: ristoranteMenuImpostazioniSubItems,
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/categoria-piatti/modifica',
+          actionNavConfig,
+          isInternalPage: true,
           item: existingCategoria,
           formConfig,
           itemType: 'Categoria Piatti',
@@ -2409,5 +2410,281 @@ router.delete('/permanent-delete', async (req, res) => {
     });
   }
 });
+
+// === ROUTE AJAX PER FORM MANAGER ===
+
+// Route AJAX per creazione allergene
+router.post('/impostazioni/allergeni/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  
+  try {
+    // Verifica se esiste già un allergene con lo stesso nome
+    const existingAllergene = await prisma.allergene.findUnique({
+      where: { nome }
+    });
+
+    if (existingAllergene) {
+      return res.json({ 
+        success: false, 
+        message: 'Un allergene con questo nome esiste già' 
+      });
+    }
+
+    const allergene = await prisma.allergene.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Allergene creato con successo',
+      data: { id: allergene.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione dell\'allergene:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione dell\'allergene' 
+    });
+  }
+});
+
+// Route AJAX per modifica allergene
+router.post('/impostazioni/allergeni/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const allergeneId = req.params.id;
+  
+  try {
+    const existingAllergene = await prisma.allergene.findUnique({
+      where: { id: allergeneId }
+    });
+
+    if (!existingAllergene) {
+      return res.json({ 
+        success: false, 
+        message: 'L\'allergene richiesto non esiste' 
+      });
+    }
+
+    if (nome !== existingAllergene.nome) {
+      const allergeneWithSameName = await prisma.allergene.findUnique({
+        where: { nome }
+      });
+
+      if (allergeneWithSameName) {
+        return res.json({ 
+          success: false, 
+          message: 'Un altro allergene con questo nome esiste già' 
+        });
+      }
+    }
+
+    const updatedAllergene = await prisma.allergene.update({
+      where: { id: allergeneId },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Allergene aggiornato con successo',
+      data: { id: updatedAllergene.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento dell\'allergene:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento dell\'allergene' 
+    });
+  }
+});
+
+// Route AJAX per creazione categoria menu fisso
+router.post('/impostazioni/categoria-menu-fisso/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  
+  try {
+    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
+      where: { nome }
+    });
+
+    if (existingCategoria) {
+      return res.json({ 
+        success: false, 
+        message: 'Una categoria con questo nome esiste già' 
+      });
+    }
+
+    const categoria = await prisma.categoriaMenuFisso.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Categoria creata con successo',
+      data: { id: categoria.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della categoria:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione della categoria' 
+    });
+  }
+});
+
+// Route AJAX per modifica categoria menu fisso
+router.post('/impostazioni/categoria-menu-fisso/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  const categoriaId = req.params.id;
+  
+  try {
+    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
+      where: { id: categoriaId }
+    });
+
+    if (!existingCategoria) {
+      return res.json({ 
+        success: false, 
+        message: 'La categoria richiesta non esiste' 
+      });
+    }
+
+    if (nome !== existingCategoria.nome) {
+      const categoriaWithSameName = await prisma.categoriaMenuFisso.findUnique({
+        where: { nome }
+      });
+
+      if (categoriaWithSameName) {
+        return res.json({ 
+          success: false, 
+          message: 'Un\'altra categoria con questo nome esiste già' 
+        });
+      }
+    }
+
+    const updatedCategoria = await prisma.categoriaMenuFisso.update({
+      where: { id: categoriaId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Categoria aggiornata con successo',
+      data: { id: updatedCategoria.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della categoria:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
+    });
+  }
+});
+
+// Route AJAX per creazione categoria piatti
+router.post('/impostazioni/categoria-piatti/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  
+  try {
+    const existingCategoria = await prisma.categoriaPiatti.findUnique({
+      where: { nome }
+    });
+
+    if (existingCategoria) {
+      return res.json({ 
+        success: false, 
+        message: 'Una categoria con questo nome esiste già' 
+      });
+    }
+
+    const categoria = await prisma.categoriaPiatti.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Categoria creata con successo',
+      data: { id: categoria.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della categoria:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione della categoria' 
+    });
+  }
+});
+
+// Route AJAX per modifica categoria piatti
+router.post('/impostazioni/categoria-piatti/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione, inLista } = req.body;
+  const categoriaId = req.params.id;
+  
+  try {
+    const existingCategoria = await prisma.categoriaPiatti.findUnique({
+      where: { id: categoriaId }
+    });
+
+    if (!existingCategoria) {
+      return res.json({ 
+        success: false, 
+        message: 'La categoria richiesta non esiste' 
+      });
+    }
+
+    if (nome !== existingCategoria.nome) {
+      const categoriaWithSameName = await prisma.categoriaPiatti.findUnique({
+        where: { nome }
+      });
+
+      if (categoriaWithSameName) {
+        return res.json({ 
+          success: false, 
+          message: 'Un\'altra categoria con questo nome esiste già' 
+        });
+      }
+    }
+
+    const updatedCategoria = await prisma.categoriaPiatti.update({
+      where: { id: categoriaId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Categoria aggiornata con successo',
+      data: { id: updatedCategoria.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della categoria:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
+    });
+  }
+});
+
+
 
 export default router; 

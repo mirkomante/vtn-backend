@@ -378,83 +378,108 @@ window.testToast = () => {
   }
 };
 
-// Funzione per mostrare toast dai flash message del server
+// Funzione per gestire messaggi flash passati direttamente alle viste
+function handleDirectFlashMessages() {
+  // Cerca elementi con messaggi di successo diretti
+  const successMessages = document.querySelectorAll('[data-success-message], .success-message');
+  successMessages.forEach(element => {
+    const message = element.textContent?.trim() || element.getAttribute('data-success-message');
+    if (message && message.length > 0 && message.length < 200) {
+      if (window.showSuccessToast) {
+        window.showSuccessToast(message);
+      }
+      element.style.display = 'none';
+    }
+  });
+
+  // Cerca elementi con messaggi di errore diretti
+  const errorMessages = document.querySelectorAll('[data-error-message], .error-message');
+  errorMessages.forEach(element => {
+    const message = element.textContent?.trim() || element.getAttribute('data-error-message');
+    if (message && message.length > 0 && message.length < 200) {
+      if (window.showErrorToast) {
+        window.showErrorToast(message);
+      }
+      element.style.display = 'none';
+    }
+  });
+
+  // Cerca messaggi flash standard del server SOLO se sono correlati all'azione
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasSuccessParam = urlParams.has('success');
+  const hasErrorParam = urlParams.has('error');
+  
+  if (hasSuccessParam) {
+    const flashSuccess = document.querySelector('.bg-green-50, .bg-green-500');
+    if (flashSuccess) {
+      const message = flashSuccess.textContent?.trim();
+      if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
+        if (window.showSuccessToast) {
+          window.showSuccessToast(message);
+        }
+        flashSuccess.style.display = 'none';
+      }
+    }
+  }
+
+  if (hasErrorParam) {
+    const flashError = document.querySelector('.bg-red-50, .bg-red-500');
+    if (flashError) {
+      const message = flashError.textContent?.trim();
+      if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
+        if (window.showErrorToast) {
+          window.showErrorToast(message);
+        }
+        flashError.style.display = 'none';
+      }
+    }
+  }
+}
+
+// Funzione per mostrare toast dai flash message del server (MIGLIORATA)
 function showFlashMessages() {
-  // Cerca messaggi di successo (più specifico)
-  const successElements = document.querySelectorAll('.bg-green-50 .text-green-800, .bg-green-500 .text-white, .success-message');
-      successElements.forEach(element => {
+  // Cerca messaggi di successo SOLO se ci sono parametri URL correlati
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasSuccessParam = urlParams.has('success');
+  const hasErrorParam = urlParams.has('error');
+  
+  if (hasSuccessParam) {
+    const successElements = document.querySelectorAll('.bg-green-50 .text-green-800, .bg-green-500 .text-white, .success-message');
+    successElements.forEach(element => {
       const message = element.textContent?.trim();
       if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
-        // Mostra il toast
         if (window.showSuccessToast) {
           window.showSuccessToast(message);
         }
-      // Nascondi l'elemento originale dopo un breve delay
-      setTimeout(() => {
-        const container = element.closest('.bg-green-50, .bg-green-500, .success-message');
-        if (container) {
-          container.style.display = 'none';
-        }
-      }, 100);
-    }
-  });
-
-  // Cerca anche messaggi flash standard del server (più ampio)
-  const allSuccessContainers = document.querySelectorAll('.bg-green-50, .bg-green-500');
-  allSuccessContainers.forEach(container => {
-    const textElements = container.querySelectorAll('p, span, div');
-    textElements.forEach(textElement => {
-      const message = textElement.textContent?.trim();
-      if (message && message.length > 0 && message.length < 200 && 
-          !message.includes('Dismiss') && 
-          !message.includes('sr-only') &&
-          textElement.offsetParent !== null) { // Verifica che sia visibile
-        if (window.showSuccessToast) {
-          window.showSuccessToast(message);
-        }
-        container.style.display = 'none';
-        return; // Esci dal loop interno
+        // Nascondi l'elemento originale dopo un breve delay
+        setTimeout(() => {
+          const container = element.closest('.bg-green-50, .bg-green-500, .success-message');
+          if (container) {
+            container.style.display = 'none';
+          }
+        }, 100);
       }
     });
-  });
+  }
 
-  // Cerca messaggi di errore (più specifico)
-  const errorElements = document.querySelectorAll('.bg-red-50 .text-red-800, .bg-red-500 .text-white, .error-message');
-      errorElements.forEach(element => {
+  if (hasErrorParam) {
+    const errorElements = document.querySelectorAll('.bg-red-50 .text-red-800, .bg-red-500 .text-white, .error-message');
+    errorElements.forEach(element => {
       const message = element.textContent?.trim();
       if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
-        // Mostra il toast
         if (window.showErrorToast) {
           window.showErrorToast(message);
         }
-      // Nascondi l'elemento originale dopo un breve delay
-      setTimeout(() => {
-        const container = element.closest('.bg-red-50, .bg-red-500, .error-message');
-        if (container) {
-          container.style.display = 'none';
-        }
-      }, 100);
-    }
-  });
-
-  // Cerca anche messaggi flash standard del server (più ampio)
-  const allErrorContainers = document.querySelectorAll('.bg-red-50, .bg-red-500');
-  allErrorContainers.forEach(container => {
-    const textElements = container.querySelectorAll('p, span, div');
-    textElements.forEach(textElement => {
-      const message = textElement.textContent?.trim();
-      if (message && message.length > 0 && message.length < 200 && 
-          !message.includes('Dismiss') && 
-          !message.includes('sr-only') &&
-          textElement.offsetParent !== null) { // Verifica che sia visibile
-        if (window.showErrorToast) {
-          window.showErrorToast(message);
-        }
-        container.style.display = 'none';
-        return; // Esci dal loop interno
+        // Nascondi l'elemento originale dopo un breve delay
+        setTimeout(() => {
+          const container = element.closest('.bg-red-50, .bg-red-500, .error-message');
+          if (container) {
+            container.style.display = 'none';
+          }
+        }, 100);
       }
     });
-  });
+  }
 
   // Cerca messaggi di warning (più specifico)
   const warningElements = document.querySelectorAll('.bg-yellow-50 .text-yellow-800, .bg-yellow-500 .text-white');
@@ -474,56 +499,6 @@ function showFlashMessages() {
       }, 100);
     }
   });
-}
-
-// Funzione per gestire messaggi flash passati direttamente alle viste
-function handleDirectFlashMessages() {
-  // Cerca elementi con messaggi di successo diretti
-  const successMessages = document.querySelectorAll('[data-success-message], .success-message');
-      successMessages.forEach(element => {
-      const message = element.textContent?.trim() || element.getAttribute('data-success-message');
-      if (message && message.length > 0 && message.length < 200) {
-        if (window.showSuccessToast) {
-          window.showSuccessToast(message);
-        }
-        element.style.display = 'none';
-      }
-    });
-
-  // Cerca elementi con messaggi di errore diretti
-  const errorMessages = document.querySelectorAll('[data-error-message], .error-message');
-      errorMessages.forEach(element => {
-      const message = element.textContent?.trim() || element.getAttribute('data-error-message');
-      if (message && message.length > 0 && message.length < 200) {
-        if (window.showErrorToast) {
-          window.showErrorToast(message);
-        }
-        element.style.display = 'none';
-      }
-    });
-
-  // Cerca anche messaggi flash standard del server
-  const flashSuccess = document.querySelector('.bg-green-50, .bg-green-500');
-  if (flashSuccess) {
-    const message = flashSuccess.textContent?.trim();
-    if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
-      if (window.showSuccessToast) {
-        window.showSuccessToast(message);
-      }
-      flashSuccess.style.display = 'none';
-    }
-  }
-
-  const flashError = document.querySelector('.bg-red-50, .bg-red-500');
-  if (flashError) {
-    const message = flashError.textContent?.trim();
-    if (message && message.length > 0 && message.length < 200 && !message.includes('Dismiss')) {
-      if (window.showErrorToast) {
-        window.showErrorToast(message);
-      }
-      flashError.style.display = 'none';
-    }
-  }
 }
 
 // Esegui le funzioni quando il DOM è caricato

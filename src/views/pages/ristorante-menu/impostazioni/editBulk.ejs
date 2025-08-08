@@ -44,15 +44,30 @@
           </div>
         </div>
         
-        <%- include('../../../ui/forms/simpleGenericForm', { ...formConfig, isBulkEdit: true }) %>
+        <%- include('../../../ui/forms/simpleGenericForm', { 
+          ...formConfig, 
+          isBulkEdit: true,
+          selectedItemsData: selectedItems 
+        }) %>
       </div>
     </div>
   </div>
 </div>
 
 <%
-  // Definisci gli script per questa pagina
-  pageScripts = `
-    <script src="/js/bulkEditForm.js"></script>
-  `;
-%> 
+  // La gestione dei form è ora centralizzata in formManager.js
+  // Non sono necessari script aggiuntivi
+%>
+
+<script>
+// Passa la configurazione bulk edit al FormManager
+window.formConfig = {
+  isBulkEdit: true,
+  requireAtLeastOneField: <%= formConfig.bulkEditConfig?.requireAtLeastOneField || false %>,
+  allowPartialUpdates: <%= formConfig.bulkEditConfig?.allowPartialUpdates || false %>,
+  config: {
+    requireAtLeastOneField: <%= formConfig.bulkEditConfig?.requireAtLeastOneField || false %>,
+    allowPartialUpdates: <%= formConfig.bulkEditConfig?.allowPartialUpdates || false %>
+  }
+};
+</script> 

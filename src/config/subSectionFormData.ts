@@ -4,7 +4,7 @@ import { FormDataSchema } from "./sectionFormSchema";
 export const allergeneFormData: FormDataSchema = {
   formConfig: {
     method: 'POST',
-    action: '/ristorante-menu/impostazioni/allergeni/nuovo',
+    action: '/ristorante-menu/impostazioni/allergeni/nuovo/ajax', // Route AJAX
     id: 'allergeneForm',
     novalidate: true
   },
@@ -16,7 +16,8 @@ export const allergeneFormData: FormDataSchema = {
       label: 'Nome Allergene',
       required: true,
       placeholder: 'Glutine',
-      errorMessage: 'Il nome dell\'allergene è obbligatorio'
+      errorMessage: 'Il nome dell\'allergene è obbligatorio',
+      bulkEditable: false // Il nome non è modificabile in massa
     },
     {
       type: 'textarea',
@@ -25,7 +26,8 @@ export const allergeneFormData: FormDataSchema = {
       label: 'Descrizione',
       required: false,
       placeholder: 'Descrizione dell\'allergene (opzionale)',
-      errorMessage: 'La descrizione non può superare i 500 caratteri'
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false // Gli allergeni non hanno campi modificabili in massa
     }
   ],
   buttons: {
@@ -44,8 +46,8 @@ export const allergeneFormData: FormDataSchema = {
       formConfig: {
         ...data.formConfig,
         action: isEdit 
-          ? `/ristorante-menu/impostazioni/allergeni/modifica/${item?.id}` 
-          : '/ristorante-menu/impostazioni/allergeni/nuovo'
+          ? `/ristorante-menu/impostazioni/allergeni/modifica/${item?.id}/ajax` // Route AJAX
+          : '/ristorante-menu/impostazioni/allergeni/nuovo/ajax' // Route AJAX
       },
       fields: data.fields.map((field: any) => {
         let value = '';
@@ -79,7 +81,7 @@ export const allergeneFormData: FormDataSchema = {
 export const categoriaMenuFissoFormData: FormDataSchema = {
   formConfig: {
     method: 'POST',
-    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo/ajax', // Route AJAX
     id: 'categoriaMenuFissoForm',
     novalidate: true
   },
@@ -91,7 +93,8 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
       label: 'Nome Categoria',
       required: true,
       placeholder: 'Antipasti',
-      errorMessage: 'Il nome della categoria è obbligatorio'
+      errorMessage: 'Il nome della categoria è obbligatorio',
+      bulkEditable: false // Il nome non è modificabile in massa
     },
     {
       type: 'textarea',
@@ -100,19 +103,21 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
       label: 'Descrizione',
       required: false,
       placeholder: 'Descrizione della categoria (opzionale)',
-      errorMessage: 'La descrizione non può superare i 500 caratteri'
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false // La descrizione non è modificabile in massa
     },
     {
       type: 'toggle',
       name: 'inLista',
       id: 'inLista',
-      label: 'In lista',
+      label: 'In Lista',
       required: false,
-      defaultValue: true,
+      description: 'Mostra questa categoria nella lista del menu',
+      value: true,
       bulkEditable: true,
-      bulkLabel: 'Imposta stato per tutte le categorie selezionate',
-      bulkHelpText: 'Questo stato verrà applicato a tutte le categorie selezionate.',
-      bulkRequired: false
+      bulkLabel: 'Stato In Lista',
+      bulkDescription: 'Imposta lo stato "In Lista" per tutte le categorie selezionate',
+      bulkHelpText: 'Seleziona per mostrare le categorie nella lista del menu'
     }
   ],
   buttons: {
@@ -126,17 +131,6 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  bulkEditConfig: {
-    title: 'Modifica Massiva Categorie Menu Fisso',
-    description: 'Modifica i campi selezionati per tutte le categorie scelte.',
-    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
-    method: 'POST',
-    endpoint: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
-    successMessage: 'Aggiornate {count} categorie con successo',
-    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
-    requireAtLeastOneField: true,
-    allowPartialUpdates: true
-  },
   getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
@@ -144,8 +138,8 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         action: isBulkEdit 
           ? data.bulkEditConfig.action 
           : isEdit 
-            ? `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${item?.id}` 
-            : '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo',
+            ? `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${item?.id}/ajax` // Route AJAX
+            : '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo/ajax', // Route AJAX
         method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
         hiddenFields: isBulkEdit && selectedItems ? [
           {
@@ -155,62 +149,41 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map((field: any) => {
-        let value: any = '';
+        let value = '';
         
-        if (formData && formData[field.name] !== undefined) {
+        // Determina il valore del campo
+        if (formData && formData[field.name]) {
           value = formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
-          value = item[field.name] !== undefined ? item[field.name] : '';
-        } else if (!isEdit && !isBulkEdit && field.defaultValue !== undefined) {
-          // Per i campi toggle, usa il valore di default se non è in modalità edit
-          value = field.defaultValue;
-        } else if (!isEdit && !isBulkEdit && field.name === 'inLista') {
-          // Assicurati che inLista sia sempre true per nuove categorie
-          value = true;
+          value = item[field.name] || '';
         }
         
+        // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
           return null;
         }
         
+        // Per la modifica massiva, usa configurazione specifica
         if (isBulkEdit && field.bulkEditable) {
-          // Calcola il valore iniziale per i campi toggle nella modifica massiva
-          let initialValue: any = '';
-          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
-            const values = selectedItems.map(item => item[field.name]);
-            const allTrue = values.every(val => val === true || val === 'true' || val === 'on');
-            const allFalse = values.every(val => val === false || val === 'false' || val === '' || val === null || val === undefined);
-            
-            if (allTrue) {
-              initialValue = true;
-            } else if (allFalse) {
-              initialValue = false;
-            } else {
-              // Stato misto - indeterminate
-              initialValue = 'indeterminate';
-            }
-          }
-          
           return {
             ...field,
             label: field.bulkLabel || field.label,
-            description: field.bulkDescription || field.description,
             placeholder: field.bulkPlaceholder || field.placeholder,
             required: field.bulkRequired || false,
-            value: initialValue
+            value: ''
           };
         }
         
         return { ...field, value };
-      }).filter((field: any) => field !== null),
+      }).filter(field => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
           ...data.buttons.submit,
           text: isBulkEdit 
-            ? 'Modifica' 
+            ? `Aggiorna ${selectedItems?.length || 0} categorie` 
             : isEdit 
-              ? 'Modifica' 
+              ? 'Aggiorna' 
               : 'Salva'
         },
         cancel: {
@@ -223,6 +196,17 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         }
       }
     };
+  },
+  bulkEditConfig: {
+    title: 'Modifica Massiva Categorie Menu Fisso',
+    description: 'Modifica lo stato delle categorie selezionate',
+    action: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa',
+    successMessage: 'Aggiornate {count} categorie con successo',
+    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
   }
 };
 
@@ -230,7 +214,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
 export const categoriaPiattiFormData: FormDataSchema = {
   formConfig: {
     method: 'POST',
-    action: '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+    action: '/ristorante-menu/impostazioni/categoria-piatti/nuovo/ajax', // Route AJAX
     id: 'categoriaPiattiForm',
     novalidate: true
   },
@@ -242,7 +226,8 @@ export const categoriaPiattiFormData: FormDataSchema = {
       label: 'Nome Categoria',
       required: true,
       placeholder: 'Primi Piatti',
-      errorMessage: 'Il nome della categoria è obbligatorio'
+      errorMessage: 'Il nome della categoria è obbligatorio',
+      bulkEditable: false // Il nome non è modificabile in massa
     },
     {
       type: 'textarea',
@@ -251,19 +236,21 @@ export const categoriaPiattiFormData: FormDataSchema = {
       label: 'Descrizione',
       required: false,
       placeholder: 'Descrizione della categoria (opzionale)',
-      errorMessage: 'La descrizione non può superare i 500 caratteri'
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false // La descrizione non è modificabile in massa
     },
     {
       type: 'toggle',
       name: 'inLista',
       id: 'inLista',
-      label: 'In lista',
+      label: 'In Lista',
       required: false,
-      defaultValue: true,
+      description: 'Mostra questa categoria nella lista del menu',
+      value: true,
       bulkEditable: true,
-      bulkLabel: 'Imposta stato per tutte le categorie selezionate',
-      bulkHelpText: 'Questo stato verrà applicato a tutte le categorie selezionate.',
-      bulkRequired: false
+      bulkLabel: 'Stato In Lista',
+      bulkDescription: 'Imposta lo stato "In Lista" per tutte le categorie selezionate',
+      bulkHelpText: 'Seleziona per mostrare le categorie nella lista del menu'
     }
   ],
   buttons: {
@@ -277,17 +264,6 @@ export const categoriaPiattiFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  bulkEditConfig: {
-    title: 'Modifica Massiva Categorie Piatti',
-    description: 'Modifica i campi selezionati per tutte le categorie scelte.',
-    action: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
-    method: 'POST',
-    endpoint: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
-    successMessage: 'Aggiornate {count} categorie con successo',
-    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
-    requireAtLeastOneField: true,
-    allowPartialUpdates: true
-  },
   getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
@@ -295,8 +271,8 @@ export const categoriaPiattiFormData: FormDataSchema = {
         action: isBulkEdit 
           ? data.bulkEditConfig.action 
           : isEdit 
-            ? `/ristorante-menu/impostazioni/categoria-piatti/modifica/${item?.id}` 
-            : '/ristorante-menu/impostazioni/categoria-piatti/nuovo',
+            ? `/ristorante-menu/impostazioni/categoria-piatti/modifica/${item?.id}/ajax` // Route AJAX
+            : '/ristorante-menu/impostazioni/categoria-piatti/nuovo/ajax', // Route AJAX
         method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
         hiddenFields: isBulkEdit && selectedItems ? [
           {
@@ -306,62 +282,41 @@ export const categoriaPiattiFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map((field: any) => {
-        let value: any = '';
+        let value = '';
         
-        if (formData && formData[field.name] !== undefined) {
+        // Determina il valore del campo
+        if (formData && formData[field.name]) {
           value = formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
-          value = item[field.name] !== undefined ? item[field.name] : '';
-        } else if (!isEdit && !isBulkEdit && field.defaultValue !== undefined) {
-          // Per i campi toggle, usa il valore di default se non è in modalità edit
-          value = field.defaultValue;
-        } else if (!isEdit && !isBulkEdit && field.name === 'inLista') {
-          // Assicurati che inLista sia sempre true per nuove categorie
-          value = true;
+          value = item[field.name] || '';
         }
         
+        // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
           return null;
         }
         
+        // Per la modifica massiva, usa configurazione specifica
         if (isBulkEdit && field.bulkEditable) {
-          // Calcola il valore iniziale per i campi toggle nella modifica massiva
-          let initialValue: any = '';
-          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
-            const values = selectedItems.map(item => item[field.name]);
-            const allTrue = values.every(val => val === true || val === 'true' || val === 'on');
-            const allFalse = values.every(val => val === false || val === 'false' || val === '' || val === null || val === undefined);
-            
-            if (allTrue) {
-              initialValue = true;
-            } else if (allFalse) {
-              initialValue = false;
-            } else {
-              // Stato misto - indeterminate
-              initialValue = 'indeterminate';
-            }
-          }
-          
           return {
             ...field,
             label: field.bulkLabel || field.label,
-            description: field.bulkDescription || field.description,
             placeholder: field.bulkPlaceholder || field.placeholder,
             required: field.bulkRequired || false,
-            value: initialValue
+            value: ''
           };
         }
         
         return { ...field, value };
-      }).filter((field: any) => field !== null),
+      }).filter(field => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
           ...data.buttons.submit,
           text: isBulkEdit 
-            ? 'Modifica' 
+            ? `Aggiorna ${selectedItems?.length || 0} categorie` 
             : isEdit 
-              ? 'Modifica' 
+              ? 'Aggiorna' 
               : 'Salva'
         },
         cancel: {
@@ -374,5 +329,16 @@ export const categoriaPiattiFormData: FormDataSchema = {
         }
       }
     };
+  },
+  bulkEditConfig: {
+    title: 'Modifica Massiva Categorie Piatti',
+    description: 'Modifica lo stato delle categorie selezionate',
+    action: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/categoria-piatti/modifica-massa',
+    successMessage: 'Aggiornate {count} categorie con successo',
+    errorMessage: 'Errore durante l\'aggiornamento delle categorie',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
   }
 }; 
