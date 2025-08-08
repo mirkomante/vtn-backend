@@ -1,5 +1,3 @@
-console.log('selectableTable.js: Script caricato');
-
 // Funzione di utilità per mostrare toast in modo coerente
 function showToastLocal(message, type = 'info') {
   if (window.showToast) {
@@ -45,6 +43,12 @@ function showInfoToastLocal(message) {
 function initializeSelectableTable(tableId, config) {
   const table = document.getElementById(tableId);
   if (!table) {
+    return;
+  }
+  
+  // Controllo di sicurezza per config
+  if (!config) {
+    console.warn('selectableTable.js: Configurazione mancante per tabella', tableId);
     return;
   }
 
@@ -414,6 +418,11 @@ function initializeSelectableTable(tableId, config) {
 
 // Inizializzazione quando il DOM è caricato
 document.addEventListener('DOMContentLoaded', function() {
+  initializeTables();
+});
+
+// Funzione per inizializzare le tabelle
+function initializeTables() {
   // Cerca tutte le tabelle con ID che terminano con '-table'
   const tables = document.querySelectorAll('table[id$="-table"]');
   
@@ -424,8 +433,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const configKey = tableId + '-config';
     const config = window[configKey];
     
-    if (config) {
+    if (config && typeof config === 'object') {
       initializeSelectableTable(tableId, config);
+    } else {
+      console.warn('selectableTable.js: Configurazione non valida per tabella', tableId, config);
     }
   });
   
@@ -434,16 +445,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const configKeys = Object.keys(window).filter(key => key.endsWith('-config'));
     
     if (configKeys.length > 0) {
-      setTimeout(() => {
-        const retryTables = document.querySelectorAll('table[id$="-table"]');
-        retryTables.forEach(table => {
-          const tableId = table.id;
-          const config = window[tableId + '-config'];
-          if (config) {
-            initializeSelectableTable(tableId, config);
-          }
-        });
-      }, 100);
+      setTimeout(initializeTables, 100);
     }
   }
-}); 
+  
+  // Retry per tabelle che non hanno ancora configurazione
+  const tablesWithoutConfig = Array.from(tables).filter(table => {
+    const tableId = table.id;
+    const config = window[tableId + '-config'];
+    return !config;
+  });
+  
+  if (tablesWithoutConfig.length > 0) {
+    setTimeout(initializeTables, 200);
+  }
+  
+  // Fallback aggiuntivo: se ci sono tabelle ma non hanno configurazione, riprova dopo un delay più lungo
+  setTimeout(() => {
+    const allTables = document.querySelectorAll('table[id$="-table"]');
+    allTables.forEach(table => {
+      const tableId = table.id;
+      const config = window[tableId + '-config'];
+      if (config && typeof config === 'object') {
+        // Se la configurazione è ora disponibile, inizializza la tabella
+        initializeSelectableTable(tableId, config);
+      } else {
+        console.warn('selectableTable.js: Configurazione mancante per tabella', tableId, 'al retry');
+      }
+    });
+  }, 500);
+} 

@@ -9,7 +9,7 @@ class FormManager {
       radioSelector: 'input[type="radio"]',
       submitButtonSelector: 'button[type="submit"]',
       useAjax: true, // Uniforma tutto ad AJAX
-      debug: true, // Abilita console.log per testing
+      debug: false, // Disabilita console.log per produzione
       ...options
     };
     

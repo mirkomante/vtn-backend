@@ -57,8 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 1000);
   
-  // Test accesso diretto ai file
-  console.log('[TEST] Verifica accesso diretto ai file:');
+  // Test accesso diretto ai file (silenzioso)
   const testFiles = [
     '/js/toast.js',
     '/js/sidebar.js', 
@@ -70,14 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
   testFiles.forEach(file => {
     fetch(file)
       .then(response => {
-        if (response.ok) {
-          console.log(`✅ ${file} accessibile`);
-        } else {
-          console.log(`❌ ${file} non accessibile (${response.status})`);
+        if (!response.ok) {
+          console.warn(`⚠️ ${file} non accessibile (${response.status})`);
         }
       })
       .catch(error => {
-        console.log(`❌ ${file} errore:`, error);
+        console.warn(`⚠️ ${file} errore:`, error);
       });
   });
 });

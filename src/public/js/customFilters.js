@@ -3,15 +3,11 @@
  */
 (function() {
   function initCustomSelects() {
-    console.log('Inizializzazione select custom...');
-    
     // Gestione delle select custom
     const selectButtons = document.querySelectorAll('[id$="-button"]');
-    console.log('Trovati', selectButtons.length, 'pulsanti select');
     
     // Se non ci sono select custom, esci silenziosamente
     if (selectButtons.length === 0) {
-      console.log('Nessuna select custom trovata, uscendo...');
       return;
     }
     
@@ -21,10 +17,7 @@
       const optionsList = document.getElementById(selectId + '-options');
       const selectedSpan = document.getElementById(selectId + '-selected');
       
-      console.log('Configurando select:', selectId, { select, optionsList, selectedSpan });
-      
       if (!select || !optionsList || !selectedSpan) {
-        console.warn('Elementi mancanti per select:', selectId);
         return;
       }
       
@@ -32,7 +25,6 @@
       button.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Click su pulsante select:', selectId);
         
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         
@@ -49,11 +41,9 @@
         
         // Toggle corrente
         if (isExpanded) {
-          console.log('Chiudendo dropdown:', selectId);
           optionsList.classList.add('hidden');
           button.setAttribute('aria-expanded', 'false');
         } else {
-          console.log('Aprendo dropdown:', selectId);
           optionsList.classList.remove('hidden');
           button.setAttribute('aria-expanded', 'true');
         }
@@ -68,8 +58,6 @@
           
           const value = this.getAttribute('data-value');
           const label = this.querySelector('span').textContent;
-          
-          console.log('Selezionata opzione:', value, label);
           
           // Aggiorna select nascosta
           select.value = value;
@@ -115,7 +103,6 @@
           button.setAttribute('aria-expanded', 'false');
           
           // Applica filtro automaticamente per tutte le opzioni (incluso valore vuoto)
-          console.log('Applicando filtro automatico per:', value);
           setTimeout(() => {
             const form = document.getElementById('filter-form');
             if (form) {
