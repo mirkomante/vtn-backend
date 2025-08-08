@@ -19,6 +19,7 @@ import {
   categoriaPiattiFormData 
 } from '../config/subSectionFormData';
 import { createSubSectionActionNav } from '../config/actionNavConfig';
+import { scriptManager } from '../config/scriptManager';
 
 const prisma = new PrismaClient();
 
@@ -39,7 +40,8 @@ router.get('/', (req, res) => {
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionIcons,
-    currentPath
+    currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard')
   });
 });
 
@@ -56,6 +58,7 @@ router.get('/menu-fissi', (req, res) => {
     sectionMenu,
     sectionIcons,
     currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard'),
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' }
@@ -75,6 +78,7 @@ router.get('/piatti', (req, res) => {
     sectionMenu,
     sectionIcons,
     currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard'),
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Piatti', href: '/ristorante-menu/piatti' }
@@ -94,6 +98,7 @@ router.get('/servizi', (req, res) => {
     sectionMenu,
     sectionIcons,
     currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard'),
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Servizi', href: '/ristorante-menu/servizi' }
@@ -168,7 +173,9 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       ],
       successMessage,
       errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
       tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig,
       isInternalPage: false,
       ...config
@@ -222,7 +229,9 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       ],
       successMessage,
       errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
       tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig,
       isInternalPage: false,
       ...config
@@ -276,7 +285,9 @@ router.get('/impostazioni/allergeni', async (req, res) => {
       ],
       successMessage,
       errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
       tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig, 
       isInternalPage: false,
       ...config
@@ -311,6 +322,7 @@ router.get('/impostazioni/allergeni/nuovo', (req, res) => {
     itemType: 'Allergene',
     backUrl: '/ristorante-menu/impostazioni/allergeni',
     actionNavConfig, // Passa la configurazione actionNav
+    scripts: scriptManager.getScriptsForPage('form'),
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -756,6 +768,7 @@ router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
     itemType: 'Categoria Menu Fisso',
     backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
     actionNavConfig,
+    scripts: scriptManager.getScriptsForPage('form'),
     isInternalPage: true,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -793,6 +806,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
         itemType: 'Categoria Menu Fisso',
         backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
         actionNavConfig,
+        scripts: scriptManager.getScriptsForPage('form'),
         isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -834,6 +848,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -881,6 +896,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -947,6 +963,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1024,6 +1041,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
           actionNavConfig,
+          scripts: scriptManager.getScriptsForPage('form'),
           isInternalPage: true,
           item: existingCategoria,
           formConfig,
@@ -1078,6 +1096,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
       formConfig,
       itemType: 'Categoria Menu Fisso',
       detailUrl: existingCategoria ? `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoriaId}` : undefined,
+      scripts: scriptManager.getScriptsForPage('form'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -1136,6 +1155,8 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('bulkEdit'),
+      bulkEditConfigScript: scriptManager.getBulkEditConfigScript(formConfig),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1329,6 +1350,7 @@ router.get('/impostazioni/categoria-piatti/nuovo', (req, res) => {
     itemType: 'Categoria Piatti',
     backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
     actionNavConfig,
+    scripts: scriptManager.getScriptsForPage('form'),
     isInternalPage: true,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1366,6 +1388,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
         itemType: 'Categoria Piatti',
         backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
         actionNavConfig,
+        scripts: scriptManager.getScriptsForPage('form'),
         isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1407,12 +1430,12 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
         { label: 'Categoria Piatti', href: '/ristorante-menu/impostazioni/categoria-piatti' },
-        { label: 'Nuova Categoria', href: '/ristorante-menu/impostazioni/categoria-piatti/nuovo' }
       ],
       error: 'Si è verificato un errore durante la creazione della categoria'
     });
@@ -1454,6 +1477,7 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1522,6 +1546,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1719,6 +1744,8 @@ router.get('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => 
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('bulkEdit'),
+      bulkEditConfigScript: scriptManager.getBulkEditConfigScript(formConfig),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1944,6 +1971,7 @@ router.get('/cancellati', async (req, res) => {
       isFilteredEmpty,
       currentTypeFilter: typeFilter,
       tableData: elementiCancellatiTableData,
+      scripts: scriptManager.getScriptsForPage('table'),
       tableConfigJson: JSON.stringify({
         tableId: 'deleted-items-table',
         idField: 'id',
@@ -1976,6 +2004,7 @@ router.get('/cancellati', async (req, res) => {
         disableClickableNames: true,
         tableData: elementiCancellatiTableData
       }),
+      tableInitScript: scriptManager.getTableInitScript('deleted-items-table'),
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(filteredCount / limit),

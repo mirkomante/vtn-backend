@@ -58,22 +58,8 @@
     </main>
   </div>
 
-  <% if (typeof pageScripts !== 'undefined') { %>
-    <%- pageScripts %>
-  <% } %>
-  <script src="/js/toast.js"></script>
-  <script src="/js/formManager.js"></script>
-  <script src="/js/sidebar.js"></script>
-  <script src="/js/selectableTable.js"></script>
-  <script src="/js/customFilters.js"></script>
-  
-  <!-- Definisci la configurazione della tabella se disponibile -->
-  <% if (typeof tableConfigJson !== 'undefined') { %>
-    <script>
-      const tableConfig = <%- tableConfigJson %>;
-      window[tableConfig.tableId + '-config'] = tableConfig;
-    </script>
-  <% } %>
+  <!-- Scripts centralizzati -->
+  <%- include('../partials/scripts') %>
 </body>
 </html>
   

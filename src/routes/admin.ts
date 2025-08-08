@@ -7,6 +7,7 @@ import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
 import { userFormData } from '../config/sectionFormData';
+import { scriptManager } from '../config/scriptManager';
 
 const router = express.Router();
 
@@ -49,6 +50,29 @@ router.get('/utenti', async (req, res) => {
       }
     });
 
+    const tableConfig = {
+      tableId: 'users-table',
+      idField: 'id',
+      labelField: 'givenName',
+      detailUrl: '/admin/utenti/dettagli/:id',
+      editUrl: '/admin/utenti/modifica/:id',
+      bulkEditUrl: '/admin/utenti/modifica-massa',
+      editMultipleButton: {
+        text: 'Modifica'
+      },
+      actionButton: {
+        text: 'Elimina',
+        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      },
+      endpoint: '/admin/utenti',
+      method: 'DELETE',
+      confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
+      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
+      successMessage: 'Eliminati {count} utente/i con successo',
+      errorMessage: 'Errore durante l\'eliminazione',
+      disableClickableNames: false
+    };
+
     res.render('pages/users/index', {
       title: 'Utenti',
       layout: 'layouts/sections',
@@ -61,28 +85,9 @@ router.get('/utenti', async (req, res) => {
       hasUsers: users.length > 0,
       successMessage: req.query.success ? decodeURIComponent(req.query.success as string) : undefined,
       errorMessage: req.query.error ? decodeURIComponent(req.query.error as string) : undefined,
-      tableConfigJson: JSON.stringify({
-        tableId: 'users-table',
-        idField: 'id',
-        labelField: 'givenName',
-        detailUrl: '/admin/utenti/dettagli/:id',
-        editUrl: '/admin/utenti/modifica/:id',
-        bulkEditUrl: '/admin/utenti/modifica-massa',
-        editMultipleButton: {
-          text: 'Modifica'
-        },
-        actionButton: {
-          text: 'Elimina',
-          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
-        },
-        endpoint: '/admin/utenti',
-        method: 'DELETE',
-        confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
-        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
-        successMessage: 'Eliminati {count} utente/i con successo',
-        errorMessage: 'Errore durante l\'eliminazione',
-        disableClickableNames: false
-      }),
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(tableConfig),
+      tableInitScript: scriptManager.getTableInitScript('users-table'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' }
@@ -127,6 +132,7 @@ router.get('/utenti/nuovo', (req, res) => {
     sectionIcons,
     currentPath,
     formConfig,
+    scripts: scriptManager.getScriptsForPage('form'),
     breadcrumbs: [
       { label: 'Admin', href: '/admin' },
       { label: 'Utenti', href: '/admin/utenti' },
@@ -239,6 +245,7 @@ router.get('/utenti/dettagli/:id', async (req, res) => {
       sectionIcons,
       currentPath,
       user,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
@@ -308,6 +315,8 @@ router.get('/utenti/modifica-massa', async (req, res) => {
       currentPath,
       selectedUsers,
       formConfig,
+      scripts: scriptManager.getScriptsForPage('bulkEdit'),
+      bulkEditConfigScript: scriptManager.getBulkEditConfigScript(formConfig),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
@@ -445,6 +454,7 @@ router.get('/utenti/modifica/:id', async (req, res) => {
       currentPath,
       user,
       formConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },

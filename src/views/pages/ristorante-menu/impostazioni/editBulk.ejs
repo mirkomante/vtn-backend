@@ -54,20 +54,4 @@
   </div>
 </div>
 
-<%
-  // La gestione dei form è ora centralizzata in formManager.js
-  // Non sono necessari script aggiuntivi
-%>
-
-<script>
-// Passa la configurazione bulk edit al FormManager
-window.formConfig = {
-  isBulkEdit: true,
-  requireAtLeastOneField: <%= formConfig.bulkEditConfig?.requireAtLeastOneField || false %>,
-  allowPartialUpdates: <%= formConfig.bulkEditConfig?.allowPartialUpdates || false %>,
-  config: {
-    requireAtLeastOneField: <%= formConfig.bulkEditConfig?.requireAtLeastOneField || false %>,
-    allowPartialUpdates: <%= formConfig.bulkEditConfig?.allowPartialUpdates || false %>
-  }
-};
-</script> 
+<!-- Gli script sono ora gestiti centralmente dal layout --> 

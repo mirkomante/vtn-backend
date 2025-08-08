@@ -54,7 +54,6 @@ app.set('views', path.join(__dirname, 'views'));
 // Configurazione Layout
 app.use(expressLayouts);
 app.set('layout', 'layouts/default');
-app.set('layout extractScripts', true);
 app.set('layout extractStyles', true);
 
 // Middleware
