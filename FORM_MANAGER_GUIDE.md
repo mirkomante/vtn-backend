@@ -2,7 +2,7 @@
 
 ## Panoramica
 
-Il `FormManager` è un sistema unificato per la gestione di tutti i form nell'applicazione. Sostituisce i vecchi script `genericForm.js`, `subSectionForm.js` e `bulkEditForm.js` con una soluzione più efficiente e scalabile.
+Il `FormManager` è un sistema unificato per la gestione di tutti i form nell'applicazione. Sostituisce i vecchi script separati con una soluzione più efficiente e scalabile.
 
 ## Caratteristiche Principali
 
@@ -149,21 +149,20 @@ document.addEventListener('formSubmitted', (e) => {
 ## Migrazione dai Vecchi Script
 
 ### Cosa Rimuovere
-- ❌ `genericForm.js`
-- ❌ `subSectionForm.js` 
-- ❌ `bulkEditForm.js`
-- ❌ Script personalizzati nelle pagine
+- ❌ Script personalizzati nelle pagine (già rimossi)
+- ❌ Riferimenti ai vecchi script nei template
 
 ### Cosa Mantenere
 - ✅ `toast.js` (migliorato)
-- ✅ `formManager.js` (nuovo)
+- ✅ `formManager.js` (sistema unificato)
 - ✅ Configurazioni in `sectionFormData.ts`
 
 ### Passi per la Migrazione
 1. ✅ Aggiunto `formManager.js` al layout
 2. ✅ Rimossi script personalizzati dalle pagine
-3. ✅ Aggiornato `toast.js` per evitare messaggi non correlati
-4. ✅ Creato `ajaxRoutes.ts` per configurazione centralizzata
+3. ✅ Eliminati file JavaScript obsoleti
+4. ✅ Aggiornato `toast.js` per evitare messaggi non correlati
+5. ✅ Creato `ajaxRoutes.ts` per configurazione centralizzata
 
 ## Vantaggi del Nuovo Sistema
 

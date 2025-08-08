@@ -93,7 +93,7 @@ Questo documento definisce i messaggi standardizzati per garantire coerenza e pr
    - `src/config/actionNavConfig.ts`
 
 3. **JavaScript Files**:
-   - `src/public/js/bulkEditForm.js`
+   - `src/public/js/formManager.js`
    - `src/public/js/selectableTable.js`
 
 ### Esempi di Utilizzo

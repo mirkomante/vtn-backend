@@ -54,18 +54,14 @@ showToast('Messaggio personalizzato', 'info', 3000);
 
 ## Integrazione nei Form
 
-### Form di Modifica Singola (edit.ejs)
-- Utilizza `subSectionForm.js` o `userForm.js`
+### Form Unificati (FormManager)
+- Tutti i form utilizzano `formManager.js`
 - Mostra toast di errore per validazione
 - Mostra toast di successo dopo il salvataggio
-
-### Form di Creazione (new.ejs)
-- Utilizza `subSectionForm.js`, `userForm.js` o `genericForm.js`
-- Mostra toast di errore per validazione
-- Mostra toast di successo dopo il salvataggio
+- Gestione automatica di form normali e bulk edit
 
 ### Form di Modifica Massiva (editBulk.ejs)
-- Utilizza `bulkEditForm.js`
+- Gestiti automaticamente dal FormManager
 - Mostra toast di errore per validazione
 - Mostra toast di successo dopo il salvataggio
 - Reindirizza automaticamente dopo 2 secondi
@@ -94,9 +90,6 @@ Il sistema è compatibile con:
 ## File Coinvolti
 
 - `src/public/js/toast.js` - Sistema principale dei toast
-- `src/public/js/bulkEditForm.js` - Integrazione per modifica massiva
-- `src/public/js/subSectionForm.js` - Integrazione per form sottosezioni
-- `src/public/js/userForm.js` - Integrazione per form utenti
-- `src/public/js/genericForm.js` - Integrazione per form generici
+- `src/public/js/formManager.js` - Integrazione per tutti i form
 - `src/public/js/selectableTable.js` - Integrazione per azioni bulk
 - `src/views/layouts/main.ejs` - Inclusione globale del sistema
