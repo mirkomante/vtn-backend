@@ -16,13 +16,14 @@ const commonScripts = [
 const conditionalScripts: Record<string, string> = {
   'formManager': '/js/formManager.js',
   'selectableTable': '/js/selectableTable.js',
-  'customFilters': '/js/customFilters.js'
+  'customFilters': '/js/customFilters.js',
+  'pagination': '/js/pagination.js'
 };
 
 // Script specifici per tipo di pagina
 const pageSpecificScripts: Record<string, string[]> = {
   'form': ['formManager'],
-  'table': ['selectableTable', 'customFilters'],
+  'table': ['selectableTable', 'customFilters', 'pagination'],
   'bulkEdit': ['formManager'],
   'dashboard': []
 };

@@ -20,6 +20,7 @@ import {
 } from '../config/subSectionFormData';
 import { createSubSectionActionNav } from '../config/actionNavConfig';
 import { scriptManager } from '../config/scriptManager';
+import { getPaginationParams, calculatePagination } from '../config/paginationHelper';
 
 const prisma = new PrismaClient();
 
@@ -136,18 +137,37 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
     let sectionMenu = ristoranteMenuItems;
     let sectionTabs = ristoranteMenuImpostazioniSubItems;
     
-    // Recuperare le categorie menu fisso dal database (escludendo quelle cancellate)
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.categoriaMenuFisso.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recuperare le categorie menu fisso dal database con paginazione
     const categorieMenuFisso = await prisma.categoriaMenuFisso.findMany({
       where: {
         deletedAt: null
       },
       orderBy: {
         nome: 'asc'
-      }
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
     });
     
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
     const config = { ...categoriaMenuFissoConfig };
-    config.hasItems = categorieMenuFisso.length > 0;
+    config.hasItems = totalItems > 0;
     config.items = categorieMenuFisso;
     
     // Gestire messaggi di successo/errore
@@ -178,11 +198,76 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig,
       isInternalPage: false,
+      pagination,
       ...config
     });
   } catch (error) {
     console.error('Errore nel recupero delle categorie menu fisso:', error);
     res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per paginazione categoria menu fisso
+router.get('/impostazioni/categoria-menu-fisso/ajax', async (req, res) => {
+  try {
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.categoriaMenuFisso.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recuperare le categorie menu fisso dal database con paginazione
+    const categorieMenuFisso = await prisma.categoriaMenuFisso.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+    
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
+    const config = { ...categoriaMenuFissoConfig };
+    config.hasItems = totalItems > 0;
+    config.items = categorieMenuFisso;
+
+    // Renderizza solo la tabella e la paginazione per AJAX
+    const tableHtml = await res.app.render('ui/tables/tableContent', {
+      tableId: config.tableConfig.tableId,
+      tableData: config.tableData,
+      items: categorieMenuFisso,
+      tableConfig: config.tableConfig
+    });
+
+    const paginationHtml = await res.app.render('ui/tables/paginationContent', {
+      pagination
+    });
+
+    res.json({
+      success: true,
+      data: categorieMenuFisso,
+      pagination,
+      tableHtml,
+      paginationHtml
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie menu fisso (AJAX):', error);
+    res.status(500).json({
+      success: false,
+      message: 'Errore interno del server'
+    });
   }
 });
 
@@ -192,18 +277,37 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
     let sectionMenu = ristoranteMenuItems;
     let sectionTabs = ristoranteMenuImpostazioniSubItems;
     
-    // Recuperare le categorie piatti dal database (escludendo quelle cancellate)
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.categoriaPiatti.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recuperare le categorie piatti dal database con paginazione
     const categoriePiatti = await prisma.categoriaPiatti.findMany({
       where: {
         deletedAt: null
       },
       orderBy: {
         nome: 'asc'
-      }
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
     });
     
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
     const config = { ...categoriaPiattiConfig };
-    config.hasItems = categoriePiatti.length > 0;
+    config.hasItems = totalItems > 0;
     config.items = categoriePiatti;
     
     // Gestire messaggi di successo/errore
@@ -234,6 +338,7 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig,
       isInternalPage: false,
+      pagination,
       ...config
     });
   } catch (error) {
@@ -248,18 +353,37 @@ router.get('/impostazioni/allergeni', async (req, res) => {
     let sectionMenu = ristoranteMenuItems;
     let sectionTabs = ristoranteMenuImpostazioniSubItems;
     
-    // Recuperare gli allergeni dal database (escludendo quelli cancellati)
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.allergene.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recuperare gli allergeni dal database con paginazione
     const allergeni = await prisma.allergene.findMany({
       where: {
         deletedAt: null
       },
       orderBy: {
         nome: 'asc'
-      }
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
     });
     
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
     const config = { ...allergeniConfig };
-    config.hasItems = allergeni.length > 0;
+    config.hasItems = totalItems > 0;
     config.items = allergeni;
     
     // Gestire messaggi di successo/errore
@@ -290,6 +414,7 @@ router.get('/impostazioni/allergeni', async (req, res) => {
       tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
       actionNavConfig, 
       isInternalPage: false,
+      pagination,
       ...config
     });
   } catch (error) {

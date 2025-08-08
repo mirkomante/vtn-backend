@@ -419,7 +419,33 @@ function initializeSelectableTable(tableId, config) {
 // Inizializzazione quando il DOM è caricato
 document.addEventListener('DOMContentLoaded', function() {
   initializeTables();
+  
+  // Inizializza la paginazione se presente
+  if (typeof TablePagination !== 'undefined') {
+    initializePagination();
+  }
 });
+
+// Funzione per inizializzare la paginazione
+function initializePagination() {
+  const tables = document.querySelectorAll('table[id$="-table"]');
+  
+  tables.forEach(table => {
+    const tableId = table.id;
+    const container = table.closest('.pt-5');
+    
+    // Controlla se c'è paginazione
+    if (container && container.querySelector('nav')) {
+      const configKey = tableId + '-config';
+      const config = window[configKey];
+      
+      if (config) {
+        // Inizializza la paginazione
+        window[`${tableId}-pagination`] = new TablePagination(tableId, config);
+      }
+    }
+  });
+}
 
 // Funzione per inizializzare le tabelle
 function initializeTables() {
