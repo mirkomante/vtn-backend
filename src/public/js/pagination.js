@@ -126,28 +126,9 @@ class TablePagination {
         url.searchParams.set(key, this.currentFilters[key]);
       });
 
-      // Richiesta AJAX
-      const response = await fetch(url.toString(), {
-        method: 'GET',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'Accept': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      if (data.success) {
-        this.updateTable(data);
-        this.updateURL(url);
-      } else {
-        console.error('Errore nel caricamento dei dati:', data.message);
-        this.showError('Errore nel caricamento dei dati');
-      }
+      // Per ora, usa reload della pagina invece di AJAX
+      // In futuro, si può implementare AJAX completo
+      window.location.href = url.toString();
     } catch (error) {
       console.error('Errore durante il caricamento:', error);
       this.showError('Errore di connessione');
@@ -161,20 +142,14 @@ class TablePagination {
     const container = document.querySelector(`#${this.tableId}`).closest('.pt-5');
     if (!container) return;
 
-    // Aggiorna la tabella
-    if (data.tableHtml) {
-      const tableContainer = container.querySelector('.flow-root');
-      if (tableContainer) {
-        tableContainer.innerHTML = data.tableHtml;
-      }
+    // Aggiorna i dati della tabella
+    if (data.data && Array.isArray(data.data)) {
+      this.updateTableRows(data.data);
     }
 
     // Aggiorna la paginazione
-    if (data.paginationHtml) {
-      const paginationContainer = container.querySelector('nav');
-      if (paginationContainer) {
-        paginationContainer.outerHTML = data.paginationHtml;
-      }
+    if (data.pagination) {
+      this.updatePagination(data.pagination);
     }
 
     // Reinizializza la tabella selectable
@@ -193,6 +168,26 @@ class TablePagination {
     if (data.title) {
       document.title = data.title;
     }
+  }
+
+  // Aggiorna le righe della tabella
+  updateTableRows(items) {
+    const tbody = document.querySelector(`#${this.tableId} tbody`);
+    if (!tbody) return;
+
+    // Per ora, ricarica la pagina per semplicità
+    // In futuro, si può implementare l'aggiornamento dinamico delle righe
+    window.location.reload();
+  }
+
+  // Aggiorna la paginazione
+  updatePagination(pagination) {
+    const container = document.querySelector(`#${this.tableId}`).closest('.pt-5');
+    if (!container) return;
+
+    // Per ora, ricarica la pagina per semplicità
+    // In futuro, si può implementare l'aggiornamento dinamico della paginazione
+    window.location.reload();
   }
 
   updateURL(url) {

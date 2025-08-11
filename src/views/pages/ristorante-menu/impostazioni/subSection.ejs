@@ -53,6 +53,28 @@
     },
     filters: typeof filters !== 'undefined' ? filters : undefined,
     hasActiveFilters: typeof hasActiveFilters !== 'undefined' ? hasActiveFilters : false,
-    clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined
+    clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined,
+    pagination: typeof pagination !== 'undefined' ? pagination : undefined
   }) %>
-<% } %> 
+<% } %>
+
+<!-- Configurazione JavaScript per la tabella -->
+<script>
+  window['<%= tableConfig.tableId %>-config'] = {
+    tableId: '<%= tableConfig.tableId %>',
+    idField: '<%= tableConfig.idField %>',
+    labelField: '<%= tableConfig.labelField %>',
+    detailUrl: '<%= tableConfig.detailUrl %>',
+    editUrl: '<%= tableConfig.editUrl %>',
+    bulkEditUrl: '<%= tableConfig.bulkEditUrl %>',
+    editMultipleButton: <%- JSON.stringify(tableConfig.editMultipleButton || null) %>,
+    actionButton: <%- JSON.stringify(tableConfig.deleteButton || tableConfig.actionButton || null) %>,
+    endpoint: '<%= tableConfig.endpoint %>',
+    method: '<%= tableConfig.method %>',
+    confirmMessage: '<%= tableConfig.confirmMessage %>',
+    confirmMessageMultiple: '<%= tableConfig.confirmMessageMultiple %>',
+    successMessage: '<%= tableConfig.successMessage %>',
+    errorMessage: '<%= tableConfig.errorMessage %>',
+    disableClickableNames: <%= typeof tableConfig.disableClickableNames !== 'undefined' ? tableConfig.disableClickableNames : 'false' %>
+  };
+</script> 

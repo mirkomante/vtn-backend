@@ -47,44 +47,118 @@ router.get('/', (req, res) => {
 });
 
 // === SEZIONI PRINCIPALI ===
-router.get('/menu-fissi', (req, res) => {
-  const currentPath = '/ristorante-menu/menu-fissi';
-  let sectionMenu = ristoranteMenuItems;
-  
-  res.render('pages/ristorante-menu/menu-fissi', {
-    title: 'Menu Fissi',
-    description: 'Gestisci i menu fissi del ristorante',
-    layout: 'layouts/sections',
-    mainMenu: mainMenuItems,
-    sectionMenu,
-    sectionIcons,
-    currentPath,
-    scripts: scriptManager.getScriptsForPage('dashboard'),
-    breadcrumbs: [
-      { label: 'Menu Ristorante', href: '/ristorante-menu' },
-      { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' }
-    ]
-  });
+router.get('/menu-fissi', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/menu-fissi';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.menuFisso.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recupera i menu fissi dal database con paginazione
+    const menuFissi = await prisma.menuFisso.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+    
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
+    res.render('pages/ristorante-menu/menu-fissi', {
+      title: 'Menu Fissi',
+      description: 'Gestisci i menu fissi del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' }
+      ],
+      items: menuFissi,
+      hasItems: totalItems > 0,
+      pagination
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei menu fissi:', error);
+    res.status(500).send('Errore interno del server');
+  }
 });
 
-router.get('/piatti', (req, res) => {
-  const currentPath = '/ristorante-menu/piatti';
-  let sectionMenu = ristoranteMenuItems;
-  
-  res.render('pages/ristorante-menu/piatti', {
-    title: 'Piatti',
-    description: 'Gestisci i piatti del ristorante',
-    layout: 'layouts/sections',
-    mainMenu: mainMenuItems,
-    sectionMenu,
-    sectionIcons,
-    currentPath,
-    scripts: scriptManager.getScriptsForPage('dashboard'),
-    breadcrumbs: [
-      { label: 'Menu Ristorante', href: '/ristorante-menu' },
-      { label: 'Piatti', href: '/ristorante-menu/piatti' }
-    ]
-  });
+router.get('/piatti', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/piatti';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.piatto.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recupera i piatti dal database con paginazione
+    const piatti = await prisma.piatto.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+    
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
+    res.render('pages/ristorante-menu/piatti', {
+      title: 'Piatti',
+      description: 'Gestisci i piatti del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Piatti', href: '/ristorante-menu/piatti' }
+      ],
+      items: piatti,
+      hasItems: totalItems > 0,
+      pagination
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei piatti:', error);
+    res.status(500).send('Errore interno del server');
+  }
 });
 
 router.get('/servizi', (req, res) => {
@@ -243,24 +317,13 @@ router.get('/impostazioni/categoria-menu-fisso/ajax', async (req, res) => {
     config.hasItems = totalItems > 0;
     config.items = categorieMenuFisso;
 
-    // Renderizza solo la tabella e la paginazione per AJAX
-    const tableHtml = await res.app.render('ui/tables/tableContent', {
-      tableId: config.tableConfig.tableId,
-      tableData: config.tableData,
-      items: categorieMenuFisso,
-      tableConfig: config.tableConfig
-    });
-
-    const paginationHtml = await res.app.render('ui/tables/paginationContent', {
-      pagination
-    });
-
+    // Per ora, restituiamo solo i dati JSON
+    // La tabella verrà aggiornata dal JavaScript frontend
     res.json({
       success: true,
       data: categorieMenuFisso,
       pagination,
-      tableHtml,
-      paginationHtml
+      message: 'Dati caricati con successo'
     });
   } catch (error) {
     console.error('Errore nel recupero delle categorie menu fisso (AJAX):', error);
@@ -2047,7 +2110,7 @@ router.get('/cancellati', async (req, res) => {
   
   try {
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 50;
+    const limit = parseInt(req.query.limit as string) || 20; // Cambiato da 50 a 20
     const offset = (page - 1) * limit;
     const typeFilter = req.query.type as string;
     
