@@ -1,69 +1,8 @@
-<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
-  <%- include('../../ui/alerts/simple', { message: success[0] }) %>
-<% } %>
-
-<div class="pt-5">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold text-gray-900">Dettagli Utente</h1>
-      <p class="mt-2 text-sm text-gray-700">Informazioni dettagliate dell'utente.</p>
-    </div>
-    <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-      <a href="/admin/utenti" 
-         class="block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-        Torna alla lista
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="mx-auto max-w-4xl mt-8">
-  <div class="mt-6 border-t border-gray-100">
-    <dl class="divide-y divide-gray-100">
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Nome completo</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= `${user.givenName || ''} ${user.familyName || ''}`.trim() || 'Non specificato' %>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Ruolo</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= user.role %>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Email</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= user.email %>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Provider di autenticazione</dt>
-        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <%= user.authProvider %>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Data di creazione</dt>
-        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <span class="grow"><%= new Date(user.createdAt).toLocaleDateString('it-IT') %></span>
-        </dd>
-      </div>
-      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900">Ultimo aggiornamento</dt>
-        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <span class="grow"><%= new Date(user.updatedAt).toLocaleDateString('it-IT') %></span>
-        </dd>
-      </div>
-    </dl>
-  </div>
-  
-  <div class="mt-8 flex justify-end">
-    <a href="/admin/utenti/modifica/<%= user.id %>" 
-       class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-      Modifica utente
-    </a>
-  </div>
-</div>
+<%- include('../../ui/detailViews/genericDetailView', {
+  config: detailViewConfig,
+  item: item,
+  itemType: 'Utente',
+  success: typeof success !== 'undefined' ? success : undefined,
+  actionNavConfig: typeof actionNavConfig !== 'undefined' ? actionNavConfig : undefined
+}) %>
   

@@ -3,7 +3,7 @@ import { FormDataSchema } from "./sectionFormSchema";
 export const userFormData: FormDataSchema = {
   formConfig: {
     method: 'POST',
-    action: '/admin/utenti/nuovo',
+    action: '/admin/utenti/nuovo/ajax',
     id: 'userForm',
     novalidate: true
   },
@@ -99,9 +99,9 @@ export const userFormData: FormDataSchema = {
   bulkEditConfig: {
     title: 'Modifica Massiva Utenti',
     description: 'Modifica i campi selezionati per tutti gli utenti scelti. Puoi modificare uno o entrambi i campi.',
-    action: '/admin/utenti/modifica-massa',
+    action: '/admin/utenti/modifica-massa/ajax',
     method: 'POST',
-    endpoint: '/admin/utenti/modifica-massa',
+    endpoint: '/admin/utenti/modifica-massa/ajax',
     successMessage: 'Aggiornati {count} utenti con successo',
     errorMessage: 'Errore durante l\'aggiornamento degli utenti',
     requireAtLeastOneField: true, // Almeno un campo deve essere compilato
@@ -114,8 +114,8 @@ export const userFormData: FormDataSchema = {
         action: isBulkEdit 
           ? data.bulkEditConfig.action 
           : isEdit 
-            ? `/admin/utenti/modifica/${user?.id}` 
-            : '/admin/utenti/nuovo',
+            ? `/admin/utenti/modifica/${user?.id}/ajax` 
+            : '/admin/utenti/nuovo/ajax',
         method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
         hiddenFields: isBulkEdit && selectedItems ? [
           {

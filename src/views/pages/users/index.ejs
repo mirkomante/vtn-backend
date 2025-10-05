@@ -25,14 +25,32 @@
     </div>
   <% } %>
   
+  <!-- Action Navigation -->
+  <% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+    <%- include('../../ui/navigation/actionNav', actionNavConfig) %>
+  <% } %>
+
   <%- include('../../ui/tables/selectableTable', {
-    actionButton: {
-      text: 'Aggiungi utente',
-      href: '/admin/utenti/nuovo'
-    },
     tableId: 'users-table',
     tableData: tableData,
     items: users,
+    showFilters: true,
+    filters: [
+      {
+        id: 'role',
+        name: 'role',
+        label: 'Ruolo',
+        type: 'select',
+        placeholder: 'Tutti i ruoli',
+        options: [
+          { value: '', label: 'Tutti i ruoli', selected: !currentRoleFilter },
+          { value: 'user', label: 'Utente', selected: currentRoleFilter === 'user' },
+          { value: 'admin', label: 'Amministratore', selected: currentRoleFilter === 'admin' }
+        ]
+      }
+    ],
+    hasActiveFilters: !!currentRoleFilter,
+    clearFiltersUrl: '/admin/utenti',
     tableConfig: {
       idField: 'id',
       labelField: 'givenName',
