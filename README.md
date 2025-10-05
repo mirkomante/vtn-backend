@@ -510,6 +510,246 @@ case 'categoria-piatti':
 - **Flessibilità**: Gestione unificata di tutti i tipi di elemento
 - **UX**: Interfaccia intuitiva con conferme e feedback chiari
 
+## Sistema di Configurazione Viste e Tabelle
+
+### Architettura del Sistema di Configurazione
+
+Il sistema utilizza una **configurazione centralizzata** per definire viste, tabelle e azioni. La configurazione è organizzata in diversi livelli:
+
+#### Schema Base (`tableDataSchema.ts`)
+```typescript
+export interface TableDataSchema {
+  tableHeads: TableHeader[];  // Intestazioni colonne
+  fields: TableField[];       // Campi dati
+  labels?: TableLabel[];      // Etichette opzionali
+}
+
+export interface TableHeader {
+  label: string;    // Testo intestazione
+  sort: boolean;    // Ordinabile
+  name: string;     // Nome campo
+  mobile: boolean;  // Visibile su mobile
+  icon?: string;    // Icona opzionale
+}
+
+export interface TableField {
+  name: string;     // Nome campo
+  label: boolean;   // È campo principale
+  edit: boolean;    // Modificabile
+  type: string;     // Tipo dato (text, currency, boolean, date)
+}
+```
+
+### Configurazione delle Colonne
+
+#### Sezioni Principali (`sectionTableData.ts`)
+Le sezioni principali (come servizi) definiscono le colonne direttamente:
+
+```typescript
+export const serviziTableData: TableDataSchema = {
+  tableHeads: [
+    { label: 'Nome', sort: true, name: 'nome', mobile: true },
+    { label: 'Descrizione', sort: false, name: 'descrizione', mobile: false },
+    { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
+    { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
+  ],
+  fields: [
+    { name: 'nome', label: true, edit: false, type: 'text' },
+    { name: 'descrizione', label: false, edit: false, type: 'text' },
+    { name: 'prezzo', label: false, edit: false, type: 'currency' },
+    { name: 'inLista', label: false, edit: false, type: 'boolean' }
+  ]
+}
+```
+
+#### Sottosezioni (`subSectionConfig.ts`)
+Le sottosezioni (come allergeni, categorie) definiscono le colonne nella configurazione:
+
+```typescript
+export const allergeniConfig: SubSectionConfig = {
+  tableData: {
+    tableHeads: [
+      { label: 'Nome', mobile: true },
+      { label: 'Descrizione', mobile: false }
+    ],
+    fields: [
+      { name: 'nome' },
+      { name: 'descrizione' }
+    ]
+  }
+}
+```
+
+### Configurazione delle Azioni
+
+#### Azioni nelle Sezioni Principali
+Le azioni sono definite direttamente nelle viste EJS:
+
+```ejs
+<%- include('../../../ui/tables/selectableTable', {
+  tableConfig: {
+    idField: 'id',
+    labelField: 'nome',
+    detailUrl: '/ristorante-menu/servizi/dettagli/:id',
+    editUrl: '/ristorante-menu/servizi/modifica/:id',
+    bulkEditUrl: '/ristorante-menu/servizi/modifica-massa',
+    editMultipleButton: {
+      text: 'Modifica'
+    },
+    actionButton: {
+      text: 'Elimina',
+      classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700'
+    },
+    endpoint: '/ristorante-menu/servizi',
+    method: 'DELETE',
+    confirmMessage: 'Sei sicuro di voler eliminare questo servizio?',
+    confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} servizi?',
+    successMessage: 'Eliminati {count} servizio/i con successo',
+    errorMessage: 'Errore durante l\'eliminazione'
+  }
+}) %>
+```
+
+#### Azioni nelle Sottosezioni
+Le azioni sono configurate centralmente in `subSectionConfig.ts`:
+
+```typescript
+export const allergeniConfig: SubSectionConfig = {
+  tableConfig: {
+    tableId: 'allergeni-table',
+    idField: 'id',
+    labelField: 'nome',
+    detailUrl: '/ristorante-menu/impostazioni/allergeni/dettagli/:id',
+    editUrl: '/ristorante-menu/impostazioni/allergeni/modifica/:id',
+    bulkEditUrl: undefined,  // Nessuna modifica massiva
+    actionButton: {
+      text: 'Nuovo Allergene',
+      href: '/ristorante-menu/impostazioni/allergeni/nuovo'
+    },
+    editMultipleButton: undefined,
+    deleteButton: {
+      text: 'Elimina',
+      classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700'
+    },
+    endpoint: '/ristorante-menu/impostazioni/allergeni',
+    method: 'DELETE',
+    confirmMessage: 'Sei sicuro di voler eliminare questo allergene?',
+    confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} allergeni?',
+    successMessage: 'Eliminati {count} allergene/i con successo',
+    errorMessage: 'Errore durante l\'eliminazione',
+    includeScripts: true
+  }
+}
+```
+
+### Componenti UI Utilizzati
+
+#### Selectable Table (`selectableTable.ejs`)
+Il componente principale per le tabelle con selezione multipla:
+
+**Caratteristiche**:
+- **Selezione multipla** con checkbox
+- **Azioni bulk** (modifica massiva, eliminazione)
+- **Paginazione integrata**
+- **Filtri personalizzabili**
+- **Responsive design**
+
+#### Table Content (`tableContent.ejs`)
+Il contenuto effettivo della tabella con:
+- **Intestazioni dinamiche** basate su `tableData.tableHeads`
+- **Celle dati** configurate tramite `tableData.fields`
+- **Link cliccabili** per il campo principale (`labelField`)
+- **Checkbox di selezione** per ogni riga
+- **Azioni bulk** che appaiono quando elementi sono selezionati
+
+#### Empty States (`simple.ejs`)
+Stati vuoti personalizzabili con:
+- **Icona personalizzata** con SVG
+- **Titolo e descrizione** configurabili
+- **Bottone di azione** con link personalizzabile
+- **Design responsive** e accessibile
+
+#### Action Navigation (`actionNav.ejs`)
+Barra di navigazione con azioni:
+- **Link di navigazione** (torna alla lista, nuovo elemento)
+- **Bottoni di azione** con ID personalizzabili
+- **Spacing automatico** tra elementi
+- **Classi CSS configurabili**
+
+#### Filters (`simpleFilter.ejs`)
+Sistema di filtri avanzato con:
+- **Dropdown personalizzati** con ricerca
+- **Input di testo** per filtri liberi
+- **Input data** per filtri temporali
+- **Bottone "Azzera"** per rimuovere filtri attivi
+- **Gestione stato** dei filtri attivi
+
+### Flusso di Configurazione
+
+#### Per Sezioni Principali (es. Servizi)
+1. **Definizione colonne** in `sectionTableData.ts`
+2. **Configurazione azioni** direttamente nella vista EJS
+3. **Rendering** tramite `selectableTable.ejs`
+
+#### Per Sottosezioni (es. Allergeni)
+1. **Definizione completa** in `subSectionConfig.ts`:
+   - Colonne (`tableData`)
+   - Azioni (`tableConfig`)
+   - Empty state (`emptyState`)
+2. **Rendering** tramite `subSection.ejs` che usa la configurazione
+
+### Tipi di Azioni Supportate
+
+#### Azioni Singole
+- **Visualizzazione**: Link al dettaglio
+- **Modifica**: Link al form di modifica
+- **Eliminazione**: Bottone con conferma
+
+#### Azioni Multiple
+- **Modifica Massiva**: Form per modificare più elementi
+- **Eliminazione Multipla**: Eliminazione di elementi selezionati
+- **Azioni Personalizzate**: Bottoni configurabili
+
+#### Azioni di Navigazione
+- **Nuovo Elemento**: Link al form di creazione
+- **Torna alla Lista**: Navigazione di ritorno
+
+### Configurazione JavaScript
+
+Ogni tabella genera una configurazione JavaScript per il frontend:
+
+```javascript
+window['servizi-table-config'] = {
+  tableId: 'servizi-table',
+  idField: 'id',
+  labelField: 'nome',
+  detailUrl: '/ristorante-menu/servizi/dettagli/:id',
+  editUrl: '/ristorante-menu/servizi/modifica/:id',
+  bulkEditUrl: '/ristorante-menu/servizi/modifica-massa',
+  actionButton: {
+    text: 'Elimina',
+    classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700'
+  },
+  endpoint: '/ristorante-menu/servizi',
+  method: 'DELETE',
+  confirmMessage: 'Sei sicuro di voler eliminare questo servizio?',
+  confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} servizi?',
+  successMessage: 'Eliminati {count} servizio/i con successo',
+  errorMessage: 'Errore durante l\'eliminazione'
+};
+```
+
+### Vantaggi del Sistema di Configurazione
+
+- **Configurabilità**: Comportamento definito tramite configurazioni
+- **Riutilizzabilità**: Componenti UI standardizzati
+- **Manutenibilità**: Modifiche centralizzate
+- **Flessibilità**: Supporto per diversi tipi di azioni
+- **Consistenza**: UI/UX uniforme across tutte le sezioni
+- **Responsive**: Ottimizzato per tutti i dispositivi
+
+Questo sistema permette di definire rapidamente nuove viste e tabelle mantenendo un'interfaccia utente coerente e funzionalità avanzate come selezione multipla, filtri e azioni bulk.
+
 ## API Endpoints
 
 ### Autenticazione
