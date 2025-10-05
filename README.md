@@ -758,6 +758,223 @@ window['servizi-table-config'] = {
 
 Questo sistema permette di definire rapidamente nuove viste e tabelle mantenendo un'interfaccia utente coerente e funzionalità avanzate come selezione multipla, filtri e azioni bulk.
 
+## Sistema di Gestione Centralizzata delle Viste in Dettaglio
+
+### Architettura del Sistema
+
+Il sistema implementa una **gestione centralizzata per le viste in dettaglio**, simile a quella esistente per i form, per migliorare la manutenibilità e la consistenza del codice. Questo sistema sostituisce la duplicazione di codice presente nelle viste individuali con un approccio configurabile e riutilizzabile.
+
+> **📋 Documentazione Completa**: Per una spiegazione dettagliata del sistema, vedi il file [DETAIL_VIEW_CENTRALIZATION.md](./DETAIL_VIEW_CENTRALIZATION.md).
+
+### Componenti del Sistema
+
+#### 1. Schema di Configurazione (`detailViewSchema.ts`)
+```typescript
+export interface DetailViewField {
+  name: string;
+  label: string;
+  type: 'text' | 'currency' | 'boolean' | 'date' | 'email' | 'custom';
+  required?: boolean;
+  conditional?: string; // campo da controllare per mostrare/nascondere
+  format?: {
+    currency?: { symbol: string; decimals: number; };
+    date?: { locale: string; options?: Intl.DateTimeFormatOptions; };
+    boolean?: { trueText: string; falseText: string; showBadge: boolean; };
+  };
+  customRender?: string; // nome del renderer personalizzato
+}
+
+export interface DetailViewConfig {
+  fields: DetailViewField[];
+  layout: 'default' | 'compact' | 'wide';
+  showTimestamps?: boolean;
+  timestampFields?: { createdAt?: string; updatedAt?: string; };
+  customFields?: DetailViewField[];
+}
+```
+
+#### 2. Configurazioni Specifiche (`detailViewConfig.ts`)
+Ogni entità ha la sua configurazione centralizzata:
+
+```typescript
+export const serviziDetailViewConfig: DetailViewConfig = {
+  fields: [
+    { name: 'nome', label: 'Nome', type: 'text', required: true },
+    { name: 'descrizione', label: 'Descrizione', type: 'text', conditional: 'descrizione' },
+    { 
+      name: 'prezzo', 
+      label: 'Prezzo', 
+      type: 'currency', 
+      required: true,
+      format: { currency: { symbol: '€', decimals: 2 } }
+    },
+    { 
+      name: 'inLista', 
+      label: 'Stato', 
+      type: 'boolean',
+      format: { boolean: { trueText: 'Attivo', falseText: 'Inattivo', showBadge: true } }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
+};
+```
+
+#### 3. Template Generico (`genericDetailView.ejs`)
+Un template unificato che gestisce tutte le viste in dettaglio:
+
+```ejs
+<%- include('../alerts/simple', { message: success[0] }) %>
+<%- include('../navigation/actionNav', actionNavConfig) %>
+
+<div class="mt-8">
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <% config.fields.forEach(field => { %>
+        <% if (!field.conditional || item[field.conditional]) { %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900"><%= field.label %></dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <%- include('../fieldRenderers/' + field.type, { item, field }) %>
+            </dd>
+          </div>
+        <% } %>
+      <% }); %>
+    </dl>
+  </div>
+</div>
+```
+
+#### 4. Renderer per Tipi di Campo (`fieldRenderers/`)
+Renderer specializzati per ogni tipo di campo:
+
+- **`text.ejs`**: Testo semplice
+- **`currency.ejs`**: Formattazione valuta (€X.XX)
+- **`boolean.ejs`**: Badge colorato (Sì/No)
+- **`date.ejs`**: Formato italiano (DD/MM/YYYY)
+- **`email.ejs`**: Link cliccabile
+- **`custom.ejs`**: Renderer personalizzati
+
+### Tipi di Campo Supportati
+
+| Tipo | Descrizione | Formattazione |
+|---|---|---|
+| **text** | Testo semplice | Valore raw |
+| **currency** | Valuta | €X.XX |
+| **boolean** | Booleano | Badge colorato (Sì/No) |
+| **date** | Data | Formato italiano (DD/MM/YYYY) |
+| **email** | Email | Link cliccabile |
+| **custom** | Personalizzato | Renderer specifico |
+
+### Integrazione con Componenti Esistenti
+
+Il sistema è completamente integrato con i componenti centralizzati esistenti:
+
+- ✅ **Action Navigation**: Integrato con `actionNavConfig.ts`
+- ✅ **Alert di Successo**: Integrato con `ui/alerts/simple.ejs`
+- ✅ **Layout Generale**: Compatibile con `layouts/sections.ejs`
+- ✅ **Percorsi Corretti**: Tutti gli include utilizzano percorsi relativi corretti
+
+### Utilizzo nelle Route
+
+```typescript
+// Esempio per servizi
+res.render('pages/ristorante-menu/servizi/view', {
+  title: 'Dettagli Servizio',
+  description: 'Informazioni dettagliate del servizio',
+  layout: 'layouts/sections',
+  mainMenu: mainMenuItems,
+  sectionMenu,
+  sectionIcons,
+  currentPath,
+  item: servizio,
+  itemType: 'Servizio',
+  actionNavConfig,
+  detailViewConfig: serviziDetailViewConfig, // ← Configurazione centralizzata
+  scripts: scriptManager.getScriptsForPage('dashboard'),
+  breadcrumbs: [/* ... */]
+});
+```
+
+### Viste Migrate
+
+- ✅ **Servizi**: `servizi/view.ejs` → usa `serviziDetailViewConfig`
+- ✅ **Allergeni**: `impostazioni/view.ejs` → usa `allergeniDetailViewConfig`
+- ✅ **Categorie Menu Fisso**: `impostazioni/view.ejs` → usa `categoriaMenuFissoDetailViewConfig`
+- ✅ **Categorie Piatti**: `impostazioni/view.ejs` → usa `categoriaPiattiDetailViewConfig`
+
+### Vantaggi del Sistema
+
+#### 1. Manutenibilità
+- **Codice centralizzato**: Modifiche in un solo posto
+- **Consistenza**: Stesso comportamento per tutti i campi
+- **Riusabilità**: Configurazioni riutilizzabili
+
+#### 2. Estensibilità
+- **Nuovi tipi**: Facile aggiunta di nuovi tipi di campo
+- **Formattazione**: Configurazione flessibile della formattazione
+- **Renderer personalizzati**: Supporto per logiche specifiche
+
+#### 3. Qualità del Codice
+- **DRY**: Eliminazione della duplicazione
+- **Type Safety**: Interfacce TypeScript
+- **Documentazione**: Configurazione auto-documentante
+
+### Esempi di Configurazione
+
+#### Campo Currency
+```typescript
+{
+  name: 'prezzo',
+  label: 'Prezzo',
+  type: 'currency',
+  format: {
+    currency: {
+      symbol: '€',
+      decimals: 2
+    }
+  }
+}
+```
+
+#### Campo Boolean con Badge
+```typescript
+{
+  name: 'inLista',
+  label: 'Stato',
+  type: 'boolean',
+  format: {
+    boolean: {
+      trueText: 'Attivo',
+      falseText: 'Inattivo',
+      showBadge: true
+    }
+  }
+}
+```
+
+#### Campo Condizionale
+```typescript
+{
+  name: 'descrizione',
+  label: 'Descrizione',
+  type: 'text',
+  conditional: 'descrizione' // Mostra solo se descrizione esiste
+}
+```
+
+### Estensioni Future
+
+Il sistema è progettato per essere facilmente estendibile:
+
+- **Nuovi tipi di campo**: URL, telefono, indirizzo, etc.
+- **Layout personalizzati**: Compact, wide, card-based
+- **Validazione**: Controlli di validazione per i campi
+- **Internazionalizzazione**: Supporto per multiple lingue
+
+> **📋 Per dettagli completi**: Consulta il file [DETAIL_VIEW_CENTRALIZATION.md](./DETAIL_VIEW_CENTRALIZATION.md) per esempi avanzati, configurazioni complete e guide per l'estensione del sistema.
+
 ## Configurazione Sottosezioni
 
 ### Architettura delle Sottosezioni
