@@ -279,6 +279,237 @@ Le route AJAX sono configurate in `ajaxRoutes.ts`:
 - **Manutenibilità**: Modifiche centralizzate si propagano ovunque
 - **Scalabilità**: Facile aggiunta di nuove sezioni/sottosezioni
 
+## Sistema di Gestione Cancellazioni
+
+### Architettura Soft Delete
+
+Il sistema implementa un **soft delete** completo per tutti gli elementi del ristorante menu. Ogni modello nel database include un campo `deletedAt` di tipo `DateTime?`:
+
+```typescript
+model ServizioAccessorio {
+  id          String   @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal  @db.Decimal(10, 2)
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?  // ← Campo per soft delete
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
+
+### Cancellazione Soft (Soft Delete)
+
+#### Funzionamento
+La cancellazione soft **non elimina fisicamente** i record dal database, ma imposta il campo `deletedAt` con la data/ora corrente.
+
+#### Implementazione
+```typescript
+// Cancellazione singola
+await prisma.servizioAccessorio.update({
+  where: { id },
+  data: {
+    deletedAt: new Date()  // ← Imposta la data di cancellazione
+  }
+});
+
+// Cancellazione multipla
+await prisma.servizioAccessorio.updateMany({
+  where: { 
+    id: { in: validIds }
+  },
+  data: { 
+    deletedAt: new Date() 
+  }
+});
+```
+
+#### Endpoint per Cancellazione Soft
+- `DELETE /ristorante-menu/servizi/:id` - Cancellazione singola servizio
+- `DELETE /ristorante-menu/servizi` - Cancellazione multipla servizi
+- `DELETE /ristorante-menu/impostazioni/allergeni/:id` - Cancellazione allergene
+- `DELETE /ristorante-menu/impostazioni/allergeni` - Cancellazione multipla allergeni
+- `DELETE /ristorante-menu/impostazioni/categoria-menu-fisso/:id` - Cancellazione categoria
+- `DELETE /ristorante-menu/impostazioni/categoria-menu-fisso` - Cancellazione multipla categorie
+- `DELETE /ristorante-menu/impostazioni/categoria-piatti/:id` - Cancellazione categoria piatti
+- `DELETE /ristorante-menu/impostazioni/categoria-piatti` - Cancellazione multipla categorie piatti
+
+#### Filtri nelle Query
+Tutte le query per recuperare dati attivi includono il filtro `deletedAt: null`:
+
+```typescript
+// Esempio: recupero servizi attivi
+const servizi = await prisma.servizioAccessorio.findMany({
+  where: {
+    deletedAt: null  // ← Solo elementi non cancellati
+  },
+  orderBy: {
+    nome: 'asc'
+  }
+});
+```
+
+### Pagina "/ristorante-menu/cancellati"
+
+#### Funzionalità
+La pagina `/ristorante-menu/cancellati` è una **vista unificata** di tutti gli elementi cancellati del sistema.
+
+#### Database View
+Utilizza una **view SQL** chiamata `ElementiCancellati` che unisce tutti i modelli cancellati:
+
+```sql
+CREATE OR REPLACE VIEW "ElementiCancellati" AS
+SELECT 
+  id, nome, descrizione, "deletedAt", "createdAt", "updatedAt",
+  'categoria-piatti' as type,
+  'Categoria Piatti' as type_label,
+  NULL as categoria_nome
+FROM "categoria_piatti" 
+WHERE "deletedAt" IS NOT NULL
+
+UNION ALL
+
+SELECT 
+  id, nome, descrizione, "deletedAt", "createdAt", "updatedAt",
+  'categoria-menu-fisso' as type,
+  'Categoria Menu Fisso' as type_label,
+  NULL as categoria_nome
+FROM "categoria_menu_fisso" 
+WHERE "deletedAt" IS NOT NULL
+
+-- ... altri UNION ALL per allergeni, piatti, servizi, menu fissi
+```
+
+#### Caratteristiche della Pagina
+- **Filtri per tipo**: Dropdown per filtrare per tipo di elemento
+- **Paginazione**: 20 elementi per pagina
+- **Azioni disponibili**:
+  - **Ripristina** (verde) - Ripristina elementi selezionati
+  - **Elimina definitivamente** (rosso) - Eliminazione fisica irreversibile
+- **Conferme JavaScript**: Doppia conferma per azioni distruttive
+
+#### Struttura Tabella
+```typescript
+// Configurazione tabella elementi cancellati
+export const elementiCancellatiTableData: TableDataSchema = {
+  tableHeads: [
+    { label: 'Nome', sort: true, name: 'nome', mobile: true },
+    { label: 'Tipo', sort: true, name: 'type_label', mobile: false },
+    { label: 'Descrizione', sort: false, name: 'descrizione', mobile: false },
+    { label: 'Categoria', sort: false, name: 'categoria_nome', mobile: false },
+    { label: 'Data Cancellazione', sort: true, name: 'deletedAt', mobile: false }
+  ]
+}
+```
+
+### Sistema di Ripristino
+
+#### Endpoint
+`POST /ristorante-menu/restore`
+
+#### Funzionamento
+Il sistema di ripristino **rimuove il campo `deletedAt`** (lo imposta a `null`), rendendo l'elemento nuovamente visibile nelle query normali.
+
+#### Implementazione
+```typescript
+// Ripristino per tipo di elemento
+switch (type) {
+  case 'servizio-accessorio':
+    await prisma.servizioAccessorio.updateMany({
+      where: { id: { in: validIds } },
+      data: { deletedAt: null }  // ← Rimuove la cancellazione
+    });
+    break;
+  // ... altri tipi
+}
+```
+
+#### Caratteristiche
+- **Ripristino multiplo**: Supporta ripristino di elementi diversi in un'unica operazione
+- **Validazione**: Verifica che gli elementi siano effettivamente cancellati prima del ripristino
+- **Raggruppamento per tipo**: Ottimizza le query raggruppando per tipo di elemento
+- **Feedback dettagliato**: Restituisce conteggi di elementi ripristinati e saltati
+
+### Cancellazione Definitiva (Hard Delete)
+
+#### Endpoint
+`DELETE /ristorante-menu/permanent-delete`
+
+#### Funzionamento
+La cancellazione definitiva **elimina fisicamente** i record dal database utilizzando `deleteMany()`.
+
+#### Implementazione
+```typescript
+// Eliminazione fisica
+const deletedServizi = await prisma.servizioAccessorio.deleteMany({
+  where: { 
+    id: { in: ids as string[] },
+    deletedAt: { not: null }  // ← Solo elementi già cancellati
+  }
+});
+```
+
+#### Controlli di Sicurezza
+- **Verifica dipendenze**: Per categorie, verifica che non ci siano elementi associati attivi
+- **Solo elementi cancellati**: Può eliminare solo elementi con `deletedAt` non null
+- **Conferme multiple**: Richiede doppia conferma JavaScript
+
+#### Esempio Controllo Dipendenze
+```typescript
+case 'categoria-piatti':
+  // Verifica che non ci siano piatti associati
+  const piattiAssociati = await prisma.piatto.findMany({
+    where: { 
+      categoriaId: { in: ids as string[] },
+      deletedAt: null  // ← Solo piatti attivi
+    }
+  });
+  
+  if (piattiAssociati.length > 0) {
+    // Non può eliminare categorie con piatti associati
+    skipped = (ids as string[]).length;
+    continue;
+  }
+```
+
+### Flusso Completo di Gestione
+
+#### 1. Cancellazione Normale
+1. Utente clicca "Elimina" → Conferma JavaScript
+2. Invio AJAX a `DELETE /path/:id` o `DELETE /path`
+3. Server imposta `deletedAt = new Date()`
+4. Elemento scompare dalle liste normali
+5. Toast di successo
+
+#### 2. Visualizzazione Elementi Cancellati
+1. Utente naviga a `/ristorante-menu/cancellati`
+2. Server esegue query sulla view `ElementiCancellati`
+3. Visualizzazione tabella con filtri e paginazione
+4. Elementi mostrano data di cancellazione e tipo
+
+#### 3. Ripristino
+1. Utente seleziona elementi → Clicca "Ripristina"
+2. Conferma JavaScript → Invio AJAX a `POST /ristorante-menu/restore`
+3. Server imposta `deletedAt = null` per tutti i tipi
+4. Elementi tornano visibili nelle liste normali
+5. Toast di successo con conteggi
+
+#### 4. Eliminazione Definitiva
+1. Utente seleziona elementi → Clicca "Elimina definitivamente"
+2. **Doppia conferma** JavaScript con avviso "irreversibile"
+3. Invio AJAX a `DELETE /ristorante-menu/permanent-delete`
+4. Server verifica dipendenze e elimina fisicamente
+5. Elementi rimossi permanentemente dal database
+
+### Vantaggi del Sistema di Cancellazioni
+
+- **Sicurezza**: Doppio livello di protezione (soft delete + conferme)
+- **Recuperabilità**: Possibilità di ripristinare elementi cancellati per errore
+- **Tracciabilità**: Data di cancellazione sempre disponibile
+- **Performance**: Query ottimizzate con filtri `deletedAt`
+- **Flessibilità**: Gestione unificata di tutti i tipi di elemento
+- **UX**: Interfaccia intuitiva con conferme e feedback chiari
+
 ## API Endpoints
 
 ### Autenticazione
