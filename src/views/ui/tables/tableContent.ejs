@@ -75,7 +75,17 @@
                             <% if (tableConfig.idField === 'id' && item.givenName && item.familyName) { %>
                               <%= `${item.givenName || ''} ${item.familyName || ''}`.trim() %>
                             <% } else { %>
-                              <%= item[field.name] %>
+                              <% if (field.type === 'currency') { %>
+                                €<%= parseFloat(item[field.name] || 0).toFixed(2) %>
+                              <% } else if (field.type === 'boolean') { %>
+                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= item[field.name] ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20' : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20' %>">
+                                  <%= item[field.name] ? 'Sì' : 'No' %>
+                                </span>
+                              <% } else if (field.type === 'date') { %>
+                                <%= item[field.name] ? new Date(item[field.name]).toLocaleDateString('it-IT') : '-' %>
+                              <% } else { %>
+                                <%= item[field.name] %>
+                              <% } %>
                             <% } %>
                           </span>
                         <% } else { %>
@@ -83,12 +93,32 @@
                             <% if (tableConfig.idField === 'id' && item.givenName && item.familyName) { %>
                               <%= `${item.givenName || ''} ${item.familyName || ''}`.trim() %>
                             <% } else { %>
-                              <%= item[field.name] %>
+                              <% if (field.type === 'currency') { %>
+                                €<%= parseFloat(item[field.name] || 0).toFixed(2) %>
+                              <% } else if (field.type === 'boolean') { %>
+                                <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= item[field.name] ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20' : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20' %>">
+                                  <%= item[field.name] ? 'Sì' : 'No' %>
+                                </span>
+                              <% } else if (field.type === 'date') { %>
+                                <%= item[field.name] ? new Date(item[field.name]).toLocaleDateString('it-IT') : '-' %>
+                              <% } else { %>
+                                <%= item[field.name] %>
+                              <% } %>
                             <% } %>
                           </a>
                         <% } %>
                       <% } else { %>
-                        <%= item[field.name] %>
+                        <% if (field.type === 'currency') { %>
+                          €<%= parseFloat(item[field.name] || 0).toFixed(2) %>
+                        <% } else if (field.type === 'boolean') { %>
+                          <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= item[field.name] ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20' : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20' %>">
+                            <%= item[field.name] ? 'Sì' : 'No' %>
+                          </span>
+                        <% } else if (field.type === 'date') { %>
+                          <%= item[field.name] ? new Date(item[field.name]).toLocaleDateString('it-IT') : '-' %>
+                        <% } else { %>
+                          <%= item[field.name] %>
+                        <% } %>
                       <% } %>
                     </td>
                   <% }); %>

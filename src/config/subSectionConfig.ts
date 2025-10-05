@@ -26,6 +26,7 @@ export interface SubSectionConfig {
     }>;
     fields: Array<{
       name: string;
+      type?: string;
     }>;
   };
   tableConfig: {
@@ -95,8 +96,8 @@ export const allergeniConfig: SubSectionConfig = {
       { label: 'Descrizione', mobile: false }
     ],
     fields: [
-      { name: 'nome' },
-      { name: 'descrizione' }
+      { name: 'nome', type: 'text' },
+      { name: 'descrizione', type: 'text' }
     ]
   },
   tableConfig: {
@@ -163,9 +164,9 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
       { label: 'Stato', mobile: true }
     ],
     fields: [
-      { name: 'nome' },
-      { name: 'descrizione' },
-      { name: 'inLista' }
+      { name: 'nome', type: 'text' },
+      { name: 'descrizione', type: 'text' },
+      { name: 'inLista', type: 'boolean' }
     ]
   },
   tableConfig: {
@@ -234,9 +235,9 @@ export const categoriaPiattiConfig: SubSectionConfig = {
       { label: 'Stato', mobile: true }
     ],
     fields: [
-      { name: 'nome' },
-      { name: 'descrizione' },
-      { name: 'inLista' }
+      { name: 'nome', type: 'text' },
+      { name: 'descrizione', type: 'text' },
+      { name: 'inLista', type: 'boolean' }
     ]
   },
   tableConfig: {
