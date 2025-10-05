@@ -15,6 +15,21 @@ export const utentiTableData: TableDataSchema = {
     ]
 }
 
+export const serviziTableData: TableDataSchema = {
+    tableHeads: [
+        { label: 'Nome', sort: true, name: 'nome', mobile: true },
+        { label: 'Descrizione', sort: false, name: 'descrizione', mobile: false },
+        { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
+        { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
+    ],
+    fields: [
+        { name: 'nome', label: true, edit: false, type: 'text' },
+        { name: 'descrizione', label: false, edit: false, type: 'text' },
+        { name: 'prezzo', label: false, edit: false, type: 'currency' },
+        { name: 'inLista', label: false, edit: false, type: 'boolean' }
+    ]
+}
+
 export const elementiCancellatiTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },

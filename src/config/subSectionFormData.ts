@@ -341,4 +341,150 @@ export const categoriaPiattiFormData: FormDataSchema = {
     requireAtLeastOneField: true,
     allowPartialUpdates: true
   }
+};
+
+// Configurazione form per servizi
+export const servizioFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/servizi/nuovo/ajax', // Route AJAX
+    id: 'servizioForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Servizio',
+      required: true,
+      placeholder: 'Servizio di esempio',
+      errorMessage: 'Il nome del servizio è obbligatorio',
+      bulkEditable: false
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione del servizio (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false
+    },
+    {
+      type: 'number',
+      name: 'prezzo',
+      id: 'prezzo',
+      label: 'Prezzo (€)',
+      required: true,
+      placeholder: '0.00',
+      step: 0.01,
+      min: 0,
+      errorMessage: 'Il prezzo deve essere un numero valido maggiore o uguale a 0',
+      bulkEditable: true,
+      bulkLabel: 'Imposta prezzo per tutti i servizi selezionati',
+      bulkPlaceholder: 'Inserisci il nuovo prezzo (opzionale)',
+      bulkHelpText: 'Questo prezzo verrà applicato a tutti i servizi selezionati. Lascia vuoto per non modificare.',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'Mostra in lista',
+      required: false,
+      description: 'Mostra questo servizio nella lista del menu',
+      value: true,
+      errorMessage: '',
+      bulkEditable: true,
+      bulkLabel: 'Imposta visibilità per tutti i servizi selezionati',
+      bulkHelpText: 'Questa impostazione verrà applicata a tutti i servizi selezionati.',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/servizi',
+      classes: 'text-sm font-semibold leading-6 text-gray-900'
+    }
+  },
+  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+    return {
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? data.bulkEditConfig.action 
+          : isEdit 
+            ? `/ristorante-menu/servizi/modifica/${item?.id}/ajax` // Route AJAX
+            : '/ristorante-menu/servizi/nuovo/ajax', // Route AJAX
+        method: isBulkEdit ? data.bulkEditConfig.method : data.formConfig.method,
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map((field: any) => {
+        let value = '';
+        
+        // Determina il valore del campo
+        if (formData && formData[field.name]) {
+          value = formData[field.name];
+        } else if (isEdit && item && !isBulkEdit) {
+          value = item[field.name] || '';
+        }
+        
+        // Per la modifica massiva, mostra solo i campi modificabili
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        // Per la modifica massiva, usa configurazione specifica
+        if (isBulkEdit && field.bulkEditable) {
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: ''
+          };
+        }
+        
+        return { ...field, value };
+      }).filter(field => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit ? 'Aggiorna' : (isEdit ? 'Modifica' : 'Salva')
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/servizi'
+            : isEdit 
+              ? `/ristorante-menu/servizi/dettagli/${item?.id}` 
+              : '/ristorante-menu/servizi'
+        }
+      }
+    };
+  },
+  bulkEditConfig: {
+    title: 'Modifica Massiva Servizi',
+    description: 'Modifica i servizi selezionati',
+    action: '/ristorante-menu/servizi/modifica-massa/ajax',
+    method: 'POST',
+    endpoint: '/ristorante-menu/servizi/modifica-massa',
+    successMessage: 'Servizi aggiornati con successo',
+    errorMessage: 'Errore durante l\'aggiornamento dei servizi',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
+  }
 }; 

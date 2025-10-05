@@ -87,12 +87,13 @@ class FormManager {
     if (path.includes('/allergeni')) return 'allergene';
     if (path.includes('/categoria-menu-fisso')) return 'categoria-menu-fisso';
     if (path.includes('/categoria-piatti')) return 'categoria-piatti';
+    if (path.includes('/servizi')) return 'servizio';
     return 'unknown';
   }
 
   supportsBulkEdit(entityType) {
     // Lista delle entità che supportano modifica massiva
-    const supportedEntities = ['user', 'categoria-menu-fisso', 'categoria-piatti'];
+    const supportedEntities = ['user', 'categoria-menu-fisso', 'categoria-piatti', 'servizio'];
     return supportedEntities.includes(entityType);
   }
 
@@ -540,12 +541,17 @@ class FormManager {
       
       // Per bulk edit, verifica se il campo è modificabile
       if (config.isBulkEdit) {
-        // Controlla se il campo ha l'attributo data-bulk-editable
-        const isBulkEditable = field.hasAttribute('data-bulk-editable') || 
-                              field.getAttribute('data-bulk-editable') === 'true';
-        
-        if (!isBulkEditable) {
-          return;
+        // I campi nascosti per gli ID non devono essere saltati
+        if (field.type === 'hidden' && (field.name === 'itemIds' || field.name.includes('Ids'))) {
+          // Non saltare i campi nascosti per gli ID
+        } else {
+          // Controlla se il campo ha l'attributo data-bulk-editable
+          const isBulkEditable = field.hasAttribute('data-bulk-editable') || 
+                                field.getAttribute('data-bulk-editable') === 'true';
+          
+          if (!isBulkEditable) {
+            return;
+          }
         }
       }
       

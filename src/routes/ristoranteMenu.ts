@@ -5,7 +5,7 @@ import { ristoranteMenuItems } from '../config/sectionMenu';
 import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { uiIcons } from '../config/uiIcons';
-import { elementiCancellatiTableData } from '../config/sectionTableData';
+import { elementiCancellatiTableData, serviziTableData } from '../config/sectionTableData';
 import { isAuthenticated } from '../middlewares/auth';
 import { 
   allergeniConfig, 
@@ -16,9 +16,10 @@ import {
 import { 
   allergeneFormData, 
   categoriaMenuFissoFormData, 
-  categoriaPiattiFormData 
+  categoriaPiattiFormData,
+  servizioFormData
 } from '../config/subSectionFormData';
-import { createSubSectionActionNav } from '../config/actionNavConfig';
+import { createSubSectionActionNav, actionNavConfigs } from '../config/actionNavConfig';
 import { scriptManager } from '../config/scriptManager';
 import { getPaginationParams, calculatePagination } from '../config/paginationHelper';
 
@@ -161,24 +162,512 @@ router.get('/piatti', async (req, res) => {
   }
 });
 
-router.get('/servizi', (req, res) => {
-  const currentPath = '/ristorante-menu/servizi';
+router.get('/servizi', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/servizi';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.servizioAccessorio.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recupera i servizi dal database con paginazione
+    const servizi = await prisma.servizioAccessorio.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+    
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
+    // Gestire messaggi di successo/errore
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['servizi.index'];
+    
+    res.render('pages/ristorante-menu/servizi/index', {
+      title: 'Servizi',
+      description: 'Gestisci i servizi del ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' }
+      ],
+      items: servizi,
+      hasItems: totalItems > 0,
+      pagination,
+      tableData: serviziTableData,
+      success: successMessage ? [successMessage] : undefined,
+      error: errorMessage,
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessun servizio disponibile',
+        description: 'Non ci sono servizi configurati nel sistema. Aggiungi il primo servizio per iniziare.',
+        buttonText: 'Aggiungi servizio',
+        buttonHref: '/ristorante-menu/servizi/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei servizi:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === ROUTE CRUD SERVIZI ===
+router.get('/servizi/nuovo', (req, res) => {
+  const currentPath = '/ristorante-menu/servizi/nuovo';
   let sectionMenu = ristoranteMenuItems;
   
-  res.render('pages/ristorante-menu/servizi', {
-    title: 'Servizi',
-    description: 'Gestisci i servizi del ristorante',
+  const formConfig = servizioFormData.getFormData ? servizioFormData.getFormData(servizioFormData, false) : servizioFormData;
+  
+  // Configurazione actionNav per questa pagina
+  const actionNavConfig = actionNavConfigs['servizi.new'];
+
+  res.render('pages/ristorante-menu/servizi/new', {
+    title: 'Nuovo Servizio',
+    description: 'Crea un nuovo servizio per il ristorante',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionIcons,
     currentPath,
-    scripts: scriptManager.getScriptsForPage('dashboard'),
+    formConfig,
+    itemType: 'Servizio',
+    backUrl: '/ristorante-menu/servizi',
+    actionNavConfig,
+    scripts: scriptManager.getScriptsForPage('form'),
+    isInternalPage: true,
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
-      { label: 'Servizi', href: '/ristorante-menu/servizi' }
+      { label: 'Servizi', href: '/ristorante-menu/servizi' },
+      { label: 'Nuovo Servizio', href: '/ristorante-menu/servizi/nuovo' }
     ]
   });
+});
+
+router.post('/servizi/nuovo', async (req, res) => {
+  const { nome, descrizione, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se esiste già un servizio con lo stesso nome
+    const existingServizio = await prisma.servizioAccessorio.findFirst({
+      where: { 
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingServizio) {
+      const formConfig = servizioFormData.getFormData ? servizioFormData.getFormData(servizioFormData, false, null, req.body) : servizioFormData;
+      
+      // Configurazione actionNav per questa pagina
+      const actionNavConfig = actionNavConfigs['servizi.new'];
+      
+      return res.status(400).render('pages/ristorante-menu/servizi/new', {
+        title: 'Nuovo Servizio',
+        description: 'Crea un nuovo servizio per il ristorante',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/servizi/nuovo',
+        formConfig,
+        itemType: 'Servizio',
+        backUrl: '/ristorante-menu/servizi',
+        actionNavConfig,
+        scripts: scriptManager.getScriptsForPage('form'),
+        isInternalPage: true,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Servizi', href: '/ristorante-menu/servizi' },
+          { label: 'Nuovo Servizio', href: '/ristorante-menu/servizi/nuovo' }
+        ],
+        error: 'Un servizio con questo nome esiste già'
+      });
+    }
+
+    const servizio = await prisma.servizioAccessorio.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    return res.redirect(`/ristorante-menu/servizi/dettagli/${servizio.id}?success=Servizio creato con successo`);
+  } catch (error) {
+    console.error('Errore nella creazione del servizio:', error);
+    
+    const formConfig = servizioFormData.getFormData ? servizioFormData.getFormData(servizioFormData, false, null, req.body) : servizioFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['servizi.new'];
+    
+    res.status(500).render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuovo Servizio',
+      description: 'Crea un nuovo servizio per il ristorante',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/servizi/nuovo',
+      formConfig,
+      itemType: 'Servizio',
+      backUrl: '/ristorante-menu/servizi',
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: 'Nuovo Servizio', href: '/ristorante-menu/servizi/nuovo' }
+      ],
+      error: 'Si è verificato un errore durante la creazione del servizio'
+    });
+  }
+});
+
+// Route per visualizzare servizio
+router.get('/servizi/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/servizi/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const servizio = await prisma.servizioAccessorio.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!servizio) {
+      return res.status(404).send('Servizio non trovato');
+    }
+
+    const actionNavConfig = { ...actionNavConfigs['servizi.view'] };
+    // Sostituisci :id con l'ID effettivo del servizio
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', servizio.id)
+          };
+        }
+        return action;
+      });
+    }
+
+    res.render('pages/ristorante-menu/servizi/view', {
+      title: 'Dettagli Servizio',
+      description: 'Informazioni dettagliate del servizio',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item: servizio,
+      itemType: 'Servizio',
+      backUrl: '/ristorante-menu/servizi',
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: servizio.nome, href: `/ristorante-menu/servizi/dettagli/${servizio.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero del servizio:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+router.get('/servizi/modifica/:id', async (req, res) => {
+  const currentPath = '/ristorante-menu/servizi/modifica';
+  let sectionMenu = ristoranteMenuItems;
+  
+  try {
+    const servizio = await prisma.servizioAccessorio.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!servizio) {
+      return res.status(404).render('error', {
+        title: 'Servizio non trovato',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu,
+        sectionIcons,
+        currentPath,
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Servizi', href: '/ristorante-menu/servizi' },
+          { label: 'Servizio non trovato', href: `/ristorante-menu/servizi/modifica/${req.params.id}` }
+        ],
+        error: 'Il servizio richiesto non esiste'
+      });
+    }
+
+    const formConfig = servizioFormData.getFormData ? servizioFormData.getFormData(servizioFormData, true, servizio) : servizioFormData;
+    const actionNavConfig = actionNavConfigs['servizi.edit'];
+    const customTitle = `Modifica servizio: ${servizio.nome}`;
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Servizio',
+      customTitle,
+      description: 'Modifica i dettagli del servizio',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item: servizio,
+      formConfig,
+      itemType: 'Servizio',
+      detailUrl: `/ristorante-menu/servizi/dettagli/${servizio.id}`,
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: servizio.nome, href: `/ristorante-menu/servizi/modifica/${servizio.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero del servizio per modifica:', error);
+    res.status(500).render('error', {
+      title: 'Errore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: 'Errore', href: `/ristorante-menu/servizi/modifica/${req.params.id}` }
+      ],
+      error: 'Si è verificato un errore nel recupero del servizio'
+    });
+  }
+});
+
+router.post('/servizi/modifica/:id', async (req, res) => {
+  const { nome, descrizione, prezzo, inLista } = req.body;
+  const servizioId = req.params.id;
+  
+  try {
+    const existingServizio = await prisma.servizioAccessorio.findUnique({
+      where: { id: servizioId }
+    });
+
+    if (!existingServizio) {
+      return res.status(404).render('error', {
+        title: 'Servizio non trovato',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: ristoranteMenuItems,
+        sectionIcons,
+        currentPath: '/ristorante-menu/servizi/modifica',
+        breadcrumbs: [
+          { label: 'Menu Ristorante', href: '/ristorante-menu' },
+          { label: 'Servizi', href: '/ristorante-menu/servizi' },
+          { label: 'Servizio non trovato', href: `/ristorante-menu/servizi/modifica/${servizioId}` }
+        ],
+        error: 'Il servizio richiesto non esiste'
+      });
+    }
+
+    if (nome !== existingServizio.nome) {
+      const servizioWithSameName = await prisma.servizioAccessorio.findFirst({
+        where: { 
+          nome,
+          deletedAt: null
+        }
+      });
+
+      if (servizioWithSameName) {
+        return res.status(400).render('pages/ristorante-menu/servizi/edit', {
+          title: 'Modifica Servizio',
+          description: 'Modifica i dettagli del servizio',
+          layout: 'layouts/sections',
+          mainMenu: mainMenuItems,
+          sectionMenu: ristoranteMenuItems,
+          sectionIcons,
+          currentPath: '/ristorante-menu/servizi/modifica',
+          item: existingServizio,
+          itemType: 'Servizio',
+          detailUrl: `/ristorante-menu/servizi/dettagli/${existingServizio.id}`,
+          scripts: scriptManager.getScriptsForPage('form'),
+          breadcrumbs: [
+            { label: 'Menu Ristorante', href: '/ristorante-menu' },
+            { label: 'Servizi', href: '/ristorante-menu/servizi' },
+            { label: existingServizio.nome, href: `/ristorante-menu/servizi/modifica/${existingServizio.id}` }
+          ],
+          error: 'Un altro servizio con questo nome esiste già',
+          formData: req.body
+        });
+      }
+    }
+
+    const updatedServizio = await prisma.servizioAccessorio.update({
+      where: { id: servizioId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    return res.redirect(`/ristorante-menu/servizi/dettagli/${updatedServizio.id}?success=Servizio aggiornato con successo`);
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento del servizio:', error);
+    
+    // Recupera il servizio per il rendering dell'errore
+    let existingServizio = null;
+    try {
+      existingServizio = await prisma.servizioAccessorio.findUnique({
+        where: { id: servizioId }
+      });
+    } catch (dbError) {
+      console.error('Errore nel recupero del servizio per rendering errore:', dbError);
+    }
+    
+    res.status(500).render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Servizio',
+      description: 'Modifica i dettagli del servizio',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu: ristoranteMenuItems,
+      sectionIcons,
+      currentPath: '/ristorante-menu/servizi/modifica',
+      item: existingServizio,
+      itemType: 'Servizio',
+      detailUrl: existingServizio ? `/ristorante-menu/servizi/dettagli/${servizioId}` : undefined,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: existingServizio?.nome || 'Modifica Servizio', href: `/ristorante-menu/servizi/modifica/${servizioId}` }
+      ],
+      error: 'Si è verificato un errore durante l\'aggiornamento del servizio',
+      formData: req.body
+    });
+  }
+});
+
+// Route per eliminazione singola servizio
+router.delete('/servizi/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.servizioAccessorio.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+    
+    res.json({ success: true, message: 'Servizio eliminato con successo' });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione del servizio:', error);
+    res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+  }
+});
+
+// Route per eliminazione multipla servizi
+router.delete('/servizi', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun servizio selezionato per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutti i servizi esistano e non siano già cancellati
+    const existingServizi = await prisma.servizioAccessorio.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingServizi.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun servizio valido trovato per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutti i servizi validi
+    const validServizioIds = existingServizi.map(servizio => servizio.id);
+    await prisma.servizioAccessorio.updateMany({
+      where: { 
+        id: { in: validServizioIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validServizioIds.length;
+    const skippedCount = itemIds.length - validServizioIds.length;
+    
+    let message = `Eliminati ${deletedCount} servizio/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} servizio/i già cancellati o non trovati.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione dei servizi:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
 });
 
 // === SEZIONE IMPOSTAZIONI CON SOTTOSEZIONI ===
@@ -536,7 +1025,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('allergeni', 'new');
       
-      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+      return res.status(400).render('pages/ristorante-menu/servizi/new', {
         title: 'Nuovo Allergene',
         description: 'Crea un nuovo allergene per i piatti del ristorante',
         layout: 'layouts/sections',
@@ -575,7 +1064,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('allergeni', 'new');
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+    res.status(500).render('pages/ristorante-menu/servizi/new', {
       title: 'Nuovo Allergene',
       description: 'Crea un nuovo allergene per i piatti del ristorante',
       layout: 'layouts/sections',
@@ -688,7 +1177,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
     const customTitle = generatePageTitle(allergeniConfig, 'edit', allergene);
 
-    res.render('pages/ristorante-menu/impostazioni/edit', {
+    res.render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Allergene',
       customTitle,
       description: 'Modifica i dettagli dell\'allergene',
@@ -775,7 +1264,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
         const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body) : allergeneFormData;
         const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
         
-        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+        return res.status(400).render('pages/ristorante-menu/servizi/edit', {
           title: 'Modifica Allergene',
           description: 'Modifica i dettagli dell\'allergene',
           layout: 'layouts/sections',
@@ -826,7 +1315,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
     const formConfig = allergeneFormData.getFormData ? allergeneFormData.getFormData(allergeneFormData, true, existingAllergene, req.body) : allergeneFormData;
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+    res.status(500).render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Allergene',
       description: 'Modifica i dettagli dell\'allergene',
       layout: 'layouts/sections',
@@ -981,7 +1470,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
       
-      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+      return res.status(400).render('pages/ristorante-menu/servizi/new', {
         title: 'Nuova Categoria Menu Fisso',
         description: 'Crea una nuova categoria per i menu fissi del ristorante',
         layout: 'layouts/sections',
@@ -1023,7 +1512,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'new');
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+    res.status(500).render('pages/ristorante-menu/servizi/new', {
       title: 'Nuova Categoria Menu Fisso',
       description: 'Crea una nuova categoria per i menu fissi del ristorante',
       layout: 'layouts/sections',
@@ -1136,7 +1625,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
     const customTitle = generatePageTitle(categoriaMenuFissoConfig, 'edit', categoria);
 
-    res.render('pages/ristorante-menu/impostazioni/edit', {
+    res.render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Categoria Menu Fisso',
       customTitle,
       description: 'Modifica i dettagli della categoria',
@@ -1219,7 +1708,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
         const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body) : categoriaMenuFissoFormData;
         const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'edit');
         
-        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+        return res.status(400).render('pages/ristorante-menu/servizi/edit', {
           title: 'Modifica Categoria Menu Fisso',
           description: 'Modifica i dettagli della categoria',
           layout: 'layouts/sections',
@@ -1271,7 +1760,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
     
     const formConfig = categoriaMenuFissoFormData.getFormData ? categoriaMenuFissoFormData.getFormData(categoriaMenuFissoFormData, true, existingCategoria, req.body) : categoriaMenuFissoFormData;
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+    res.status(500).render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Categoria Menu Fisso',
       description: 'Modifica i dettagli della categoria',
       layout: 'layouts/sections',
@@ -1563,7 +2052,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
       // Configurazione actionNav per questa pagina
       const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'new');
       
-      return res.status(400).render('pages/ristorante-menu/impostazioni/new', {
+      return res.status(400).render('pages/ristorante-menu/servizi/new', {
         title: 'Nuova Categoria Piatti',
         description: 'Crea una nuova categoria per i piatti del ristorante',
         layout: 'layouts/sections',
@@ -1605,7 +2094,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
     // Configurazione actionNav per questa pagina
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'new');
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/new', {
+    res.status(500).render('pages/ristorante-menu/servizi/new', {
       title: 'Nuova Categoria Piatti',
       description: 'Crea una nuova categoria per i piatti del ristorante',
       layout: 'layouts/sections',
@@ -1719,7 +2208,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
     const customTitle = generatePageTitle(categoriaPiattiConfig, 'edit', categoria);
 
-    res.render('pages/ristorante-menu/impostazioni/edit', {
+    res.render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Categoria Piatti',
       customTitle,
       description: 'Modifica i dettagli della categoria',
@@ -1807,7 +2296,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
         const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body) : categoriaPiattiFormData;
         const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
         
-        return res.status(400).render('pages/ristorante-menu/impostazioni/edit', {
+        return res.status(400).render('pages/ristorante-menu/servizi/edit', {
           title: 'Modifica Categoria Piatti',
           description: 'Modifica i dettagli della categoria',
           layout: 'layouts/sections',
@@ -1859,7 +2348,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
     const formConfig = categoriaPiattiFormData.getFormData ? categoriaPiattiFormData.getFormData(categoriaPiattiFormData, true, existingCategoria, req.body) : categoriaPiattiFormData;
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
     
-    res.status(500).render('pages/ristorante-menu/impostazioni/edit', {
+    res.status(500).render('pages/ristorante-menu/servizi/edit', {
       title: 'Modifica Categoria Piatti',
       description: 'Modifica i dettagli della categoria',
       layout: 'layouts/sections',
@@ -2898,6 +3387,322 @@ router.post('/impostazioni/categoria-piatti/modifica/:id/ajax', async (req, res)
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
+    });
+  }
+});
+
+// === ROUTE MODIFICA MASSIVA SERVIZI ===
+
+// Route per modifica massiva servizi
+router.get('/servizi/modifica-massa', async (req, res) => {
+  const currentPath = '/ristorante-menu/servizi/modifica-massa';
+  let sectionMenu = ristoranteMenuItems;
+  
+  const servizioIds = req.query.ids ? (req.query.ids as string).split(',') : [];
+  
+  if (servizioIds.length === 0) {
+    return res.redirect('/ristorante-menu/servizi');
+  }
+  
+  try {
+    const selectedServizi = await prisma.servizioAccessorio.findMany({
+      where: { 
+        id: { in: servizioIds },
+        deletedAt: null
+      },
+      select: {
+        id: true,
+        nome: true,
+        descrizione: true,
+        prezzo: true,
+        inLista: true
+      }
+    });
+
+    if (selectedServizi.length === 0) {
+      return res.redirect('/ristorante-menu/servizi');
+    }
+
+    const formConfig = servizioFormData.getFormData ? servizioFormData.getFormData(servizioFormData, false, null, null, true, selectedServizi) : servizioFormData;
+    const actionNavConfig = actionNavConfigs['servizi.editBulk'];
+
+    res.render('pages/ristorante-menu/servizi/editBulk', {
+      title: 'Modifica Massiva Servizi',
+      description: 'Modifica i servizi selezionati',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      selectedItems: selectedServizi,
+      formConfig,
+      itemType: 'Servizio',
+      backUrl: '/ristorante-menu/servizi',
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('bulkEdit'),
+      bulkEditConfigScript: scriptManager.getBulkEditConfigScript(formConfig),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Servizi', href: '/ristorante-menu/servizi' },
+        { label: 'Modifica Massiva', href: '#' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei servizi per modifica massiva:', error);
+    res.redirect('/ristorante-menu/servizi');
+  }
+});
+
+router.post('/servizi/modifica-massa', async (req, res) => {
+  const { itemIds, prezzo, inLista } = req.body;
+  
+  let servizioIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    servizioIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    servizioIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (servizioIds.length === 0) {
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Nessun servizio selezionato per la modifica' });
+    }
+    return res.redirect('/ristorante-menu/servizi?error=Nessun servizio selezionato per la modifica');
+  }
+  
+  try {
+    const existingServizi = await prisma.servizioAccessorio.findMany({
+      where: { 
+        id: { in: servizioIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingServizi.length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun servizio valido trovato per la modifica' });
+      }
+      return res.redirect('/ristorante-menu/servizi?error=Nessun servizio valido trovato per la modifica');
+    }
+
+    const updateData: any = {};
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento' });
+      }
+      return res.redirect('/ristorante-menu/servizi?error=Nessun campo valido fornito per l\'aggiornamento');
+    }
+
+    await prisma.servizioAccessorio.updateMany({
+      where: { 
+        id: { in: servizioIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingServizi.length;
+    const skippedCount = servizioIds.length - existingServizi.length;
+    
+    let message = `Aggiornati ${updatedCount} servizio${updatedCount === 1 ? '' : 'i'} con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} servizio${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
+    }
+    
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: true, message });
+    }
+    
+    res.redirect(`/ristorante-menu/servizi?success=${encodeURIComponent(message)}`);
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    }
+    res.redirect('/ristorante-menu/servizi?error=Errore interno del server durante la modifica massiva');
+  }
+});
+
+// Route AJAX per modifica massiva servizi
+router.post('/servizi/modifica-massa/ajax', async (req, res) => {
+  const { itemIds, prezzo, inLista } = req.body;
+  
+  let servizioIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    servizioIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    servizioIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (servizioIds.length === 0) {
+    return res.json({ success: false, message: 'Nessun servizio selezionato per la modifica' });
+  }
+  
+  try {
+    const existingServizi = await prisma.servizioAccessorio.findMany({
+      where: { 
+        id: { in: servizioIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingServizi.length === 0) {
+      return res.json({ success: false, message: 'Nessun servizio valido trovato per la modifica' });
+    }
+
+    const updateData: any = {};
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento' });
+    }
+
+    await prisma.servizioAccessorio.updateMany({
+      where: { 
+        id: { in: servizioIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingServizi.length;
+    const skippedCount = servizioIds.length - existingServizi.length;
+    
+    let message = `Aggiornati ${updatedCount} servizio${updatedCount === 1 ? '' : 'i'} con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} servizio${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
+    }
+    
+    res.json({ 
+      success: true, 
+      message,
+      updatedCount,
+      skippedCount
+    });
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    res.json({ 
+      success: false, 
+      message: 'Errore interno del server durante la modifica massiva' 
+    });
+  }
+});
+
+// === ROUTE AJAX PER SERVIZI ===
+
+// Route AJAX per creazione servizio
+router.post('/servizi/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se esiste già un servizio con lo stesso nome
+    const existingServizio = await prisma.servizioAccessorio.findFirst({
+      where: { 
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingServizio) {
+      return res.json({ 
+        success: false, 
+        message: 'Un servizio con questo nome esiste già' 
+      });
+    }
+
+    const servizio = await prisma.servizioAccessorio.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Servizio creato con successo',
+      data: { id: servizio.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione del servizio:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione del servizio' 
+    });
+  }
+});
+
+// Route AJAX per modifica servizio
+router.post('/servizi/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione, prezzo, inLista } = req.body;
+  const servizioId = req.params.id;
+  
+  try {
+    const existingServizio = await prisma.servizioAccessorio.findUnique({
+      where: { id: servizioId }
+    });
+
+    if (!existingServizio) {
+      return res.json({ 
+        success: false, 
+        message: 'Il servizio richiesto non esiste' 
+      });
+    }
+
+    if (nome !== existingServizio.nome) {
+      const servizioWithSameName = await prisma.servizioAccessorio.findFirst({
+        where: { 
+          nome,
+          deletedAt: null
+        }
+      });
+
+      if (servizioWithSameName) {
+        return res.json({ 
+          success: false, 
+          message: 'Un altro servizio con questo nome esiste già' 
+        });
+      }
+    }
+
+    const updatedServizio = await prisma.servizioAccessorio.update({
+      where: { id: servizioId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Servizio aggiornato con successo',
+      data: { id: updatedServizio.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento del servizio:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento del servizio' 
     });
   }
 });

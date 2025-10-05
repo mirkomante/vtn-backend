@@ -77,6 +77,68 @@ export const actionNavConfigs: Record<string, ActionNavConfig> = {
     ]
   },
   
+  'servizi.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Servizio',
+        href: '/ristorante-menu/servizi/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'servizi.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/servizi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'servizi.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/servizi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'servizi.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/servizi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/servizi/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+        dynamicHref: true
+      }
+    ]
+  },
+  
+  'servizi.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/servizi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
   'users.new': {
     actions: [
       {

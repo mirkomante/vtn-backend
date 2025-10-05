@@ -1,0 +1,57 @@
+<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+  <%- include('../../../ui/alerts/simple', { message: success[0] }) %>
+<% } %>
+
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
+
+<div class="mt-8">
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Nome</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <%= item.nome %>
+        </dd>
+      </div>
+      <% if (item.descrizione) { %>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Descrizione</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <%= item.descrizione %>
+          </dd>
+        </div>
+      <% } %>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Prezzo</dt>
+        <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          €<%= parseFloat(item.prezzo).toFixed(2) %>
+        </dd>
+      </div>
+      <% if (typeof item.inLista !== 'undefined') { %>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm/6 font-medium text-gray-900">Stato</dt>
+          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= item.inLista ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20' : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20' %>">
+              <%= item.inLista ? 'Attivo' : 'Inattivo' %>
+            </span>
+          </dd>
+        </div>
+      <% } %>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Data di creazione</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= new Date(item.createdAt).toLocaleDateString('it-IT') %></span>
+        </dd>
+      </div>
+      <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <dt class="text-sm/6 font-medium text-gray-900">Ultimo aggiornamento</dt>
+        <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <span class="grow"><%= new Date(item.updatedAt).toLocaleDateString('it-IT') %></span>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>

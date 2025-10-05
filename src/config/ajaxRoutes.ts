@@ -96,6 +96,28 @@ export const ajaxRoutes: { [key: string]: AjaxRouteConfig } = {
     redirectUrl: '/ristorante-menu/impostazioni/categoria-piatti',
     requireAtLeastOneField: true,
     allowPartialUpdates: true
+  },
+  'servizio-new': {
+    endpoint: '/ristorante-menu/servizi/nuovo/ajax',
+    method: 'POST',
+    successMessage: 'Servizio creato con successo',
+    errorMessage: 'Errore durante la creazione del servizio',
+    redirectUrl: '/ristorante-menu/servizi'
+  },
+  'servizio-edit': {
+    endpoint: '/ristorante-menu/servizi/modifica',
+    method: 'POST',
+    successMessage: 'Servizio aggiornato con successo',
+    errorMessage: 'Errore durante l\'aggiornamento del servizio'
+  },
+  'servizio-bulk-edit': {
+    endpoint: '/ristorante-menu/servizi/modifica-massa',
+    method: 'POST',
+    successMessage: 'Aggiornati {count} servizi con successo',
+    errorMessage: 'Errore durante l\'aggiornamento dei servizi',
+    redirectUrl: '/ristorante-menu/servizi',
+    requireAtLeastOneField: true,
+    allowPartialUpdates: true
   }
 };
 
@@ -115,6 +137,8 @@ export function getAjaxConfig(path: string, action: string): AjaxRouteConfig | n
     entityType = 'categoria-menu-fisso';
   } else if (pathSegments.includes('categoria-piatti')) {
     entityType = 'categoria-piatti';
+  } else if (pathSegments.includes('servizi')) {
+    entityType = 'servizio';
   }
   
   if (action.includes('/nuovo')) {
