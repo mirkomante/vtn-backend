@@ -142,6 +142,143 @@ npm start
 - `npm run prisma:generate` - Genera client Prisma
 - `npm run prisma:migrate` - Esegue migrazioni database
 
+## Sistema Ristorante-Menu
+
+### Architettura del Sistema
+
+Il sistema ristorante-menu è organizzato in una gerarchia a tre livelli:
+
+1. **Livello principale**: `/ristorante-menu` - Dashboard principale
+2. **Livello sezione**: `/ristorante-menu/servizi` e `/ristorante-menu/impostazioni`
+3. **Livello sottosezione**: `/ristorante-menu/impostazioni/{sottosezione}` (solo per impostazioni)
+
+### Sezione Servizi (Livello Singolo)
+
+La sezione servizi gestisce i servizi del ristorante con un'interfaccia CRUD completa.
+
+**Endpoint principali**:
+- `GET /ristorante-menu/servizi` - Lista servizi
+- `GET /ristorante-menu/servizi/nuovo` - Form creazione
+- `POST /ristorante-menu/servizi/nuovo` - Creazione servizio
+- `POST /ristorante-menu/servizi/nuovo/ajax` - Creazione AJAX
+- `GET /ristorante-menu/servizi/dettagli/:id` - Visualizzazione
+- `GET /ristorante-menu/servizi/modifica/:id` - Form modifica
+- `POST /ristorante-menu/servizi/modifica/:id` - Modifica servizio
+- `POST /ristorante-menu/servizi/modifica/:id/ajax` - Modifica AJAX
+- `GET /ristorante-menu/servizi/modifica-massa` - Form modifica massiva
+- `POST /ristorante-menu/servizi/modifica-massa` - Modifica massiva
+- `POST /ristorante-menu/servizi/modifica-massa/ajax` - Modifica massiva AJAX
+- `DELETE /ristorante-menu/servizi/:id` - Eliminazione singola
+- `DELETE /ristorante-menu/servizi` - Eliminazione multipla
+
+**Campi del servizio**:
+- `nome` - Nome del servizio (obbligatorio)
+- `descrizione` - Descrizione opzionale
+- `prezzo` - Prezzo in euro (obbligatorio, modificabile in massa)
+- `inLista` - Visibilità nel menu (toggle, modificabile in massa)
+
+### Sezione Impostazioni (Livello Doppio)
+
+La sezione impostazioni contiene sottosezioni per la gestione delle configurazioni del ristorante.
+
+#### Sottosezioni Disponibili
+
+**1. Allergeni** (`/ristorante-menu/impostazioni/allergeni`)
+- Gestione degli allergeni del ristorante
+- Campi: `nome`, `descrizione`
+- Operazioni: CRUD completo (senza modifica massiva)
+
+**2. Categoria Menu Fisso** (`/ristorante-menu/impostazioni/categoria-menu-fisso`)
+- Categorie per i menu fissi
+- Campi: `nome`, `descrizione`, `inLista` (toggle)
+- Operazioni: CRUD completo + modifica massiva per `inLista`
+
+**3. Categoria Piatti** (`/ristorante-menu/impostazioni/categoria-piatti`)
+- Categorie per i piatti
+- Campi: `nome`, `descrizione`, `inLista` (toggle)
+- Operazioni: CRUD completo + modifica massiva per `inLista`
+
+**Endpoint per sottosezioni**:
+- `GET /impostazioni/{sottosezione}` - Lista elementi
+- `GET /impostazioni/{sottosezione}/nuovo` - Form creazione
+- `POST /impostazioni/{sottosezione}/nuovo` - Creazione
+- `POST /impostazioni/{sottosezione}/nuovo/ajax` - Creazione AJAX
+- `GET /impostazioni/{sottosezione}/dettagli/:id` - Visualizzazione
+- `GET /impostazioni/{sottosezione}/modifica/:id` - Form modifica
+- `POST /impostazioni/{sottosezione}/modifica/:id` - Modifica
+- `POST /impostazioni/{sottosezione}/modifica/:id/ajax` - Modifica AJAX
+- `GET /impostazioni/{sottosezione}/modifica-massa` - Form modifica massiva (solo categorie)
+- `POST /impostazioni/{sottosezione}/modifica-massa` - Modifica massiva (solo categorie)
+- `DELETE /impostazioni/{sottosezione}/:id` - Eliminazione singola
+- `DELETE /impostazioni/{sottosezione}` - Eliminazione multipla
+
+### Componenti Centralizzati
+
+#### 1. Form Manager (`formManager.js`)
+- **Gestione unificata** di tutti i form del sistema
+- **Validazione client-side** automatica
+- **Supporto AJAX** per operazioni asincrone
+- **Modifica massiva** con campi configurabili
+- **Integrazione toast** per feedback utente
+
+#### 2. Selectable Table (`selectableTable.js`)
+- **Tabelle con selezione multipla** per operazioni bulk
+- **Paginazione integrata** con configurazione flessibile
+- **Azioni personalizzabili** (eliminazione, modifica massiva)
+- **Conferme JavaScript** per azioni distruttive
+- **Filtri avanzati** con sistema customFilters
+
+#### 3. Sistema di Configurazione
+
+**Form Data** (`sectionFormData.ts`, `subSectionFormData.ts`):
+- Configurazione centralizzata dei form
+- Supporto per tutti i tipi di campo
+- Configurazione modifica massiva per campo
+- Validazione e messaggi di errore
+
+**SubSection Config** (`subSectionConfig.ts`):
+- Configurazione per sottosezioni
+- Empty states personalizzabili
+- Configurazione tabelle e azioni
+- Titoli dinamici delle pagine
+
+**Action Navigation** (`actionNavConfig.ts`):
+- Configurazione pulsanti di navigazione
+- Supporto per configurazioni statiche e dinamiche
+- Contesti specifici per sottosezioni
+
+### Operazioni AJAX
+
+#### Configurazione Centralizzata
+Le route AJAX sono configurate in `ajaxRoutes.ts`:
+
+```typescript
+'servizio-new': {
+  endpoint: '/ristorante-menu/servizi/nuovo/ajax',
+  method: 'POST',
+  successMessage: 'Servizio creato con successo',
+  errorMessage: 'Errore durante la creazione del servizio',
+  redirectUrl: '/ristorante-menu/servizi'
+}
+```
+
+#### Flusso AJAX
+1. **Form Manager** intercetta l'invio del form
+2. **Validazione client-side** dei campi obbligatori
+3. **Invio AJAX** con `fetch()` API
+4. **Gestione risposta**:
+   - Successo: Toast di successo + redirect (se configurato)
+   - Errore: Toast di errore + visualizzazione errori nel form
+5. **Aggiornamento UI** senza ricaricamento pagina
+
+### Vantaggi dell'Architettura
+
+- **Modularità**: Ogni componente è indipendente e riutilizzabile
+- **Configurabilità**: Comportamento definito tramite configurazioni
+- **Consistenza**: UI/UX uniforme across tutte le sezioni
+- **Manutenibilità**: Modifiche centralizzate si propagano ovunque
+- **Scalabilità**: Facile aggiunta di nuove sezioni/sottosezioni
+
 ## API Endpoints
 
 ### Autenticazione
