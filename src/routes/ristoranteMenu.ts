@@ -31,7 +31,8 @@ import {
   piattiDetailViewConfig,
   allergeniDetailViewConfig,
   categoriaMenuFissoDetailViewConfig,
-  categoriaPiattiDetailViewConfig
+  categoriaPiattiDetailViewConfig,
+  getDetailViewConfig
 } from '../config/detailViewConfig';
 
 const prisma = new PrismaClient();
@@ -5092,6 +5093,66 @@ router.post('/menu-fissi/modifica-massa/ajax', async (req, res) => {
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei menu fissi' 
+    });
+  }
+});
+
+// Route per eliminazione singola menu fisso
+router.delete('/menu-fissi/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.menuFisso.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Menu fisso eliminato con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione del menu fisso:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla menu fissi
+router.delete('/menu-fissi', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun menu fisso selezionato' 
+    });
+  }
+
+  try {
+    const result = await prisma.menuFisso.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: `${result.count} menu fisso/i eliminato/i con successo` 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla dei menu fissi:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
     });
   }
 });
