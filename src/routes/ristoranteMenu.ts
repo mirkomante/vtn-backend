@@ -578,14 +578,24 @@ router.get('/piatti', async (req, res) => {
     const currentPath = '/ristorante-menu/piatti';
     let sectionMenu = ristoranteMenuItems;
     
+    // Filtro per categoria
+    const categoriaFilter = req.query.categoria as string;
+    
     // Parametri di paginazione
     const { page, limit, offset } = getPaginationParams(req);
     
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (categoriaFilter && categoriaFilter.trim() !== '') {
+      whereClause.categoriaId = categoriaFilter;
+    }
+    
     // Recupera i piatti con le relazioni
     const piatti = await prisma.piatto.findMany({
-      where: {
-        deletedAt: null
-      },
+      where: whereClause,
       include: {
         categoria: true,
         allergeni: {
@@ -610,10 +620,26 @@ router.get('/piatti', async (req, res) => {
     
     // Calcola paginazione
     const totalItems = await prisma.piatto.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di piatti nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.piatto.count({
       where: { deletedAt: null }
     });
     
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
     const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le categorie per il filtro
+    const categorie = await prisma.categoriaPiatti.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
     
     // Configurazione actionNav per questa pagina
     const actionNavConfig = actionNavConfigs['piatti.index'];
@@ -628,8 +654,12 @@ router.get('/piatti', async (req, res) => {
       currentPath,
       tableData: piattiTableData,
       items,
-      hasItems: items.length > 0,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
       pagination,
+      currentCategoriaFilter: categoriaFilter,
+      categorie,
       scripts: scriptManager.getScriptsForPage('table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1365,12 +1395,22 @@ router.get('/menu-fissi', async (req, res) => {
     const currentPath = '/ristorante-menu/menu-fissi';
     let sectionMenu = ristoranteMenuItems;
     
+    // Filtro per categoria
+    const categoriaFilter = req.query.categoria as string;
+    
     const { page, limit, offset } = getPaginationParams(req);
     
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (categoriaFilter && categoriaFilter.trim() !== '') {
+      whereClause.categoriaId = categoriaFilter;
+    }
+    
     const menuFissi = await prisma.menuFisso.findMany({
-      where: {
-        deletedAt: null
-      },
+      where: whereClause,
       include: {
         categoria: true,
         piatti: {
@@ -1399,10 +1439,26 @@ router.get('/menu-fissi', async (req, res) => {
     }));
     
     const totalItems = await prisma.menuFisso.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di menu fissi nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.menuFisso.count({
       where: { deletedAt: null }
     });
     
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
     const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le categorie per il filtro
+    const categorie = await prisma.categoriaMenuFisso.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
     
     // Configurazione actionNav per questa pagina
     const actionNavConfig = actionNavConfigs['menu-fissi.index'];
@@ -1417,8 +1473,12 @@ router.get('/menu-fissi', async (req, res) => {
       currentPath,
       tableData: menuFissiTableData,
       items,
-      hasItems: items.length > 0,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
       pagination,
+      currentCategoriaFilter: categoriaFilter,
+      categorie,
       scripts: scriptManager.getScriptsForPage('table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },

@@ -1,25 +1,5 @@
-<% if (!hasItems || items.length === 0) { %>
-  <% if (typeof emptyState !== 'undefined' && emptyState) { %>
-    <%- include('../../../ui/emptyStates/simple', emptyState) %>
-  <% } else { %>
-    <div class="text-center py-12">
-      <div class="mx-auto h-12 w-12 text-gray-400">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      </div>
-      <h3 class="mt-2 text-sm font-medium text-gray-900">Nessun menu fisso disponibile</h3>
-      <p class="mt-1 text-sm text-gray-500">Non ci sono menu fissi configurati nel sistema. Aggiungi il primo menu per iniziare.</p>
-      <div class="mt-6">
-        <a href="/ristorante-menu/menu-fissi/nuovo" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <svg class="-ml-0.5 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-          </svg>
-          Aggiungi menu
-        </a>
-      </div>
-    </div>
-  <% } %>
+<% if (isSectionEmpty) { %>
+  <%- include('../../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
   <!-- Messaggio di successo se presente -->
   <% if (typeof success !== 'undefined' && success && success.length > 0) { %>
@@ -54,6 +34,34 @@
     tableId: 'menu-fissi-table',
     tableData: tableData,
     items: items,
+    showFilters: true,
+    filters: [
+      {
+        id: 'categoria',
+        name: 'categoria',
+        label: 'Categoria',
+        type: 'select',
+        placeholder: 'Tutte le categorie',
+        options: [
+          { value: '', label: 'Tutte le categorie', selected: !currentCategoriaFilter },
+          ...categorie.map(categoria => ({
+            value: categoria.id,
+            label: categoria.nome,
+            selected: currentCategoriaFilter === categoria.id
+          }))
+        ]
+      }
+    ],
+    hasActiveFilters: !!currentCategoriaFilter,
+    clearFiltersUrl: '/ristorante-menu/menu-fissi',
+    showEmptyMessage: isFilteredEmpty,
+    emptyMessage: {
+      title: 'Nessun menu fisso trovato',
+      description: 'Non ci sono menu fissi che corrispondono ai filtri applicati.',
+      icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>`
+    },
     tableConfig: {
       idField: 'id',
       labelField: 'nome',
@@ -75,7 +83,7 @@
       errorMessage: 'Errore durante l\'eliminazione',
       getDisplayValue: (item) => item.nome
     },
-    pagination: typeof pagination !== 'undefined' ? pagination : undefined
+    pagination: (typeof pagination !== 'undefined' && !isFilteredEmpty) ? pagination : undefined
   }) %>
 <% } %>
 
