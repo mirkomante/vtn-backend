@@ -198,6 +198,8 @@ La sezione impostazioni contiene sottosezioni per la gestione delle configurazio
 - Campi: `nome`, `descrizione`, `inLista` (toggle)
 - Operazioni: CRUD completo + modifica massiva per `inLista`
 
+> **Nota**: Per dettagli completi sulla configurazione delle sottosezioni, vedi la sezione [Configurazione Sottosezioni](#configurazione-sottosezioni).
+
 **Endpoint per sottosezioni**:
 - `GET /impostazioni/{sottosezione}` - Lista elementi
 - `GET /impostazioni/{sottosezione}/nuovo` - Form creazione
@@ -580,6 +582,8 @@ export const allergeniConfig: SubSectionConfig = {
 }
 ```
 
+> **Nota**: Per una spiegazione completa della configurazione delle sottosezioni, vedi la sezione [Configurazione Sottosezioni](#configurazione-sottosezioni).
+
 ### Configurazione delle Azioni
 
 #### Azioni nelle Sezioni Principali
@@ -642,6 +646,8 @@ export const allergeniConfig: SubSectionConfig = {
 }
 ```
 
+> **Nota**: Per dettagli completi sulla configurazione delle sottosezioni, vedi la sezione [Configurazione Sottosezioni](#configurazione-sottosezioni).
+
 ### Componenti UI Utilizzati
 
 #### Selectable Table (`selectableTable.ejs`)
@@ -698,6 +704,8 @@ Sistema di filtri avanzato con:
    - Empty state (`emptyState`)
 2. **Rendering** tramite `subSection.ejs` che usa la configurazione
 
+> **Nota**: Per una spiegazione dettagliata della configurazione delle sottosezioni, vedi la sezione [Configurazione Sottosezioni](#configurazione-sottosezioni).
+
 ### Tipi di Azioni Supportate
 
 #### Azioni Singole
@@ -749,6 +757,233 @@ window['servizi-table-config'] = {
 - **Responsive**: Ottimizzato per tutti i dispositivi
 
 Questo sistema permette di definire rapidamente nuove viste e tabelle mantenendo un'interfaccia utente coerente e funzionalità avanzate come selezione multipla, filtri e azioni bulk.
+
+## Configurazione Sottosezioni
+
+### Architettura delle Sottosezioni
+
+Le sottosezioni sono sezioni di secondo livello che appartengono a sezioni principali. Nel sistema ristorante-menu, la sezione "Impostazioni" contiene tre sottosezioni:
+
+- **Allergeni** (`/ristorante-menu/impostazioni/allergeni`)
+- **Categoria Menu Fisso** (`/ristorante-menu/impostazioni/categoria-menu-fisso`)
+- **Categoria Piatti** (`/ristorante-menu/impostazioni/categoria-piatti`)
+
+### Configurazione Centralizzata
+
+A differenza delle sezioni principali, le sottosezioni utilizzano una **configurazione completamente centralizzata** in `subSectionConfig.ts`. Ogni sottosezione ha una configurazione che include:
+
+#### Struttura della Configurazione
+
+```typescript
+export interface SubSectionConfig {
+  hasItems: boolean;           // Se ci sono elementi da mostrare
+  items: any[];               // Array degli elementi
+  emptyState: {               // Stato vuoto personalizzato
+    iconName: string;
+    icon: { viewBox: string; path: string; };
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonHref: string;
+    buttonIconName: string;
+    buttonIcon: { viewBox: string; path: string; };
+  };
+  tableData: {                // Configurazione colonne tabella
+    tableHeads: Array<{ label: string; mobile: boolean; }>;
+    fields: Array<{ name: string; }>;
+  };
+  tableConfig: {              // Configurazione azioni e comportamento
+    tableId: string;
+    idField: string;
+    labelField: string;
+    detailUrl: string;
+    editUrl: string;
+    bulkEditUrl?: string;
+    actionButton: { text: string; href: string; };
+    editMultipleButton?: { text: string; };
+    deleteButton: { text: string; classes: string; };
+    endpoint: string;
+    method: string;
+    confirmMessage: string;
+    confirmMessageMultiple: string;
+    successMessage: string;
+    errorMessage: string;
+    includeScripts: boolean;
+  };
+  pageTitles?: {              // Titoli dinamici delle pagine
+    view?: { titleField: string; prefix?: string; suffix?: string; };
+    edit?: { titleField: string; prefix?: string; suffix?: string; };
+  };
+}
+```
+
+### Configurazioni Specifiche per Sottosezione
+
+#### 1. Allergeni
+```typescript
+export const allergeniConfig: SubSectionConfig = {
+  hasItems: false, // Impostato dinamicamente
+  items: [],       // Impostato dinamicamente
+  emptyState: {
+    iconName: 'exclamation-triangle',
+    icon: { viewBox: '0 0 24 24', path: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z' },
+    title: 'Nessun allergene',
+    description: 'Inizia creando il tuo primo allergene.',
+    buttonText: 'Nuovo Allergene',
+    buttonHref: '/ristorante-menu/impostazioni/allergeni/nuovo',
+    buttonIconName: 'plus',
+    buttonIcon: { viewBox: '0 0 20 20', path: 'M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z' }
+  },
+  tableData: {
+    tableHeads: [
+      { label: 'Nome', mobile: true },
+      { label: 'Descrizione', mobile: false }
+    ],
+    fields: [
+      { name: 'nome' },
+      { name: 'descrizione' }
+    ]
+  },
+  tableConfig: {
+    tableId: 'allergeni-table',
+    idField: 'id',
+    labelField: 'nome',
+    detailUrl: '/ristorante-menu/impostazioni/allergeni/dettagli/:id',
+    editUrl: '/ristorante-menu/impostazioni/allergeni/modifica/:id',
+    bulkEditUrl: undefined, // Nessuna modifica massiva
+    actionButton: {
+      text: 'Nuovo Allergene',
+      href: '/ristorante-menu/impostazioni/allergeni/nuovo'
+    },
+    editMultipleButton: undefined,
+    deleteButton: {
+      text: 'Elimina',
+      classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700'
+    },
+    endpoint: '/ristorante-menu/impostazioni/allergeni',
+    method: 'DELETE',
+    confirmMessage: 'Sei sicuro di voler eliminare questo allergene?',
+    confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} allergeni?',
+    successMessage: 'Eliminati {count} allergene/i con successo',
+    errorMessage: 'Errore durante l\'eliminazione',
+    includeScripts: true
+  },
+  pageTitles: {
+    view: { titleField: 'nome', prefix: 'Dettagli' },
+    edit: { titleField: 'nome', prefix: 'Modifica' }
+  }
+};
+```
+
+#### 2. Categoria Menu Fisso
+```typescript
+export const categoriaMenuFissoConfig: SubSectionConfig = {
+  // ... configurazione simile ma con:
+  tableData: {
+    tableHeads: [
+      { label: 'Nome', mobile: true },
+      { label: 'Descrizione', mobile: false },
+      { label: 'Stato', mobile: true }  // ← Colonna aggiuntiva
+    ],
+    fields: [
+      { name: 'nome' },
+      { name: 'descrizione' },
+      { name: 'inLista' }  // ← Campo aggiuntivo
+    ]
+  },
+  tableConfig: {
+    // ... configurazione simile ma con:
+    bulkEditUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica-massa', // ← Modifica massiva abilitata
+    editMultipleButton: { text: 'Modifica' }  // ← Bottone modifica massiva
+  }
+};
+```
+
+#### 3. Categoria Piatti
+```typescript
+export const categoriaPiattiConfig: SubSectionConfig = {
+  // Configurazione identica a categoriaMenuFissoConfig
+  // ma con URL e ID specifici per categoria-piatti
+};
+```
+
+### Differenze tra Sottosezioni
+
+| Caratteristica | Allergeni | Categoria Menu Fisso | Categoria Piatti |
+|---|---|---|---|
+| **Colonne** | Nome, Descrizione | Nome, Descrizione, Stato | Nome, Descrizione, Stato |
+| **Modifica Massiva** | ❌ Non supportata | ✅ Supportata | ✅ Supportata |
+| **Campo Stato** | ❌ Non presente | ✅ `inLista` | ✅ `inLista` |
+| **Bottone Modifica** | ❌ Non presente | ✅ Presente | ✅ Presente |
+
+### Utilizzo della Configurazione
+
+#### Nel Controller (Route)
+```typescript
+// Esempio per allergeni
+router.get('/impostazioni/allergeni', async (req, res) => {
+  const config = allergeniConfig;
+  
+  // Aggiorna dinamicamente
+  config.hasItems = allergeni.length > 0;
+  config.items = allergeni;
+  
+  res.render('pages/ristorante-menu/impostazioni/subSection', {
+    title: 'Allergeni',
+    config,
+    tableData: config.tableData,
+    tableConfig: config.tableConfig,
+    emptyState: config.emptyState
+  });
+});
+```
+
+#### Nella Vista (`subSection.ejs`)
+```ejs
+<% if (!hasItems || items.length === 0) { %>
+  <%- include('../../../ui/emptyStates/simple', emptyState) %>
+<% } else { %>
+  <%- include('../../../ui/tables/selectableTable', {
+    tableId: tableConfig.tableId,
+    tableData: tableData,
+    items: items,
+    tableConfig: {
+      idField: tableConfig.idField,
+      labelField: tableConfig.labelField,
+      detailUrl: tableConfig.detailUrl,
+      editUrl: tableConfig.editUrl,
+      bulkEditUrl: tableConfig.bulkEditUrl,
+      editMultipleButton: tableConfig.editMultipleButton,
+      actionButton: tableConfig.deleteButton,
+      endpoint: tableConfig.endpoint,
+      method: tableConfig.method,
+      confirmMessage: tableConfig.confirmMessage,
+      confirmMessageMultiple: tableConfig.confirmMessageMultiple,
+      successMessage: tableConfig.successMessage,
+      errorMessage: tableConfig.errorMessage
+    }
+  }) %>
+<% } %>
+```
+
+### Vantaggi della Configurazione Centralizzata
+
+- **Coerenza**: Tutte le sottosezioni seguono lo stesso pattern
+- **Manutenibilità**: Modifiche in un solo file per sottosezione
+- **Riutilizzabilità**: La vista `subSection.ejs` gestisce tutte le sottosezioni
+- **Flessibilità**: Ogni sottosezione può avere configurazioni specifiche
+- **Scalabilità**: Facile aggiunta di nuove sottosezioni
+
+### Aggiunta di una Nuova Sottosezione
+
+Per aggiungere una nuova sottosezione:
+
+1. **Definire la configurazione** in `subSectionConfig.ts`
+2. **Aggiungere la route** nel controller
+3. **Aggiungere al menu** in `subSectionMenu.ts`
+4. **Creare i form** in `subSectionFormData.ts` (se necessario)
+
+La vista `subSection.ejs` gestirà automaticamente la nuova sottosezione utilizzando la sua configurazione.
 
 ## API Endpoints
 
