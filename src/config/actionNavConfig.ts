@@ -122,8 +122,7 @@ export const actionNavConfigs: Record<string, ActionNavConfig> = {
         type: 'link',
         text: 'Modifica',
         href: '/ristorante-menu/servizi/modifica/:id',
-        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
-        dynamicHref: true
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
       }
     ]
   },
@@ -134,6 +133,128 @@ export const actionNavConfigs: Record<string, ActionNavConfig> = {
         type: 'link',
         text: 'Torna alla lista',
         href: '/ristorante-menu/servizi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+
+  'piatti.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Piatto',
+        href: '/ristorante-menu/piatti/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'piatti.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/piatti',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'piatti.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/piatti',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'piatti.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/piatti',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/piatti/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'piatti.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/piatti',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'menu-fissi.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Menu',
+        href: '/ristorante-menu/menu-fissi/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'menu-fissi.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/menu-fissi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'menu-fissi.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/menu-fissi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'menu-fissi.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/menu-fissi',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/menu-fissi/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'menu-fissi.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/menu-fissi',
         classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
       }
     ]

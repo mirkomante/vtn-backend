@@ -199,4 +199,180 @@ export const userFormData: FormDataSchema = {
       }
     };
   }
+};
+
+export const piattoFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/piatti/nuovo/ajax', // Route AJAX
+    id: 'piattoForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Piatto',
+      required: true,
+      placeholder: 'Spaghetti Carbonara',
+      errorMessage: 'Il nome del piatto è obbligatorio',
+      bulkEditable: false
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione del piatto (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false
+    },
+    {
+      type: 'select',
+      name: 'categoriaId',
+      id: 'categoriaId',
+      label: 'Categoria',
+      required: true,
+      placeholder: 'Seleziona una categoria',
+      errorMessage: 'La categoria è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna categoria per tutti i piatti selezionati',
+      bulkPlaceholder: 'Seleziona nuova categoria (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'number',
+      name: 'prezzo',
+      id: 'prezzo',
+      label: 'Prezzo (€)',
+      required: true,
+      placeholder: '12.50',
+      min: 0,
+      step: 0.01,
+      errorMessage: 'Il prezzo deve essere un numero valido maggiore di 0',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna prezzo per tutti i piatti selezionati',
+      bulkPlaceholder: 'Nuovo prezzo (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'checkbox-group',
+      name: 'allergeni',
+      id: 'allergeni',
+      label: 'Allergeni',
+      required: false,
+      description: 'Seleziona gli allergeni presenti nel piatto',
+      errorMessage: 'Seleziona almeno un allergene valido',
+      bulkEditable: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'Visibile nel menu',
+      required: false,
+      value: true,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna visibilità per tutti i piatti selezionati',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/piatti',
+      classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+    }
+  },
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, piatto?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+    return {
+      ...data,
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? '/ristorante-menu/piatti/modifica-massa/ajax'
+          : isEdit 
+            ? `/ristorante-menu/piatti/modifica/${piatto?.id}/ajax`
+            : '/ristorante-menu/piatti/nuovo/ajax',
+        method: isBulkEdit ? 'POST' : 'POST'
+      },
+      fields: data.fields.map(field => {
+        let value = '';
+        
+        if (piatto && field.name in piatto) {
+          if (field.name === 'allergeni') {
+            // Per gli allergeni, prendiamo gli ID degli allergeni associati
+            value = piatto.allergeni?.map((pa: any) => pa.allergene.id) || [];
+          } else {
+            value = piatto[field.name] || '';
+          }
+        }
+        
+        // Per la modifica massiva, mostra solo i campi modificabili
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        // Per la modifica massiva, usa configurazione specifica
+        if (isBulkEdit && field.bulkEditable) {
+          let bulkValue = '';
+          
+          // Per i campi toggle/checkbox, gestisci gli stati misti
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map((item: any) => item[field.name]);
+            const trueCount = values.filter(v => v === true || v === 'true' || v === 'on').length;
+            const falseCount = values.filter(v => v === false || v === 'false' || v === 'off').length;
+            
+            if (trueCount === selectedItems.length) {
+              // Tutti true
+              bulkValue = 'true';
+            } else if (falseCount === selectedItems.length) {
+              // Tutti false
+              bulkValue = 'false';
+            } else {
+              // Stato misto
+              bulkValue = 'indeterminate';
+            }
+          }
+          
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: bulkValue
+          };
+        }
+        
+        return { ...field, value };
+      }).filter(field => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Aggiorna ${selectedItems?.length || 0} piatti` 
+            : isEdit 
+              ? 'Aggiorna' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/piatti' 
+            : isEdit 
+              ? `/ristorante-menu/piatti/dettagli/${piatto?.id}` 
+              : '/ristorante-menu/piatti'
+        }
+      }
+    };
+  }
 }; 

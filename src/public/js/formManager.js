@@ -436,8 +436,21 @@ class FormManager {
       if (field.indeterminate) {
         return null; // Non includere il campo nei dati
       }
+      
+      // Per checkbox multipli (con name che finisce con []), restituisci il value se checked
+      if (field.name && field.name.endsWith('[]')) {
+        return field.checked ? field.value : false;
+      }
+      
       return field.checked;
     }
+    
+    // Per select multipli, restituisci un array di valori
+    if (field.type === 'select-multiple' || field.multiple) {
+      const selectedOptions = Array.from(field.selectedOptions);
+      return selectedOptions.map(option => option.value);
+    }
+    
     return field.value;
   }
 
@@ -557,15 +570,38 @@ class FormManager {
       
       const value = this.getFieldValue(field);
       
+      // Gestisci campi multipli (come checkbox con name="field[]")
+      const fieldName = field.name.replace('[]', '');
+      
       // Per bulk edit, raccogli solo campi con valori (includendo false per checkbox)
       if (config.isBulkEdit && config.config.allowPartialUpdates) {
         if (value !== '' && value !== null && value !== undefined) {
-          data[field.name] = value;
+          if (field.name.includes('[]')) {
+            // Campo multiplo
+            if (!data[fieldName]) {
+              data[fieldName] = [];
+            }
+            if (value !== false) { // Includi solo valori true per checkbox
+              data[fieldName].push(value);
+            }
+          } else {
+            data[field.name] = value;
+          }
         }
       } else {
         // Per form normali, includi tutti i campi tranne quelli null
         if (value !== null) {
-          data[field.name] = value;
+          if (field.name.includes('[]')) {
+            // Campo multiplo
+            if (!data[fieldName]) {
+              data[fieldName] = [];
+            }
+            if (value !== false) { // Includi solo valori true per checkbox
+              data[fieldName].push(value);
+            }
+          } else {
+            data[field.name] = value;
+          }
         }
       }
     });

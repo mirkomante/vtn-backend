@@ -13,7 +13,7 @@ export interface FormHiddenField {
 }
 
 export interface FormField {
-  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'toggle';
+  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'toggle' | 'checkbox-group';
   name: string;
   id: string;
   label: string;
@@ -28,6 +28,7 @@ export interface FormField {
   step?: number;
   pattern?: string;
   options?: FormOption[];
+  multiple?: boolean; // Per select multipli
   // Proprietà per la modifica massiva
   bulkEditable?: boolean;
   bulkLabel?: string;

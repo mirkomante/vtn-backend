@@ -30,6 +30,42 @@ export const serviziTableData: TableDataSchema = {
     ]
 }
 
+export const piattiTableData: TableDataSchema = {
+    tableHeads: [
+        { label: 'Nome', sort: true, name: 'nome', mobile: true },
+        { label: 'Categoria', sort: true, name: 'categoria_nome', mobile: false },
+        { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
+        { label: 'Allergeni', sort: false, name: 'allergeni_count', mobile: false },
+        { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
+    ],
+    fields: [
+        { name: 'nome', label: true, edit: false, type: 'text' },
+        { name: 'categoria_nome', label: false, edit: false, type: 'text' },
+        { name: 'prezzo', label: false, edit: false, type: 'currency' },
+        { name: 'allergeni_count', label: false, edit: false, type: 'text' },
+        { name: 'inLista', label: false, edit: false, type: 'boolean' }
+    ]
+}
+
+export const menuFissiTableData: TableDataSchema = {
+    tableHeads: [
+        { label: 'Nome', sort: true, name: 'nome', mobile: true },
+        { label: 'Categoria', sort: true, name: 'categoria_nome', mobile: false },
+        { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
+        { label: 'Piatti', sort: false, name: 'piatti_count', mobile: false },
+        { label: 'Servizi', sort: false, name: 'servizi_count', mobile: false },
+        { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
+    ],
+    fields: [
+        { name: 'nome', label: true, edit: false, type: 'text' },
+        { name: 'categoria_nome', label: false, edit: false, type: 'text' },
+        { name: 'prezzo', label: false, edit: false, type: 'currency' },
+        { name: 'piatti_count', label: false, edit: false, type: 'text' },
+        { name: 'servizi_count', label: false, edit: false, type: 'text' },
+        { name: 'inLista', label: false, edit: false, type: 'boolean' }
+    ]
+}
+
 export const elementiCancellatiTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },

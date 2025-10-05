@@ -25,17 +25,18 @@
           
           <% if (field.type === 'select') { %>
             <!-- Select field -->
-            <select name="<%= field.name %>" 
+            <select name="<%= field.multiple ? field.name + '[]' : field.name %>" 
                     id="<%= field.id %>" 
                     <%= field.required ? 'required' : '' %>
+                    <%= field.multiple ? 'multiple' : '' %>
                     <%= field.bulkEditable ? 'data-bulk-editable="true"' : '' %>
-                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-              <% if (field.placeholder) { %>
+                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 <%= field.multiple ? 'h-32' : '' %>">
+              <% if (field.placeholder && !field.multiple) { %>
                 <option value=""><%= field.placeholder %></option>
               <% } %>
               <% field.options.forEach(function(option) { %>
                 <option value="<%= option.value %>" 
-                        <%= (field.value && field.value === option.value) ? 'selected' : '' %>>
+                        <%= (field.value && (field.multiple ? field.value.includes(option.value) : field.value === option.value)) ? 'selected' : '' %>>
                   <%= option.label %>
                 </option>
               <% }); %>
@@ -56,6 +57,40 @@
             <svg class="pointer-events-none col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-red-500 sm:size-4 hidden" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon" role="img" aria-label="Error icon">
               <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
             </svg>
+            
+          <% } else if (field.type === 'checkbox-group') { %>
+            <!-- Checkbox Group field -->
+            <fieldset>
+              <legend class="text-base font-semibold text-gray-900"><%= field.label %></legend>
+              <% if (field.description) { %>
+                <p class="mt-1 text-sm text-gray-500"><%= field.description %></p>
+              <% } %>
+              <div class="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
+                <% field.options.forEach(function(option, index) { %>
+                  <div class="relative flex gap-3 py-4">
+                    <div class="min-w-0 flex-1 text-sm/6">
+                      <label for="<%= field.id %>-<%= option.value %>" class="font-medium text-gray-900 select-none"><%= option.label %></label>
+                    </div>
+                    <div class="flex h-6 shrink-0 items-center">
+                      <div class="group grid size-4 grid-cols-1">
+                        <input 
+                          id="<%= field.id %>-<%= option.value %>" 
+                          type="checkbox" 
+                          name="<%= field.name %>[]" 
+                          value="<%= option.value %>"
+                          <%= field.bulkEditable ? 'data-bulk-editable="true"' : '' %>
+                          <%= (field.value && field.value.includes(option.value)) ? 'checked' : '' %>
+                          class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
+                        <svg viewBox="0 0 14 14" fill="none" class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25">
+                          <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-checked:opacity-100" />
+                          <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-indeterminate:opacity-100" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              </div>
+            </fieldset>
             
           <% } else if (field.type === 'toggle') { %>
             <% if (typeof isBulkEdit !== 'undefined' && isBulkEdit) { %>

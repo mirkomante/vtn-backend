@@ -1,0 +1,20 @@
+<%- include('../../../ui/sectionHeadings/simple', {
+  title: title,
+  description: description
+}) %>
+
+<%- include('../../../ui/navigation/actionNav', {
+  config: actionNavConfig
+}) %>
+
+<%- include('../../../ui/forms/simpleGenericForm', {
+  formConfig: formConfig,
+  fields: fields,
+  buttons: buttons,
+  selectedItems: selectedItems,
+  itemType: 'Menu Fisso',
+  backUrl: '/ristorante-menu/menu-fissi',
+  isInternalPage: true,
+  isBulkEdit: true,
+  actionNavConfig: actionNavConfig
+}) %>

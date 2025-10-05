@@ -12,7 +12,7 @@ export const ristoranteMenuItems: MenuItem[] = [
     icon: 'dashboard'
   },
   {
-    label: 'Menu fissi',
+    label: 'Menu Fissi',
     link: '/ristorante-menu/menu-fissi',
     icon: 'tabella'
   },

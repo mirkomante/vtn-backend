@@ -4,6 +4,42 @@
 %>
 <% if (customRender === 'userFullName') { %>
   <%= `${item.givenName || ''} ${item.familyName || ''}`.trim() || 'Non specificato' %>
+    <% } else if (customRender === 'allergeniList') { %>
+      <% if (item.allergeni && item.allergeni.length > 0) { %>
+        <div class="flex flex-wrap gap-1">
+          <% item.allergeni.forEach(allergene => { %>
+            <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+              <%= allergene.allergene?.nome || allergene.nome || 'Allergene' %>
+            </span>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <span class="text-gray-500">Nessun allergene</span>
+      <% } %>
+    <% } else if (customRender === 'piattiList') { %>
+      <% if (item.piatti && item.piatti.length > 0) { %>
+        <div class="flex flex-wrap gap-1">
+          <% item.piatti.forEach(piatto => { %>
+            <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-800 ring-1 ring-inset ring-green-600/20">
+              <%= piatto.piatto?.nome || piatto.nome || 'Piatto' %>
+            </span>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <span class="text-gray-500">Nessun piatto</span>
+      <% } %>
+    <% } else if (customRender === 'serviziList') { %>
+      <% if (item.servizi && item.servizi.length > 0) { %>
+        <div class="flex flex-wrap gap-1">
+          <% item.servizi.forEach(servizio => { %>
+            <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-600/20">
+              <%= servizio.servizioAccessorio?.nome || servizio.nome || 'Servizio' %>
+            </span>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <span class="text-gray-500">Nessun servizio</span>
+      <% } %>
 <% } else { %>
   <!-- Fallback per renderer personalizzati non implementati -->
   <%= item[field.name] || '-' %>
