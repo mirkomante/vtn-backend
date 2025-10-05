@@ -1,0 +1,7 @@
+<% if (item[field.name]) { %>
+  <a href="mailto:<%= item[field.name] %>" class="text-indigo-600 hover:text-indigo-900">
+    <%= item[field.name] %>
+  </a>
+<% } else { %>
+  -
+<% } %>

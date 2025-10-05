@@ -1,0 +1,10 @@
+<% 
+  const value = item[field.name];
+  const locale = field.format?.date?.locale || 'it-IT';
+  const options = field.format?.date?.options || {};
+%>
+<% if (value) { %>
+  <%= new Date(value).toLocaleDateString(locale, options) %>
+<% } else { %>
+  -
+<% } %>

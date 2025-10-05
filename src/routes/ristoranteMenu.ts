@@ -22,6 +22,12 @@ import {
 import { createSubSectionActionNav, actionNavConfigs } from '../config/actionNavConfig';
 import { scriptManager } from '../config/scriptManager';
 import { getPaginationParams, calculatePagination } from '../config/paginationHelper';
+import { 
+  serviziDetailViewConfig,
+  allergeniDetailViewConfig,
+  categoriaMenuFissoDetailViewConfig,
+  categoriaPiattiDetailViewConfig
+} from '../config/detailViewConfig';
 
 const prisma = new PrismaClient();
 
@@ -398,6 +404,7 @@ router.get('/servizi/dettagli/:id', async (req, res) => {
       itemType: 'Servizio',
       backUrl: '/ristorante-menu/servizi',
       actionNavConfig,
+      detailViewConfig: serviziDetailViewConfig,
       scripts: scriptManager.getScriptsForPage('dashboard'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1124,6 +1131,7 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
       itemType: 'Allergene',
       backUrl: '/ristorante-menu/impostazioni/allergeni',
       actionNavConfig,
+      detailViewConfig: allergeniDetailViewConfig,
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1573,6 +1581,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
+      detailViewConfig: categoriaMenuFissoDetailViewConfig,
       scripts: scriptManager.getScriptsForPage('dashboard'),
       isInternalPage: true,
       breadcrumbs: [
@@ -2154,6 +2163,7 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
+      detailViewConfig: categoriaPiattiDetailViewConfig,
       scripts: scriptManager.getScriptsForPage('dashboard'),
       isInternalPage: true,
       breadcrumbs: [

@@ -1,0 +1,13 @@
+<% 
+  const value = item[field.name];
+  const trueText = field.format?.boolean?.trueText || 'Sì';
+  const falseText = field.format?.boolean?.falseText || 'No';
+  const showBadge = field.format?.boolean?.showBadge !== false;
+%>
+<% if (showBadge) { %>
+  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= value ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20' : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20' %>">
+    <%= value ? trueText : falseText %>
+  </span>
+<% } else { %>
+  <%= value ? trueText : falseText %>
+<% } %>

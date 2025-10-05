@@ -1,0 +1,10 @@
+<% 
+  // Gestione dei renderer personalizzati
+  const customRender = field.customRender;
+%>
+<% if (customRender === 'userFullName') { %>
+  <%= `${item.givenName || ''} ${item.familyName || ''}`.trim() || 'Non specificato' %>
+<% } else { %>
+  <!-- Fallback per renderer personalizzati non implementati -->
+  <%= item[field.name] || '-' %>
+<% } %>
