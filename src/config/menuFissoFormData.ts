@@ -59,25 +59,43 @@ export const menuFissoFormData: FormDataSchema = {
       bulkRequired: false
     },
     {
-      type: 'checkbox-group',
+      type: 'dynamic-list',
       name: 'piatti',
       id: 'piatti',
-      label: 'Piatti',
+      label: 'Piatti del Menu',
       required: false,
-      description: 'Seleziona i piatti inclusi nel menu',
+      description: 'Aggiungi e riordina i piatti inclusi nel menu',
       errorMessage: 'Seleziona almeno un piatto valido',
       bulkEditable: false,
+      listConfig: {
+        itemType: 'piatto',
+        placeholder: 'Seleziona un piatto...',
+        addButtonText: 'Aggiungi Piatto',
+        emptyMessage: 'Nessun piatto selezionato',
+        allowReorder: true,
+        allowRemove: true,
+        maxItems: 20
+      },
       options: []
     },
     {
-      type: 'checkbox-group',
+      type: 'dynamic-list',
       name: 'servizi',
       id: 'servizi',
       label: 'Servizi Accessori',
       required: false,
-      description: 'Seleziona i servizi accessori inclusi nel menu',
+      description: 'Aggiungi e riordina i servizi accessori inclusi nel menu',
       errorMessage: 'Seleziona almeno un servizio valido',
       bulkEditable: false,
+      listConfig: {
+        itemType: 'servizio',
+        placeholder: 'Seleziona un servizio...',
+        addButtonText: 'Aggiungi Servizio',
+        emptyMessage: 'Nessun servizio selezionato',
+        allowReorder: true,
+        allowRemove: true,
+        maxItems: 10
+      },
       options: []
     },
     {
@@ -103,7 +121,7 @@ export const menuFissoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, menuFisso?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, menuFisso?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -120,9 +138,9 @@ export const menuFissoFormData: FormDataSchema = {
         
         if (menuFisso && field.name in menuFisso) {
           if (field.name === 'piatti') {
-            value = menuFisso.piatti?.map((mp: any) => mp.piattoId) || [];
+            value = menuFisso.piatti?.map((mp: any) => mp.piatto?.id || mp.piattoId) || [];
           } else if (field.name === 'servizi') {
-            value = menuFisso.servizi?.map((ms: any) => ms.servizioAccessorioId) || [];
+            value = menuFisso.servizi?.map((ms: any) => ms.servizioAccessorio?.id || ms.servizioAccessorioId) || [];
           } else {
             value = menuFisso[field.name] || '';
           }
@@ -171,12 +189,13 @@ export const menuFissoFormData: FormDataSchema = {
               : 'Salva'
         },
         cancel: {
-          ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/menu-fissi' 
             : isEdit 
               ? `/ristorante-menu/menu-fissi/dettagli/${menuFisso?.id}` 
-              : '/ristorante-menu/menu-fissi'
+              : '/ristorante-menu/menu-fissi',
+          classes: 'text-sm font-semibold leading-6 text-gray-900'
         }
       }
     };

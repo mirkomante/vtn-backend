@@ -13,7 +13,7 @@ export interface FormHiddenField {
 }
 
 export interface FormField {
-  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'toggle' | 'checkbox-group';
+  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'select' | 'textarea' | 'checkbox' | 'radio' | 'toggle' | 'checkbox-group' | 'dynamic-list';
   name: string;
   id: string;
   label: string;
@@ -36,6 +36,15 @@ export interface FormField {
   bulkPlaceholder?: string;
   bulkHelpText?: string;
   bulkRequired?: boolean; // Se il campo è obbligatorio in modifica massiva
+  listConfig?: {
+    itemType: string;
+    placeholder: string;
+    addButtonText: string;
+    emptyMessage: string;
+    allowReorder: boolean;
+    allowRemove: boolean;
+    maxItems?: number;
+  };
 }
 
 export interface FormOption {

@@ -451,6 +451,15 @@ class FormManager {
       return selectedOptions.map(option => option.value);
     }
     
+    // Per dynamic-list, ottieni i valori dal manager
+    if (field.type === 'dynamic-list') {
+      const container = document.querySelector(`[data-field-name="${field.name}"]`);
+      if (container && container.dynamicListManager) {
+        return container.dynamicListManager.getValues();
+      }
+      return [];
+    }
+    
     return field.value;
   }
 

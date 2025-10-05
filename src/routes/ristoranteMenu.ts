@@ -6,6 +6,7 @@ import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { uiIcons } from '../config/uiIcons';
 import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData } from '../config/sectionTableData';
+import { getCountText } from '../config/pluralHelper';
 import { isAuthenticated } from '../middlewares/auth';
 import { 
   allergeniConfig, 
@@ -60,63 +61,6 @@ router.get('/', (req, res) => {
 });
 
 // === SEZIONI PRINCIPALI ===
-router.get('/menu-fissi', async (req, res) => {
-  try {
-    const currentPath = '/ristorante-menu/menu-fissi';
-    let sectionMenu = ristoranteMenuItems;
-    
-    // Gestione paginazione
-    const paginationConfig = getPaginationParams(req, 20);
-    
-    // Conta totale elementi
-    const totalItems = await prisma.menuFisso.count({
-      where: {
-        deletedAt: null
-      }
-    });
-    
-    // Recupera i menu fissi dal database con paginazione
-    const menuFissi = await prisma.menuFisso.findMany({
-      where: {
-        deletedAt: null
-      },
-      orderBy: {
-        nome: 'asc'
-      },
-      skip: paginationConfig.offset,
-      take: paginationConfig.limit
-    });
-    
-    // Calcola informazioni di paginazione
-    const pagination = calculatePagination(
-      totalItems,
-      paginationConfig.page,
-      paginationConfig.limit
-    );
-    
-    res.render('pages/ristorante-menu/menu-fissi', {
-      title: 'Menu Fissi',
-      description: 'Gestisci i menu fissi del ristorante',
-      layout: 'layouts/sections',
-      mainMenu: mainMenuItems,
-      sectionMenu,
-      sectionIcons,
-      currentPath,
-      scripts: scriptManager.getScriptsForPage('table'),
-      breadcrumbs: [
-        { label: 'Menu Ristorante', href: '/ristorante-menu' },
-        { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' }
-      ],
-      items: menuFissi,
-      hasItems: totalItems > 0,
-      pagination
-    });
-  } catch (error) {
-    console.error('Errore nel recupero dei menu fissi:', error);
-    res.status(500).send('Errore interno del server');
-  }
-});
-
 router.get('/servizi', async (req, res) => {
   try {
     const currentPath = '/ristorante-menu/servizi';
@@ -661,9 +605,7 @@ router.get('/piatti', async (req, res) => {
     const items = piatti.map(piatto => ({
       ...piatto,
       categoria_nome: piatto.categoria.nome,
-      allergeni_count: piatto.allergeni.length > 0 
-        ? `${piatto.allergeni.length} allergene${piatto.allergeni.length > 1 ? 'i' : ''}`
-        : 'Nessuno'
+      allergeni_count: getCountText(piatto.allergeni.length, 'allergene')
     }));
     
     // Calcola paginazione
@@ -1452,12 +1394,8 @@ router.get('/menu-fissi', async (req, res) => {
     const items = menuFissi.map(menu => ({
       ...menu,
       categoria_nome: menu.categoria.nome,
-      piatti_count: menu.piatti.length > 0 
-        ? `${menu.piatti.length} piatto${menu.piatti.length > 1 ? 'i' : ''}`
-        : 'Nessuno',
-      servizi_count: menu.servizi.length > 0 
-        ? `${menu.servizi.length} servizio${menu.servizi.length > 1 ? 'i' : ''}`
-        : 'Nessuno'
+      piatti_count: getCountText(menu.piatti.length, 'piatto'),
+      servizi_count: getCountText(menu.servizi.length, 'servizio')
     }));
     
     const totalItems = await prisma.menuFisso.count({
@@ -1616,7 +1554,19 @@ router.get('/menu-fissi/dettagli/:id', async (req, res) => {
     };
 
     // Configurazione actionNav per questa pagina
-    const actionNavConfig = actionNavConfigs['menu-fissi.view'];
+    const actionNavConfig = { ...actionNavConfigs['menu-fissi.view'] };
+    // Sostituisci :id con l'ID effettivo del menu fisso
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', menuFisso.id)
+          };
+        }
+        return action;
+      });
+    }
 
     // Configurazione vista dettaglio
     const detailViewConfig = getDetailViewConfig('menu-fissi');
