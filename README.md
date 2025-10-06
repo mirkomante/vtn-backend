@@ -85,14 +85,34 @@ showToast('Messaggio personalizzato', 'info', 3000);
 
 ## Gestione Database
 
-### Prisma Schema
-Il database utilizza Prisma con le seguenti entità principali:
+### Panoramica Schema
+Il database utilizza PostgreSQL con Prisma ORM e include:
 
+#### Modelli Base
 - **User**: Gestione utenti con autenticazione
-- **CategoriaMenuFisso**: Categorie per menu fissi
-- **CategoriaPiatti**: Categorie per piatti
-- **Allergene**: Sistema allergeni
+- **Session**: Gestione sessioni utente
+
+#### Modelli Ristorante Menu
+- **CategoriaPiatti**: Categorie per i piatti
+- **CategoriaMenuFisso**: Categorie per i menu fissi
+- **Allergene**: Sistema di gestione allergeni
+- **Piatto**: Piatti del ristorante
+- **ServizioAccessorio**: Servizi accessori del ristorante
 - **MenuFisso**: Menu fissi del ristorante
+
+#### Modelli Bevande (Nuovo)
+- **Nazione, Regione, Zona**: Struttura geografica gerarchica
+- **Tipologie**: TipologiaVino, TipologiaBirra, TipologiaLiquore, TipologiaCocktail, TipologiaBevanda
+- **Bevande**: Vino, Birra, Liquore, Cocktail, Bevanda
+
+### Caratteristiche Speciali
+- **Soft Delete**: Tutti i modelli supportano cancellazione logica
+- **Indicazioni Geografiche**: Sistema completo per vini (Nazione → Regione → Zona)
+- **Gestione Prezzi**: Supporto prezzo bottiglia e calice per vini
+- **Relazioni Flessibili**: Struttura ottimizzata per query efficienti
+
+### Documentazione Completa
+📋 **Per una documentazione dettagliata completa del database**, inclusi tutti i modelli, campi, relazioni ed esempi di utilizzo, consulta il file [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md).
 
 ### Migrazioni
 ```bash
@@ -101,6 +121,9 @@ npm run prisma:migrate
 
 # Applica le migrazioni
 npx prisma migrate deploy
+
+# Reset del database (sviluppo)
+npx prisma migrate reset
 ```
 
 ## Configurazione
