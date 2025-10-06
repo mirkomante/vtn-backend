@@ -5,7 +5,7 @@ import { ristoranteMenuItems } from '../config/sectionMenu';
 import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { uiIcons } from '../config/uiIcons';
-import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData } from '../config/sectionTableData';
+import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData, viniTableData, birreTableData } from '../config/sectionTableData';
 import { getCountText } from '../config/pluralHelper';
 import { isAuthenticated } from '../middlewares/auth';
 import { 
@@ -23,7 +23,9 @@ import {
   generatePageTitle
 } from '../config/subSectionConfig';
 import { 
-  piattoFormData
+  piattoFormData,
+  vinoFormData,
+  birraFormData
 } from '../config/sectionFormData';
 import { menuFissoFormData } from '../config/menuFissoFormData';
 import { 
@@ -46,6 +48,9 @@ import { getPaginationParams, calculatePagination } from '../config/paginationHe
 import { 
   serviziDetailViewConfig,
   piattiDetailViewConfig,
+  menuFissiDetailViewConfig,
+  viniDetailViewConfig,
+  birreDetailViewConfig,
   allergeniDetailViewConfig,
   categoriaMenuFissoDetailViewConfig,
   categoriaPiattiDetailViewConfig,
@@ -57,6 +62,7 @@ import {
   tipologieLiquoreDetailViewConfig,
   tipologieCocktailDetailViewConfig,
   tipologieBevandaDetailViewConfig,
+  utentiDetailViewConfig,
   getDetailViewConfig
 } from '../config/detailViewConfig';
 
@@ -1408,6 +1414,868 @@ router.get('/impostazioni/categoria-menu-fisso/ajax', async (req, res) => {
       success: false,
       message: 'Errore interno del server'
     });
+  }
+});
+
+// === SEZIONE VINI ===
+
+// Route per visualizzare lista vini
+router.get('/vini', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/vini';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Filtro per tipologia
+    const tipologiaFilter = req.query.tipologia as string;
+    
+    // Parametri di paginazione
+    const { page, limit, offset } = getPaginationParams(req);
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (tipologiaFilter && tipologiaFilter.trim() !== '') {
+      whereClause.tipologiaId = tipologiaFilter;
+    }
+    
+    // Recupera i vini con le relazioni
+    const vini = await prisma.vino.findMany({
+      where: whereClause,
+      include: {
+        tipologia: true,
+        nazione: true,
+        regione: true,
+        zona: true
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: offset,
+      take: limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = vini.map(vino => ({
+      ...vino,
+      tipologia_nome: vino.tipologia.nome,
+      nazione_nome: vino.nazione.nome,
+      regione_nome: vino.regione?.nome || '',
+      zona_nome: vino.zona?.nome || ''
+    }));
+    
+    // Calcola paginazione
+    const totalItems = await prisma.vino.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di vini nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.vino.count({
+      where: { deletedAt: null }
+    });
+    
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
+    const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le tipologie per il filtro
+    const tipologie = await prisma.tipologiaVino.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['vini.index'];
+    
+    res.render('pages/ristorante-menu/vini/index', {
+      title: 'Vini',
+      description: 'Gestione vini del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: viniTableData,
+      items,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      pagination,
+      currentTipologiaFilter: tipologiaFilter,
+      tipologie,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Vini', href: '/ristorante-menu/vini' }
+      ],
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessun vino disponibile',
+        description: 'Non ci sono vini configurati nel sistema. Aggiungi il primo vino per iniziare.',
+        buttonText: 'Aggiungi vino',
+        buttonHref: '/ristorante-menu/vini/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei vini:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuovo vino
+router.get('/vini/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/vini/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaVino.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le regioni per il form
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le zone per il form
+    const zone = await prisma.zona.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = vinoFormData.getFormData(vinoFormData, false);
+    
+    // Popola le opzioni dei select
+    formData.fields = formData.fields.map(field => {
+      if (field.name === 'tipologiaId') {
+        return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
+      } else if (field.name === 'nazioneId') {
+        return { ...field, options: nazioni.map(n => ({ value: n.id, label: n.nome })) };
+      } else if (field.name === 'regioneId') {
+        return { ...field, options: regioni.map(r => ({ value: r.id, label: r.nome })) };
+      } else if (field.name === 'zonaId') {
+        return { ...field, options: zone.map(z => ({ value: z.id, label: z.nome })) };
+      }
+      return field;
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['vini.new'];
+    
+    res.render('pages/ristorante-menu/vini/new', {
+      title: 'Nuovo Vino',
+      description: 'Aggiungi un nuovo vino al menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      isEdit: false,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Vini', href: '/ristorante-menu/vini' },
+        { label: 'Nuovo Vino', href: '/ristorante-menu/vini/nuovo' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica vino
+router.get('/vini/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/vini/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const vino = await prisma.vino.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true,
+        regione: true,
+        zona: true
+      }
+    });
+
+    if (!vino) {
+      return res.status(404).send('Vino non trovato');
+    }
+
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaVino.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le regioni per il form
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le zone per il form
+    const zone = await prisma.zona.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = vinoFormData.getFormData(vinoFormData, true, vino);
+    
+    // Popola le opzioni dei select
+    formData.fields = formData.fields.map(field => {
+      if (field.name === 'tipologiaId') {
+        return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
+      } else if (field.name === 'nazioneId') {
+        return { ...field, options: nazioni.map(n => ({ value: n.id, label: n.nome })) };
+      } else if (field.name === 'regioneId') {
+        return { ...field, options: regioni.map(r => ({ value: r.id, label: r.nome })) };
+      } else if (field.name === 'zonaId') {
+        return { ...field, options: zone.map(z => ({ value: z.id, label: z.nome })) };
+      }
+      return field;
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['vini.edit'];
+    
+    res.render('pages/ristorante-menu/vini/edit', {
+      title: 'Modifica Vino',
+      description: `Modifica il vino ${vino.nome}`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      isEdit: true,
+      item: vino,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Vini', href: '/ristorante-menu/vini' },
+        { label: vino.nome, href: `/ristorante-menu/vini/dettagli/${vino.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/vini/modifica/${vino.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare vino
+router.get('/vini/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/vini/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const vino = await prisma.vino.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true,
+        regione: true,
+        zona: true
+      }
+    });
+
+    if (!vino) {
+      return res.status(404).send('Vino non trovato');
+    }
+
+    // Trasforma i dati per la vista
+    const item = {
+      ...vino,
+      tipologia_nome: vino.tipologia.nome,
+      nazione_nome: vino.nazione.nome,
+      regione_nome: vino.regione?.nome || '',
+      zona_nome: vino.zona?.nome || ''
+    };
+
+    const actionNavConfig = { ...actionNavConfigs['vini.view'] };
+    // Sostituisci :id con l'ID effettivo del vino
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', vino.id)
+          };
+        }
+        return action;
+      });
+    }
+
+    res.render('pages/ristorante-menu/vini/view', {
+      title: 'Dettagli Vino',
+      description: 'Informazioni dettagliate del vino',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item,
+      itemType: 'Vino',
+      backUrl: '/ristorante-menu/vini',
+      actionNavConfig,
+      detailViewConfig: viniDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Vini', href: '/ristorante-menu/vini' },
+        { label: vino.nome, href: `/ristorante-menu/vini/dettagli/${vino.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero del vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per modifica massiva vini
+router.get('/vini/modifica-massa', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/vini/modifica-massa';
+    let sectionMenu = ristoranteMenuItems;
+    
+    const selectedIds = req.query.ids as string;
+    
+    if (!selectedIds) {
+      return res.redirect('/ristorante-menu/vini');
+    }
+    
+    const ids = selectedIds.split(',');
+    
+    // Recupera i vini selezionati
+    const vini = await prisma.vino.findMany({
+      where: { 
+        id: { in: ids },
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true,
+        regione: true,
+        zona: true
+      }
+    });
+    
+    if (vini.length === 0) {
+      return res.redirect('/ristorante-menu/vini');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaVino.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le regioni per il form
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le zone per il form
+    const zone = await prisma.zona.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form per la modifica massiva
+    const formData = vinoFormData.getFormData(vinoFormData, false, undefined, undefined, true, vini);
+    
+    // Popola le opzioni dei select
+    formData.fields = formData.fields.map(field => {
+      if (field.name === 'tipologiaId') {
+        return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
+      } else if (field.name === 'nazioneId') {
+        return { ...field, options: nazioni.map(n => ({ value: n.id, label: n.nome })) };
+      } else if (field.name === 'regioneId') {
+        return { ...field, options: regioni.map(r => ({ value: r.id, label: r.nome })) };
+      } else if (field.name === 'zonaId') {
+        return { ...field, options: zone.map(z => ({ value: z.id, label: z.nome })) };
+      }
+      return field;
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['vini.editBulk'];
+    
+    res.render('pages/ristorante-menu/vini/editBulk', {
+      title: 'Modifica Massiva Vini',
+      description: `Modifica ${vini.length} vini selezionati`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      selectedItems: vini,
+      selectedCount: vini.length,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Vini', href: '/ristorante-menu/vini' },
+        { label: 'Modifica Massiva', href: '/ristorante-menu/vini/modifica-massa' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento della modifica massiva vini:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === SEZIONE BIRRE ===
+
+// Route per visualizzare lista birre
+router.get('/birre', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/birre';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Filtro per tipologia
+    const tipologiaFilter = req.query.tipologia as string;
+    
+    // Parametri di paginazione
+    const { page, limit, offset } = getPaginationParams(req);
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (tipologiaFilter && tipologiaFilter.trim() !== '') {
+      whereClause.tipologiaId = tipologiaFilter;
+    }
+    
+    // Recupera le birre con le relazioni
+    const birre = await prisma.birra.findMany({
+      where: whereClause,
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: offset,
+      take: limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = birre.map(birra => ({
+      ...birra,
+      tipologia_nome: birra.tipologia.nome,
+      nazione_nome: birra.nazione.nome
+    }));
+    
+    // Calcola paginazione
+    const totalItems = await prisma.birra.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di birre nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.birra.count({
+      where: { deletedAt: null }
+    });
+    
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
+    const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le tipologie per il filtro
+    const tipologie = await prisma.tipologiaBirra.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['birre.index'];
+    
+    res.render('pages/ristorante-menu/birre/index', {
+      title: 'Birre',
+      description: 'Gestione birre del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: birreTableData,
+      items,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      pagination,
+      currentTipologiaFilter: tipologiaFilter,
+      tipologie,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Birre', href: '/ristorante-menu/birre' }
+      ],
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessuna birra disponibile',
+        description: 'Non ci sono birre configurate nel sistema. Aggiungi la prima birra per iniziare.',
+        buttonText: 'Aggiungi birra',
+        buttonHref: '/ristorante-menu/birre/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle birre:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form nuovo birra
+router.get('/birre/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/birre/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaBirra.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = birraFormData.getFormData(birraFormData, false);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['birre.new'];
+    
+    res.render('pages/ristorante-menu/birre/new', {
+      title: 'Nuova Birra',
+      description: 'Aggiungi una nuova birra al menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      isEdit: false,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Birre', href: '/ristorante-menu/birre' },
+        { label: 'Nuova Birra', href: '/ristorante-menu/birre/nuovo' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica birra
+router.get('/birre/modifica/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentPath = `/ristorante-menu/birre/modifica/${id}`;
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera la birra con le relazioni
+    const birra = await prisma.birra.findUnique({
+      where: { id },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!birra) {
+      return res.status(404).send('Birra non trovata');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaBirra.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = birraFormData.getFormData(birraFormData, true, birra);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['birre.edit'];
+    
+    res.render('pages/ristorante-menu/birre/edit', {
+      title: 'Modifica Birra',
+      description: `Modifica la birra ${birra.nome}`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      isEdit: true,
+      item: birra,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Birre', href: '/ristorante-menu/birre' },
+        { label: birra.nome, href: `/ristorante-menu/birre/dettagli/${birra.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/birre/modifica/${birra.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli birra
+router.get('/birre/dettagli/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentPath = `/ristorante-menu/birre/dettagli/${id}`;
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera la birra con le relazioni
+    const birra = await prisma.birra.findUnique({
+      where: { id },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!birra) {
+      return res.status(404).send('Birra non trovata');
+    }
+    
+    // Trasforma i dati per la vista dettaglio
+    const item = {
+      ...birra,
+      tipologia_nome: birra.tipologia.nome,
+      nazione_nome: birra.nazione.nome
+    };
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = { ...actionNavConfigs['birre.view'] };
+    // Sostituisci :id con l'ID effettivo della birra
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', birra.id)
+          };
+        }
+        return action;
+      });
+    }
+    
+    res.render('pages/ristorante-menu/birre/view', {
+      title: birra.nome,
+      description: `Dettagli della birra ${birra.nome}`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item,
+      detailViewConfig: birreDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('detail'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Birre', href: '/ristorante-menu/birre' },
+        { label: birra.nome, href: `/ristorante-menu/birre/dettagli/${birra.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel recupero della birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare modifica massiva birre
+router.get('/birre/modifica-massa', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/birre/modifica-massa';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera gli ID delle birre selezionate dalla query string
+    const selectedIds = req.query.ids as string;
+    
+    if (!selectedIds) {
+      return res.redirect('/ristorante-menu/birre');
+    }
+    
+    const ids = selectedIds.split(',');
+    
+    // Recupera le birre selezionate con le relazioni
+    const birre = await prisma.birra.findMany({
+      where: {
+        id: { in: ids },
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    if (birre.length === 0) {
+      return res.redirect('/ristorante-menu/birre');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaBirra.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form per la modifica massiva
+    const formData = birraFormData.getFormData(birraFormData, false, undefined, undefined, true, birre);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['birre.editBulk'];
+    
+    res.render('pages/ristorante-menu/birre/editBulk', {
+      title: 'Modifica Massiva Birre',
+      description: `Modifica ${birre.length} birre selezionate`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      selectedItems: birre,
+      selectedCount: birre.length,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Birre', href: '/ristorante-menu/birre' },
+        { label: 'Modifica Massiva', href: '/ristorante-menu/birre/modifica-massa' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento della modifica massiva birre:', error);
+    res.status(500).send('Errore interno del server');
   }
 });
 
@@ -5631,6 +6499,410 @@ router.post('/piatti/modifica-massa/ajax', async (req, res) => {
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei piatti' 
+    });
+  }
+});
+
+// === ROUTE AJAX PER VINI ===
+
+// Route AJAX per creazione vino
+router.post('/vini/nuovo/ajax', async (req, res) => {
+  const { 
+    nome, 
+    descrizione, 
+    cantina, 
+    grado, 
+    certificazione, 
+    capacita, 
+    tipologiaId, 
+    nazioneId, 
+    regioneId, 
+    zonaId, 
+    prezzo, 
+    prezzoCalice, 
+    inLista 
+  } = req.body;
+  
+  try {
+    // Verifica se esiste già un vino con lo stesso nome
+    const existingVino = await prisma.vino.findFirst({
+      where: { 
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingVino) {
+      return res.json({ 
+        success: false, 
+        message: 'Un vino con questo nome esiste già' 
+      });
+    }
+
+    // Crea il vino
+    const vino = await prisma.vino.create({
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        cantina: cantina || null,
+        grado: grado || null,
+        certificazione: certificazione || null,
+        capacita: capacita || null,
+        tipologiaId,
+        nazioneId,
+        regioneId: regioneId || null,
+        zonaId: zonaId || null,
+        prezzo: parseFloat(prezzo),
+        prezzoCalice: prezzoCalice ? parseFloat(prezzoCalice) : null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Vino creato con successo',
+      data: { id: vino.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione del vino:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione del vino' 
+    });
+  }
+});
+
+// Route AJAX per modifica vino
+router.post('/vini/modifica/:id/ajax', async (req, res) => {
+  const { 
+    nome, 
+    descrizione, 
+    cantina, 
+    grado, 
+    certificazione, 
+    capacita, 
+    tipologiaId, 
+    nazioneId, 
+    regioneId, 
+    zonaId, 
+    prezzo, 
+    prezzoCalice, 
+    inLista 
+  } = req.body;
+  const vinoId = req.params.id;
+  
+  try {
+    const existingVino = await prisma.vino.findUnique({
+      where: { id: vinoId }
+    });
+
+    if (!existingVino) {
+      return res.json({
+        success: false,
+        message: 'Vino non trovato'
+      });
+    }
+
+    // Verifica se esiste già un altro vino con lo stesso nome
+    const duplicateVino = await prisma.vino.findFirst({
+      where: { 
+        nome,
+        deletedAt: null,
+        id: { not: vinoId }
+      }
+    });
+
+    if (duplicateVino) {
+      return res.json({
+        success: false,
+        message: 'Un altro vino con questo nome esiste già'
+      });
+    }
+
+    // Aggiorna il vino
+    const updatedVino = await prisma.vino.update({
+      where: { id: vinoId },
+      data: {
+        nome,
+        descrizione: descrizione || null,
+        cantina: cantina || null,
+        grado: grado || null,
+        certificazione: certificazione || null,
+        capacita: capacita || null,
+        tipologiaId,
+        nazioneId,
+        regioneId: regioneId || null,
+        zonaId: zonaId || null,
+        prezzo: parseFloat(prezzo),
+        prezzoCalice: prezzoCalice ? parseFloat(prezzoCalice) : null,
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Vino aggiornato con successo',
+      data: { id: updatedVino.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento del vino:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento del vino' 
+    });
+  }
+});
+
+// Route AJAX per modifica massiva vini
+router.post('/vini/modifica-massa/ajax', async (req, res) => {
+  const { 
+    itemIds, 
+    tipologiaId, 
+    nazioneId, 
+    regioneId, 
+    zonaId, 
+    cantina, 
+    grado, 
+    certificazione, 
+    capacita, 
+    prezzo, 
+    prezzoCalice, 
+    inLista 
+  } = req.body;
+  
+  try {
+    if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+      return res.json({ 
+        success: false, 
+        message: 'Nessun vino selezionato' 
+      });
+    }
+
+    const updateData: any = {};
+    
+    if (tipologiaId) {
+      updateData.tipologiaId = tipologiaId;
+    }
+    
+    if (nazioneId) {
+      updateData.nazioneId = nazioneId;
+    }
+    
+    if (regioneId) {
+      updateData.regioneId = regioneId;
+    }
+    
+    if (zonaId) {
+      updateData.zonaId = zonaId;
+    }
+    
+    if (cantina !== undefined && cantina !== '') {
+      updateData.cantina = cantina;
+    }
+    
+    if (grado !== undefined && grado !== '') {
+      updateData.grado = grado;
+    }
+    
+    if (certificazione !== undefined && certificazione !== '') {
+      updateData.certificazione = certificazione;
+    }
+    
+    if (capacita !== undefined && capacita !== '') {
+      updateData.capacita = capacita;
+    }
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (prezzoCalice !== undefined && prezzoCalice !== '') {
+      updateData.prezzoCalice = parseFloat(prezzoCalice);
+    }
+    
+    if (inLista !== undefined && inLista !== null) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    // Aggiorna i vini
+    const result = await prisma.vino.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: updateData
+    });
+
+    res.json({ 
+      success: true, 
+      message: `${result.count} vino/i aggiornato/i con successo`,
+      data: { updatedCount: result.count }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica massiva dei vini:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la modifica massiva dei vini' 
+    });
+  }
+});
+
+// === ROUTE AJAX PER BIRRE ===
+
+// Route AJAX per creare nuova birra
+router.post('/birre/nuovo/ajax', async (req, res) => {
+  try {
+    const { nome, descrizione, grado, capacita, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    // Validazione
+    if (!nome || !tipologiaId || !nazioneId || !prezzo) {
+      return res.json({
+        success: false,
+        message: 'Nome, tipologia, nazione e prezzo sono obbligatori'
+      });
+    }
+    
+    // Crea la birra
+    const birra = await prisma.birra.create({
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        grado: grado?.trim() || null,
+        capacita: capacita?.trim() || null,
+        tipologiaId,
+        nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Birra creata con successo',
+      data: { id: birra.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della birra:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione della birra' 
+    });
+  }
+});
+
+// Route AJAX per modificare birra
+router.post('/birre/modifica/:id/ajax', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, descrizione, grado, capacita, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    // Validazione
+    if (!nome || !tipologiaId || !nazioneId || !prezzo) {
+      return res.json({
+        success: false,
+        message: 'Nome, tipologia, nazione e prezzo sono obbligatori'
+      });
+    }
+    
+    // Verifica che la birra esista
+    const existingBirra = await prisma.birra.findUnique({
+      where: { id }
+    });
+    
+    if (!existingBirra) {
+      return res.json({
+        success: false,
+        message: 'Birra non trovata'
+      });
+    }
+    
+    // Aggiorna la birra
+    const birra = await prisma.birra.update({
+      where: { id },
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        grado: grado?.trim() || null,
+        capacita: capacita?.trim() || null,
+        tipologiaId,
+        nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Birra aggiornata con successo',
+      data: { id: birra.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della birra:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento della birra' 
+    });
+  }
+});
+
+// Route AJAX per modifica massiva birre
+router.post('/birre/modifica-massa/ajax', async (req, res) => {
+  try {
+    const { itemIds, tipologiaId, nazioneId, grado, capacita, prezzo, inLista } = req.body;
+    
+    if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessuna birra selezionata'
+      });
+    }
+    
+    // Prepara i dati da aggiornare
+    const updateData: any = {};
+    
+    if (tipologiaId !== undefined && tipologiaId !== '') {
+      updateData.tipologiaId = tipologiaId;
+    }
+    
+    if (nazioneId !== undefined && nazioneId !== '') {
+      updateData.nazioneId = nazioneId;
+    }
+    
+    if (grado !== undefined && grado !== '') {
+      updateData.grado = grado.trim();
+    }
+    
+    if (capacita !== undefined && capacita !== '') {
+      updateData.capacita = capacita.trim();
+    }
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined && inLista !== null) {
+      updateData.inLista = inLista === 'on' || inLista === true;
+    }
+
+    // Aggiorna le birre
+    const result = await prisma.birra.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: updateData
+    });
+    
+    res.json({
+      success: true,
+      message: `${result.count} birra aggiornata/e con successo`,
+      data: { count: result.count }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica massiva delle birre:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la modifica massiva delle birre' 
     });
   }
 });

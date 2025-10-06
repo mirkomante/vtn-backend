@@ -501,10 +501,190 @@ export const menuFissiDetailViewConfig: DetailViewConfig = {
   }
 };
 
+export const viniDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      conditional: 'descrizione'
+    },
+    {
+      name: 'cantina',
+      label: 'Cantina',
+      type: 'text',
+      conditional: 'cantina'
+    },
+    {
+      name: 'grado',
+      label: 'Grado Alcolico',
+      type: 'text',
+      conditional: 'grado'
+    },
+    {
+      name: 'certificazione',
+      label: 'Certificazione',
+      type: 'text',
+      conditional: 'certificazione'
+    },
+    {
+      name: 'capacita',
+      label: 'Capacità',
+      type: 'text',
+      conditional: 'capacita'
+    },
+    {
+      name: 'tipologia_nome',
+      label: 'Tipologia',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'regione_nome',
+      label: 'Regione',
+      type: 'text',
+      conditional: 'regione_nome'
+    },
+    {
+      name: 'zona_nome',
+      label: 'Zona',
+      type: 'text',
+      conditional: 'zona_nome'
+    },
+    {
+      name: 'prezzo',
+      label: 'Prezzo Bottiglia',
+      type: 'currency',
+      required: true,
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'prezzoCalice',
+      label: 'Prezzo Calice',
+      type: 'currency',
+      conditional: 'prezzoCalice',
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'inLista',
+      label: 'Stato',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Attivo',
+          falseText: 'Inattivo',
+          showBadge: true
+        }
+      }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const birreDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      conditional: 'descrizione'
+    },
+    {
+      name: 'grado',
+      label: 'Grado Alcolico',
+      type: 'text',
+      conditional: 'grado'
+    },
+    {
+      name: 'capacita',
+      label: 'Capacità',
+      type: 'text',
+      conditional: 'capacita'
+    },
+    {
+      name: 'tipologia_nome',
+      label: 'Tipologia',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'prezzo',
+      label: 'Prezzo',
+      type: 'currency',
+      required: true,
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'inLista',
+      label: 'Stato',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Attivo',
+          falseText: 'Inattivo',
+          showBadge: true
+        }
+      }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
 export const detailViewConfigs = {
   'servizi': serviziDetailViewConfig,
   'piatti': piattiDetailViewConfig,
   'menu-fissi': menuFissiDetailViewConfig,
+  'vini': viniDetailViewConfig,
+  'birre': birreDetailViewConfig,
   'allergeni': allergeniDetailViewConfig,
   'categoria-menu-fisso': categoriaMenuFissoDetailViewConfig,
   'categoria-piatti': categoriaPiattiDetailViewConfig,

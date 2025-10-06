@@ -259,6 +259,128 @@ export const actionNavConfigs: Record<string, ActionNavConfig> = {
       }
     ]
   },
+
+  'vini.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Vino',
+        href: '/ristorante-menu/vini/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'vini.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/vini',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'vini.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/vini',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'vini.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/vini',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/vini/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'vini.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/vini',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'birre.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuova Birra',
+        href: '/ristorante-menu/birre/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'birre.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/birre',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'birre.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/birre',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'birre.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/birre',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/birre/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'birre.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/birre',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
   
   'users.new': {
     actions: [

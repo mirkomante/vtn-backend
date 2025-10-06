@@ -167,3 +167,4 @@ SELECT
   NULL as categoria_nome
 FROM "tipologie_birra"
 WHERE "deletedAt" IS NOT NULL;
+

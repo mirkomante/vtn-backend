@@ -152,3 +152,4 @@ SELECT
   NULL as categoria_nome
 FROM "tipologie_vino"
 WHERE "deletedAt" IS NOT NULL;
+

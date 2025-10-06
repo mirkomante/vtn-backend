@@ -212,3 +212,4 @@ SELECT
   NULL as categoria_nome
 FROM "tipologie_bevanda"
 WHERE "deletedAt" IS NOT NULL;
+

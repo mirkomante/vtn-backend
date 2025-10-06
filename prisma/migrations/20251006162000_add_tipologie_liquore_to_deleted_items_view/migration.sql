@@ -182,3 +182,4 @@ SELECT
   NULL as categoria_nome
 FROM "tipologie_liquore"
 WHERE "deletedAt" IS NOT NULL;
+
