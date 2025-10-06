@@ -118,6 +118,136 @@ export const ajaxRoutes: { [key: string]: AjaxRouteConfig } = {
     redirectUrl: '/ristorante-menu/servizi',
     requireAtLeastOneField: true,
     allowPartialUpdates: true
+  },
+
+  'nazione-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/nazioni/nuovo/ajax',
+    successMessage: 'Nazione creata con successo',
+    errorMessage: 'Errore durante la creazione della nazione',
+    redirectUrl: '/ristorante-menu/impostazioni/nazioni',
+    allowPartialUpdates: false
+  },
+
+  'nazione-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/nazioni/modifica/:id/ajax',
+    successMessage: 'Nazione aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della nazione',
+    redirectUrl: '/ristorante-menu/impostazioni/nazioni',
+    allowPartialUpdates: false
+  },
+  'regione-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/regioni/nuovo/ajax',
+    successMessage: 'Regione creata con successo',
+    errorMessage: 'Errore durante la creazione della regione',
+    redirectUrl: '/ristorante-menu/impostazioni/regioni',
+    allowPartialUpdates: false
+  },
+  'regione-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/regioni/modifica/:id/ajax',
+    successMessage: 'Regione aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della regione',
+    redirectUrl: '/ristorante-menu/impostazioni/regioni',
+    allowPartialUpdates: false
+  },
+  'zona-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/zone/nuovo/ajax',
+    successMessage: 'Zona creata con successo',
+    errorMessage: 'Errore durante la creazione della zona',
+    redirectUrl: '/ristorante-menu/impostazioni/zone',
+    allowPartialUpdates: false
+  },
+  'zona-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/zone/modifica/:id/ajax',
+    successMessage: 'Zona aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della zona',
+    redirectUrl: '/ristorante-menu/impostazioni/zone',
+    allowPartialUpdates: false
+  },
+  'tipologia-vino-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax',
+    successMessage: 'Tipologia vino creata con successo',
+    errorMessage: 'Errore durante la creazione della tipologia vino',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-vino',
+    allowPartialUpdates: false
+  },
+  'tipologia-vino-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id/ajax',
+    successMessage: 'Tipologia vino aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della tipologia vino',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-vino',
+    allowPartialUpdates: false
+  },
+  'tipologia-birra-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax',
+    successMessage: 'Tipologia birra creata con successo',
+    errorMessage: 'Errore durante la creazione della tipologia birra',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-birra',
+    allowPartialUpdates: false
+  },
+  'tipologia-birra-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id/ajax',
+    successMessage: 'Tipologia birra aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della tipologia birra',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-birra',
+    allowPartialUpdates: false
+  },
+  'tipologia-liquore-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax',
+    successMessage: 'Tipologia liquore creata con successo',
+    errorMessage: 'Errore durante la creazione della tipologia liquore',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-liquore',
+    allowPartialUpdates: false
+  },
+  'tipologia-liquore-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id/ajax',
+    successMessage: 'Tipologia liquore aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della tipologia liquore',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-liquore',
+    allowPartialUpdates: false
+  },
+  'tipologia-cocktail-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax',
+    successMessage: 'Tipologia cocktail creata con successo',
+    errorMessage: 'Errore durante la creazione della tipologia cocktail',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-cocktail',
+    allowPartialUpdates: false
+  },
+  'tipologia-cocktail-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id/ajax',
+    successMessage: 'Tipologia cocktail aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della tipologia cocktail',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-cocktail',
+    allowPartialUpdates: false
+  },
+  'tipologia-bevanda-new': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax',
+    successMessage: 'Tipologia bevanda creata con successo',
+    errorMessage: 'Errore durante la creazione della tipologia bevanda',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-bevanda',
+    allowPartialUpdates: false
+  },
+  'tipologia-bevanda-edit': {
+    method: 'POST',
+    endpoint: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id/ajax',
+    successMessage: 'Tipologia bevanda aggiornata con successo',
+    errorMessage: 'Errore durante l\'aggiornamento della tipologia bevanda',
+    redirectUrl: '/ristorante-menu/impostazioni/tipologie-bevanda',
+    allowPartialUpdates: false
   }
 };
 
@@ -137,6 +267,22 @@ export function getAjaxConfig(path: string, action: string): AjaxRouteConfig | n
     entityType = 'categoria-menu-fisso';
   } else if (pathSegments.includes('categoria-piatti')) {
     entityType = 'categoria-piatti';
+  } else if (pathSegments.includes('nazioni')) {
+    entityType = 'nazione';
+  } else if (pathSegments.includes('regioni')) {
+    entityType = 'regione';
+  } else if (pathSegments.includes('zone')) {
+    entityType = 'zona';
+  } else if (pathSegments.includes('tipologie-vino')) {
+    entityType = 'tipologia-vino';
+  } else if (pathSegments.includes('tipologie-birra')) {
+    entityType = 'tipologia-birra';
+  } else if (pathSegments.includes('tipologie-liquore')) {
+    entityType = 'tipologia-liquore';
+  } else if (pathSegments.includes('tipologie-cocktail')) {
+    entityType = 'tipologia-cocktail';
+  } else if (pathSegments.includes('tipologie-bevanda')) {
+    entityType = 'tipologia-bevanda';
   } else if (pathSegments.includes('servizi')) {
     entityType = 'servizio';
   }

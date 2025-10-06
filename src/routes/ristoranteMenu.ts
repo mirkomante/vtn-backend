@@ -12,6 +12,14 @@ import {
   allergeniConfig, 
   categoriaMenuFissoConfig, 
   categoriaPiattiConfig,
+  nazioniConfig,
+  regioniConfig,
+  zoneConfig,
+  tipologieVinoConfig,
+  tipologieBirraConfig,
+  tipologieLiquoreConfig,
+  tipologieCocktailConfig,
+  tipologieBevandaConfig,
   generatePageTitle
 } from '../config/subSectionConfig';
 import { 
@@ -22,6 +30,14 @@ import {
   allergeneFormData, 
   categoriaMenuFissoFormData, 
   categoriaPiattiFormData,
+  nazioneFormData,
+  regioneFormData,
+  zonaFormData,
+  tipologiaVinoFormData,
+  tipologiaBirraFormData,
+  tipologiaLiquoreFormData,
+  tipologiaCocktailFormData,
+  tipologiaBevandaFormData,
   servizioFormData
 } from '../config/subSectionFormData';
 import { createSubSectionActionNav, actionNavConfigs } from '../config/actionNavConfig';
@@ -33,6 +49,14 @@ import {
   allergeniDetailViewConfig,
   categoriaMenuFissoDetailViewConfig,
   categoriaPiattiDetailViewConfig,
+  nazioniDetailViewConfig,
+  regioniDetailViewConfig,
+  zoneDetailViewConfig,
+  tipologieVinoDetailViewConfig,
+  tipologieBirraDetailViewConfig,
+  tipologieLiquoreDetailViewConfig,
+  tipologieCocktailDetailViewConfig,
+  tipologieBevandaDetailViewConfig,
   getDetailViewConfig
 } from '../config/detailViewConfig';
 
@@ -3881,6 +3905,161 @@ router.post('/restore', async (req, res) => {
           }
           break;
 
+        case 'nazione':
+          const existingNazioni = await prisma.nazione.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingNazioni.length > 0) {
+            const validIds = existingNazioni.map(item => item.id);
+            await prisma.nazione.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'regione':
+          const existingRegioni = await prisma.regione.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingRegioni.length > 0) {
+            const validIds = existingRegioni.map(item => item.id);
+            await prisma.regione.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'zona':
+          const existingZone = await prisma.zona.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingZone.length > 0) {
+            const validIds = existingZone.map(item => item.id);
+            await prisma.zona.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+        case 'tipologia-vino':
+          const existingTipologieVino = await prisma.tipologiaVino.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingTipologieVino.length > 0) {
+            const validIds = existingTipologieVino.map(item => item.id);
+            await prisma.tipologiaVino.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+        case 'tipologia-birra':
+          const existingTipologieBirra = await prisma.tipologiaBirra.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingTipologieBirra.length > 0) {
+            const validIds = existingTipologieBirra.map(item => item.id);
+            await prisma.tipologiaBirra.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+        case 'tipologia-liquore':
+          const existingTipologieLiquore = await prisma.tipologiaLiquore.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingTipologieLiquore.length > 0) {
+            const validIds = existingTipologieLiquore.map(item => item.id);
+            await prisma.tipologiaLiquore.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+        case 'tipologia-cocktail':
+          const existingTipologieCocktail = await prisma.tipologiaCocktail.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingTipologieCocktail.length > 0) {
+            const validIds = existingTipologieCocktail.map(item => item.id);
+            await prisma.tipologiaCocktail.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+        case 'tipologia-bevanda':
+          const existingTipologieBevanda = await prisma.tipologiaBevanda.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingTipologieBevanda.length > 0) {
+            const validIds = existingTipologieBevanda.map(item => item.id);
+            await prisma.tipologiaBevanda.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
         case 'piatto':
           const existingPiatti = await prisma.piatto.findMany({
             where: { 
@@ -4072,6 +4251,222 @@ router.delete('/permanent-delete', async (req, res) => {
           skipped = (ids as string[]).length - deleted;
           break;
 
+        case 'nazione':
+          // Verifica che non ci siano regioni associate
+          const regioniAssociate = await prisma.regione.findMany({
+            where: { 
+              nazioneId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (regioniAssociate.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare nazioni con regioni associate'
+            });
+            continue;
+          }
+          
+          const deletedNazioni = await prisma.nazione.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedNazioni.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'regione':
+          // Verifica che non ci siano zone associate
+          const zoneAssociate = await prisma.zona.findMany({
+            where: { 
+              regioneId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (zoneAssociate.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare regioni con zone associate'
+            });
+            continue;
+          }
+          
+          const deletedRegioni = await prisma.regione.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedRegioni.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'zona':
+          const deletedZone = await prisma.zona.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedZone.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+        case 'tipologia-vino':
+          // Verifica se ci sono vini associati
+          const viniAssociati = await prisma.vino.findMany({
+            where: {
+              tipologiaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (viniAssociati.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare tipologie vino con vini associati'
+            });
+            continue;
+          }
+          
+          const deletedTipologieVino = await prisma.tipologiaVino.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedTipologieVino.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+        case 'tipologia-birra':
+          // Verifica se ci sono birre associate
+          const birreAssociate = await prisma.birra.findMany({
+            where: {
+              tipologiaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (birreAssociate.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare tipologie birra con birre associate'
+            });
+            continue;
+          }
+          
+          const deletedTipologieBirra = await prisma.tipologiaBirra.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedTipologieBirra.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+        case 'tipologia-liquore':
+          // Verifica se ci sono liquori associati
+          const liquoriAssociati = await prisma.liquore.findMany({
+            where: {
+              tipologiaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (liquoriAssociati.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare tipologie liquore con liquori associati'
+            });
+            continue;
+          }
+          
+          const deletedTipologieLiquore = await prisma.tipologiaLiquore.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedTipologieLiquore.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+        case 'tipologia-cocktail':
+          // Verifica se ci sono cocktail associati
+          const cocktailAssociati = await prisma.cocktail.findMany({
+            where: {
+              tipologiaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (cocktailAssociati.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare tipologie cocktail con cocktail associati'
+            });
+            continue;
+          }
+          
+          const deletedTipologieCocktail = await prisma.tipologiaCocktail.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedTipologieCocktail.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+        case 'tipologia-bevanda':
+          // Verifica se ci sono bevande associate
+          const bevandeAssociate = await prisma.bevanda.findMany({
+            where: {
+              tipologiaId: { in: ids as string[] },
+              deletedAt: null
+            }
+          });
+          
+          if (bevandeAssociate.length > 0) {
+            skipped = (ids as string[]).length;
+            results.push({ 
+              type, 
+              deleted: 0, 
+              skipped: (ids as string[]).length,
+              error: 'Impossibile eliminare tipologie bevanda con bevande associate'
+            });
+            continue;
+          }
+          
+          const deletedTipologieBevanda = await prisma.tipologiaBevanda.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedTipologieBevanda.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
         case 'piatto':
           const deletedPiatti = await prisma.piatto.deleteMany({
             where: { 
@@ -4128,6 +4523,336 @@ router.delete('/permanent-delete', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'eliminazione definitiva' 
+    });
+  }
+});
+
+// === ROUTE NAZIONI ===
+
+// Route per visualizzare lista nazioni
+router.get('/impostazioni/nazioni', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/nazioni';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    // Gestione paginazione
+    const paginationConfig = getPaginationParams(req, 20);
+    
+    // Conta totale elementi
+    const totalItems = await prisma.nazione.count({
+      where: {
+        deletedAt: null
+      }
+    });
+    
+    // Recuperare le nazioni dal database con paginazione e conteggio regioni
+    const nazioni = await prisma.nazione.findMany({
+      where: {
+        deletedAt: null
+      },
+      include: {
+        _count: {
+          select: {
+            regioni: true
+          }
+        }
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = nazioni.map(nazione => ({
+      ...nazione,
+      regioni: nazione._count.regioni
+    }));
+    
+    // Calcola informazioni di paginazione
+    const pagination = calculatePagination(
+      totalItems,
+      paginationConfig.page,
+      paginationConfig.limit
+    );
+    
+    const config = { ...nazioniConfig };
+    config.hasItems = totalItems > 0;
+    config.items = items;
+    
+    // Gestire messaggi di successo/errore
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    
+    // Configurazione actionNav per questa sottosezione
+    const actionNavConfig = createSubSectionActionNav('nazioni', 'index');
+    
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Nazioni',
+      description: 'Gestisci le nazioni per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Nazioni', href: '/ristorante-menu/impostazioni/nazioni' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle nazioni:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare nazione 
+router.get('/impostazioni/nazioni/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/nazioni/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    const nazione = await prisma.nazione.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: {
+        _count: {
+          select: {
+            regioni: true
+          }
+        }
+      }
+    });
+
+    if (!nazione) {
+      return res.status(404).send('Nazione non trovata');
+    }
+
+    // Trasforma i dati per la vista
+    const nazioneData = {
+      ...nazione,
+      regioni: nazione._count.regioni
+    };
+
+    const actionNavConfig = createSubSectionActionNav('nazioni', 'view', nazione.id);
+    const customTitle = generatePageTitle(nazioniConfig, 'view', nazione);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Nazione',
+      customTitle,
+      description: 'Informazioni dettagliate della nazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: nazioneData,
+      itemType: 'Nazione',
+      backUrl: '/ristorante-menu/impostazioni/nazioni',
+      actionNavConfig,
+      detailViewConfig: nazioniDetailViewConfig,
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Nazioni', href: '/ristorante-menu/impostazioni/nazioni' },
+        { label: nazione.nome, href: `/ristorante-menu/impostazioni/nazioni/dettagli/${nazione.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel recupero della nazione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per nuovo nazione
+router.get('/impostazioni/nazioni/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/nazioni/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    const formConfig = nazioneFormData.getFormData ? nazioneFormData.getFormData(nazioneFormData, false, null, req.body) : nazioneFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('nazioni', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Nazione',
+      description: 'Crea una nuova nazione per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Nazione',
+      backUrl: '/ristorante-menu/impostazioni/nazioni',
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Nazioni', href: '/ristorante-menu/impostazioni/nazioni' },
+        { label: 'Nuova Nazione', href: '/ristorante-menu/impostazioni/nazioni/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova nazione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per modifica nazione
+router.get('/impostazioni/nazioni/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/nazioni/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+    
+    const nazione = await prisma.nazione.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!nazione) {
+      return res.status(404).send('Nazione non trovata');
+    }
+
+    const formConfig = nazioneFormData.getFormData ? nazioneFormData.getFormData(nazioneFormData, true, nazione, req.body) : nazioneFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('nazioni', 'edit', nazione.id);
+    const customTitle = generatePageTitle(nazioniConfig, 'edit', nazione);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Nazione',
+      customTitle,
+      description: 'Modifica le informazioni della nazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: nazione,
+      itemType: 'Nazione',
+      backUrl: `/ristorante-menu/impostazioni/nazioni/dettagli/${nazione.id}`,
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Nazioni', href: '/ristorante-menu/impostazioni/nazioni' },
+        { label: nazione.nome, href: `/ristorante-menu/impostazioni/nazioni/dettagli/${nazione.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/nazioni/modifica/${nazione.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica nazione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per eliminazione singola nazione
+router.delete('/impostazioni/nazioni/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.nazione.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+    
+    res.json({ success: true, message: 'Nazione eliminata con successo' });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della nazione:', error);
+    res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+  }
+});
+
+// Route per eliminazione multipla nazioni
+router.delete('/impostazioni/nazioni', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna nazione selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le nazioni esistano e non siano già cancellate
+    const existingNazioni = await prisma.nazione.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingNazioni.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna nazione valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le nazioni valide
+    const validNazioneIds = existingNazioni.map(nazione => nazione.id);
+    await prisma.nazione.updateMany({
+      where: { 
+        id: { in: validNazioneIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validNazioneIds.length;
+    const skippedCount = itemIds.length - validNazioneIds.length;
+    
+    let message = `Eliminate ${deletedCount} nazione/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} nazione/i già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle nazioni:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
     });
   }
 });
@@ -4402,6 +5127,116 @@ router.post('/impostazioni/categoria-piatti/modifica/:id/ajax', async (req, res)
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
+    });
+  }
+});
+
+// Route AJAX per creazione nazione
+router.post('/impostazioni/nazioni/nuovo/ajax', async (req, res) => {
+  const { nome, sigla } = req.body;
+  
+  try {
+    // Verifica se esiste già una nazione con lo stesso nome o sigla
+    const existingNazione = await prisma.nazione.findFirst({
+      where: {
+        OR: [
+          { nome },
+          { sigla: sigla.toUpperCase() }
+        ]
+      }
+    });
+
+    if (existingNazione) {
+      return res.json({ 
+        success: false, 
+        message: existingNazione.nome === nome 
+          ? 'Una nazione con questo nome esiste già' 
+          : 'Una nazione con questa sigla esiste già'
+      });
+    }
+
+    const nazione = await prisma.nazione.create({
+      data: {
+        nome,
+        sigla: sigla.toUpperCase()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Nazione creata con successo',
+      data: { id: nazione.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della nazione:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione della nazione' 
+    });
+  }
+});
+
+// Route AJAX per modifica nazione
+router.post('/impostazioni/nazioni/modifica/:id/ajax', async (req, res) => {
+  const { nome, sigla } = req.body;
+  const nazioneId = req.params.id;
+  
+  try {
+    const existingNazione = await prisma.nazione.findUnique({
+      where: { id: nazioneId }
+    });
+
+    if (!existingNazione) {
+      return res.json({ 
+        success: false, 
+        message: 'La nazione richiesta non esiste' 
+      });
+    }
+
+    // Verifica se esiste già un'altra nazione con lo stesso nome o sigla
+    if (nome !== existingNazione.nome || sigla.toUpperCase() !== existingNazione.sigla) {
+      const duplicateNazione = await prisma.nazione.findFirst({
+        where: {
+          AND: [
+            { id: { not: nazioneId } },
+            {
+              OR: [
+                { nome },
+                { sigla: sigla.toUpperCase() }
+              ]
+            }
+          ]
+        }
+      });
+
+      if (duplicateNazione) {
+        return res.json({ 
+          success: false, 
+          message: duplicateNazione.nome === nome 
+            ? 'Un\'altra nazione con questo nome esiste già' 
+            : 'Un\'altra nazione con questa sigla esiste già'
+        });
+      }
+    }
+
+    const updatedNazione = await prisma.nazione.update({
+      where: { id: nazioneId },
+      data: {
+        nome,
+        sigla: sigla.toUpperCase()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Nazione aggiornata con successo',
+      data: { id: updatedNazione.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della nazione:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento della nazione' 
     });
   }
 });
@@ -5163,6 +5998,2970 @@ router.delete('/menu-fissi', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD REGIONI ===
+
+// Route per visualizzare lista regioni
+router.get('/impostazioni/regioni', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/regioni';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.regione.count({ where: { deletedAt: null } });
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      include: { 
+        nazione: true
+      },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const items = regioni.map(regione => ({ 
+      ...regione, 
+      nazione_nome: regione.nazione.nome
+    }));
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...regioniConfig };
+    config.hasItems = totalItems > 0;
+    config.items = items;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('regioni', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Regioni',
+      description: 'Gestisci le regioni per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Regioni', href: '/ristorante-menu/impostazioni/regioni' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle regioni:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli regione
+router.get('/impostazioni/regioni/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/regioni/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const regione = await prisma.regione.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: { 
+        nazione: true
+      }
+    });
+
+    if (!regione) {
+      return res.status(404).send('Regione non trovata');
+    }
+
+    // Trasforma i dati per la vista
+    const item = {
+      ...regione,
+      nazione_nome: regione.nazione.nome
+    };
+
+    const actionNavConfig = createSubSectionActionNav('regioni', 'view', regione.id);
+    const customTitle = generatePageTitle(regioniConfig, 'view', regione);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Regione',
+      customTitle,
+      description: 'Informazioni dettagliate della regione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item,
+      itemType: 'Regione',
+      backUrl: '/ristorante-menu/impostazioni/regioni',
+      actionNavConfig,
+      detailViewConfig: regioniDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Regioni', href: '/ristorante-menu/impostazioni/regioni' },
+        { label: regione.nome, href: `/ristorante-menu/impostazioni/regioni/dettagli/${regione.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli regione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova regione
+router.get('/impostazioni/regioni/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/regioni/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Recupera le nazioni per il select
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+
+    // Configura il form
+    const formConfig = regioneFormData.getFormData ? 
+      regioneFormData.getFormData(regioneFormData, false, null, req.body) : 
+      regioneFormData;
+    
+    // Popola le opzioni del select nazione
+    formConfig.fields.forEach((field: any) => {
+      if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('regioni', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Regione',
+      description: 'Crea una nuova regione per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Regione',
+      backUrl: '/ristorante-menu/impostazioni/regioni',
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Regioni', href: '/ristorante-menu/impostazioni/regioni' },
+        { label: 'Nuova Regione', href: '/ristorante-menu/impostazioni/regioni/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova regione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica regione
+router.get('/impostazioni/regioni/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/regioni/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const regione = await prisma.regione.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: { nazione: true }
+    });
+
+    if (!regione) {
+      return res.status(404).send('Regione non trovata');
+    }
+
+    // Recupera le nazioni per il select
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+
+    // Configura il form
+    const formConfig = regioneFormData.getFormData ? 
+      regioneFormData.getFormData(regioneFormData, true, regione, req.body) : 
+      regioneFormData;
+    
+    // Popola le opzioni del select nazione
+    formConfig.fields.forEach((field: any) => {
+      if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('regioni', 'edit', regione.id);
+    const customTitle = generatePageTitle(regioniConfig, 'edit', regione);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Regione',
+      customTitle,
+      description: 'Modifica le informazioni della regione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: regione,
+      itemType: 'Regione',
+      backUrl: `/ristorante-menu/impostazioni/regioni/dettagli/${regione.id}`,
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Regioni', href: '/ristorante-menu/impostazioni/regioni' },
+        { label: regione.nome, href: `/ristorante-menu/impostazioni/regioni/dettagli/${regione.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/regioni/modifica/${regione.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica regione:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova regione
+router.post('/impostazioni/regioni/nuovo/ajax', async (req, res) => {
+  const { nome, nazioneId } = req.body;
+
+  try {
+    // Verifica che la nazione esista
+    const nazione = await prisma.nazione.findFirst({
+      where: { id: nazioneId, deletedAt: null }
+    });
+
+    if (!nazione) {
+      return res.json({
+        success: false,
+        message: 'Nazione non trovata'
+      });
+    }
+
+    // Verifica che non esista già una regione con lo stesso nome nella stessa nazione
+    const existingRegione = await prisma.regione.findFirst({
+      where: {
+        nome,
+        nazioneId,
+        deletedAt: null
+      }
+    });
+
+    if (existingRegione) {
+      return res.json({
+        success: false,
+        message: 'Una regione con questo nome esiste già in questa nazione'
+      });
+    }
+
+    const regione = await prisma.regione.create({
+      data: {
+        nome,
+        nazioneId
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Regione creata con successo',
+      data: { id: regione.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della regione:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della regione'
+    });
+  }
+});
+
+// Route AJAX per modificare regione
+router.post('/impostazioni/regioni/modifica/:id/ajax', async (req, res) => {
+  const { nome, nazioneId } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la regione esista
+    const existingRegione = await prisma.regione.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingRegione) {
+      return res.json({
+        success: false,
+        message: 'Regione non trovata'
+      });
+    }
+
+    // Verifica che la nazione esista
+    const nazione = await prisma.nazione.findFirst({
+      where: { id: nazioneId, deletedAt: null }
+    });
+
+    if (!nazione) {
+      return res.json({
+        success: false,
+        message: 'Nazione non trovata'
+      });
+    }
+
+    // Verifica che non esista già una regione con lo stesso nome nella stessa nazione (escludendo quella corrente)
+    const duplicateRegione = await prisma.regione.findFirst({
+      where: {
+        nome,
+        nazioneId,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateRegione) {
+      return res.json({
+        success: false,
+        message: 'Una regione con questo nome esiste già in questa nazione'
+      });
+    }
+
+    const regione = await prisma.regione.update({
+      where: { id },
+      data: {
+        nome,
+        nazioneId
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Regione aggiornata con successo',
+      data: { id: regione.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della regione:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della regione'
+    });
+  }
+});
+
+// Route per eliminazione singola regione
+router.delete('/impostazioni/regioni/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.regione.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Regione eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della regione:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla regioni
+router.delete('/impostazioni/regioni', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna regione selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le regioni esistano e non siano già cancellate
+    const existingRegioni = await prisma.regione.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingRegioni.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna regione valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le regioni valide
+    const validRegioneIds = existingRegioni.map(regione => regione.id);
+    await prisma.regione.updateMany({
+      where: { 
+        id: { in: validRegioneIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validRegioneIds.length;
+    const skippedCount = itemIds.length - validRegioneIds.length;
+    
+    let message = `Eliminate ${deletedCount} regione/i con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} regione/i già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle regioni:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD ZONE ===
+
+// Route per visualizzare lista zone
+router.get('/impostazioni/zone', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/zone';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.zona.count({ where: { deletedAt: null } });
+    const zone = await prisma.zona.findMany({
+      where: { deletedAt: null },
+      include: { 
+        regione: true,
+        nazione: true
+      },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const items = zone.map(zona => ({ 
+      ...zona, 
+      regione_nome: zona.regione.nome,
+      nazione_nome: zona.nazione.nome
+    }));
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...zoneConfig };
+    config.hasItems = totalItems > 0;
+    config.items = items;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('zone', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Zone',
+      description: 'Gestisci le zone per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Zone', href: '/ristorante-menu/impostazioni/zone' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle zone:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli zona
+router.get('/impostazioni/zone/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/zone/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const zona = await prisma.zona.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: { 
+        regione: true,
+        nazione: true
+      }
+    });
+
+    if (!zona) {
+      return res.status(404).send('Zona non trovata');
+    }
+
+    // Trasforma i dati per la vista
+    const item = {
+      ...zona,
+      regione_nome: zona.regione.nome,
+      nazione_nome: zona.nazione.nome
+    };
+
+    const actionNavConfig = createSubSectionActionNav('zone', 'view', zona.id);
+    const customTitle = generatePageTitle(zoneConfig, 'view', zona);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Zona',
+      customTitle,
+      description: 'Informazioni dettagliate della zona',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item,
+      itemType: 'Zona',
+      backUrl: '/ristorante-menu/impostazioni/zone',
+      actionNavConfig,
+      detailViewConfig: zoneDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Zone', href: '/ristorante-menu/impostazioni/zone' },
+        { label: zona.nome, href: `/ristorante-menu/impostazioni/zone/dettagli/${zona.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli zona:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova zona
+router.get('/impostazioni/zone/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/zone/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Recupera le regioni e nazioni per i select
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      include: { nazione: true },
+      orderBy: { nome: 'asc' }
+    });
+
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+
+    // Configura il form
+    const formConfig = zonaFormData.getFormData ? 
+      zonaFormData.getFormData(zonaFormData, false, null, req.body) : 
+      zonaFormData;
+    
+    // Popola le opzioni dei select
+    formConfig.fields.forEach((field: any) => {
+      if (field.name === 'regioneId') {
+        field.options = regioni.map(regione => ({
+          value: regione.id,
+          label: regione.nome,
+          data: { nazioneId: regione.nazioneId, nazioneNome: regione.nazione.nome }
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('zone', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Zona',
+      description: 'Crea una nuova zona per la classificazione geografica',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Zona',
+      backUrl: '/ristorante-menu/impostazioni/zone',
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Zone', href: '/ristorante-menu/impostazioni/zone' },
+        { label: 'Nuova Zona', href: '/ristorante-menu/impostazioni/zone/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova zona:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica zona
+router.get('/impostazioni/zone/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/zone/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const zona = await prisma.zona.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      },
+      include: { 
+        regione: true,
+        nazione: true
+      }
+    });
+
+    if (!zona) {
+      return res.status(404).send('Zona non trovata');
+    }
+
+    // Recupera le regioni e nazioni per i select
+    const regioni = await prisma.regione.findMany({
+      where: { deletedAt: null },
+      include: { nazione: true },
+      orderBy: { nome: 'asc' }
+    });
+
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+
+    // Configura il form
+    const formConfig = zonaFormData.getFormData ? 
+      zonaFormData.getFormData(zonaFormData, true, zona, req.body) : 
+      zonaFormData;
+    
+    // Popola le opzioni dei select
+    formConfig.fields.forEach((field: any) => {
+      if (field.name === 'regioneId') {
+        field.options = regioni.map(regione => ({
+          value: regione.id,
+          label: regione.nome,
+          data: { nazioneId: regione.nazioneId, nazioneNome: regione.nazione.nome }
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('zone', 'edit', zona.id);
+    const customTitle = generatePageTitle(zoneConfig, 'edit', zona);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Zona',
+      customTitle,
+      description: 'Modifica le informazioni della zona',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: zona,
+      itemType: 'Zona',
+      backUrl: `/ristorante-menu/impostazioni/zone/dettagli/${zona.id}`,
+      actionNavConfig, // Passa la configurazione actionNav
+      isInternalPage: true, // Aggiunto parametro mancante
+      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Zone', href: '/ristorante-menu/impostazioni/zone' },
+        { label: zona.nome, href: `/ristorante-menu/impostazioni/zone/dettagli/${zona.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/zone/modifica/${zona.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica zona:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova zona
+router.post('/impostazioni/zone/nuovo/ajax', async (req, res) => {
+  const { nome, regioneId, nazioneId } = req.body;
+
+  try {
+    // Verifica che la regione esista
+    const regione = await prisma.regione.findFirst({
+      where: { id: regioneId, deletedAt: null },
+      include: { nazione: true }
+    });
+
+    if (!regione) {
+      return res.json({
+        success: false,
+        message: 'Regione non trovata'
+      });
+    }
+
+    // Verifica che la nazione esista
+    const nazione = await prisma.nazione.findFirst({
+      where: { id: nazioneId, deletedAt: null }
+    });
+
+    if (!nazione) {
+      return res.json({
+        success: false,
+        message: 'Nazione non trovata'
+      });
+    }
+
+    // Nota: regioneId e nazioneId sono campi indipendenti nel modello Zona
+
+    // Verifica che non esista già una zona con lo stesso nome nella stessa regione
+    const existingZona = await prisma.zona.findFirst({
+      where: {
+        nome,
+        regioneId,
+        deletedAt: null
+      }
+    });
+
+    if (existingZona) {
+      return res.json({
+        success: false,
+        message: 'Una zona con questo nome esiste già in questa regione'
+      });
+    }
+
+    const zona = await prisma.zona.create({
+      data: {
+        nome,
+        regioneId,
+        nazioneId
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Zona creata con successo',
+      data: { id: zona.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della zona:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della zona'
+    });
+  }
+});
+
+// Route AJAX per modificare zona
+router.post('/impostazioni/zone/modifica/:id/ajax', async (req, res) => {
+  const { nome, regioneId, nazioneId } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la zona esista
+    const existingZona = await prisma.zona.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingZona) {
+      return res.json({
+        success: false,
+        message: 'Zona non trovata'
+      });
+    }
+
+    // Verifica che la regione esista
+    const regione = await prisma.regione.findFirst({
+      where: { id: regioneId, deletedAt: null },
+      include: { nazione: true }
+    });
+
+    if (!regione) {
+      return res.json({
+        success: false,
+        message: 'Regione non trovata'
+      });
+    }
+
+    // Verifica che la nazione esista
+    const nazione = await prisma.nazione.findFirst({
+      where: { id: nazioneId, deletedAt: null }
+    });
+
+    if (!nazione) {
+      return res.json({
+        success: false,
+        message: 'Nazione non trovata'
+      });
+    }
+
+    // Nota: regioneId e nazioneId sono campi indipendenti nel modello Zona
+
+    // Verifica che non esista già una zona con lo stesso nome nella stessa regione (escludendo quella corrente)
+    const duplicateZona = await prisma.zona.findFirst({
+      where: {
+        nome,
+        regioneId,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateZona) {
+      return res.json({
+        success: false,
+        message: 'Una zona con questo nome esiste già in questa regione'
+      });
+    }
+
+    const zona = await prisma.zona.update({
+      where: { id },
+      data: {
+        nome,
+        regioneId,
+        nazioneId
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Zona aggiornata con successo',
+      data: { id: zona.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della zona:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della zona'
+    });
+  }
+});
+
+// Route per eliminazione singola zona
+router.delete('/impostazioni/zone/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.zona.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Zona eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della zona:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla zone
+router.delete('/impostazioni/zone', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna zona selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le zone esistano e non siano già cancellate
+    const existingZone = await prisma.zona.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingZone.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna zona valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le zone valide
+    const validZonaIds = existingZone.map(zona => zona.id);
+    await prisma.zona.updateMany({
+      where: { 
+        id: { in: validZonaIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validZonaIds.length;
+    const skippedCount = itemIds.length - validZonaIds.length;
+    
+    let message = `Eliminate ${deletedCount} zona/e con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} zona/e già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle zone:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD TIPOLOGIE VINO ===
+
+// Route per visualizzare lista tipologie vino
+router.get('/impostazioni/tipologie-vino', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-vino';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.tipologiaVino.count({ where: { deletedAt: null } });
+    const tipologieVino = await prisma.tipologiaVino.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...tipologieVinoConfig };
+    config.hasItems = totalItems > 0;
+    config.items = tipologieVino;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('tipologie-vino', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Tipologie Vino',
+      description: 'Gestisci le tipologie vino per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Vino', href: '/ristorante-menu/impostazioni/tipologie-vino' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle tipologie vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli tipologia vino
+router.get('/impostazioni/tipologie-vino/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-vino/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaVino = await prisma.tipologiaVino.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaVino) {
+      return res.status(404).send('Tipologia vino non trovata');
+    }
+
+    const actionNavConfig = createSubSectionActionNav('tipologie-vino', 'view', tipologiaVino.id);
+    const customTitle = generatePageTitle(tipologieVinoConfig, 'view', tipologiaVino);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Tipologia Vino',
+      customTitle,
+      description: 'Informazioni dettagliate della tipologia vino',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: tipologiaVino,
+      itemType: 'Tipologia Vino',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-vino',
+      actionNavConfig,
+      detailViewConfig: tipologieVinoDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Vino', href: '/ristorante-menu/impostazioni/tipologie-vino' },
+        { label: tipologiaVino.nome, href: `/ristorante-menu/impostazioni/tipologie-vino/dettagli/${tipologiaVino.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli tipologia vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova tipologia vino
+router.get('/impostazioni/tipologie-vino/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-vino/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Configura il form
+    const formConfig = tipologiaVinoFormData.getFormData ? 
+      tipologiaVinoFormData.getFormData(tipologiaVinoFormData, false, null, req.body) : 
+      tipologiaVinoFormData;
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-vino', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Tipologia Vino',
+      description: 'Crea una nuova tipologia vino per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Tipologia Vino',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-vino',
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Vino', href: '/ristorante-menu/impostazioni/tipologie-vino' },
+        { label: 'Nuova Tipologia Vino', href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova tipologia vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica tipologia vino
+router.get('/impostazioni/tipologie-vino/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-vino/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaVino = await prisma.tipologiaVino.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaVino) {
+      return res.status(404).send('Tipologia vino non trovata');
+    }
+
+    // Configura il form
+    const formConfig = tipologiaVinoFormData.getFormData ? 
+      tipologiaVinoFormData.getFormData(tipologiaVinoFormData, true, tipologiaVino, req.body) : 
+      tipologiaVinoFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-vino', 'edit', tipologiaVino.id);
+    const customTitle = generatePageTitle(tipologieVinoConfig, 'edit', tipologiaVino);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Tipologia Vino',
+      customTitle,
+      description: 'Modifica le informazioni della tipologia vino',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: tipologiaVino,
+      itemType: 'Tipologia Vino',
+      backUrl: `/ristorante-menu/impostazioni/tipologie-vino/dettagli/${tipologiaVino.id}`,
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Vino', href: '/ristorante-menu/impostazioni/tipologie-vino' },
+        { label: tipologiaVino.nome, href: `/ristorante-menu/impostazioni/tipologie-vino/dettagli/${tipologiaVino.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-vino/modifica/${tipologiaVino.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica tipologia vino:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova tipologia vino
+router.post('/impostazioni/tipologie-vino/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+
+  try {
+    // Verifica che non esista già una tipologia vino con lo stesso nome
+    const existingTipologiaVino = await prisma.tipologiaVino.findFirst({
+      where: {
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologiaVino) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia vino con questo nome esiste già'
+      });
+    }
+
+    const tipologiaVino = await prisma.tipologiaVino.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia vino creata con successo',
+      data: { id: tipologiaVino.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della tipologia vino:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della tipologia vino'
+    });
+  }
+});
+
+// Route AJAX per modificare tipologia vino
+router.post('/impostazioni/tipologie-vino/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la tipologia vino esista
+    const existingTipologiaVino = await prisma.tipologiaVino.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingTipologiaVino) {
+      return res.json({
+        success: false,
+        message: 'Tipologia vino non trovata'
+      });
+    }
+
+    // Verifica che non esista già una tipologia vino con lo stesso nome (escludendo quella corrente)
+    const duplicateTipologiaVino = await prisma.tipologiaVino.findFirst({
+      where: {
+        nome,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateTipologiaVino) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia vino con questo nome esiste già'
+      });
+    }
+
+    const tipologiaVino = await prisma.tipologiaVino.update({
+      where: { id },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia vino aggiornata con successo',
+      data: { id: tipologiaVino.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della tipologia vino:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della tipologia vino'
+    });
+  }
+});
+
+// Route per eliminazione singola tipologia vino
+router.delete('/impostazioni/tipologie-vino/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.tipologiaVino.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Tipologia vino eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della tipologia vino:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla tipologie vino
+router.delete('/impostazioni/tipologie-vino', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna tipologia vino selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le tipologie vino esistano e non siano già cancellate
+    const existingTipologieVino = await prisma.tipologiaVino.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologieVino.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna tipologia vino valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le tipologie vino valide
+    const validTipologiaVinoIds = existingTipologieVino.map(tipologiaVino => tipologiaVino.id);
+    await prisma.tipologiaVino.updateMany({
+      where: { 
+        id: { in: validTipologiaVinoIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validTipologiaVinoIds.length;
+    const skippedCount = itemIds.length - validTipologiaVinoIds.length;
+    
+    let message = `Eliminate ${deletedCount} tipologia/e vino con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} tipologia/e vino già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle tipologie vino:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD TIPOLOGIE BIRRA ===
+
+// Route per visualizzare lista tipologie birra
+router.get('/impostazioni/tipologie-birra', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-birra';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.tipologiaBirra.count({ where: { deletedAt: null } });
+    const tipologieBirra = await prisma.tipologiaBirra.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...tipologieBirraConfig };
+    config.hasItems = totalItems > 0;
+    config.items = tipologieBirra;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('tipologie-birra', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Tipologie Birra',
+      description: 'Gestisci le tipologie birra per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Birra', href: '/ristorante-menu/impostazioni/tipologie-birra' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle tipologie birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli tipologia birra
+router.get('/impostazioni/tipologie-birra/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-birra/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaBirra = await prisma.tipologiaBirra.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaBirra) {
+      return res.status(404).send('Tipologia birra non trovata');
+    }
+
+    const actionNavConfig = createSubSectionActionNav('tipologie-birra', 'view', tipologiaBirra.id);
+    const customTitle = generatePageTitle(tipologieBirraConfig, 'view', tipologiaBirra);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Tipologia Birra',
+      customTitle,
+      description: 'Informazioni dettagliate della tipologia birra',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: tipologiaBirra,
+      itemType: 'Tipologia Birra',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-birra',
+      actionNavConfig,
+      detailViewConfig: tipologieBirraDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Birra', href: '/ristorante-menu/impostazioni/tipologie-birra' },
+        { label: tipologiaBirra.nome, href: `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${tipologiaBirra.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli tipologia birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova tipologia birra
+router.get('/impostazioni/tipologie-birra/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-birra/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Configura il form
+    const formConfig = tipologiaBirraFormData.getFormData ? 
+      tipologiaBirraFormData.getFormData(tipologiaBirraFormData, false, null, req.body) : 
+      tipologiaBirraFormData;
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-birra', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Tipologia Birra',
+      description: 'Crea una nuova tipologia birra per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Tipologia Birra',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-birra',
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Birra', href: '/ristorante-menu/impostazioni/tipologie-birra' },
+        { label: 'Nuova Tipologia Birra', href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova tipologia birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica tipologia birra
+router.get('/impostazioni/tipologie-birra/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-birra/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaBirra = await prisma.tipologiaBirra.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaBirra) {
+      return res.status(404).send('Tipologia birra non trovata');
+    }
+
+    // Configura il form
+    const formConfig = tipologiaBirraFormData.getFormData ? 
+      tipologiaBirraFormData.getFormData(tipologiaBirraFormData, true, tipologiaBirra, req.body) : 
+      tipologiaBirraFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-birra', 'edit', tipologiaBirra.id);
+    const customTitle = generatePageTitle(tipologieBirraConfig, 'edit', tipologiaBirra);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Tipologia Birra',
+      customTitle,
+      description: 'Modifica le informazioni della tipologia birra',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: tipologiaBirra,
+      itemType: 'Tipologia Birra',
+      backUrl: `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${tipologiaBirra.id}`,
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Birra', href: '/ristorante-menu/impostazioni/tipologie-birra' },
+        { label: tipologiaBirra.nome, href: `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${tipologiaBirra.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-birra/modifica/${tipologiaBirra.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica tipologia birra:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova tipologia birra
+router.post('/impostazioni/tipologie-birra/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+
+  try {
+    // Verifica che non esista già una tipologia birra con lo stesso nome
+    const existingTipologiaBirra = await prisma.tipologiaBirra.findFirst({
+      where: {
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologiaBirra) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia birra con questo nome esiste già'
+      });
+    }
+
+    const tipologiaBirra = await prisma.tipologiaBirra.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia birra creata con successo',
+      data: { id: tipologiaBirra.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della tipologia birra:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della tipologia birra'
+    });
+  }
+});
+
+// Route AJAX per modificare tipologia birra
+router.post('/impostazioni/tipologie-birra/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la tipologia birra esista
+    const existingTipologiaBirra = await prisma.tipologiaBirra.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingTipologiaBirra) {
+      return res.json({
+        success: false,
+        message: 'Tipologia birra non trovata'
+      });
+    }
+
+    // Verifica che non esista già una tipologia birra con lo stesso nome (escludendo quella corrente)
+    const duplicateTipologiaBirra = await prisma.tipologiaBirra.findFirst({
+      where: {
+        nome,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateTipologiaBirra) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia birra con questo nome esiste già'
+      });
+    }
+
+    const tipologiaBirra = await prisma.tipologiaBirra.update({
+      where: { id },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia birra aggiornata con successo',
+      data: { id: tipologiaBirra.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della tipologia birra:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della tipologia birra'
+    });
+  }
+});
+
+// Route per eliminazione singola tipologia birra
+router.delete('/impostazioni/tipologie-birra/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.tipologiaBirra.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Tipologia birra eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della tipologia birra:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla tipologie birra
+router.delete('/impostazioni/tipologie-birra', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna tipologia birra selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le tipologie birra esistano e non siano già cancellate
+    const existingTipologieBirra = await prisma.tipologiaBirra.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologieBirra.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna tipologia birra valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le tipologie birra valide
+    const validTipologiaBirraIds = existingTipologieBirra.map(tipologiaBirra => tipologiaBirra.id);
+    await prisma.tipologiaBirra.updateMany({
+      where: { 
+        id: { in: validTipologiaBirraIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validTipologiaBirraIds.length;
+    const skippedCount = itemIds.length - validTipologiaBirraIds.length;
+    
+    let message = `Eliminate ${deletedCount} tipologia/e birra con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} tipologia/e birra già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle tipologie birra:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD TIPOLOGIE LIQUORE ===
+
+// Route per visualizzare lista tipologie liquore
+router.get('/impostazioni/tipologie-liquore', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-liquore';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.tipologiaLiquore.count({ where: { deletedAt: null } });
+    const tipologieLiquore = await prisma.tipologiaLiquore.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...tipologieLiquoreConfig };
+    config.hasItems = totalItems > 0;
+    config.items = tipologieLiquore;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('tipologie-liquore', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Tipologie Liquore',
+      description: 'Gestisci le tipologie liquore per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle tipologie liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli tipologia liquore
+router.get('/impostazioni/tipologie-liquore/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaLiquore = await prisma.tipologiaLiquore.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaLiquore) {
+      return res.status(404).send('Tipologia liquore non trovata');
+    }
+
+    const actionNavConfig = createSubSectionActionNav('tipologie-liquore', 'view', tipologiaLiquore.id);
+    const customTitle = generatePageTitle(tipologieLiquoreConfig, 'view', tipologiaLiquore);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Tipologia Liquore',
+      customTitle,
+      description: 'Informazioni dettagliate della tipologia liquore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: tipologiaLiquore,
+      itemType: 'Tipologia Liquore',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-liquore',
+      actionNavConfig,
+      detailViewConfig: tipologieLiquoreDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore' },
+        { label: tipologiaLiquore.nome, href: `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${tipologiaLiquore.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli tipologia liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova tipologia liquore
+router.get('/impostazioni/tipologie-liquore/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-liquore/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Configura il form
+    const formConfig = tipologiaLiquoreFormData.getFormData ? 
+      tipologiaLiquoreFormData.getFormData(tipologiaLiquoreFormData, false, null, req.body) : 
+      tipologiaLiquoreFormData;
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-liquore', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Tipologia Liquore',
+      description: 'Crea una nuova tipologia liquore per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Tipologia Liquore',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-liquore',
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore' },
+        { label: 'Nuova Tipologia Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova tipologia liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica tipologia liquore
+router.get('/impostazioni/tipologie-liquore/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-liquore/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaLiquore = await prisma.tipologiaLiquore.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaLiquore) {
+      return res.status(404).send('Tipologia liquore non trovata');
+    }
+
+    // Configura il form
+    const formConfig = tipologiaLiquoreFormData.getFormData ? 
+      tipologiaLiquoreFormData.getFormData(tipologiaLiquoreFormData, true, tipologiaLiquore, req.body) : 
+      tipologiaLiquoreFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-liquore', 'edit', tipologiaLiquore.id);
+    const customTitle = generatePageTitle(tipologieLiquoreConfig, 'edit', tipologiaLiquore);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Tipologia Liquore',
+      customTitle,
+      description: 'Modifica le informazioni della tipologia liquore',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: tipologiaLiquore,
+      itemType: 'Tipologia Liquore',
+      backUrl: `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${tipologiaLiquore.id}`,
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore' },
+        { label: tipologiaLiquore.nome, href: `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${tipologiaLiquore.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${tipologiaLiquore.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica tipologia liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova tipologia liquore
+router.post('/impostazioni/tipologie-liquore/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+
+  try {
+    // Verifica che non esista già una tipologia liquore con lo stesso nome
+    const existingTipologiaLiquore = await prisma.tipologiaLiquore.findFirst({
+      where: {
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologiaLiquore) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia liquore con questo nome esiste già'
+      });
+    }
+
+    const tipologiaLiquore = await prisma.tipologiaLiquore.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia liquore creata con successo',
+      data: { id: tipologiaLiquore.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della tipologia liquore:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della tipologia liquore'
+    });
+  }
+});
+
+// Route AJAX per modificare tipologia liquore
+router.post('/impostazioni/tipologie-liquore/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la tipologia liquore esista
+    const existingTipologiaLiquore = await prisma.tipologiaLiquore.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingTipologiaLiquore) {
+      return res.json({
+        success: false,
+        message: 'Tipologia liquore non trovata'
+      });
+    }
+
+    // Verifica che non esista già una tipologia liquore con lo stesso nome (escludendo quella corrente)
+    const duplicateTipologiaLiquore = await prisma.tipologiaLiquore.findFirst({
+      where: {
+        nome,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateTipologiaLiquore) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia liquore con questo nome esiste già'
+      });
+    }
+
+    const tipologiaLiquore = await prisma.tipologiaLiquore.update({
+      where: { id },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia liquore aggiornata con successo',
+      data: { id: tipologiaLiquore.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della tipologia liquore:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della tipologia liquore'
+    });
+  }
+});
+
+// Route per eliminazione singola tipologia liquore
+router.delete('/impostazioni/tipologie-liquore/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.tipologiaLiquore.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Tipologia liquore eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della tipologia liquore:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla tipologie liquore
+router.delete('/impostazioni/tipologie-liquore', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna tipologia liquore selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le tipologie liquore esistano e non siano già cancellate
+    const existingTipologieLiquore = await prisma.tipologiaLiquore.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologieLiquore.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna tipologia liquore valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le tipologie liquore valide
+    const validTipologiaLiquoreIds = existingTipologieLiquore.map(tipologiaLiquore => tipologiaLiquore.id);
+    await prisma.tipologiaLiquore.updateMany({
+      where: { 
+        id: { in: validTipologiaLiquoreIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validTipologiaLiquoreIds.length;
+    const skippedCount = itemIds.length - validTipologiaLiquoreIds.length;
+    
+    let message = `Eliminate ${deletedCount} tipologia/e liquore con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} tipologia/e liquore già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle tipologie liquore:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD TIPOLOGIE COCKTAIL ===
+
+// Route per visualizzare lista tipologie cocktail
+router.get('/impostazioni/tipologie-cocktail', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-cocktail';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.tipologiaCocktail.count({ where: { deletedAt: null } });
+    const tipologieCocktail = await prisma.tipologiaCocktail.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...tipologieCocktailConfig };
+    config.hasItems = totalItems > 0;
+    config.items = tipologieCocktail;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('tipologie-cocktail', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Tipologie Cocktail',
+      description: 'Gestisci le tipologie cocktail per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle tipologie cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli tipologia cocktail
+router.get('/impostazioni/tipologie-cocktail/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaCocktail = await prisma.tipologiaCocktail.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaCocktail) {
+      return res.status(404).send('Tipologia cocktail non trovata');
+    }
+
+    const actionNavConfig = createSubSectionActionNav('tipologie-cocktail', 'view', tipologiaCocktail.id);
+    const customTitle = generatePageTitle(tipologieCocktailConfig, 'view', tipologiaCocktail);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Tipologia Cocktail',
+      customTitle,
+      description: 'Informazioni dettagliate della tipologia cocktail',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: tipologiaCocktail,
+      itemType: 'Tipologia Cocktail',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-cocktail',
+      actionNavConfig,
+      detailViewConfig: tipologieCocktailDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail' },
+        { label: tipologiaCocktail.nome, href: `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${tipologiaCocktail.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli tipologia cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova tipologia cocktail
+router.get('/impostazioni/tipologie-cocktail/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Configura il form
+    const formConfig = tipologiaCocktailFormData.getFormData ? 
+      tipologiaCocktailFormData.getFormData(tipologiaCocktailFormData, false, null, req.body) : 
+      tipologiaCocktailFormData;
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-cocktail', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Tipologia Cocktail',
+      description: 'Crea una nuova tipologia cocktail per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Tipologia Cocktail',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-cocktail',
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail' },
+        { label: 'Nuova Tipologia Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova tipologia cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica tipologia cocktail
+router.get('/impostazioni/tipologie-cocktail/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaCocktail = await prisma.tipologiaCocktail.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaCocktail) {
+      return res.status(404).send('Tipologia cocktail non trovata');
+    }
+
+    // Configura il form
+    const formConfig = tipologiaCocktailFormData.getFormData ? 
+      tipologiaCocktailFormData.getFormData(tipologiaCocktailFormData, true, tipologiaCocktail, req.body) : 
+      tipologiaCocktailFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-cocktail', 'edit', tipologiaCocktail.id);
+    const customTitle = generatePageTitle(tipologieCocktailConfig, 'edit', tipologiaCocktail);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Tipologia Cocktail',
+      customTitle,
+      description: 'Modifica le informazioni della tipologia cocktail',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: tipologiaCocktail,
+      itemType: 'Tipologia Cocktail',
+      backUrl: `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${tipologiaCocktail.id}`,
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail' },
+        { label: tipologiaCocktail.nome, href: `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${tipologiaCocktail.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${tipologiaCocktail.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica tipologia cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova tipologia cocktail
+router.post('/impostazioni/tipologie-cocktail/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+
+  try {
+    // Verifica che non esista già una tipologia cocktail con lo stesso nome
+    const existingTipologiaCocktail = await prisma.tipologiaCocktail.findFirst({
+      where: {
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologiaCocktail) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia cocktail con questo nome esiste già'
+      });
+    }
+
+    const tipologiaCocktail = await prisma.tipologiaCocktail.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia cocktail creata con successo',
+      data: { id: tipologiaCocktail.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della tipologia cocktail:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della tipologia cocktail'
+    });
+  }
+});
+
+// Route AJAX per modificare tipologia cocktail
+router.post('/impostazioni/tipologie-cocktail/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la tipologia cocktail esista
+    const existingTipologiaCocktail = await prisma.tipologiaCocktail.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingTipologiaCocktail) {
+      return res.json({
+        success: false,
+        message: 'Tipologia cocktail non trovata'
+      });
+    }
+
+    // Verifica che non esista già una tipologia cocktail con lo stesso nome (escludendo quella corrente)
+    const duplicateTipologiaCocktail = await prisma.tipologiaCocktail.findFirst({
+      where: {
+        nome,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateTipologiaCocktail) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia cocktail con questo nome esiste già'
+      });
+    }
+
+    const tipologiaCocktail = await prisma.tipologiaCocktail.update({
+      where: { id },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia cocktail aggiornata con successo',
+      data: { id: tipologiaCocktail.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della tipologia cocktail:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della tipologia cocktail'
+    });
+  }
+});
+
+// Route per eliminazione singola tipologia cocktail
+router.delete('/impostazioni/tipologie-cocktail/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.tipologiaCocktail.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Tipologia cocktail eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della tipologia cocktail:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla tipologie cocktail
+router.delete('/impostazioni/tipologie-cocktail', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna tipologia cocktail selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le tipologie cocktail esistano e non siano già cancellate
+    const existingTipologieCocktail = await prisma.tipologiaCocktail.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologieCocktail.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna tipologia cocktail valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le tipologie cocktail valide
+    const validTipologiaCocktailIds = existingTipologieCocktail.map(tipologiaCocktail => tipologiaCocktail.id);
+    await prisma.tipologiaCocktail.updateMany({
+      where: { 
+        id: { in: validTipologiaCocktailIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validTipologiaCocktailIds.length;
+    const skippedCount = itemIds.length - validTipologiaCocktailIds.length;
+    
+    let message = `Eliminate ${deletedCount} tipologia/e cocktail con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} tipologia/e cocktail già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle tipologie cocktail:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// === ROUTE CRUD TIPOLOGIE BEVANDA ===
+
+// Route per visualizzare lista tipologie bevanda
+router.get('/impostazioni/tipologie-bevanda', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-bevanda';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const paginationConfig = getPaginationParams(req, 20);
+    const totalItems = await prisma.tipologiaBevanda.count({ where: { deletedAt: null } });
+    const tipologieBevanda = await prisma.tipologiaBevanda.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' },
+      skip: paginationConfig.offset,
+      take: paginationConfig.limit
+    });
+
+    const pagination = calculatePagination(totalItems, paginationConfig.page, paginationConfig.limit);
+
+    const config = { ...tipologieBevandaConfig };
+    config.hasItems = totalItems > 0;
+    config.items = tipologieBevanda;
+
+    const successMessage = req.query.success ? decodeURIComponent(req.query.success as string) : undefined;
+    const errorMessage = req.query.error ? decodeURIComponent(req.query.error as string) : undefined;
+    const actionNavConfig = createSubSectionActionNav('tipologie-bevanda', 'index');
+
+    res.render('pages/ristorante-menu/impostazioni/subSection', {
+      title: 'Tipologie Bevanda',
+      description: 'Gestisci le tipologie bevanda per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda' }
+      ],
+      successMessage,
+      errorMessage,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(config.tableConfig),
+      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      actionNavConfig,
+      isInternalPage: false,
+      pagination,
+      ...config
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle tipologie bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli tipologia bevanda
+router.get('/impostazioni/tipologie-bevanda/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaBevanda = await prisma.tipologiaBevanda.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaBevanda) {
+      return res.status(404).send('Tipologia bevanda non trovata');
+    }
+
+    const actionNavConfig = createSubSectionActionNav('tipologie-bevanda', 'view', tipologiaBevanda.id);
+    const customTitle = generatePageTitle(tipologieBevandaConfig, 'view', tipologiaBevanda);
+
+    res.render('pages/ristorante-menu/impostazioni/view', {
+      title: 'Dettagli Tipologia Bevanda',
+      customTitle,
+      description: 'Informazioni dettagliate della tipologia bevanda',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      item: tipologiaBevanda,
+      itemType: 'Tipologia Bevanda',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-bevanda',
+      actionNavConfig,
+      detailViewConfig: tipologieBevandaDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
+      isInternalPage: true,
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda' },
+        { label: tipologiaBevanda.nome, href: `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${tipologiaBevanda.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento dei dettagli tipologia bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form nuova tipologia bevanda
+router.get('/impostazioni/tipologie-bevanda/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    // Configura il form
+    const formConfig = tipologiaBevandaFormData.getFormData ? 
+      tipologiaBevandaFormData.getFormData(tipologiaBevandaFormData, false, null, req.body) : 
+      tipologiaBevandaFormData;
+
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-bevanda', 'new');
+    
+    res.render('pages/ristorante-menu/servizi/new', {
+      title: 'Nuova Tipologia Bevanda',
+      description: 'Crea una nuova tipologia bevanda per la classificazione',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      itemType: 'Tipologia Bevanda',
+      backUrl: '/ristorante-menu/impostazioni/tipologie-bevanda',
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda' },
+        { label: 'Nuova Tipologia Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo' }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova tipologia bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per form modifica tipologia bevanda
+router.get('/impostazioni/tipologie-bevanda/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    let sectionTabs = ristoranteMenuImpostazioniSubItems;
+
+    const tipologiaBevanda = await prisma.tipologiaBevanda.findFirst({
+      where: { 
+        id: req.params.id,
+        deletedAt: null
+      }
+    });
+
+    if (!tipologiaBevanda) {
+      return res.status(404).send('Tipologia bevanda non trovata');
+    }
+
+    // Configura il form
+    const formConfig = tipologiaBevandaFormData.getFormData ? 
+      tipologiaBevandaFormData.getFormData(tipologiaBevandaFormData, true, tipologiaBevanda, req.body) : 
+      tipologiaBevandaFormData;
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = createSubSectionActionNav('tipologie-bevanda', 'edit', tipologiaBevanda.id);
+    const customTitle = generatePageTitle(tipologieBevandaConfig, 'edit', tipologiaBevanda);
+
+    res.render('pages/ristorante-menu/servizi/edit', {
+      title: 'Modifica Tipologia Bevanda',
+      customTitle,
+      description: 'Modifica le informazioni della tipologia bevanda',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionTabs,
+      sectionIcons,
+      currentPath,
+      formConfig,
+      item: tipologiaBevanda,
+      itemType: 'Tipologia Bevanda',
+      backUrl: `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${tipologiaBevanda.id}`,
+      actionNavConfig,
+      isInternalPage: true,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
+        { label: 'Tipologie Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda' },
+        { label: tipologiaBevanda.nome, href: `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${tipologiaBevanda.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${tipologiaBevanda.id}` }
+      ]
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica tipologia bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route AJAX per creare nuova tipologia bevanda
+router.post('/impostazioni/tipologie-bevanda/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+
+  try {
+    // Verifica che non esista già una tipologia bevanda con lo stesso nome
+    const existingTipologiaBevanda = await prisma.tipologiaBevanda.findFirst({
+      where: {
+        nome,
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologiaBevanda) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia bevanda con questo nome esiste già'
+      });
+    }
+
+    const tipologiaBevanda = await prisma.tipologiaBevanda.create({
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia bevanda creata con successo',
+      data: { id: tipologiaBevanda.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della tipologia bevanda:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione della tipologia bevanda'
+    });
+  }
+});
+
+// Route AJAX per modificare tipologia bevanda
+router.post('/impostazioni/tipologie-bevanda/modifica/:id/ajax', async (req, res) => {
+  const { nome, descrizione } = req.body;
+  const { id } = req.params;
+
+  try {
+    // Verifica che la tipologia bevanda esista
+    const existingTipologiaBevanda = await prisma.tipologiaBevanda.findFirst({
+      where: { id, deletedAt: null }
+    });
+
+    if (!existingTipologiaBevanda) {
+      return res.json({
+        success: false,
+        message: 'Tipologia bevanda non trovata'
+      });
+    }
+
+    // Verifica che non esista già una tipologia bevanda con lo stesso nome (escludendo quella corrente)
+    const duplicateTipologiaBevanda = await prisma.tipologiaBevanda.findFirst({
+      where: {
+        nome,
+        id: { not: id },
+        deletedAt: null
+      }
+    });
+
+    if (duplicateTipologiaBevanda) {
+      return res.json({
+        success: false,
+        message: 'Una tipologia bevanda con questo nome esiste già'
+      });
+    }
+
+    const tipologiaBevanda = await prisma.tipologiaBevanda.update({
+      where: { id },
+      data: {
+        nome,
+        descrizione: descrizione || null
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Tipologia bevanda aggiornata con successo',
+      data: { id: tipologiaBevanda.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento della tipologia bevanda:', error);
+    res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento della tipologia bevanda'
+    });
+  }
+});
+
+// Route per eliminazione singola tipologia bevanda
+router.delete('/impostazioni/tipologie-bevanda/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.tipologiaBevanda.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({ 
+      success: true, 
+      message: 'Tipologia bevanda eliminata con successo' 
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della tipologia bevanda:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore nell\'eliminazione' 
+    });
+  }
+});
+
+// Route per eliminazione multipla tipologie bevanda
+router.delete('/impostazioni/tipologie-bevanda', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna tipologia bevanda selezionata per la cancellazione' 
+    });
+  }
+  
+  try {
+    // Verifica che tutte le tipologie bevanda esistano e non siano già cancellate
+    const existingTipologieBevanda = await prisma.tipologiaBevanda.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingTipologieBevanda.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessuna tipologia bevanda valida trovata per la cancellazione' 
+      });
+    }
+
+    // Esegui soft delete per tutte le tipologie bevanda valide
+    const validTipologiaBevandaIds = existingTipologieBevanda.map(tipologiaBevanda => tipologiaBevanda.id);
+    await prisma.tipologiaBevanda.updateMany({
+      where: { 
+        id: { in: validTipologiaBevandaIds }
+      },
+      data: { 
+        deletedAt: new Date() 
+      }
+    });
+
+    const deletedCount = validTipologiaBevandaIds.length;
+    const skippedCount = itemIds.length - validTipologiaBevandaIds.length;
+    
+    let message = `Eliminate ${deletedCount} tipologia/e bevanda con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} tipologia/e bevanda già cancellate o non trovate.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nella cancellazione delle tipologie bevanda:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
     });
   }
 });

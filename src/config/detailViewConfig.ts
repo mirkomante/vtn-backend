@@ -146,6 +146,202 @@ export const categoriaPiattiDetailViewConfig: DetailViewConfig = {
   }
 };
 
+// Configurazione per le Nazioni
+export const nazioniDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'sigla',
+      label: 'Sigla',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'regioni',
+      label: 'Regioni',
+      type: 'text'
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const regioniDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const zoneDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'regione_nome',
+      label: 'Regione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const tipologieVinoDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      required: false
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const tipologieBirraDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      required: false
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const tipologieLiquoreDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      required: false
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const tipologieCocktailDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      required: false
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const tipologieBevandaDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      required: false
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
 // Configurazione per gli Utenti
 export const utentiDetailViewConfig: DetailViewConfig = {
   fields: [
@@ -312,6 +508,14 @@ export const detailViewConfigs = {
   'allergeni': allergeniDetailViewConfig,
   'categoria-menu-fisso': categoriaMenuFissoDetailViewConfig,
   'categoria-piatti': categoriaPiattiDetailViewConfig,
+  'nazioni': nazioniDetailViewConfig,
+  'regioni': regioniDetailViewConfig,
+  'zone': zoneDetailViewConfig,
+  'tipologie-vino': tipologieVinoDetailViewConfig,
+  'tipologie-birra': tipologieBirraDetailViewConfig,
+  'tipologie-liquore': tipologieLiquoreDetailViewConfig,
+  'tipologie-cocktail': tipologieCocktailDetailViewConfig,
+  'tipologie-bevanda': tipologieBevandaDetailViewConfig,
   'utenti': utentiDetailViewConfig
 };
 
