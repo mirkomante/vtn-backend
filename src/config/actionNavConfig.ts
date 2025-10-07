@@ -382,6 +382,189 @@ export const actionNavConfigs: Record<string, ActionNavConfig> = {
     ]
   },
   
+  'liquori.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Liquore',
+        href: '/ristorante-menu/liquori/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'liquori.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/liquori',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'liquori.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/liquori',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'liquori.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/liquori',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/liquori/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'liquori.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/liquori',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'cocktails.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuovo Cocktail',
+        href: '/ristorante-menu/cocktails/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'cocktails.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/cocktails',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'cocktails.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/cocktails',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'cocktails.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/cocktails',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/cocktails/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'cocktails.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/cocktails',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'bevande.index': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Nuova Bevanda',
+        href: '/ristorante-menu/bevande/nuovo',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'bevande.new': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/bevande',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'bevande.edit': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/bevande',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
+  'bevande.view': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/bevande',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      },
+      {
+        type: 'link',
+        text: 'Modifica',
+        href: '/ristorante-menu/bevande/modifica/:id',
+        classes: 'rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+      }
+    ]
+  },
+  
+  'bevande.editBulk': {
+    actions: [
+      {
+        type: 'link',
+        text: 'Torna alla lista',
+        href: '/ristorante-menu/bevande',
+        classes: 'rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600'
+      }
+    ]
+  },
+  
   'users.new': {
     actions: [
       {

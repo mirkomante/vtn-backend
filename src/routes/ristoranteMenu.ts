@@ -5,7 +5,7 @@ import { ristoranteMenuItems } from '../config/sectionMenu';
 import { ristoranteMenuImpostazioniSubItems } from '../config/subSectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { uiIcons } from '../config/uiIcons';
-import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData, viniTableData, birreTableData } from '../config/sectionTableData';
+import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData, viniTableData, birreTableData, liquoriTableData, cocktailsTableData, bevandeTableData } from '../config/sectionTableData';
 import { getCountText } from '../config/pluralHelper';
 import { isAuthenticated } from '../middlewares/auth';
 import { 
@@ -25,7 +25,10 @@ import {
 import { 
   piattoFormData,
   vinoFormData,
-  birraFormData
+  birraFormData,
+  liquoreFormData,
+  cocktailFormData,
+  bevandaFormData
 } from '../config/sectionFormData';
 import { menuFissoFormData } from '../config/menuFissoFormData';
 import { 
@@ -51,6 +54,9 @@ import {
   menuFissiDetailViewConfig,
   viniDetailViewConfig,
   birreDetailViewConfig,
+  liquoriDetailViewConfig,
+  cocktailsDetailViewConfig,
+  bevandeDetailViewConfig,
   allergeniDetailViewConfig,
   categoriaMenuFissoDetailViewConfig,
   categoriaPiattiDetailViewConfig,
@@ -6903,6 +6909,1732 @@ router.post('/birre/modifica-massa/ajax', async (req, res) => {
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva delle birre' 
+    });
+  }
+});
+
+// === SEZIONE LIQUORI ===
+
+// Route per visualizzare lista liquori
+router.get('/liquori', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/liquori';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Filtro per tipologia
+    const tipologiaFilter = req.query.tipologia as string;
+    
+    // Parametri di paginazione
+    const { page, limit, offset } = getPaginationParams(req);
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (tipologiaFilter && tipologiaFilter.trim() !== '') {
+      whereClause.tipologiaId = tipologiaFilter;
+    }
+    
+    // Recupera i liquori con le relazioni
+    const liquori = await prisma.liquore.findMany({
+      where: whereClause,
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: offset,
+      take: limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = liquori.map(liquore => ({
+      ...liquore,
+      tipologia_nome: liquore.tipologia.nome,
+      nazione_nome: liquore.nazione.nome
+    }));
+    
+    // Calcola paginazione
+    const totalItems = await prisma.liquore.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di liquori nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.liquore.count({
+      where: { deletedAt: null }
+    });
+    
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
+    const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le tipologie per il filtro
+    const tipologie = await prisma.tipologiaLiquore.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['liquori.index'];
+    
+    res.render('pages/ristorante-menu/liquori/index', {
+      title: 'Liquori',
+      description: 'Gestione liquori del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: liquoriTableData,
+      items,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      pagination,
+      currentTipologiaFilter: tipologiaFilter,
+      tipologie,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Liquori', href: '/ristorante-menu/liquori' }
+      ],
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessun liquore disponibile',
+        description: 'Non ci sono liquori configurati nel sistema. Aggiungi il primo liquore per iniziare.',
+        buttonText: 'Aggiungi liquore',
+        buttonHref: '/ristorante-menu/liquori/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei liquori:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form nuovo liquore
+router.get('/liquori/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/liquori/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaLiquore.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = liquoreFormData.getFormData(liquoreFormData, false);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['liquori.new'];
+    
+    res.render('pages/ristorante-menu/liquori/new', {
+      title: 'Nuovo Liquore',
+      description: 'Aggiungi un nuovo liquore al menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Liquori', href: '/ristorante-menu/liquori' },
+        { label: 'Nuovo', href: '/ristorante-menu/liquori/nuovo' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuovo liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica liquore
+router.get('/liquori/modifica/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentPath = `/ristorante-menu/liquori/modifica/${id}`;
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera il liquore con le relazioni
+    const liquore = await prisma.liquore.findUnique({
+      where: { id },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!liquore) {
+      return res.status(404).send('Liquore non trovato');
+    }
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaLiquore.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = liquoreFormData.getFormData(liquoreFormData, true, liquore);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['liquori.edit'];
+    
+    res.render('pages/ristorante-menu/liquori/edit', {
+      title: `Modifica ${liquore.nome}`,
+      description: `Modifica i dettagli del liquore ${liquore.nome}`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      liquore,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Liquori', href: '/ristorante-menu/liquori' },
+        { label: liquore.nome, href: `/ristorante-menu/liquori/dettagli/${liquore.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/liquori/modifica/${liquore.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli liquore
+router.get('/liquori/dettagli/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentPath = `/ristorante-menu/liquori/dettagli/${id}`;
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera il liquore con le relazioni
+    const liquore = await prisma.liquore.findUnique({
+      where: { id },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!liquore) {
+      return res.status(404).send('Liquore non trovato');
+    }
+    
+    // Trasforma i dati per la vista dettaglio
+    const item = {
+      ...liquore,
+      tipologia_nome: liquore.tipologia.nome,
+      nazione_nome: liquore.nazione.nome
+    };
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = { ...actionNavConfigs['liquori.view'] };
+    // Sostituisci :id con l'ID effettivo del liquore
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', liquore.id)
+          };
+        }
+        return action;
+      });
+    }
+    
+    res.render('pages/ristorante-menu/liquori/view', {
+      title: liquore.nome,
+      description: `Dettagli del liquore ${liquore.nome}`,
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item,
+      detailViewConfig: liquoriDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('detail'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Liquori', href: '/ristorante-menu/liquori' },
+        { label: liquore.nome, href: `/ristorante-menu/liquori/dettagli/${liquore.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel recupero del liquore:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica massiva liquori
+router.get('/liquori/modifica-massa', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/liquori/modifica-massa';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera gli ID dei liquori selezionati dalla query string
+    const selectedIds = req.query.ids as string;
+    
+    if (!selectedIds) {
+      return res.redirect('/ristorante-menu/liquori');
+    }
+    
+    const ids = selectedIds.split(',');
+    
+    // Recupera i liquori selezionati con le relazioni
+    const liquori = await prisma.liquore.findMany({
+      where: {
+        id: { in: ids },
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    if (liquori.length === 0) {
+      return res.redirect('/ristorante-menu/liquori');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaLiquore.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form per la modifica massiva
+    const formData = liquoreFormData.getFormData(liquoreFormData, false, undefined, undefined, true, liquori);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['liquori.editBulk'];
+    
+    res.render('pages/ristorante-menu/liquori/editBulk', {
+      title: 'Modifica Massiva Liquori',
+      description: 'Modifica più liquori contemporaneamente',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      selectedItems: liquori,
+      selectedCount: liquori.length,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Liquori', href: '/ristorante-menu/liquori' },
+        { label: 'Modifica Massiva', href: '/ristorante-menu/liquori/modifica-massa' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica massiva liquori:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === ROUTE AJAX PER LIQUORI ===
+
+// Route AJAX per creare nuovo liquore
+router.post('/liquori/nuovo/ajax', async (req, res) => {
+  try {
+    const { nome, descrizione, grado, invecchiamento, capacita, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    // Validazione
+    if (!nome || !tipologiaId || !nazioneId || !prezzo) {
+      return res.json({
+        success: false,
+        message: 'Nome, tipologia, nazione e prezzo sono obbligatori'
+      });
+    }
+    
+    // Crea il liquore
+    const liquore = await prisma.liquore.create({
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        grado: grado?.trim() || null,
+        invecchiamento: invecchiamento?.trim() || null,
+        capacita: capacita?.trim() || null,
+        tipologiaId,
+        nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Liquore creato con successo',
+      data: { id: liquore.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione del liquore:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la creazione del liquore' 
+    });
+  }
+});
+
+// Route AJAX per modificare liquore
+router.post('/liquori/modifica/:id/ajax', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, descrizione, grado, invecchiamento, capacita, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    // Validazione
+    if (!nome || !tipologiaId || !nazioneId || !prezzo) {
+      return res.json({
+        success: false,
+        message: 'Nome, tipologia, nazione e prezzo sono obbligatori'
+      });
+    }
+    
+    // Verifica che il liquore esista
+    const existingLiquore = await prisma.liquore.findUnique({
+      where: { id }
+    });
+    
+    if (!existingLiquore) {
+      return res.json({
+        success: false,
+        message: 'Liquore non trovato'
+      });
+    }
+    
+    // Aggiorna il liquore
+    const liquore = await prisma.liquore.update({
+      where: { id },
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        grado: grado?.trim() || null,
+        invecchiamento: invecchiamento?.trim() || null,
+        capacita: capacita?.trim() || null,
+        tipologiaId,
+        nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'on' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Liquore aggiornato con successo',
+      data: { id: liquore.id }
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento del liquore:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'aggiornamento del liquore' 
+    });
+  }
+});
+
+// Route AJAX per modifica massiva liquori
+router.post('/liquori/modifica-massa/ajax', async (req, res) => {
+  try {
+    const { itemIds, tipologiaId, nazioneId, grado, invecchiamento, capacita, prezzo, inLista } = req.body;
+    
+    if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessun liquore selezionato'
+      });
+    }
+    
+    // Prepara i dati da aggiornare
+    const updateData: any = {};
+    
+    if (tipologiaId !== undefined && tipologiaId !== '') {
+      updateData.tipologiaId = tipologiaId;
+    }
+    
+    if (nazioneId !== undefined && nazioneId !== '') {
+      updateData.nazioneId = nazioneId;
+    }
+    
+    if (grado !== undefined && grado !== '') {
+      updateData.grado = grado;
+    }
+    
+    if (invecchiamento !== undefined && invecchiamento !== '') {
+      updateData.invecchiamento = invecchiamento;
+    }
+    
+    if (capacita !== undefined && capacita !== '') {
+      updateData.capacita = capacita;
+    }
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined && inLista !== '') {
+      updateData.inLista = inLista === 'true' || inLista === true;
+    }
+    
+    // Verifica che ci sia almeno una modifica
+    if (Object.keys(updateData).length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessuna modifica specificata'
+      });
+    }
+    
+    // Esegui l'aggiornamento massivo
+    const result = await prisma.liquore.updateMany({
+      where: {
+        id: { in: itemIds }
+      },
+      data: updateData
+    });
+    
+    res.json({
+      success: true,
+      message: `${result.count} liquore aggiornato/i con successo`,
+      data: { count: result.count }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica massiva dei liquori:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la modifica massiva dei liquori' 
+    });
+  }
+});
+
+// === SEZIONE COCKTAILS ===
+
+// Route per visualizzare lista cocktails
+router.get('/cocktails', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/cocktails';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Filtro per tipologia
+    const tipologiaFilter = req.query.tipologia as string;
+    
+    // Parametri di paginazione
+    const { page, limit, offset } = getPaginationParams(req);
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (tipologiaFilter && tipologiaFilter.trim() !== '') {
+      whereClause.tipologiaId = tipologiaFilter;
+    }
+    
+    // Recupera i cocktails con le relazioni
+    const cocktails = await prisma.cocktail.findMany({
+      where: whereClause,
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: offset,
+      take: limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = cocktails.map(cocktail => ({
+      ...cocktail,
+      tipologia_nome: cocktail.tipologia.nome,
+      nazione_nome: cocktail.nazione.nome
+    }));
+    
+    // Calcola paginazione
+    const totalItems = await prisma.cocktail.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di cocktails nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.cocktail.count({
+      where: { deletedAt: null }
+    });
+    
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
+    const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le tipologie per il filtro
+    const tipologie = await prisma.tipologiaCocktail.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['cocktails.index'];
+    
+    res.render('pages/ristorante-menu/cocktails/index', {
+      title: 'Cocktails',
+      description: 'Gestione cocktails del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: cocktailsTableData,
+      items,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      pagination,
+      currentTipologiaFilter: tipologiaFilter,
+      tipologie,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cocktails', href: '/ristorante-menu/cocktails' }
+      ],
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessun cocktail disponibile',
+        description: 'Non ci sono cocktails configurati nel sistema. Aggiungi il primo cocktail per iniziare.',
+        buttonText: 'Aggiungi cocktail',
+        buttonHref: '/ristorante-menu/cocktails/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei cocktails:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form nuovo cocktail
+router.get('/cocktails/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/cocktails/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaCocktail.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = cocktailFormData.getFormData(cocktailFormData, false);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['cocktails.new'];
+    
+    res.render('pages/ristorante-menu/cocktails/new', {
+      title: 'Nuovo Cocktail',
+      description: 'Aggiungi un nuovo cocktail al menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
+        { label: 'Nuovo', href: '/ristorante-menu/cocktails/nuovo' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuovo cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica cocktail
+router.get('/cocktails/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/cocktails/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const cocktailId = req.params.id;
+    
+    // Recupera il cocktail con le relazioni
+    const cocktail = await prisma.cocktail.findUnique({
+      where: { id: cocktailId },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!cocktail || cocktail.deletedAt) {
+      return res.status(404).send('Cocktail non trovato');
+    }
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaCocktail.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = cocktailFormData.getFormData(cocktailFormData, true, cocktail);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['cocktails.edit'];
+    
+    res.render('pages/ristorante-menu/cocktails/edit', {
+      title: 'Modifica Cocktail',
+      description: 'Modifica i dettagli del cocktail',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      item: cocktail,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
+        { label: cocktail.nome, href: `/ristorante-menu/cocktails/dettagli/${cocktail.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/cocktails/modifica/${cocktail.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli cocktail
+router.get('/cocktails/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/cocktails/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const cocktailId = req.params.id;
+    
+    // Recupera il cocktail con le relazioni
+    const cocktail = await prisma.cocktail.findUnique({
+      where: { id: cocktailId },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!cocktail || cocktail.deletedAt) {
+      return res.status(404).send('Cocktail non trovato');
+    }
+    
+    // Trasforma i dati per la vista dettaglio
+    const item = {
+      ...cocktail,
+      tipologia_nome: cocktail.tipologia.nome,
+      nazione_nome: cocktail.nazione.nome
+    };
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['cocktails.view'];
+    
+    // Sostituisci :id nell'href del pulsante Modifica
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions.forEach(action => {
+        if (action.href && action.href.includes(':id')) {
+          action.href = action.href.replace(':id', cocktail.id);
+        }
+      });
+    }
+    
+    res.render('pages/ristorante-menu/cocktails/view', {
+      title: 'Dettagli Cocktail',
+      description: 'Visualizza i dettagli del cocktail',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item,
+      detailViewConfig: cocktailsDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('detail'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
+        { label: cocktail.nome, href: `/ristorante-menu/cocktails/dettagli/${cocktail.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei dettagli del cocktail:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica massiva cocktails
+router.get('/cocktails/modifica-massa', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/cocktails/modifica-massa';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera gli ID dei cocktails selezionati dalla query string
+    const selectedIds = req.query.ids as string;
+    
+    if (!selectedIds) {
+      return res.redirect('/ristorante-menu/cocktails');
+    }
+    
+    const ids = selectedIds.split(',');
+    
+    // Recupera i cocktails selezionati con le relazioni
+    const cocktails = await prisma.cocktail.findMany({
+      where: {
+        id: { in: ids },
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    if (cocktails.length === 0) {
+      return res.redirect('/ristorante-menu/cocktails');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaCocktail.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form per la modifica massiva
+    const formData = cocktailFormData.getFormData(cocktailFormData, false, undefined, undefined, true, cocktails);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['cocktails.editBulk'];
+    
+    res.render('pages/ristorante-menu/cocktails/editBulk', {
+      title: 'Modifica Massiva Cocktails',
+      description: 'Modifica più cocktails contemporaneamente',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      selectedItems: cocktails,
+      selectedCount: cocktails.length,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
+        { label: 'Modifica Massiva', href: '/ristorante-menu/cocktails/modifica-massa' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica massiva cocktails:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === ROUTE AJAX PER COCKTAILS ===
+
+// Route AJAX per creazione cocktail
+router.post('/cocktails/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se esiste già un cocktail con lo stesso nome
+    const existingCocktail = await prisma.cocktail.findFirst({
+      where: {
+        nome: nome,
+        deletedAt: null
+      }
+    });
+    
+    if (existingCocktail) {
+      return res.json({
+        success: false,
+        message: 'Esiste già un cocktail con questo nome'
+      });
+    }
+    
+    // Crea il nuovo cocktail
+    const cocktail = await prisma.cocktail.create({
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        tipologiaId: tipologiaId,
+        nazioneId: nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'true' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Cocktail creato con successo',
+      data: { id: cocktail.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione del cocktail:', error);
+    res.json({
+      success: false,
+      message: 'Errore durante la creazione del cocktail'
+    });
+  }
+});
+
+// Route AJAX per modifica cocktail
+router.post('/cocktails/modifica/:id/ajax', async (req, res) => {
+  const cocktailId = req.params.id;
+  const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se il cocktail esiste
+    const existingCocktail = await prisma.cocktail.findUnique({
+      where: { id: cocktailId }
+    });
+    
+    if (!existingCocktail || existingCocktail.deletedAt) {
+      return res.json({
+        success: false,
+        message: 'Cocktail non trovato'
+      });
+    }
+    
+    // Verifica se esiste già un altro cocktail con lo stesso nome
+    const duplicateCocktail = await prisma.cocktail.findFirst({
+      where: {
+        nome: nome,
+        id: { not: cocktailId },
+        deletedAt: null
+      }
+    });
+    
+    if (duplicateCocktail) {
+      return res.json({
+        success: false,
+        message: 'Esiste già un altro cocktail con questo nome'
+      });
+    }
+    
+    // Aggiorna il cocktail
+    const updatedCocktail = await prisma.cocktail.update({
+      where: { id: cocktailId },
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        tipologiaId: tipologiaId,
+        nazioneId: nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'true' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Cocktail aggiornato con successo',
+      data: { id: updatedCocktail.id }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica del cocktail:', error);
+    res.json({
+      success: false,
+      message: 'Errore durante la modifica del cocktail'
+    });
+  }
+});
+
+// Route AJAX per modifica massiva cocktails
+router.post('/cocktails/modifica-massa/ajax', async (req, res) => {
+  try {
+    const { itemIds, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessun cocktail selezionato'
+      });
+    }
+    
+    // Prepara i dati da aggiornare
+    const updateData: any = {};
+    
+    if (tipologiaId !== undefined && tipologiaId !== '') {
+      updateData.tipologiaId = tipologiaId;
+    }
+    
+    if (nazioneId !== undefined && nazioneId !== '') {
+      updateData.nazioneId = nazioneId;
+    }
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined && inLista !== '') {
+      updateData.inLista = inLista === 'true' || inLista === true;
+    }
+    
+    // Verifica che ci sia almeno una modifica
+    if (Object.keys(updateData).length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessuna modifica specificata'
+      });
+    }
+    
+    // Esegui l'aggiornamento massivo
+    const result = await prisma.cocktail.updateMany({
+      where: {
+        id: { in: itemIds }
+      },
+      data: updateData
+    });
+    
+    res.json({
+      success: true,
+      message: `${result.count} cocktail aggiornato/i con successo`,
+      data: { count: result.count }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica massiva dei cocktails:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la modifica massiva dei cocktails' 
+    });
+  }
+});
+
+// === SEZIONE BEVANDE ===
+
+// Route per visualizzare lista bevande
+router.get('/bevande', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/bevande';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Filtro per tipologia
+    const tipologiaFilter = req.query.tipologia as string;
+    
+    // Parametri di paginazione
+    const { page, limit, offset } = getPaginationParams(req);
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null
+    };
+    
+    if (tipologiaFilter && tipologiaFilter.trim() !== '') {
+      whereClause.tipologiaId = tipologiaFilter;
+    }
+    
+    // Recupera le bevande con le relazioni
+    const bevande = await prisma.bevanda.findMany({
+      where: whereClause,
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      },
+      skip: offset,
+      take: limit
+    });
+    
+    // Trasforma i dati per la tabella
+    const items = bevande.map(bevanda => ({
+      ...bevanda,
+      tipologia_nome: bevanda.tipologia.nome,
+      nazione_nome: bevanda.nazione.nome
+    }));
+    
+    // Calcola paginazione
+    const totalItems = await prisma.bevanda.count({
+      where: whereClause
+    });
+    
+    // Calcola il totale di bevande nel sistema (senza filtri)
+    const totalItemsInSystem = await prisma.bevanda.count({
+      where: { deletedAt: null }
+    });
+    
+    // Determina gli stati vuoti
+    const isSectionEmpty = totalItemsInSystem === 0;
+    const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
+    const hasItems = items.length > 0;
+    
+    const pagination = calculatePagination(page, limit, totalItems);
+    
+    // Recupera le tipologie per il filtro
+    const tipologie = await prisma.tipologiaBevanda.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['bevande.index'];
+    
+    res.render('pages/ristorante-menu/bevande/index', {
+      title: 'Bevande',
+      description: 'Gestione bevande del menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      tableData: bevandeTableData,
+      items,
+      hasItems,
+      isSectionEmpty,
+      isFilteredEmpty,
+      pagination,
+      currentTipologiaFilter: tipologiaFilter,
+      tipologie,
+      scripts: scriptManager.getScriptsForPage('table'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Bevande', href: '/ristorante-menu/bevande' }
+      ],
+      actionNavConfig,
+      emptyState: {
+        title: 'Nessuna bevanda disponibile',
+        description: 'Non ci sono bevande configurate nel sistema. Aggiungi la prima bevanda per iniziare.',
+        buttonText: 'Aggiungi bevanda',
+        buttonHref: '/ristorante-menu/bevande/nuovo',
+        iconName: 'menu',
+        icon: sectionIcons['menu'],
+        buttonIconName: 'piu',
+        buttonIcon: uiIcons['piu']
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle bevande:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form nuova bevanda
+router.get('/bevande/nuovo', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/bevande/nuovo';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaBevanda.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = bevandaFormData.getFormData(bevandaFormData, false);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['bevande.new'];
+    
+    res.render('pages/ristorante-menu/bevande/new', {
+      title: 'Nuova Bevanda',
+      description: 'Aggiungi una nuova bevanda al menu',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Bevande', href: '/ristorante-menu/bevande' },
+        { label: 'Nuovo', href: '/ristorante-menu/bevande/nuovo' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form nuova bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica bevanda
+router.get('/bevande/modifica/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/bevande/modifica/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const bevandaId = req.params.id;
+    
+    // Recupera la bevanda con le relazioni
+    const bevanda = await prisma.bevanda.findUnique({
+      where: { id: bevandaId },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!bevanda || bevanda.deletedAt) {
+      return res.status(404).send('Bevanda non trovata');
+    }
+    
+    // Recupera le tipologie e nazioni per i select
+    const tipologie = await prisma.tipologiaBevanda.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form
+    const formData = bevandaFormData.getFormData(bevandaFormData, true, bevanda);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['bevande.edit'];
+    
+    res.render('pages/ristorante-menu/bevande/edit', {
+      title: 'Modifica Bevanda',
+      description: 'Modifica i dettagli della bevanda',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      item: bevanda,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Bevande', href: '/ristorante-menu/bevande' },
+        { label: bevanda.nome, href: `/ristorante-menu/bevande/dettagli/${bevanda.id}` },
+        { label: 'Modifica', href: `/ristorante-menu/bevande/modifica/${bevanda.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare dettagli bevanda
+router.get('/bevande/dettagli/:id', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/bevande/dettagli/' + req.params.id;
+    let sectionMenu = ristoranteMenuItems;
+    
+    const bevandaId = req.params.id;
+    
+    // Recupera la bevanda con le relazioni
+    const bevanda = await prisma.bevanda.findUnique({
+      where: { id: bevandaId },
+      include: {
+        tipologia: true,
+        nazione: true
+      }
+    });
+    
+    if (!bevanda || bevanda.deletedAt) {
+      return res.status(404).send('Bevanda non trovata');
+    }
+    
+    // Trasforma i dati per la vista dettaglio
+    const item = {
+      ...bevanda,
+      tipologia_nome: bevanda.tipologia.nome,
+      nazione_nome: bevanda.nazione.nome
+    };
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['bevande.view'];
+    
+    // Sostituisci :id nell'href del pulsante Modifica
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions.forEach(action => {
+        if (action.href && action.href.includes(':id')) {
+          action.href = action.href.replace(':id', bevanda.id);
+        }
+      });
+    }
+    
+    res.render('pages/ristorante-menu/bevande/view', {
+      title: 'Dettagli Bevanda',
+      description: 'Visualizza i dettagli della bevanda',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      item,
+      detailViewConfig: bevandeDetailViewConfig,
+      scripts: scriptManager.getScriptsForPage('detail'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Bevande', href: '/ristorante-menu/bevande' },
+        { label: bevanda.nome, href: `/ristorante-menu/bevande/dettagli/${bevanda.id}` }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei dettagli della bevanda:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// Route per visualizzare form modifica massiva bevande
+router.get('/bevande/modifica-massa', async (req, res) => {
+  try {
+    const currentPath = '/ristorante-menu/bevande/modifica-massa';
+    let sectionMenu = ristoranteMenuItems;
+    
+    // Recupera gli ID delle bevande selezionate dalla query string
+    const selectedIds = req.query.ids as string;
+    
+    if (!selectedIds) {
+      return res.redirect('/ristorante-menu/bevande');
+    }
+    
+    const ids = selectedIds.split(',');
+    
+    // Recupera le bevande selezionate con le relazioni
+    const bevande = await prisma.bevanda.findMany({
+      where: {
+        id: { in: ids },
+        deletedAt: null
+      },
+      include: {
+        tipologia: true,
+        nazione: true
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    if (bevande.length === 0) {
+      return res.redirect('/ristorante-menu/bevande');
+    }
+    
+    // Recupera le tipologie per il form
+    const tipologie = await prisma.tipologiaBevanda.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Recupera le nazioni per il form
+    const nazioni = await prisma.nazione.findMany({
+      where: { deletedAt: null },
+      orderBy: { nome: 'asc' }
+    });
+    
+    // Prepara i dati del form per la modifica massiva
+    const formData = bevandaFormData.getFormData(bevandaFormData, false, undefined, undefined, true, bevande);
+    
+    // Popola le opzioni dei select
+    formData.fields.forEach(field => {
+      if (field.name === 'tipologiaId') {
+        field.options = tipologie.map(tipologia => ({
+          value: tipologia.id,
+          label: tipologia.nome
+        }));
+      } else if (field.name === 'nazioneId') {
+        field.options = nazioni.map(nazione => ({
+          value: nazione.id,
+          label: nazione.nome
+        }));
+      }
+    });
+    
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['bevande.editBulk'];
+    
+    res.render('pages/ristorante-menu/bevande/editBulk', {
+      title: 'Modifica Massiva Bevande',
+      description: 'Modifica più bevande contemporaneamente',
+      layout: 'layouts/sections',
+      mainMenu: mainMenuItems,
+      sectionMenu,
+      sectionIcons,
+      currentPath,
+      formData,
+      selectedItems: bevande,
+      selectedCount: bevande.length,
+      scripts: scriptManager.getScriptsForPage('form'),
+      breadcrumbs: [
+        { label: 'Menu Ristorante', href: '/ristorante-menu' },
+        { label: 'Bevande', href: '/ristorante-menu/bevande' },
+        { label: 'Modifica Massiva', href: '/ristorante-menu/bevande/modifica-massa' }
+      ],
+      actionNavConfig
+    });
+  } catch (error) {
+    console.error('Errore nel caricamento del form modifica massiva bevande:', error);
+    res.status(500).send('Errore interno del server');
+  }
+});
+
+// === ROUTE AJAX PER BEVANDE ===
+
+// Route AJAX per creazione bevanda
+router.post('/bevande/nuovo/ajax', async (req, res) => {
+  const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se esiste già una bevanda con lo stesso nome
+    const existingBevanda = await prisma.bevanda.findFirst({
+      where: {
+        nome: nome,
+        deletedAt: null
+      }
+    });
+    
+    if (existingBevanda) {
+      return res.json({
+        success: false,
+        message: 'Esiste già una bevanda con questo nome'
+      });
+    }
+    
+    // Crea la nuova bevanda
+    const bevanda = await prisma.bevanda.create({
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        tipologiaId: tipologiaId,
+        nazioneId: nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'true' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Bevanda creata con successo',
+      data: { id: bevanda.id }
+    });
+  } catch (error) {
+    console.error('Errore nella creazione della bevanda:', error);
+    res.json({
+      success: false,
+      message: 'Errore durante la creazione della bevanda'
+    });
+  }
+});
+
+// Route AJAX per modifica bevanda
+router.post('/bevande/modifica/:id/ajax', async (req, res) => {
+  const bevandaId = req.params.id;
+  const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+  
+  try {
+    // Verifica se la bevanda esiste
+    const existingBevanda = await prisma.bevanda.findUnique({
+      where: { id: bevandaId }
+    });
+    
+    if (!existingBevanda || existingBevanda.deletedAt) {
+      return res.json({
+        success: false,
+        message: 'Bevanda non trovata'
+      });
+    }
+    
+    // Verifica se esiste già un'altra bevanda con lo stesso nome
+    const duplicateBevanda = await prisma.bevanda.findFirst({
+      where: {
+        nome: nome,
+        id: { not: bevandaId },
+        deletedAt: null
+      }
+    });
+    
+    if (duplicateBevanda) {
+      return res.json({
+        success: false,
+        message: 'Esiste già un\'altra bevanda con questo nome'
+      });
+    }
+    
+    // Aggiorna la bevanda
+    const updatedBevanda = await prisma.bevanda.update({
+      where: { id: bevandaId },
+      data: {
+        nome: nome.trim(),
+        descrizione: descrizione?.trim() || null,
+        tipologiaId: tipologiaId,
+        nazioneId: nazioneId,
+        prezzo: parseFloat(prezzo),
+        inLista: inLista === 'true' || inLista === true
+      }
+    });
+    
+    res.json({
+      success: true,
+      message: 'Bevanda aggiornata con successo',
+      data: { id: updatedBevanda.id }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica della bevanda:', error);
+    res.json({
+      success: false,
+      message: 'Errore durante la modifica della bevanda'
+    });
+  }
+});
+
+// Route AJAX per modifica massiva bevande
+router.post('/bevande/modifica-massa/ajax', async (req, res) => {
+  try {
+    const { itemIds, tipologiaId, nazioneId, prezzo, inLista } = req.body;
+    
+    if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessuna bevanda selezionata'
+      });
+    }
+    
+    // Prepara i dati da aggiornare
+    const updateData: any = {};
+    
+    if (tipologiaId !== undefined && tipologiaId !== '') {
+      updateData.tipologiaId = tipologiaId;
+    }
+    
+    if (nazioneId !== undefined && nazioneId !== '') {
+      updateData.nazioneId = nazioneId;
+    }
+    
+    if (prezzo !== undefined && prezzo !== '') {
+      updateData.prezzo = parseFloat(prezzo);
+    }
+    
+    if (inLista !== undefined && inLista !== '') {
+      updateData.inLista = inLista === 'true' || inLista === true;
+    }
+    
+    // Verifica che ci sia almeno una modifica
+    if (Object.keys(updateData).length === 0) {
+      return res.json({
+        success: false,
+        message: 'Nessuna modifica specificata'
+      });
+    }
+    
+    // Esegui l'aggiornamento massivo
+    const result = await prisma.bevanda.updateMany({
+      where: {
+        id: { in: itemIds }
+      },
+      data: updateData
+    });
+    
+    res.json({
+      success: true,
+      message: `${result.count} bevanda aggiornata/e con successo`,
+      data: { count: result.count }
+    });
+  } catch (error) {
+    console.error('Errore nella modifica massiva delle bevande:', error);
+    res.json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la modifica massiva delle bevande' 
     });
   }
 });

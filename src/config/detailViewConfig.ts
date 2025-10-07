@@ -679,12 +679,210 @@ export const birreDetailViewConfig: DetailViewConfig = {
   }
 };
 
+export const liquoriDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      conditional: 'descrizione'
+    },
+    {
+      name: 'grado',
+      label: 'Grado Alcolico',
+      type: 'text',
+      conditional: 'grado'
+    },
+    {
+      name: 'invecchiamento',
+      label: 'Invecchiamento',
+      type: 'text',
+      conditional: 'invecchiamento'
+    },
+    {
+      name: 'capacita',
+      label: 'Capacità',
+      type: 'text',
+      conditional: 'capacita'
+    },
+    {
+      name: 'tipologia_nome',
+      label: 'Tipologia',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'prezzo',
+      label: 'Prezzo',
+      type: 'currency',
+      required: true,
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'inLista',
+      label: 'Stato',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Attivo',
+          falseText: 'Inattivo',
+          showBadge: true
+        }
+      }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const cocktailsDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      conditional: 'descrizione'
+    },
+    {
+      name: 'tipologia_nome',
+      label: 'Tipologia',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'prezzo',
+      label: 'Prezzo',
+      type: 'currency',
+      required: true,
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'inLista',
+      label: 'Stato',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Attivo',
+          falseText: 'Inattivo',
+          showBadge: true
+        }
+      }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
+export const bevandeDetailViewConfig: DetailViewConfig = {
+  fields: [
+    {
+      name: 'nome',
+      label: 'Nome',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'descrizione',
+      label: 'Descrizione',
+      type: 'text',
+      conditional: 'descrizione'
+    },
+    {
+      name: 'tipologia_nome',
+      label: 'Tipologia',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'nazione_nome',
+      label: 'Nazione',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'prezzo',
+      label: 'Prezzo',
+      type: 'currency',
+      required: true,
+      format: {
+        currency: {
+          symbol: '€',
+          decimals: 2
+        }
+      }
+    },
+    {
+      name: 'inLista',
+      label: 'Stato',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Attivo',
+          falseText: 'Inattivo',
+          showBadge: true
+        }
+      }
+    }
+  ],
+  layout: 'default',
+  showTimestamps: true,
+  timestampFields: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  }
+};
+
 export const detailViewConfigs = {
   'servizi': serviziDetailViewConfig,
   'piatti': piattiDetailViewConfig,
   'menu-fissi': menuFissiDetailViewConfig,
   'vini': viniDetailViewConfig,
   'birre': birreDetailViewConfig,
+  'liquori': liquoriDetailViewConfig,
+  'cocktails': cocktailsDetailViewConfig,
+  'bevande': bevandeDetailViewConfig,
   'allergeni': allergeniDetailViewConfig,
   'categoria-menu-fisso': categoriaMenuFissoDetailViewConfig,
   'categoria-piatti': categoriaPiattiDetailViewConfig,

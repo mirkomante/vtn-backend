@@ -32,6 +32,21 @@ export const ristoranteMenuItems: MenuItem[] = [
     icon: 'tabella'
   },
   {
+    label: 'Liquori',
+    link: '/ristorante-menu/liquori',
+    icon: 'tabella'
+  },
+  {
+    label: 'Cocktails',
+    link: '/ristorante-menu/cocktails',
+    icon: 'tabella'
+  },
+  {
+    label: 'Bevande',
+    link: '/ristorante-menu/bevande',
+    icon: 'tabella'
+  },
+  {
     label: 'Servizi',
     link: '/ristorante-menu/servizi',
     icon: 'tabella'

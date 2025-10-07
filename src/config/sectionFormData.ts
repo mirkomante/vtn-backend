@@ -860,4 +860,601 @@ export const birraFormData: FormDataSchema = {
       }
     };
   }
+};
+
+export const liquoreFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/liquori/nuovo/ajax', // Route AJAX
+    id: 'liquoreForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Liquore',
+      required: true,
+      placeholder: 'Whisky Johnnie Walker Black Label',
+      errorMessage: 'Il nome del liquore è obbligatorio',
+      bulkEditable: false
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione del liquore (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false
+    },
+    {
+      type: 'text',
+      name: 'grado',
+      id: 'grado',
+      label: 'Grado Alcolico',
+      required: false,
+      placeholder: '40%',
+      errorMessage: 'Il grado alcolico deve essere un valore valido',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna grado alcolico per tutti i liquori selezionati',
+      bulkPlaceholder: 'Nuovo grado alcolico (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'text',
+      name: 'invecchiamento',
+      id: 'invecchiamento',
+      label: 'Invecchiamento',
+      required: false,
+      placeholder: '12 anni, 8 mesi, Non invecchiato',
+      errorMessage: 'L\'invecchiamento deve essere un valore valido',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna invecchiamento per tutti i liquori selezionati',
+      bulkPlaceholder: 'Nuovo invecchiamento (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'text',
+      name: 'capacita',
+      id: 'capacita',
+      label: 'Capacità',
+      required: false,
+      placeholder: '50ml, 70cl, 1L, etc.',
+      errorMessage: 'La capacità deve essere un valore valido',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna capacità per tutti i liquori selezionati',
+      bulkPlaceholder: 'Nuova capacità (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'select',
+      name: 'tipologiaId',
+      id: 'tipologiaId',
+      label: 'Tipologia',
+      required: true,
+      placeholder: 'Seleziona una tipologia',
+      errorMessage: 'La tipologia è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna tipologia per tutti i liquori selezionati',
+      bulkPlaceholder: 'Seleziona nuova tipologia (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'select',
+      name: 'nazioneId',
+      id: 'nazioneId',
+      label: 'Nazione',
+      required: true,
+      placeholder: 'Seleziona una nazione',
+      errorMessage: 'La nazione è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna nazione per tutti i liquori selezionati',
+      bulkPlaceholder: 'Seleziona nuova nazione (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'number',
+      name: 'prezzo',
+      id: 'prezzo',
+      label: 'Prezzo (€)',
+      required: true,
+      placeholder: '25.00',
+      min: 0,
+      step: 0.01,
+      errorMessage: 'Il prezzo deve essere un numero valido maggiore di 0',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna prezzo per tutti i liquori selezionati',
+      bulkPlaceholder: 'Nuovo prezzo (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'Visibile nel menu',
+      required: false,
+      value: true,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna visibilità per tutti i liquori selezionati',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/liquori',
+      classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+    }
+  },
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, liquore?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+    return {
+      ...data,
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? '/ristorante-menu/liquori/modifica-massa/ajax'
+          : isEdit 
+            ? `/ristorante-menu/liquori/modifica/${liquore?.id}/ajax`
+            : '/ristorante-menu/liquori/nuovo/ajax',
+        method: isBulkEdit ? 'POST' : 'POST',
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map(field => {
+        let value = '';
+        
+        if (liquore && field.name in liquore) {
+          if (field.name === 'tipologiaId') {
+            value = liquore.tipologia?.id || '';
+          } else if (field.name === 'nazioneId') {
+            value = liquore.nazione?.id || '';
+          } else {
+            value = liquore[field.name] || '';
+          }
+        }
+        
+        // Per la modifica massiva, mostra solo i campi modificabili
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        // Per la modifica massiva, usa configurazione specifica
+        if (isBulkEdit && field.bulkEditable) {
+          let bulkValue = '';
+          
+          // Per i campi toggle/checkbox, gestisci gli stati misti
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map((item: any) => item[field.name]);
+            const trueCount = values.filter(v => v === true || v === 'true' || v === 'on').length;
+            const falseCount = values.filter(v => v === false || v === 'false' || v === 'off').length;
+            
+            if (trueCount === selectedItems.length) {
+              // Tutti true
+              bulkValue = 'true';
+            } else if (falseCount === selectedItems.length) {
+              // Tutti false
+              bulkValue = 'false';
+            } else {
+              // Stato misto
+              bulkValue = 'indeterminate';
+            }
+          }
+          
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: bulkValue
+          };
+        }
+        
+        return { ...field, value };
+      }).filter(field => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Aggiorna ${selectedItems?.length || 0} liquori` 
+            : isEdit 
+              ? 'Aggiorna' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/liquori' 
+            : isEdit 
+              ? `/ristorante-menu/liquori/dettagli/${liquore?.id}` 
+              : '/ristorante-menu/liquori'
+        }
+      }
+    };
+  }
+};
+
+export const cocktailFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/cocktails/nuovo/ajax', // Route AJAX
+    id: 'cocktailForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Cocktail',
+      required: true,
+      placeholder: 'Mojito, Margarita, Cosmopolitan',
+      errorMessage: 'Il nome del cocktail è obbligatorio',
+      bulkEditable: false
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione del cocktail (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false
+    },
+    {
+      type: 'select',
+      name: 'tipologiaId',
+      id: 'tipologiaId',
+      label: 'Tipologia',
+      required: true,
+      placeholder: 'Seleziona una tipologia',
+      errorMessage: 'La tipologia è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna tipologia per tutti i cocktails selezionati',
+      bulkPlaceholder: 'Seleziona nuova tipologia (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'select',
+      name: 'nazioneId',
+      id: 'nazioneId',
+      label: 'Nazione',
+      required: true,
+      placeholder: 'Seleziona una nazione',
+      errorMessage: 'La nazione è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna nazione per tutti i cocktails selezionati',
+      bulkPlaceholder: 'Seleziona nuova nazione (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'number',
+      name: 'prezzo',
+      id: 'prezzo',
+      label: 'Prezzo (€)',
+      required: true,
+      placeholder: '12.00',
+      min: 0,
+      step: 0.01,
+      errorMessage: 'Il prezzo deve essere un numero valido maggiore di 0',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna prezzo per tutti i cocktails selezionati',
+      bulkPlaceholder: 'Nuovo prezzo (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'Visibile nel menu',
+      required: false,
+      value: true,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna visibilità per tutti i cocktails selezionati',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/cocktails',
+      classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+    }
+  },
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, cocktail?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+    return {
+      ...data,
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? '/ristorante-menu/cocktails/modifica-massa/ajax'
+          : isEdit 
+            ? `/ristorante-menu/cocktails/modifica/${cocktail?.id}/ajax`
+            : '/ristorante-menu/cocktails/nuovo/ajax',
+        method: isBulkEdit ? 'POST' : 'POST',
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map(field => {
+        let value = '';
+        
+        if (cocktail && field.name in cocktail) {
+          if (field.name === 'tipologiaId') {
+            value = cocktail.tipologia?.id || '';
+          } else if (field.name === 'nazioneId') {
+            value = cocktail.nazione?.id || '';
+          } else {
+            value = cocktail[field.name] || '';
+          }
+        }
+        
+        // Per la modifica massiva, mostra solo i campi modificabili
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        // Per la modifica massiva, usa configurazione specifica
+        if (isBulkEdit && field.bulkEditable) {
+          let bulkValue = '';
+          
+          // Per i campi toggle/checkbox, gestisci gli stati misti
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map((item: any) => item[field.name]);
+            const trueCount = values.filter(v => v === true || v === 'true' || v === 'on').length;
+            const falseCount = values.filter(v => v === false || v === 'false' || v === 'off').length;
+            
+            if (trueCount === selectedItems.length) {
+              // Tutti true
+              bulkValue = 'true';
+            } else if (falseCount === selectedItems.length) {
+              // Tutti false
+              bulkValue = 'false';
+            } else {
+              // Stato misto
+              bulkValue = 'indeterminate';
+            }
+          }
+          
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: bulkValue
+          };
+        }
+        
+        return { ...field, value };
+      }).filter(field => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Aggiorna ${selectedItems?.length || 0} cocktails` 
+            : isEdit 
+              ? 'Aggiorna' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/cocktails' 
+            : isEdit 
+              ? `/ristorante-menu/cocktails/dettagli/${cocktail?.id}` 
+              : '/ristorante-menu/cocktails'
+        }
+      }
+    };
+  }
+};
+
+export const bevandaFormData: FormDataSchema = {
+  formConfig: {
+    method: 'POST',
+    action: '/ristorante-menu/bevande/nuovo/ajax', // Route AJAX
+    id: 'bevandaForm',
+    novalidate: true
+  },
+  fields: [
+    {
+      type: 'text',
+      name: 'nome',
+      id: 'nome',
+      label: 'Nome Bevanda',
+      required: true,
+      placeholder: 'Coca Cola, Sprite, Acqua Naturale',
+      errorMessage: 'Il nome della bevanda è obbligatorio',
+      bulkEditable: false
+    },
+    {
+      type: 'textarea',
+      name: 'descrizione',
+      id: 'descrizione',
+      label: 'Descrizione',
+      required: false,
+      placeholder: 'Descrizione della bevanda (opzionale)',
+      errorMessage: 'La descrizione non può superare i 500 caratteri',
+      bulkEditable: false
+    },
+    {
+      type: 'select',
+      name: 'tipologiaId',
+      id: 'tipologiaId',
+      label: 'Tipologia',
+      required: true,
+      placeholder: 'Seleziona una tipologia',
+      errorMessage: 'La tipologia è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna tipologia per tutte le bevande selezionate',
+      bulkPlaceholder: 'Seleziona nuova tipologia (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'select',
+      name: 'nazioneId',
+      id: 'nazioneId',
+      label: 'Nazione',
+      required: true,
+      placeholder: 'Seleziona una nazione',
+      errorMessage: 'La nazione è obbligatoria',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna nazione per tutte le bevande selezionate',
+      bulkPlaceholder: 'Seleziona nuova nazione (opzionale)',
+      bulkRequired: false,
+      options: [] // Sarà popolato dinamicamente
+    },
+    {
+      type: 'number',
+      name: 'prezzo',
+      id: 'prezzo',
+      label: 'Prezzo (€)',
+      required: true,
+      placeholder: '3.50',
+      min: 0,
+      step: 0.01,
+      errorMessage: 'Il prezzo deve essere un numero valido maggiore di 0',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna prezzo per tutte le bevande selezionate',
+      bulkPlaceholder: 'Nuovo prezzo (opzionale)',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'inLista',
+      id: 'inLista',
+      label: 'Visibile nel menu',
+      required: false,
+      value: true,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna visibilità per tutte le bevande selezionate',
+      bulkRequired: false
+    }
+  ],
+  buttons: {
+    submit: {
+      text: 'Salva',
+      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+    },
+    cancel: {
+      text: 'Annulla',
+      href: '/ristorante-menu/bevande',
+      classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+    }
+  },
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, bevanda?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+    return {
+      ...data,
+      formConfig: {
+        ...data.formConfig,
+        action: isBulkEdit 
+          ? '/ristorante-menu/bevande/modifica-massa/ajax'
+          : isEdit 
+            ? `/ristorante-menu/bevande/modifica/${bevanda?.id}/ajax`
+            : '/ristorante-menu/bevande/nuovo/ajax',
+        method: isBulkEdit ? 'POST' : 'POST',
+        hiddenFields: isBulkEdit && selectedItems ? [
+          {
+            name: 'itemIds',
+            value: selectedItems.map(item => item.id)
+          }
+        ] : undefined
+      },
+      fields: data.fields.map(field => {
+        let value = '';
+        
+        if (bevanda && field.name in bevanda) {
+          if (field.name === 'tipologiaId') {
+            value = bevanda.tipologia?.id || '';
+          } else if (field.name === 'nazioneId') {
+            value = bevanda.nazione?.id || '';
+          } else {
+            value = bevanda[field.name] || '';
+          }
+        }
+        
+        // Per la modifica massiva, mostra solo i campi modificabili
+        if (isBulkEdit && !field.bulkEditable) {
+          return null;
+        }
+        
+        // Per la modifica massiva, usa configurazione specifica
+        if (isBulkEdit && field.bulkEditable) {
+          let bulkValue = '';
+          
+          // Per i campi toggle/checkbox, gestisci gli stati misti
+          if (field.type === 'toggle' && selectedItems && selectedItems.length > 0) {
+            const values = selectedItems.map((item: any) => item[field.name]);
+            const trueCount = values.filter(v => v === true || v === 'true' || v === 'on').length;
+            const falseCount = values.filter(v => v === false || v === 'false' || v === 'off').length;
+            
+            if (trueCount === selectedItems.length) {
+              // Tutti true
+              bulkValue = 'true';
+            } else if (falseCount === selectedItems.length) {
+              // Tutti false
+              bulkValue = 'false';
+            } else {
+              // Stato misto
+              bulkValue = 'indeterminate';
+            }
+          }
+          
+          return {
+            ...field,
+            label: field.bulkLabel || field.label,
+            placeholder: field.bulkPlaceholder || field.placeholder,
+            required: field.bulkRequired || false,
+            value: bulkValue
+          };
+        }
+        
+        return { ...field, value };
+      }).filter(field => field !== null),
+      buttons: {
+        ...data.buttons,
+        submit: {
+          ...data.buttons.submit,
+          text: isBulkEdit 
+            ? `Aggiorna ${selectedItems?.length || 0} bevande` 
+            : isEdit 
+              ? 'Aggiorna' 
+              : 'Salva'
+        },
+        cancel: {
+          ...data.buttons.cancel,
+          href: isBulkEdit 
+            ? '/ristorante-menu/bevande' 
+            : isEdit 
+              ? `/ristorante-menu/bevande/dettagli/${bevanda?.id}` 
+              : '/ristorante-menu/bevande'
+        }
+      }
+    };
+  }
 }; 
