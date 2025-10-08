@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// === MODELLI ESISTENTI ===
 model User {
   id           String   @id @default(uuid())
   email        String   @unique
@@ -29,4 +30,424 @@ model Session {
   expire DateTime
 
   @@map("session")
+}
+
+// === MODELLI RISTORANTE MENU ===
+
+// Categoria Piatti
+model CategoriaPiatti {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  piatti      Piatto[]
+
+  @@map("categoria_piatti")
+}
+
+// Categoria Menu Fisso
+model CategoriaMenuFisso {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  menuFissi   MenuFisso[]
+
+  @@map("categoria_menu_fisso")
+}
+
+// Allergeni
+model Allergene {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  piatti      PiattoAllergene[]
+
+  @@map("allergeni")
+}
+
+// Piatti
+model Piatto {
+  id          String   @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal  @db.Decimal(10, 2)
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  categoriaId String
+  categoria   CategoriaPiatti @relation(fields: [categoriaId], references: [id])
+  
+  allergeni   PiattoAllergene[]
+  menuFissi   MenuFissoPiatto[]
+
+  @@map("piatti")
+}
+
+// Tabella di relazione Piatto-Allergene (molti a molti)
+model PiattoAllergene {
+  id          String   @id @default(uuid())
+  piattoId    String
+  allergeneId String
+  createdAt   DateTime @default(now())
+
+  // Relazioni
+  piatto      Piatto   @relation(fields: [piattoId], references: [id], onDelete: Cascade)
+  allergene   Allergene @relation(fields: [allergeneId], references: [id], onDelete: Cascade)
+
+  @@unique([piattoId, allergeneId])
+  @@map("piatto_allergene")
+}
+
+// Servizi Accessori
+model ServizioAccessorio {
+  id          String   @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal  @db.Decimal(10, 2)
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  menuFissi   MenuFissoServizioAccessorio[]
+
+  @@map("servizi_accessori")
+}
+
+// Menu Fisso
+model MenuFisso {
+  id          String   @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal  @db.Decimal(10, 2)
+  inLista     Boolean  @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  categoriaId String
+  categoria   CategoriaMenuFisso @relation(fields: [categoriaId], references: [id])
+  
+  piatti      MenuFissoPiatto[]
+  servizi     MenuFissoServizioAccessorio[]
+
+  @@map("menu_fisso")
+}
+
+// Tabella di relazione Menu Fisso-Piatto (molti a molti)
+model MenuFissoPiatto {
+  id          String   @id @default(uuid())
+  menuFissoId String
+  piattoId    String
+  createdAt   DateTime @default(now())
+
+  // Relazioni
+  menuFisso   MenuFisso @relation(fields: [menuFissoId], references: [id], onDelete: Cascade)
+  piatto      Piatto   @relation(fields: [piattoId], references: [id], onDelete: Cascade)
+
+  @@unique([menuFissoId, piattoId])
+  @@map("menu_fisso_piatto")
+}
+
+// Tabella di relazione Menu Fisso-Servizio Accessorio (molti a molti)
+model MenuFissoServizioAccessorio {
+  id                    String   @id @default(uuid())
+  menuFissoId           String
+  servizioAccessorioId  String
+  createdAt             DateTime @default(now())
+
+  // Relazioni
+  menuFisso             MenuFisso @relation(fields: [menuFissoId], references: [id], onDelete: Cascade)
+  servizioAccessorio    ServizioAccessorio @relation(fields: [servizioAccessorioId], references: [id], onDelete: Cascade)
+
+  @@unique([menuFissoId, servizioAccessorioId])
+  @@map("menu_fisso_servizio_accessorio")
+}
+
+// === TABELLE GEOGRAFICHE ===
+
+// Nazione
+model Nazione {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  sigla       String   @unique // Sigla di due lettere maiuscole (es. "IT", "FR")
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  regioni     Regione[]
+  zone        Zona[]
+  vini        Vino[]
+  birre       Birra[]
+  liquori     Liquore[]
+  cocktail    Cocktail[]
+  bevande     Bevanda[]
+
+  @@map("nazioni")
+}
+
+// Regione
+model Regione {
+  id          String   @id @default(uuid())
+  nome        String
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  nazioneId   String
+  nazione     Nazione @relation(fields: [nazioneId], references: [id])
+  zone        Zona[]
+  vini        Vino[]
+
+  @@unique([nome, nazioneId])
+  @@map("regioni")
+}
+
+// Zona
+model Zona {
+  id          String   @id @default(uuid())
+  nome        String
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  regioneId   String
+  regione     Regione @relation(fields: [regioneId], references: [id])
+  
+  nazioneId   String
+  nazione     Nazione @relation(fields: [nazioneId], references: [id])
+  
+  vini        Vino[]
+
+  @@unique([nome, regioneId])
+  @@map("zone")
+}
+
+// === TABELLE TIPOLOGIE ===
+
+// Tipologia Vini
+model TipologiaVino {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?  // Testo lungo per descrizione dettagliata
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  vini        Vino[]
+
+  @@map("tipologie_vino")
+}
+
+// Tipologia Birre
+model TipologiaBirra {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?  // Testo lungo per descrizione dettagliata
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  birre       Birra[]
+
+  @@map("tipologie_birra")
+}
+
+// Tipologia Liquori
+model TipologiaLiquore {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?  // Testo lungo per descrizione dettagliata
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  liquori     Liquore[]
+
+  @@map("tipologie_liquore")
+}
+
+// Tipologia Cocktail
+model TipologiaCocktail {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?  // Testo lungo per descrizione dettagliata
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  cocktail    Cocktail[]
+
+  @@map("tipologie_cocktail")
+}
+
+// Tipologia Bevande
+model TipologiaBevanda {
+  id          String   @id @default(uuid())
+  nome        String   @unique
+  descrizione String?  // Testo lungo per descrizione dettagliata
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relazioni
+  bevande     Bevanda[]
+
+  @@map("tipologie_bevanda")
+}
+
+// === TABELLE BEVANDE ===
+
+// Vini
+model Vino {
+  id              String   @id @default(uuid())
+  nome            String
+  descrizione     String?
+  cantina         String?
+  grado           String?  // Grado alcolico (es. "13.5%", "12%")
+  certificazione  String?
+  capacita        String?  // Capacità (es. "750ml", "1L")
+  prezzoCalice    Decimal? @db.Decimal(10, 2) // Prezzo per calice
+  prezzo          Decimal  @db.Decimal(10, 2) // Prezzo bottiglia
+  inLista         Boolean  @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relazioni geografiche
+  zonaId          String?
+  zona            Zona? @relation(fields: [zonaId], references: [id])
+  
+  regioneId       String?
+  regione         Regione? @relation(fields: [regioneId], references: [id])
+  
+  nazioneId       String
+  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+
+  // Relazione tipologia
+  tipologiaId     String
+  tipologia       TipologiaVino @relation(fields: [tipologiaId], references: [id])
+
+  @@map("vini")
+}
+
+// Birre
+model Birra {
+  id              String   @id @default(uuid())
+  nome            String
+  descrizione     String?
+  grado           String?  // Grado alcolico (es. "5.2%", "4.5%")
+  capacita        String?  // Capacità (es. "33cl", "50cl", "1L")
+  prezzo          Decimal  @db.Decimal(10, 2) // Prezzo
+  inLista         Boolean  @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relazioni geografiche
+  nazioneId       String
+  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+
+  // Relazione tipologia
+  tipologiaId     String
+  tipologia       TipologiaBirra @relation(fields: [tipologiaId], references: [id])
+
+  @@map("birre")
+}
+
+// Liquori
+model Liquore {
+  id              String   @id @default(uuid())
+  nome            String
+  descrizione     String?
+  grado           String?  // Grado alcolico (es. "40%", "35%")
+  invecchiamento  String?  // Invecchiamento (es. "12 anni", "8 mesi", "Non invecchiato")
+  capacita        String?  // Capacità (es. "50ml", "70cl", "1L")
+  prezzo          Decimal  @db.Decimal(10, 2) // Prezzo
+  inLista         Boolean  @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relazioni geografiche
+  nazioneId       String
+  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+
+  // Relazione tipologia
+  tipologiaId     String
+  tipologia       TipologiaLiquore @relation(fields: [tipologiaId], references: [id])
+
+  @@map("liquori")
+}
+
+// Cocktail
+model Cocktail {
+  id              String   @id @default(uuid())
+  nome            String
+  descrizione     String?
+  prezzo          Decimal  @db.Decimal(10, 2) // Prezzo
+  inLista         Boolean  @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relazioni geografiche
+  nazioneId       String
+  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+
+  // Relazione tipologia
+  tipologiaId     String
+  tipologia       TipologiaCocktail @relation(fields: [tipologiaId], references: [id])
+
+  @@map("cocktail")
+}
+
+// Bevande Analcoliche
+model Bevanda {
+  id              String   @id @default(uuid())
+  nome            String
+  descrizione     String?
+  prezzo          Decimal  @db.Decimal(10, 2) // Prezzo
+  inLista         Boolean  @default(true)
+  deletedAt       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relazioni geografiche
+  nazioneId       String
+  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+
+  // Relazione tipologia
+  tipologiaId     String
+  tipologia       TipologiaBevanda @relation(fields: [tipologiaId], references: [id])
+
+  @@map("bevande")
 }

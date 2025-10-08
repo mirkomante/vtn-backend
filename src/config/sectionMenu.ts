@@ -7,19 +7,59 @@ interface SectionMenu {
 // Esportiamo le singole sezioni
 export const ristoranteMenuItems: MenuItem[] = [
   {
-    label: 'Menu degustazione',
-    link: '/ristorante-menu/degustazioni',
-    icon: 'degustazioni'
+    label: 'Menu ristorante',
+    link: '/ristorante-menu',
+    icon: 'dashboard'
   },
   {
-    label: 'Menu lavoro',
-    link: '/ristorante-menu/lavoro',
-    icon: 'lavoro'
+    label: 'Menu Fissi',
+    link: '/ristorante-menu/menu-fissi',
+    icon: 'tabella'
   },
   {
     label: 'Piatti',
     link: '/ristorante-menu/piatti',
-    icon: 'piatti'
+    icon: 'tabella'
+  },
+  {
+    label: 'Vini',
+    link: '/ristorante-menu/vini',
+    icon: 'tabella'
+  },
+  {
+    label: 'Birre',
+    link: '/ristorante-menu/birre',
+    icon: 'tabella'
+  },
+  {
+    label: 'Liquori',
+    link: '/ristorante-menu/liquori',
+    icon: 'tabella'
+  },
+  {
+    label: 'Cocktails',
+    link: '/ristorante-menu/cocktails',
+    icon: 'tabella'
+  },
+  {
+    label: 'Bevande',
+    link: '/ristorante-menu/bevande',
+    icon: 'tabella'
+  },
+  {
+    label: 'Servizi',
+    link: '/ristorante-menu/servizi',
+    icon: 'tabella'
+  },
+  {
+    label: 'Impostazioni',
+    link: '/ristorante-menu/impostazioni',
+    icon: 'tabella'
+  },
+  {
+    label: 'Cancellati',
+    link: '/ristorante-menu/cancellati',
+    icon: 'cestino'
   }
 ];
 

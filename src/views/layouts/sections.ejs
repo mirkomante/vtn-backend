@@ -19,8 +19,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
-      <div class="flex-1 text-sm/6 font-semibold text-gray-900"><%= title || 'Dashboard' %></div>
-      <a href="/profile">
+      <a href="/profile" class="ml-auto">
         <span class="sr-only">Il tuo profilo</span>
         <% if (user && user.avatar) { %>
           <img class="size-8 rounded-full bg-gray-50" src="<%= user.avatar %>" alt="<%= user.name %>">
@@ -33,19 +32,34 @@
     </div>
   
     <main class="lg:pl-72">
-      <div class="px-8 py-6 sm:px-6 lg:px-8 ">
-        <!-- Main area -->
+      <div class="px-8 py-6 sm:px-6 lg:px-8">
+        
+        <!-- Breadcrumbs se presenti (sempre in cima) -->
+        <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
+          <div class="mb-8">
+            <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
+          </div>
+        <% } %>
 
+        <!-- Section Heading e Tabs -->
         <%- include('../ui/sectionHeadings/simple') %>
 
-        <%- body %>
+        <!-- Section Tabs se presenti (solo nelle pagine di lista, non nelle pagine interne) -->
+        <% if (typeof sectionTabs !== 'undefined' && sectionTabs && !isInternalPage) { %>
+          <%- include('../ui/sectionTabs/tabsWithUnderline', { sectionTabs }) %>
+        <% } %>
+
+        <!-- Main content area -->
+        <div class="mt-8">
+          <%- body %>
+        </div>
         
       </div>
     </main>
   </div>
 
-  <%- script %>
-  <script src="/js/sidebar.js"></script>
+  <!-- Scripts centralizzati -->
+  <%- include('../partials/scripts') %>
 </body>
 </html>
   

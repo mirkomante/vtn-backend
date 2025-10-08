@@ -1,55 +1,76 @@
-<% if (!hasUsers) { %>
+<% if (isSectionEmpty) { %>
   <%- include('../../ui/emptyStates/simple', emptyState) %>
 <% } else { %>
+  <!-- Tabella con configurazione centralizzata -->
   <%- include('../../ui/tables/selectableTable', {
-    title: 'Utenti Cancellati',
-    description: 'Lista degli utenti cancellati dal sistema.',
     actionButton: null,
     tableId: 'deleted-users-table',
     tableData: tableData,
-    items: users,
+    items: deletedUsers,
     tableConfig: {
       idField: 'id',
       labelField: 'givenName',
-      detailUrl: '/admin/utenti/dettagli/:id',
-      editUrl: '/admin/utenti/modifica/:id',
-      editMultipleButton: null, // Rimuove il bottone modifica
-      actionButton: {
-        text: 'Ripristina',
-        classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
-      },
-      endpoint: '/admin/utenti/restore',
-      method: 'POST',
-      confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
-      confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
-      successMessage: 'Ripristinati {count} utente/i con successo',
-      errorMessage: 'Errore durante il ripristino',
-      getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
-      disableClickableNames: true // Nuovo parametro per disabilitare i nomi cliccabili
-    },
-    breadcrumbs: breadcrumbs
+      editMultipleButton: null,
+      bulkEditUrl: null,
+      editUrl: null,
+      actionButtons: [
+        {
+          text: 'Ripristina',
+          classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+          endpoint: '/admin/utenti/restore',
+          method: 'POST',
+          confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+          confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+          successMessage: 'Ripristinati {count} utente/i con successo',
+          errorMessage: 'Errore durante il ripristino'
+        },
+        {
+          text: 'Elimina definitivamente',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+          endpoint: '/admin/utenti/permanent-delete',
+          method: 'DELETE',
+          confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo utente?',
+          confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} utenti?',
+          successMessage: 'Eliminati definitivamente {count} utente/i',
+          errorMessage: 'Errore durante l\'eliminazione definitiva'
+        }
+      ],
+      disableClickableNames: true
+    }
   }) %>
 <% } %>
 
+<!-- Configurazione JavaScript per la tabella -->
 <script>
-  window['deleted-users-tableConfig'] = <%- JSON.stringify({
+  window['deleted-users-table-config'] = {
+    tableId: 'deleted-users-table',
     idField: 'id',
     labelField: 'givenName',
-    detailUrl: '/admin/utenti/dettagli/:id',
-    editUrl: '/admin/utenti/modifica/:id',
     editMultipleButton: null,
-    actionButton: {
-      text: 'Ripristina',
-      classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600'
-    },
-    endpoint: '/admin/utenti/restore',
-    method: 'POST',
-    confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
-    confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
-    successMessage: 'Ripristinati {count} utente/i con successo',
-    errorMessage: 'Errore durante il ripristino',
-    getDisplayValue: (user) => `${user.givenName || ''} ${user.familyName || ''}`.trim(),
+    bulkEditUrl: null,
+    editUrl: null,
+    actionButtons: [
+      {
+        text: 'Ripristina',
+        classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+        endpoint: '/admin/utenti/restore',
+        method: 'POST',
+        confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+        confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+        successMessage: 'Ripristinati {count} utente/i con successo',
+        errorMessage: 'Errore durante il ripristino'
+      },
+      {
+        text: 'Elimina definitivamente',
+        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+        endpoint: '/admin/utenti/permanent-delete',
+        method: 'DELETE',
+        confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo utente?',
+        confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} utenti?',
+        successMessage: 'Eliminati definitivamente {count} utente/i',
+        errorMessage: 'Errore durante l\'eliminazione definitiva'
+      }
+    ],
     disableClickableNames: true
-  }) %>
-</script>
-<script src="/js/selectableTable.js"></script> 
+  };
+</script> 

@@ -54,7 +54,6 @@ app.set('views', path.join(__dirname, 'views'));
 // Configurazione Layout
 app.use(expressLayouts);
 app.set('layout', 'layouts/default');
-app.set('layout extractScripts', true);
 app.set('layout extractStyles', true);
 
 // Middleware
@@ -66,10 +65,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 import indexRoutes from './routes/index';
 import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
+import ristoranteMenuRoutes from './routes/ristoranteMenu';
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
+app.use('/ristorante-menu', ristoranteMenuRoutes);
 
 export default app; 

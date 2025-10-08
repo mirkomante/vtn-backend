@@ -1,0 +1,19 @@
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
+
+<div class="mt-8">
+  <div class="space-y-10">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+      <div class="md:col-span-2">
+        <%- include('../../../ui/forms/simpleGenericForm', { ...formConfig, isBulkEdit: true }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%
+  // La gestione dei form è ora centralizzata in formManager.js
+  // Non sono necessari script aggiuntivi
+%>

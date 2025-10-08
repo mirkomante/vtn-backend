@@ -1,0 +1,85 @@
+<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+  <%- include('../alerts/simple', { message: success[0] }) %>
+<% } %>
+
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../navigation/actionNav', actionNavConfig) %>
+<% } %>
+
+<div class="mt-8">
+  <div class="mt-6 border-t border-gray-100">
+    <dl class="divide-y divide-gray-100">
+      <% config.fields.forEach(field => { %>
+        <% 
+          // Controlla se il campo deve essere mostrato
+          const shouldShow = !field.conditional || item[field.conditional];
+        %>
+        <% if (shouldShow) { %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900"><%= field.label %></dt>
+            <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <%- include('../fieldRenderers/' + field.type, { item, field }) %>
+            </dd>
+          </div>
+        <% } %>
+      <% }); %>
+      
+      <!-- Campi personalizzati aggiuntivi -->
+      <% if (config.customFields && config.customFields.length > 0) { %>
+        <% config.customFields.forEach(field => { %>
+          <% 
+            const shouldShow = !field.conditional || item[field.conditional];
+          %>
+          <% if (shouldShow) { %>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm/6 font-medium text-gray-900"><%= field.label %></dt>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                <%- include('../fieldRenderers/' + field.type, { item, field }) %>
+              </dd>
+            </div>
+          <% } %>
+        <% }); %>
+      <% } %>
+      
+      <!-- Timestamps automatici -->
+      <% if (config.showTimestamps && config.timestampFields) { %>
+        <% if (config.timestampFields.createdAt && item[config.timestampFields.createdAt]) { %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Data di creazione</dt>
+            <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <span class="grow">
+                <%- include('../fieldRenderers/date', { 
+                  item, 
+                  field: { 
+                    name: config.timestampFields.createdAt, 
+                    type: 'date',
+                    format: { date: { locale: 'it-IT' } }
+                  } 
+                }) %>
+              </span>
+            </dd>
+          </div>
+        <% } %>
+        
+        <% if (config.timestampFields.updatedAt && item[config.timestampFields.updatedAt]) { %>
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm/6 font-medium text-gray-900">Ultimo aggiornamento</dt>
+            <dd class="mt-1 flex text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <span class="grow">
+                <%- include('../fieldRenderers/date', { 
+                  item, 
+                  field: { 
+                    name: config.timestampFields.updatedAt, 
+                    type: 'date',
+                    format: { date: { locale: 'it-IT' } }
+                  } 
+                }) %>
+              </span>
+            </dd>
+          </div>
+        <% } %>
+      <% } %>
+    </dl>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="pt-5">
+  <!-- Contenuto della pagina principale -->
+  <div class="mt-8">
+    <!-- Griglia delle sottosezioni -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% sectionTabs.forEach(item => { %>
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+          <div class="p-6">
+            <div class="flex items-center">
+              <% if (item.icon && sectionIcons[item.icon]) { %>
+                <div class="flex-shrink-0">
+                  <svg class="h-8 w-8 text-gray-400" 
+                       fill="none" 
+                       viewBox="<%= sectionIcons[item.icon].viewBox %>" 
+                       stroke-width="1.5" 
+                       stroke="currentColor">
+                    <path stroke-linecap="round" 
+                          stroke-linejoin="round" 
+                          d="<%= sectionIcons[item.icon].path %>" />
+                  </svg>
+                </div>
+              <% } %>
+              <div class="ml-4">
+                <h3 class="text-lg font-medium text-gray-900">
+                  <a href="<%= item.link %>" class="hover:text-indigo-600">
+                    <%= item.label %>
+                  </a>
+                </h3>
+                <p class="text-sm text-gray-500">
+                  Gestisci <%= item.label.toLowerCase() %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</div> 

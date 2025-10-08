@@ -2,6 +2,7 @@ import express from 'express';
 import { mainMenuItems } from '../config/mainMenu';
 import { sectionMenuItems } from '../config/sectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
+import { scriptManager } from '../config/scriptManager';
 import { isAuthenticated } from '../middlewares/auth';
 
 const router = express.Router();
@@ -20,6 +21,29 @@ router.get('/', (req, res) => {
     sectionMenu,
     sectionIcons,
     currentPath
+  });
+});
+
+// Rotta di test per il Script Manager
+router.get('/test-scripts', (req, res) => {
+  // Test con tutti gli script disponibili
+  const allScripts = [
+    ...scriptManager.getScriptsForPage('dashboard'), // Script comuni
+    ...scriptManager.getScriptsForPage('table'),     // Script per tabelle
+    ...scriptManager.getScriptsForPage('form')       // Script per form
+  ];
+  
+  // Rimuovi duplicati
+  const uniqueScripts = [...new Set(allScripts)];
+  
+  res.render('pages/test-scripts', {
+    title: 'Test Script Manager',
+    layout: 'layouts/sections',
+    scripts: uniqueScripts,
+    mainMenu: mainMenuItems,
+    sectionMenu: sectionMenuItems.defaultNavigationItems,
+    sectionIcons,
+    currentPath: '/test-scripts'
   });
 });
 

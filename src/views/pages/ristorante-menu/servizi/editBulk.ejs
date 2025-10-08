@@ -1,0 +1,57 @@
+<% if (typeof success !== 'undefined' && success && success.length > 0) { %>
+  <div class="success-message" data-success-message="<%= success[0] %>" style="display: none;">
+    <%= success[0] %>
+  </div>
+<% } %>
+
+<!-- Action Navigation -->
+<% if (typeof actionNavConfig !== 'undefined' && actionNavConfig) { %>
+  <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
+<% } %>
+
+<div class="mt-8">
+  <div class="space-y-10">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
+      <div class="md:col-span-2">
+        <!-- Mostra gli elementi selezionati -->
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+          <h3 class="text-sm font-medium text-gray-900 mb-2">Servizi selezionati (<%= selectedItems.length %>)</h3>
+          <div class="text-sm text-gray-600">
+            <% if (selectedItems.length <= 5) { %>
+              <% selectedItems.forEach(item => { %>
+                <div class="mb-1">• <%= item.nome %> - €<%= parseFloat(item.prezzo).toFixed(2) %></div>
+              <% }); %>
+            <% } else { %>
+              <!-- Mostra i primi 5 e un contatore -->
+              <% selectedItems.slice(0, 5).forEach(item => { %>
+                <div class="mb-1">• <%= item.nome %> - €<%= parseFloat(item.prezzo).toFixed(2) %></div>
+              <% }); %>
+              <div class="mt-2 text-gray-500">
+                ... e altri <%= selectedItems.length - 5 %> servizi
+              </div>
+              <!-- Lista completa espandibile -->
+              <details class="mt-3">
+                <summary class="cursor-pointer text-indigo-600 hover:text-indigo-800">
+                  Mostra tutti i servizi
+                </summary>
+                <div class="mt-2 space-y-1">
+                  <% selectedItems.slice(5).forEach(item => { %>
+                    <div class="mb-1">• <%= item.nome %> - €<%= parseFloat(item.prezzo).toFixed(2) %></div>
+                  <% }); %>
+                </div>
+              </details>
+            <% } %>
+          </div>
+        </div>
+        
+        <%- include('../../../ui/forms/simpleGenericForm', { 
+          ...formConfig, 
+          isBulkEdit: true,
+          selectedItemsData: selectedItems 
+        }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gli script sono ora gestiti centralmente dal layout -->

@@ -1,0 +1,35 @@
+<% actions.forEach((action, index) => { %>
+  <% 
+    // Determina le classi di spacing
+    let spacingClasses = '';
+    if (actions.length === 1) {
+      // Se c'è solo un elemento, nessun margine laterale
+      spacingClasses = '';
+    } else {
+      // Se ci sono più elementi, aggiungi spazio tra di loro
+      if (index === 0) {
+        // Primo elemento: solo margine destro
+        spacingClasses = 'mr-2';
+      } else if (index === actions.length - 1) {
+        // Ultimo elemento: solo margine sinistro
+        spacingClasses = 'ml-2';
+      } else {
+        // Elementi intermedi: margini su entrambi i lati
+        spacingClasses = 'mx-2';
+      }
+    }
+  %>
+  
+  <% if (action.type === 'link') { %>
+    <a href="<%= action.href %>" 
+       class="<%= spacingClasses %> <%= action.classes || 'block rounded-md bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600' %>">
+      <%= action.text %>
+    </a>
+  <% } else if (action.type === 'button') { %>
+    <button type="button" 
+            id="<%= action.id %>"
+            class="<%= spacingClasses %> <%= action.classes || 'block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>">
+      <%= action.text %>
+    </button>
+  <% } %>
+<% }); %> 

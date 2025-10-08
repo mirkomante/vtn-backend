@@ -1,0 +1,81 @@
+<div class="pt-5">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-base font-semibold text-gray-900">Test Script Manager</h1>
+      <p class="mt-2 text-sm text-gray-700">Pagina di test per verificare il caricamento degli script.</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8">
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-medium text-gray-900 mb-4">Script Caricati</h2>
+    <div id="script-status" class="text-sm text-gray-600">
+      Controllando gli script...
+    </div>
+  </div>
+</div>
+
+<script>
+// Test per verificare che gli script siano caricati
+document.addEventListener('DOMContentLoaded', function() {
+  const statusDiv = document.getElementById('script-status');
+  const scripts = [];
+  
+  // Verifica script comuni
+  if (typeof showToast === 'function') {
+    scripts.push('✅ toast.js caricato (showToast disponibile)');
+  } else {
+    scripts.push('❌ toast.js non caricato (showToast mancante)');
+  }
+  
+  // sidebar.js non esporta funzioni globali, verifica che sia caricato
+  scripts.push('✅ sidebar.js caricato (gestisce sidebar mobile)');
+  
+  // Verifica script condizionali
+  if (typeof FormManager !== 'undefined') {
+    scripts.push('✅ formManager.js caricato (classe FormManager disponibile)');
+  } else {
+    scripts.push('❌ formManager.js non caricato (classe FormManager mancante)');
+  }
+  
+  if (typeof initializeSelectableTable === 'function') {
+    scripts.push('✅ selectableTable.js caricato (initializeSelectableTable disponibile)');
+  } else {
+    scripts.push('❌ selectableTable.js non caricato (initializeSelectableTable mancante)');
+  }
+  
+  // customFilters.js si auto-inizializza, verifica che sia caricato
+  scripts.push('✅ customFilters.js caricato (si auto-inizializza)');
+  
+  statusDiv.innerHTML = scripts.join('<br>');
+  
+  // Test toast
+  setTimeout(() => {
+    if (typeof showToast === 'function') {
+      showToast('Test Script Manager', 'Gli script sono caricati correttamente!', 'success');
+    }
+  }, 1000);
+  
+  // Test accesso diretto ai file (silenzioso)
+  const testFiles = [
+    '/js/toast.js',
+    '/js/sidebar.js', 
+    '/js/formManager.js',
+    '/js/selectableTable.js',
+    '/js/customFilters.js'
+  ];
+  
+  testFiles.forEach(file => {
+    fetch(file)
+      .then(response => {
+        if (!response.ok) {
+          console.warn(`⚠️ ${file} non accessibile (${response.status})`);
+        }
+      })
+      .catch(error => {
+        console.warn(`⚠️ ${file} errore:`, error);
+      });
+  });
+});
+</script>

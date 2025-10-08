@@ -1,4 +1,13 @@
-<div class="hidden lg:block border-b border-gray-200 pb-5">
-    <h3 class="text-base font-semibold text-gray-900"><%= title %></h3>
-</div>
-  
+<!-- Section Heading con titolo, descrizione e tabs -->
+<div class="border-b border-gray-200 pb-5">
+  <h1 class="text-2xl font-bold text-gray-900">
+    <% if (typeof customTitle !== 'undefined' && customTitle) { %>
+      <%= customTitle %>
+    <% } else { %>
+      <%= title || 'Dashboard' %>
+    <% } %>
+  </h1>
+  <% if (typeof description !== 'undefined' && description) { %>
+    <p class="mt-2 text-sm text-gray-700"><%= description %></p>
+  <% } %>
+</div> 

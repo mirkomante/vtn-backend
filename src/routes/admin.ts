@@ -7,7 +7,9 @@ import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
 import { userFormData } from '../config/sectionFormData';
-import { FormDataSchema } from "./sectionFormSchema";
+import { scriptManager } from '../config/scriptManager';
+import { actionNavConfigs } from '../config/actionNavConfig';
+import { getDetailViewConfig } from '../config/detailViewConfig';
 
 const router = express.Router();
 
@@ -34,10 +36,20 @@ router.get('/utenti', async (req, res) => {
   let sectionMenu = adminItems;
   
   try {
+    // Filtro per ruolo
+    const roleFilter = req.query.role as string;
+    
+    // Costruisci la clausola WHERE
+    const whereClause: any = {
+      deletedAt: null // Esclude gli utenti cancellati
+    };
+    
+    if (roleFilter && roleFilter.trim() !== '') {
+      whereClause.role = roleFilter;
+    }
+    
     const users = await prisma.user.findMany({
-      where: {
-        deletedAt: null // Esclude gli utenti cancellati
-      },
+      where: whereClause,
       select: {
         id: true,
         givenName: true,
@@ -50,8 +62,35 @@ router.get('/utenti', async (req, res) => {
       }
     });
 
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['users.index'];
+
+    const tableConfig = {
+      tableId: 'users-table',
+      idField: 'id',
+      labelField: 'givenName',
+      detailUrl: '/admin/utenti/dettagli/:id',
+      editUrl: '/admin/utenti/modifica/:id',
+      bulkEditUrl: '/admin/utenti/modifica-massa',
+      editMultipleButton: {
+        text: 'Modifica'
+      },
+      actionButton: {
+        text: 'Elimina',
+        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      },
+      endpoint: '/admin/utenti',
+      method: 'DELETE',
+      confirmMessage: 'Sei sicuro di voler eliminare questo utente?',
+      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} utenti?',
+      successMessage: 'Eliminati {count} utente/i con successo',
+      errorMessage: 'Errore durante l\'eliminazione',
+      disableClickableNames: false
+    };
+
     res.render('pages/users/index', {
       title: 'Utenti',
+      description: 'Gestione utenti del sistema',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
@@ -60,7 +99,13 @@ router.get('/utenti', async (req, res) => {
       tableData: utentiTableData,
       users,
       hasUsers: users.length > 0,
-      successMessage: req.query.success ? decodeURIComponent(req.query.success as string) : undefined,
+      actionNavConfig,
+      currentRoleFilter: roleFilter,
+      success: req.query.success ? [decodeURIComponent(req.query.success as string)] : undefined,
+      error: req.query.error ? [decodeURIComponent(req.query.error as string)] : undefined,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify(tableConfig),
+      tableInitScript: scriptManager.getTableInitScript('users-table'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' }
@@ -94,17 +139,23 @@ router.get('/utenti/nuovo', (req, res) => {
   const currentPath = '/admin/utenti/nuovo';
   let sectionMenu = adminItems;
 
+  // Configurazione actionNav per questa pagina
+  const actionNavConfig = actionNavConfigs['users.new'];
+
   // Prepara la configurazione per il nuovo utente
   const formConfig = userFormData.getFormData(userFormData, false);
 
   res.render('pages/users/new', {
     title: 'Nuovo Utente',
+    description: 'Crea un nuovo utente nel sistema',
     layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionIcons,
     currentPath,
     formConfig,
+    actionNavConfig,
+    scripts: scriptManager.getScriptsForPage('form'),
     breadcrumbs: [
       { label: 'Admin', href: '/admin' },
       { label: 'Utenti', href: '/admin/utenti' },
@@ -209,20 +260,46 @@ router.get('/utenti/dettagli/:id', async (req, res) => {
       });
     }
 
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = { ...actionNavConfigs['users.view'] };
+    // Sostituisci :id con l'ID effettivo dell'utente
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', user.id)
+          };
+        }
+        return action;
+      });
+    }
+
+    // Configurazione vista dettaglio
+    const detailViewConfig = getDetailViewConfig('utenti');
+    const item = {
+      ...user,
+      fullName: `${user.givenName || ''} ${user.familyName || ''}`.trim() || 'Non specificato'
+    };
+
     res.render('pages/users/view', {
-      title: 'Dettagli Utente',
+      title: `Utente: ${user.givenName || 'Sconosciuto'}`,
+      description: `Dettagli dell'utente ${user.givenName || 'sconosciuto'}`,
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
       sectionIcons,
       currentPath,
-      user,
+      detailViewConfig,
+      item,
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('dashboard'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
         { label: `${user.givenName || ''} ${user.familyName || ''}`.trim() || 'Dettagli Utente', href: `/admin/utenti/dettagli/${user.id}` }
       ],
-      successMessage: req.query.success
+      success: req.query.success ? [req.query.success as string] : undefined
     });
   } catch (error) {
     console.error('Errore nel recupero dei dettagli utente:', error);
@@ -274,11 +351,15 @@ router.get('/utenti/modifica-massa', async (req, res) => {
       return res.redirect('/admin/utenti');
     }
 
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = actionNavConfigs['users.editBulk'];
+
     // Prepara la configurazione per la modifica massiva
     const formConfig = userFormData.getFormData(userFormData, false, null, null, true, selectedUsers);
 
     res.render('pages/users/editBulk', {
       title: 'Modifica Massiva Utenti',
+      description: `Modifica ${selectedUsers.length} utenti selezionati`,
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
@@ -286,6 +367,9 @@ router.get('/utenti/modifica-massa', async (req, res) => {
       currentPath,
       selectedUsers,
       formConfig,
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('bulkEdit'),
+      bulkEditConfigScript: scriptManager.getBulkEditConfigScript(formConfig),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
@@ -310,10 +394,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
   }
   
   if (userIds.length === 0) {
-    return res.status(400).json({ 
-      success: false, 
-      message: 'Nessun utente selezionato per la modifica' 
-    });
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+    }
+    return res.redirect('/admin/utenti?error=Nessun utente selezionato per la modifica');
   }
   
   try {
@@ -325,10 +409,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.status(404).json({ 
-        success: false, 
-        message: 'Nessun utente valido trovato per la modifica' 
-      });
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+      }
+      return res.redirect('/admin/utenti?error=Nessun utente valido trovato per la modifica');
     }
 
     // Prepara i dati per l'aggiornamento (solo i campi forniti)
@@ -345,10 +429,10 @@ router.post('/utenti/modifica-massa', async (req, res) => {
 
     // Se non ci sono dati da aggiornare, restituisci errore
     if (Object.keys(updateData).length === 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' 
-      });
+      if (req.xhr || req.headers.accept?.includes('application/json')) {
+        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+      }
+      return res.redirect('/admin/utenti?error=Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.');
     }
 
     await prisma.user.updateMany({
@@ -361,23 +445,134 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     const updatedCount = existingUsers.length;
     const skippedCount = userIds.length - existingUsers.length;
     
-    let message = `Aggiornati ${updatedCount} utenti con successo`;
+    let message = `Aggiornati ${updatedCount} utente${updatedCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utenti non trovati o già cancellati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
     }
     
-    res.json({ 
-      success: true, 
-      message,
-      updatedCount,
-      skippedCount
-    });
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: true, message });
+    }
+    
+    res.redirect(`/admin/utenti?success=${encodeURIComponent(message)}`);
     
   } catch (error) {
     console.error('Errore durante la modifica massiva:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Errore interno del server durante la modifica massiva' 
+    if (req.xhr || req.headers.accept?.includes('application/json')) {
+      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    }
+    res.redirect('/admin/utenti?error=Errore interno del server durante la modifica massiva');
+  }
+});
+
+// Route AJAX per modifica massiva utenti
+router.post('/utenti/modifica-massa/ajax', async (req, res) => {
+  const { itemIds, ruolo, auth } = req.body;
+  
+  let userIds: string[] = [];
+  if (Array.isArray(itemIds)) {
+    userIds = itemIds;
+  } else if (typeof itemIds === 'string') {
+    userIds = itemIds.split(',').filter(id => id.trim() !== '');
+  }
+  
+  if (userIds.length === 0) {
+    return res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+  }
+  
+  try {
+    const existingUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: userIds },
+        deletedAt: null
+      }
+    });
+
+    if (existingUsers.length === 0) {
+      return res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+    }
+
+    // Prepara i dati per l'aggiornamento (solo i campi forniti)
+    const updateData: any = {};
+    
+    if (ruolo && ruolo.trim() !== '') {
+      updateData.role = ruolo;
+      updateData.auth = ruolo;
+    }
+    
+    if (auth && auth.trim() !== '') {
+      updateData.auth = auth;
+    }
+
+    // Se non ci sono dati da aggiornare, restituisci errore
+    if (Object.keys(updateData).length === 0) {
+      return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+    }
+
+    await prisma.user.updateMany({
+      where: { 
+        id: { in: userIds }
+      },
+      data: updateData
+    });
+
+    const updatedCount = existingUsers.length;
+    const skippedCount = userIds.length - existingUsers.length;
+    
+    let message = `Aggiornati ${updatedCount} utente${updatedCount === 1 ? '' : 'i'} con successo`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
+    }
+    
+    return res.json({ success: true, message });
+    
+  } catch (error) {
+    console.error('Errore durante la modifica massiva:', error);
+    return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+  }
+});
+
+// Route AJAX per creazione nuovo utente
+router.post('/utenti/nuovo/ajax', async (req, res) => {
+  const { nome, cognome, email, password, ruolo } = req.body;
+  
+  try {
+    // Verifica se esiste già un utente con la stessa email
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    });
+
+    if (existingUser) {
+      return res.json({
+        success: false,
+        message: 'Un utente con questa email esiste già'
+      });
+    }
+
+    // Crea il nuovo utente
+    const newUser = await prisma.user.create({
+      data: {
+        givenName: nome,
+        familyName: cognome,
+        email,
+        password, // Nota: in produzione dovresti hashare la password
+        role: ruolo,
+        authProvider: 'local',
+        auth: ruolo
+      }
+    });
+
+    return res.json({
+      success: true,
+      message: 'Utente creato con successo',
+      data: { id: newUser.id },
+      redirectUrl: `/admin/utenti/dettagli/${newUser.id}`
+    });
+  } catch (error) {
+    console.error('Errore nella creazione dell\'utente:', error);
+    return res.json({
+      success: false,
+      message: 'Si è verificato un errore durante la creazione dell\'utente'
     });
   }
 });
@@ -412,11 +607,27 @@ router.get('/utenti/modifica/:id', async (req, res) => {
       });
     }
 
+    // Configurazione actionNav per questa pagina
+    const actionNavConfig = { ...actionNavConfigs['users.edit'] };
+    // Sostituisci :id con l'ID effettivo dell'utente
+    if (actionNavConfig.actions) {
+      actionNavConfig.actions = actionNavConfig.actions.map(action => {
+        if (action.type === 'link' && action.href?.includes(':id')) {
+          return {
+            ...action,
+            href: action.href.replace(':id', user.id)
+          };
+        }
+        return action;
+      });
+    }
+
     // Prepara la configurazione per la modifica
     const formConfig = userFormData.getFormData(userFormData, true, user);
 
     res.render('pages/users/edit', {
-      title: 'Modifica Utente',
+      title: `Modifica Utente: ${user.givenName || 'Sconosciuto'}`,
+      description: `Modifica i dettagli dell'utente ${user.givenName || 'sconosciuto'}`,
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
@@ -424,6 +635,8 @@ router.get('/utenti/modifica/:id', async (req, res) => {
       currentPath,
       user,
       formConfig,
+      actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
@@ -550,6 +763,72 @@ router.post('/utenti/modifica/:id', async (req, res) => {
   }
 });
 
+// Route AJAX per modifica utente
+router.post('/utenti/modifica/:id/ajax', async (req, res) => {
+  const { nome, cognome, email, password, ruolo } = req.body;
+  const userId = req.params.id;
+  
+  try {
+    // Verifica se l'utente esiste
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId }
+    });
+
+    if (!existingUser) {
+      return res.json({
+        success: false,
+        message: 'Utente non trovato'
+      });
+    }
+
+    // Verifica se esiste già un altro utente con la stessa email
+    if (email !== existingUser.email) {
+      const userWithSameEmail = await prisma.user.findUnique({
+        where: { email }
+      });
+
+      if (userWithSameEmail) {
+        return res.json({
+          success: false,
+          message: 'Un altro utente con questa email esiste già'
+        });
+      }
+    }
+
+    // Prepara i dati per l'aggiornamento
+    const updateData: any = {
+      givenName: nome,
+      familyName: cognome,
+      email,
+      role: ruolo,
+      auth: ruolo
+    };
+
+    // Aggiungi la password solo se fornita
+    if (password && password.trim() !== '') {
+      updateData.password = password; // Nota: in produzione dovresti hashare la password
+    }
+
+    // Aggiorna l'utente
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: updateData
+    });
+
+    return res.json({
+      success: true,
+      message: 'Utente aggiornato con successo',
+      redirectUrl: `/admin/utenti/dettagli/${updatedUser.id}`
+    });
+  } catch (error) {
+    console.error('Errore nell\'aggiornamento dell\'utente:', error);
+    return res.json({
+      success: false,
+      message: 'Si è verificato un errore durante l\'aggiornamento dell\'utente'
+    });
+  }
+});
+
 // Route per soft delete di uno o più utenti
 router.delete('/utenti', async (req, res) => {
   const { itemIds } = req.body;
@@ -591,9 +870,9 @@ router.delete('/utenti', async (req, res) => {
     const deletedCount = validUserIds.length;
     const skippedCount = itemIds.length - validUserIds.length;
     
-    let message = `Eliminati ${deletedCount} utente/i con successo`;
+    let message = `Eliminati ${deletedCount} utente${deletedCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utente/i già cancellati o non trovati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} già cancellato${skippedCount === 1 ? '' : 'i'} o non trovato${skippedCount === 1 ? '' : 'i'}.`;
     }
 
     res.json({ 
@@ -636,16 +915,55 @@ router.get('/utenti/cancellati', async (req, res) => {
       }
     });
 
+    const isSectionEmpty = deletedUsers.length === 0;
+    const hasItems = deletedUsers.length > 0;
+
     res.render('pages/users/deleted', {
       title: 'Utenti Cancellati',
+      description: 'Visualizza e gestisci gli utenti cancellati del sistema',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
       sectionIcons,
+      uiIcons,
       currentPath,
       tableData: utentiTableData,
-      users: deletedUsers,
-      hasUsers: deletedUsers.length > 0,
+      deletedUsers,
+      hasItems,
+      isSectionEmpty,
+      scripts: scriptManager.getScriptsForPage('table'),
+      tableConfigJson: JSON.stringify({
+        tableId: 'deleted-users-table',
+        idField: 'id',
+        labelField: 'givenName',
+        editMultipleButton: null,
+        bulkEditUrl: null,
+        editUrl: null,
+        actionButtons: [
+          {
+            text: 'Ripristina',
+            classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+            endpoint: '/admin/utenti/restore',
+            method: 'POST',
+            confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+            confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+            successMessage: 'Ripristinati {count} utente/i con successo',
+            errorMessage: 'Errore durante il ripristino'
+          },
+          {
+            text: 'Elimina definitivamente',
+            classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+            endpoint: '/admin/utenti/permanent-delete',
+            method: 'DELETE',
+            confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo utente?',
+            confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} utenti?',
+            successMessage: 'Eliminati definitivamente {count} utente/i',
+            errorMessage: 'Errore durante l\'eliminazione definitiva'
+          }
+        ],
+        disableClickableNames: true,
+        tableData: utentiTableData
+      }),
       breadcrumbs: [
         { label: 'Admin', href: '/admin' },
         { label: 'Utenti', href: '/admin/utenti' },
@@ -664,14 +982,68 @@ router.get('/utenti/cancellati', async (req, res) => {
     });
   } catch (error) {
     console.error('Errore nel recupero degli utenti cancellati:', error);
-    res.status(500).render('error', {
+    
+    res.render('pages/users/deleted', {
       title: 'Errore',
+      description: 'Si è verificato un errore nel recupero degli utenti cancellati',
       layout: 'layouts/sections',
       mainMenu: mainMenuItems,
       sectionMenu,
       sectionIcons,
+      uiIcons,
       currentPath,
-      error: 'Si è verificato un errore nel recupero degli utenti cancellati'
+      deletedUsers: [],
+      hasItems: false,
+      isSectionEmpty: true,
+      tableData: utentiTableData,
+      tableConfigJson: JSON.stringify({
+        tableId: 'deleted-users-table',
+        idField: 'id',
+        labelField: 'givenName',
+        editMultipleButton: null,
+        bulkEditUrl: null,
+        editUrl: null,
+        actionButtons: [
+          {
+            text: 'Ripristina',
+            classes: 'bg-green-600 text-white ring-green-600 hover:bg-green-700 disabled:hover:bg-green-600',
+            endpoint: '/admin/utenti/restore',
+            method: 'POST',
+            confirmMessage: 'Sei sicuro di voler ripristinare questo utente?',
+            confirmMessageMultiple: 'Sei sicuro di voler ripristinare {count} utenti?',
+            successMessage: 'Ripristinati {count} utente/i con successo',
+            errorMessage: 'Errore durante il ripristino'
+          },
+          {
+            text: 'Elimina definitivamente',
+            classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600',
+            endpoint: '/admin/utenti/permanent-delete',
+            method: 'DELETE',
+            confirmMessage: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente questo utente?',
+            confirmMessageMultiple: 'ATTENZIONE: Questa azione è irreversibile! Sei sicuro di voler eliminare definitivamente {count} utenti?',
+            successMessage: 'Eliminati definitivamente {count} utente/i',
+            errorMessage: 'Errore durante l\'eliminazione definitiva'
+          }
+        ],
+        disableClickableNames: true,
+        tableData: utentiTableData
+      }),
+      error: 'Si è verificato un errore nel recupero degli utenti cancellati',
+      breadcrumbs: [
+        { label: 'Admin', href: '/admin' },
+        { label: 'Utenti', href: '/admin/utenti' },
+        { label: 'Cancellati', href: '/admin/utenti/cancellati' }
+      ],
+      emptyState: {
+        title: 'Errore',
+        description: 'Si è verificato un errore nel recupero degli utenti cancellati',
+        buttonText: 'Riprova',
+        buttonHref: '/admin/utenti/cancellati',
+        iconName: 'tabella',
+        icon: uiIcons['tabella'],
+        buttonIconName: 'freccia-sx',
+        buttonIcon: uiIcons['freccia-sx']
+      }
     });
   }
 });
@@ -719,9 +1091,9 @@ router.post('/utenti/restore', async (req, res) => {
     const restoredCount = validUserIds.length;
     const skippedCount = itemIds.length - validUserIds.length;
     
-    let message = `Ripristinati ${restoredCount} utente/i con successo`;
+    let message = `Ripristinati ${restoredCount} utente${restoredCount === 1 ? '' : 'i'} con successo`;
     if (skippedCount > 0) {
-      message += `. ${skippedCount} utente/i non trovati o già ripristinati.`;
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già ripristinato${skippedCount === 1 ? '' : 'i'}.`;
     }
 
     res.json({ 
@@ -735,6 +1107,65 @@ router.post('/utenti/restore', async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante il ripristino' 
+    });
+  }
+});
+
+// Route per eliminazione fisica definitiva di uno o più utenti cancellati
+router.delete('/utenti/permanent-delete', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Dati mancanti per l\'eliminazione definitiva' 
+    });
+  }
+  
+  try {
+    // Verifica che tutti gli utenti esistano ed siano cancellati
+    const existingUsers = await prisma.user.findMany({
+      where: { 
+        id: { in: itemIds },
+        deletedAt: {
+          not: null
+        }
+      }
+    });
+
+    if (existingUsers.length === 0) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Nessun utente valido trovato per l\'eliminazione definitiva' 
+      });
+    }
+
+    // Elimina fisicamente gli utenti
+    await prisma.user.deleteMany({
+      where: { 
+        id: { in: itemIds }
+      }
+    });
+
+    const deletedCount = existingUsers.length;
+    const skippedCount = itemIds.length - existingUsers.length;
+    
+    let message = `Eliminati definitivamente ${deletedCount} utente${deletedCount === 1 ? '' : 'i'}`;
+    if (skippedCount > 0) {
+      message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o non cancellato${skippedCount === 1 ? '' : 'i'}.`;
+    }
+
+    res.json({ 
+      success: true, 
+      message,
+      deletedCount,
+      skippedCount
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione definitiva degli utenti:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante l\'eliminazione definitiva' 
     });
   }
 });

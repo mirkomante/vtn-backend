@@ -1,0 +1,31 @@
+<!-- Partial per la gestione centralizzata degli script -->
+
+<!-- Script comuni e condizionali -->
+<% if (typeof scripts !== 'undefined' && scripts && scripts.length > 0) { %>
+  <% scripts.forEach(script => { %>
+    <script src="<%= script %>"></script>
+  <% }); %>
+<% } %>
+
+<!-- Script specifici della pagina -->
+<% if (typeof pageScripts !== 'undefined' && pageScripts) { %>
+  <%- pageScripts %>
+<% } %>
+
+<!-- Configurazione tabella se disponibile -->
+<% if (typeof tableConfigJson !== 'undefined' && tableConfigJson) { %>
+  <script>
+    const tableConfig = <%- tableConfigJson %>;
+    window[tableConfig.tableId + '-config'] = tableConfig;
+  </script>
+<% } %>
+
+<!-- Script di inizializzazione tabella se disponibile -->
+<% if (typeof tableInitScript !== 'undefined' && tableInitScript) { %>
+  <%- tableInitScript %>
+<% } %>
+
+<!-- Script di configurazione bulk edit se disponibile -->
+<% if (typeof bulkEditConfigScript !== 'undefined' && bulkEditConfigScript) { %>
+  <%- bulkEditConfigScript %>
+<% } %>
