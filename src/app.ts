@@ -9,6 +9,7 @@ import flash from 'connect-flash';
 import { configurePassport } from './config/passport';
 import { flashMessages, userToLocals } from './middlewares/global';
 import { Pool } from 'pg';
+import { jsonErrorHandler } from './middlewares/api/errorHandler';
 
 const app = express();
 export const prisma = new PrismaClient();
@@ -61,14 +62,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware per gestione errori JSON (deve essere dopo express.json())
+app.use(jsonErrorHandler);
+
 // Routes
 import indexRoutes from './routes/index';
 import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
 import ristoranteMenuRoutes from './routes/ristoranteMenu';
+import apiV1Routes from './routes/api/v1';
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
+
+// API Routes (senza autenticazione)
+app.use('/api/v1', apiV1Routes);
+
+// Rotte protette
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
 app.use('/ristorante-menu', ristoranteMenuRoutes);
