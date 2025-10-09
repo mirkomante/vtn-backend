@@ -10,6 +10,7 @@ import { configurePassport } from './config/passport';
 import { flashMessages, userToLocals } from './middlewares/global';
 import { Pool } from 'pg';
 import { jsonErrorHandler } from './middlewares/api/errorHandler';
+import DatabaseLogger from './utils/dbLogger';
 
 const app = express();
 export const prisma = new PrismaClient();
@@ -82,5 +83,15 @@ app.use('/api/v1', apiV1Routes);
 app.use('/', indexRoutes);
 app.use('/admin', adminRoutes);
 app.use('/ristorante-menu', ristoranteMenuRoutes);
+
+// Log database (async, non blocca l'avvio)
+DatabaseLogger.info('VTN Backend started successfully', {
+  environment: process.env.NODE_ENV,
+  port: process.env.PORT || 8080,
+  timestamp: new Date().toISOString()
+});
+
+console.log('🚀 VTN Backend started successfully!');
+console.log(`📊 Logging system activated - Environment: ${process.env.NODE_ENV}`);
 
 export default app; 

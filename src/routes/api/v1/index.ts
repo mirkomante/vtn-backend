@@ -12,11 +12,19 @@ import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api
 import { validationLogger } from '../../../middlewares/api/validation';
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
 import { responseHandler } from '../../../middlewares/api/responseHandler';
+import { requestLogger, errorLogger, performanceLogger, auditLogger } from '../../../middlewares/logging';
 
 const router = express.Router();
 
 // Middleware per trust proxy e logging (deve essere prima del rate limiting)
 router.use(trustProxyMiddleware);
+
+// Middleware di logging avanzato
+router.use(requestLogger);
+router.use(performanceLogger);
+router.use(auditLogger);
+
+// Middleware legacy (da rimuovere gradualmente)
 router.use(apiRequestLogger);
 router.use(validationLogger);
 
@@ -46,6 +54,7 @@ router.get('/health', healthCheckRateLimiter, (req, res) => {
 
 // Middleware per gestione errori (deve essere alla fine)
 router.use(notFoundHandler);
+router.use(errorLogger);
 router.use(apiErrorHandler);
 
 export default router;

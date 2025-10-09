@@ -45,6 +45,7 @@
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.16",
     "@types/passport-local": "^1.0.38",
+    "@types/winston": "^2.4.4",
     "autoprefixer": "^10.4.17",
     "concurrently": "^8.2.2",
     "postcss": "^8.4.35",
