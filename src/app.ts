@@ -5,7 +5,7 @@ import expressLayouts from 'express-ejs-layouts';
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import passport from 'passport';
-import flash from 'connect-flash';
+import flash from 'express-flash';
 import { configurePassport } from './config/passport';
 import { flashMessages, userToLocals } from './middlewares/global';
 import { Pool } from 'pg';
