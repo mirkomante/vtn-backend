@@ -1227,19 +1227,61 @@ La vista `subSection.ejs` gestirà automaticamente la nuova sottosezione utilizz
 
 ## API Endpoints
 
-### Autenticazione
+Il sistema VTN Backend fornisce un'API REST completa per l'integrazione con frontend headless e applicazioni esterne.
+
+### API v1 - Endpoints Principali
+
+#### 🍽️ **Piatti**
+- `GET /api/v1/piatti` - Lista tutti i piatti
+- `GET /api/v1/piatti/:id` - Dettagli piatto specifico
+- `GET /api/v1/piatti/categoria/:categoriaId` - Piatti per categoria
+- `GET /api/v1/piatti/allergene/:allergeneId` - Piatti per allergene
+- `GET /api/v1/piatti/categorie` - Piatti raggruppati per categorie
+- `GET /api/v1/piatti/categorie/ordine?categorie=id1,id2` - Categorie con ordine personalizzato
+- `GET /api/v1/piatti/categorie/filtro?escludi=id1&ordine=nome` - Filtri avanzati
+
+#### 🍷 **Menu Fissi**
+- `GET /api/v1/menu-fisso` - Lista tutti i menu fissi
+- `GET /api/v1/menu-fisso/:id` - Dettagli menu fisso specifico
+- `GET /api/v1/menu-fisso/categoria/:categoriaId` - Menu fissi per categoria
+- `GET /api/v1/menu-fisso/categoria/:categoriaId/dettagli` - Menu fissi con allergeni
+
+#### 🍷 **Bevande**
+- `GET /api/v1/vini` - Lista vini
+- `GET /api/v1/birre` - Lista birre
+- `GET /api/v1/liquori` - Lista liquori
+- `GET /api/v1/cocktails` - Lista cocktail
+- `GET /api/v1/bevande` - Lista bevande analcoliche
+
+#### ⚙️ **Servizi**
+- `GET /api/v1/servizi` - Lista servizi accessori
+
+### Caratteristiche API
+
+- **Formato JSON**: Tutte le risposte in formato JSON strutturato
+- **Rate Limiting**: Protezione contro abusi con limiti configurabili
+- **Validazione**: Validazione completa dei parametri di input
+- **Error Handling**: Gestione errori standardizzata con codici HTTP appropriati
+- **Soft Delete**: Supporto per cancellazione logica degli elementi
+- **Filtri Avanzati**: Supporto per filtri, ordinamento e paginazione
+
+### Documentazione Completa
+
+📋 **Per la documentazione dettagliata completa delle API v1**, inclusi esempi di chiamate, formati di risposta, codici di errore e best practices, consulta il file [API_V1_DOCUMENTATION.md](./API_V1_DOCUMENTATION.md).
+
+### Autenticazione Web
 - `GET /auth/google` - Login Google OAuth
 - `POST /auth/login` - Login locale
 - `GET /auth/logout` - Logout
 
-### Utenti
+### Gestione Utenti
 - `GET /admin/utenti` - Lista utenti
 - `POST /admin/utenti` - Crea utente
 - `PUT /admin/utenti/:id` - Modifica utente
 - `DELETE /admin/utenti/:id` - Elimina utente
 - `POST /admin/utenti/modifica-massa` - Modifica massiva
 
-### Menu Ristorante
+### Menu Ristorante (Web Interface)
 - `GET /ristorante-menu/menu-fissi` - Lista menu fissi
 - `POST /ristorante-menu/menu-fissi` - Crea menu fisso
 - `GET /ristorante-menu/impostazioni/*` - Gestione categorie e allergeni
