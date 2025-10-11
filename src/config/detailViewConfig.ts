@@ -780,7 +780,7 @@ export const cocktailsDetailViewConfig: DetailViewConfig = {
       name: 'nazione_nome',
       label: 'Nazione',
       type: 'text',
-      required: true
+      required: false
     },
     {
       name: 'prezzo',
@@ -839,7 +839,7 @@ export const bevandeDetailViewConfig: DetailViewConfig = {
       name: 'nazione_nome',
       label: 'Nazione',
       type: 'text',
-      required: true
+      required: false
     },
     {
       name: 'prezzo',
