@@ -74,7 +74,13 @@ Per aggiornamenti manuali, modifica i file nella cartella appropriata e aggiorna
 ---
 
 **Ultimo aggiornamento**: 2024-01-15  
-**Versione**: 1.1.0
+**Versione**: 1.1.1
+
+### 🆕 Novità in v1.1.1
+- **Documentazione API Bevande** completamente rivista
+- **Tutti gli endpoint** per vini, birre, liquori, cocktail e bevande analcoliche
+- **Chiarimento terminologico** tra bevande alcoliche e analcoliche
+- **Esempi pratici** per utilizzo API bevande
 
 ### 🆕 Novità in v1.1.0
 - **Campo "Solo Menu Fissi"** per piatti

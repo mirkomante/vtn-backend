@@ -488,13 +488,22 @@ Menu fissi di una categoria con allergeni unici dei piatti.
 
 ---
 
-## 🍷 Endpoint Bevande
+## 🍷 Endpoint Bevande Alcoliche
 
 ### `GET /api/v1/vini`
 
-Lista tutti i vini attivi.
+Lista tutti i vini attivi con supporto per paginazione, filtri e ordinamento.
 
-**Parametri**: Nessuno
+**Parametri Query**:
+- `page` (optional): Numero di pagina (default: 1)
+- `limit` (optional): Elementi per pagina (default: 20)
+- `nazioneId` (optional): Filtra per nazione
+- `regioneId` (optional): Filtra per regione
+- `zonaId` (optional): Filtra per zona
+- `tipologiaId` (optional): Filtra per tipologia
+- `inLista` (optional): Filtra per visibilità (true/false)
+- `sortBy` (optional): Campo per ordinamento
+- `sortOrder` (optional): Direzione ordinamento (asc/desc)
 
 **Risposta**:
 ```json
@@ -509,8 +518,10 @@ Lista tutti i vini attivi.
       "grado": "13.5%",
       "certificazione": "DOCG",
       "capacita": "750ml",
+      "anno": "2020",
       "prezzoCalice": "8.00",
       "prezzo": "25.00",
+      "inLista": true,
       "nazione": {
         "id": "uuid-nazione-1",
         "nome": "Italia",
@@ -532,11 +543,134 @@ Lista tutti i vini attivi.
     }
   ],
   "meta": {
+    "pagination": {
+      "page": 1,
+      "limit": 20,
+      "total": 1,
+      "totalPages": 1
+    },
+    "filters": {
+      "nazioneId": "uuid-nazione-1"
+    },
+    "sorting": {
+      "sortBy": "nome",
+      "sortOrder": "asc"
+    },
     "count": 1,
     "timestamp": "2024-01-01T00:00:00.000Z"
   }
 }
 ```
+
+### `GET /api/v1/vini/raggruppati-per-tipologia`
+
+Vini raggruppati per tipologia.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "tipologia": {
+        "id": "uuid-tipologia-1",
+        "nome": "Rosso",
+        "descrizione": "Vini rossi"
+      },
+      "vini": [
+        {
+          "id": "uuid-vino-1",
+          "nome": "Chianti Classico",
+          "descrizione": "Vino rosso toscano",
+          "cantina": "Tenuta San Guido",
+          "grado": "13.5%",
+          "certificazione": "DOCG",
+          "capacita": "750ml",
+          "anno": "2020",
+          "prezzoCalice": "8.00",
+          "prezzo": "25.00",
+          "inLista": true,
+          "nazione": {
+            "id": "uuid-nazione-1",
+            "nome": "Italia",
+            "sigla": "IT"
+          },
+          "regione": {
+            "id": "uuid-regione-1",
+            "nome": "Toscana"
+          },
+          "zona": {
+            "id": "uuid-zona-1",
+            "nome": "Chianti"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "totalVini": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/vini/:id`
+
+Dettagli di un vino specifico.
+
+**Parametri**:
+- `id` (path): UUID del vino
+
+**Risposta**: Stesso formato di `/vini` ma con un singolo oggetto
+
+### `GET /api/v1/vini/nazione/:nazioneId`
+
+Vini di una nazione specifica.
+
+**Parametri**:
+- `nazioneId` (path): UUID della nazione
+- `page` (optional): Numero di pagina
+- `limit` (optional): Elementi per pagina
+
+**Risposta**: Stesso formato di `/vini` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "filters": {
+      "nazioneId": "uuid-nazione-1"
+    },
+    "nazioneId": "uuid-nazione-1"
+  }
+}
+```
+
+### `GET /api/v1/vini/tipologia/:tipologiaId`
+
+Vini di una tipologia specifica.
+
+**Parametri**:
+- `tipologiaId` (path): UUID della tipologia
+- `page` (optional): Numero di pagina
+- `limit` (optional): Elementi per pagina
+
+**Risposta**: Stesso formato di `/vini` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "filters": {
+      "tipologiaId": "uuid-tipologia-1"
+    },
+    "tipologiaId": "uuid-tipologia-1"
+  }
+}
+```
+
+---
+
+## 🍺 Endpoint Birre
 
 ### `GET /api/v1/birre`
 
@@ -544,7 +678,7 @@ Lista tutte le birre attive.
 
 **Parametri**: Nessuno
 
-**Risposta**: Formato simile ai vini ma con campi specifici per birre:
+**Risposta**:
 ```json
 {
   "success": true,
@@ -556,6 +690,7 @@ Lista tutte le birre attive.
       "grado": "5.2%",
       "capacita": "33cl",
       "prezzo": "4.50",
+      "inLista": true,
       "nazione": {
         "id": "uuid-nazione-1",
         "nome": "Italia",
@@ -575,13 +710,105 @@ Lista tutte le birre attive.
 }
 ```
 
+### `GET /api/v1/birre/raggruppati-per-tipologia`
+
+Birre raggruppate per tipologia.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "tipologia": {
+        "id": "uuid-tipologia-birra-1",
+        "nome": "Lager",
+        "descrizione": "Birre lager"
+      },
+      "birre": [
+        {
+          "id": "uuid-birra-1",
+          "nome": "Peroni Nastro Azzurro",
+          "descrizione": "Birra lager italiana",
+          "grado": "5.2%",
+          "capacita": "33cl",
+          "prezzo": "4.50",
+          "inLista": true,
+          "nazione": {
+            "id": "uuid-nazione-1",
+            "nome": "Italia",
+            "sigla": "IT"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "totalBirre": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/birre/:id`
+
+Dettagli di una birra specifica.
+
+**Parametri**:
+- `id` (path): UUID della birra
+
+**Risposta**: Stesso formato di `/birre` ma con un singolo oggetto
+
+### `GET /api/v1/birre/nazione/:nazioneId`
+
+Birre di una nazione specifica.
+
+**Parametri**:
+- `nazioneId` (path): UUID della nazione
+
+**Risposta**: Stesso formato di `/birre` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "nazioneId": "uuid-nazione-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/birre/tipologia/:tipologiaId`
+
+Birre di una tipologia specifica.
+
+**Parametri**:
+- `tipologiaId` (path): UUID della tipologia
+
+**Risposta**: Stesso formato di `/birre` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "tipologiaId": "uuid-tipologia-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+---
+
+## 🥃 Endpoint Liquori
+
 ### `GET /api/v1/liquori`
 
 Lista tutti i liquori attivi.
 
 **Parametri**: Nessuno
 
-**Risposta**: Formato simile con campi specifici per liquori:
+**Risposta**:
 ```json
 {
   "success": true,
@@ -594,6 +821,7 @@ Lista tutti i liquori attivi.
       "invecchiamento": "12 anni",
       "capacita": "70cl",
       "prezzo": "45.00",
+      "inLista": true,
       "nazione": {
         "id": "uuid-nazione-1",
         "nome": "Italia",
@@ -613,13 +841,106 @@ Lista tutti i liquori attivi.
 }
 ```
 
+### `GET /api/v1/liquori/raggruppati-per-tipologia`
+
+Liquori raggruppati per tipologia.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "tipologia": {
+        "id": "uuid-tipologia-liquore-1",
+        "nome": "Grappa",
+        "descrizione": "Distillati di vinacce"
+      },
+      "liquori": [
+        {
+          "id": "uuid-liquore-1",
+          "nome": "Grappa di Barolo",
+          "descrizione": "Grappa invecchiata",
+          "grado": "40%",
+          "invecchiamento": "12 anni",
+          "capacita": "70cl",
+          "prezzo": "45.00",
+          "inLista": true,
+          "nazione": {
+            "id": "uuid-nazione-1",
+            "nome": "Italia",
+            "sigla": "IT"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "totalLiquori": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/liquori/:id`
+
+Dettagli di un liquore specifico.
+
+**Parametri**:
+- `id` (path): UUID del liquore
+
+**Risposta**: Stesso formato di `/liquori` ma con un singolo oggetto
+
+### `GET /api/v1/liquori/nazione/:nazioneId`
+
+Liquori di una nazione specifica.
+
+**Parametri**:
+- `nazioneId` (path): UUID della nazione
+
+**Risposta**: Stesso formato di `/liquori` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "nazioneId": "uuid-nazione-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/liquori/tipologia/:tipologiaId`
+
+Liquori di una tipologia specifica.
+
+**Parametri**:
+- `tipologiaId` (path): UUID della tipologia
+
+**Risposta**: Stesso formato di `/liquori` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "tipologiaId": "uuid-tipologia-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+---
+
+## 🍸 Endpoint Cocktail
+
 ### `GET /api/v1/cocktails`
 
 Lista tutti i cocktail attivi.
 
 **Parametri**: Nessuno
 
-**Risposta**: Formato simile con campi specifici per cocktail:
+**Risposta**:
 ```json
 {
   "success": true,
@@ -629,6 +950,7 @@ Lista tutti i cocktail attivi.
       "nome": "Negroni",
       "descrizione": "Cocktail classico italiano",
       "prezzo": "12.00",
+      "inLista": true,
       "nazione": {
         "id": "uuid-nazione-1",
         "nome": "Italia",
@@ -648,13 +970,102 @@ Lista tutti i cocktail attivi.
 }
 ```
 
+### `GET /api/v1/cocktails/raggruppati-per-tipologia`
+
+Cocktail raggruppati per tipologia.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "tipologia": {
+        "id": "uuid-tipologia-cocktail-1",
+        "nome": "Classico",
+        "descrizione": "Cocktail classici"
+      },
+      "cocktails": [
+        {
+          "id": "uuid-cocktail-1",
+          "nome": "Negroni",
+          "descrizione": "Cocktail classico italiano",
+          "prezzo": "12.00",
+          "nazione": {
+            "id": "uuid-nazione-1",
+            "nome": "Italia",
+            "sigla": "IT"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "totalCocktails": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/cocktails/:id`
+
+Dettagli di un cocktail specifico.
+
+**Parametri**:
+- `id` (path): UUID del cocktail
+
+**Risposta**: Stesso formato di `/cocktails` ma con un singolo oggetto
+
+### `GET /api/v1/cocktails/nazione/:nazioneId`
+
+Cocktail di una nazione specifica.
+
+**Parametri**:
+- `nazioneId` (path): UUID della nazione
+
+**Risposta**: Stesso formato di `/cocktails` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "nazioneId": "uuid-nazione-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/cocktails/tipologia/:tipologiaId`
+
+Cocktail di una tipologia specifica.
+
+**Parametri**:
+- `tipologiaId` (path): UUID della tipologia
+
+**Risposta**: Stesso formato di `/cocktails` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "tipologiaId": "uuid-tipologia-1",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+---
+
+## 🥤 Endpoint Bevande Analcoliche
+
 ### `GET /api/v1/bevande`
 
 Lista tutte le bevande analcoliche attive.
 
 **Parametri**: Nessuno
 
-**Risposta**: Formato simile con campi specifici per bevande:
+**Risposta**:
 ```json
 {
   "success": true,
@@ -664,6 +1075,7 @@ Lista tutte le bevande analcoliche attive.
       "nome": "Coca Cola",
       "descrizione": "Bibita gassata",
       "prezzo": "3.50",
+      "inLista": true,
       "nazione": {
         "id": "uuid-nazione-2",
         "nome": "Stati Uniti",
@@ -678,6 +1090,91 @@ Lista tutte le bevande analcoliche attive.
   ],
   "meta": {
     "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/bevande/raggruppate-per-tipologia`
+
+Bevande analcoliche raggruppate per tipologia.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "tipologia": {
+        "id": "uuid-tipologia-bevanda-1",
+        "nome": "Cola",
+        "descrizione": "Bibite cola"
+      },
+      "bevande": [
+        {
+          "id": "uuid-bevanda-1",
+          "nome": "Coca Cola",
+          "descrizione": "Bibita gassata",
+          "prezzo": "3.50",
+          "nazione": {
+            "id": "uuid-nazione-2",
+            "nome": "Stati Uniti",
+            "sigla": "US"
+          }
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "totalBevande": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/bevande/:id`
+
+Dettagli di una bevanda analcolica specifica.
+
+**Parametri**:
+- `id` (path): UUID della bevanda
+
+**Risposta**: Stesso formato di `/bevande` ma con un singolo oggetto
+
+### `GET /api/v1/bevande/nazione/:nazioneId`
+
+Bevande analcoliche di una nazione specifica.
+
+**Parametri**:
+- `nazioneId` (path): UUID della nazione
+
+**Risposta**: Stesso formato di `/bevande` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "nazioneId": "uuid-nazione-2",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/bevande/tipologia/:tipologiaId`
+
+Bevande analcoliche di una tipologia specifica.
+
+**Parametri**:
+- `tipologiaId` (path): UUID della tipologia
+
+**Risposta**: Stesso formato di `/bevande` con metadati aggiuntivi:
+```json
+{
+  "meta": {
+    "count": 1,
+    "tipologiaId": "uuid-tipologia-1",
     "timestamp": "2024-01-01T00:00:00.000Z"
   }
 }
@@ -796,6 +1293,69 @@ data.data.forEach(menu => {
     });
   }
 });
+```
+
+### Menu Bevande Completo
+
+```javascript
+// Recupera tutte le bevande alcoliche e analcoliche
+const [vini, birre, liquori, cocktails, bevandeAnalcoliche] = await Promise.all([
+  fetch('/api/v1/vini').then(r => r.json()),
+  fetch('/api/v1/birre').then(r => r.json()),
+  fetch('/api/v1/liquori').then(r => r.json()),
+  fetch('/api/v1/cocktails').then(r => r.json()),
+  fetch('/api/v1/bevande').then(r => r.json())
+]);
+
+// Stampa menu bevande alcoliche
+console.log('\n🍷 VINI');
+vini.data.forEach(vino => {
+  console.log(`- ${vino.nome}: €${vino.prezzo}`);
+  if (vino.cantina) console.log(`  Cantina: ${vino.cantina}`);
+  if (vino.regione) console.log(`  Regione: ${vino.regione.nome}`);
+});
+
+console.log('\n🍺 BIRRE');
+birre.data.forEach(birra => {
+  console.log(`- ${birra.nome}: €${birra.prezzo}`);
+  if (birra.grado) console.log(`  Grado: ${birra.grado}`);
+});
+
+console.log('\n🥃 LIQUORI');
+liquori.data.forEach(liquore => {
+  console.log(`- ${liquore.nome}: €${liquore.prezzo}`);
+  if (liquore.invecchiamento) console.log(`  Invecchiamento: ${liquore.invecchiamento}`);
+});
+
+console.log('\n🍸 COCKTAIL');
+cocktails.data.forEach(cocktail => {
+  console.log(`- ${cocktail.nome}: €${cocktail.prezzo}`);
+});
+
+console.log('\n🥤 BEVANDE ANALCOLICHE');
+bevandeAnalcoliche.data.forEach(bevanda => {
+  console.log(`- ${bevanda.nome}: €${bevanda.prezzo}`);
+});
+```
+
+### Filtri Avanzati per Bevande
+
+```javascript
+// Vini italiani con paginazione
+const response = await fetch('/api/v1/vini?nazioneId=uuid-italia&page=1&limit=10&sortBy=nome&sortOrder=asc');
+const viniItaliani = await response.json();
+
+// Birre per tipologia
+const response2 = await fetch('/api/v1/birre/tipologia/uuid-lager');
+const birreLager = await response2.json();
+
+// Cocktail raggruppati per tipologia
+const response3 = await fetch('/api/v1/cocktails/raggruppati-per-tipologia');
+const cocktailsPerTipologia = await response3.json();
+
+// Bevande analcoliche per nazione
+const response4 = await fetch('/api/v1/bevande/nazione/uuid-usa');
+const bevandeUSA = await response4.json();
 ```
 
 ### Filtri Avanzati
@@ -931,6 +1491,13 @@ function validateApiResponse(data) {
 ---
 
 ## Changelog
+
+### v1.1.1 (2024-01-15)
+- ✅ **Corretto**: Documentazione API bevande completamente rivista
+- ✅ **Aggiunto**: Tutti gli endpoint mancanti per vini, birre, liquori, cocktail e bevande analcoliche
+- ✅ **Chiarito**: Distinzione tra "bevande alcoliche" e "bevande analcoliche"
+- ✅ **Migliorato**: Esempi pratici per utilizzo API bevande
+- ✅ **Aggiunto**: Supporto paginazione e filtri per endpoint vini
 
 ### v1.1.0 (2024-01-15)
 - ✅ **Nuovo**: Campo `soloMenuFissi` per piatti

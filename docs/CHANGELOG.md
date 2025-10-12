@@ -1,5 +1,23 @@
 # Changelog VTN Backend
 
+## [1.1.1] - 2024-01-15
+
+### 🔧 Corretto
+- **Documentazione API Bevande** completamente rivista
+  - Aggiunti tutti gli endpoint mancanti per vini, birre, liquori, cocktail e bevande analcoliche
+  - Chiarita la distinzione tra "bevande alcoliche" e "bevande analcoliche"
+  - Corretta la confusione terminologica nella documentazione
+  - Aggiunti esempi pratici per l'utilizzo delle API bevande
+
+### 📚 Documentazione
+- **Endpoint Vini**: Aggiunto supporto paginazione, filtri e ordinamento
+- **Endpoint Birre**: Documentati tutti gli endpoint disponibili
+- **Endpoint Liquori**: Aggiunta documentazione completa
+- **Endpoint Cocktail**: Documentati tutti gli endpoint disponibili
+- **Endpoint Bevande Analcoliche**: Chiarita la terminologia e documentati tutti gli endpoint
+
+---
+
 ## [1.1.0] - 2024-01-15
 
 ### 🆕 Aggiunto
