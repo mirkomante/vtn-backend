@@ -18,7 +18,7 @@
   <div class="space-y-6">
     <% fields.forEach(function(field) { %>
       <div>
-        <% if (field.type !== 'toggle') { %>
+        <% if (field.type !== 'toggle' && field.type !== 'dynamic-list') { %>
           <label for="<%= field.id %>" class="block text-sm/6 font-medium text-gray-900"><%= field.label %></label>
         <% } %>
         <div class="mt-2 grid grid-cols-1">
