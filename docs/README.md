@@ -15,6 +15,7 @@ Documentazione completa delle API e dei middleware associati.
 ### ⚙️ [Systems Documentation](./systems/)
 Documentazione dei sistemi e componenti principali dell'applicazione.
 
+- **[Authentication](./systems/authentication.md)** - Sistema di autenticazione completo (Locale + Google OAuth)
 - **[Toast System](./systems/toast-system.md)** - Sistema di notifiche toast
 - **[Form Manager](./systems/form-manager.md)** - Gestione unificata dei form
 - **[Pagination](./systems/pagination.md)** - Sistema di paginazione per tabelle
@@ -31,9 +32,10 @@ Guide e documentazione di riferimento per sviluppatori.
 ## 🎯 Come Usare Questa Documentazione
 
 ### Per Sviluppatori
-1. **Inizia con** [Database Schema](./guides/database-schema.md) per capire la struttura dati
-2. **Consulta** [API Documentation](./api/) per integrazioni
-3. **Riferisciti** a [Systems Documentation](./systems/) per componenti specifici
+1. **Inizia con** [Authentication](./systems/authentication.md) per configurare l'accesso
+2. **Consulta** [Database Schema](./guides/database-schema.md) per capire la struttura dati
+3. **Riferisciti** a [API Documentation](./api/) per integrazioni
+4. **Esplora** [Systems Documentation](./systems/) per componenti specifici
 
 ### Per Integratori
 1. **Leggi** [API Documentation](./api/) per endpoint disponibili

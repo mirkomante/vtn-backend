@@ -10,7 +10,7 @@ VTN Backend è un sistema completo per la gestione di un ristorante, sviluppato 
 - **Backend**: Node.js con Express e TypeScript
 - **Database**: PostgreSQL con Prisma ORM
 - **Frontend**: EJS templates con Tailwind CSS
-- **Autenticazione**: Passport.js con Google OAuth e strategia locale
+- **Autenticazione**: Passport.js con strategia locale (email/password) e Google OAuth
 
 ### 📋 Moduli Principali
 - **Gestione Utenti**: CRUD completo con ruoli e permessi
@@ -1283,6 +1283,7 @@ Tutta la documentazione tecnica è stata centralizzata nella cartella `docs/` pe
 - **[Validation](./docs/api/validation.md)** - Sistema di validazione dei parametri
 
 ### ⚙️ [Systems Documentation](./docs/systems/)
+- **[Authentication](./docs/systems/authentication.md)** - Sistema di autenticazione completo (Locale + Google OAuth)
 - **[Toast System](./docs/systems/toast-system.md)** - Sistema di notifiche toast
 - **[Form Manager](./docs/systems/form-manager.md)** - Gestione unificata dei form
 - **[Pagination](./docs/systems/pagination.md)** - Sistema di paginazione per tabelle
@@ -1297,9 +1298,27 @@ Tutta la documentazione tecnica è stata centralizzata nella cartella `docs/` pe
 Per una panoramica completa della documentazione, consulta il [README della documentazione](./docs/README.md).
 
 ### Autenticazione Web
-- `GET /auth/google` - Login Google OAuth
-- `POST /auth/login` - Login locale
-- `GET /auth/logout` - Logout
+
+Il sistema supporta due strategie di autenticazione:
+
+#### Strategia Locale (Email + Password)
+- `GET /auth/login` - Pagina di login
+- `POST /auth/local` - Login con email e password
+- **Sicurezza**: Password hashate con bcrypt (12 rounds)
+- **Validazione**: Requisiti robusti per password sicure
+
+#### Strategia Google OAuth
+- `GET /auth/google` - Inizia autenticazione Google
+- `GET /auth/google/callback` - Callback OAuth
+- **Scope**: Solo profile e email
+- **Auto-registrazione**: Primo utente diventa admin
+
+#### Gestione Sessioni
+- `GET /auth/logout` - Logout con conferma
+- **Sicurezza**: Sessioni sicure con timeout automatico
+- **Storage**: Sessioni salvate in database PostgreSQL
+
+> 📋 **Documentazione Completa**: Per dettagli tecnici completi, configurazione e troubleshooting, consulta [Authentication System](./docs/systems/authentication.md).
 
 ### Gestione Utenti
 - `GET /admin/utenti` - Lista utenti
@@ -1336,10 +1355,13 @@ Per una panoramica completa della documentazione, consulta il [README della docu
 
 ## Sicurezza
 
-- **Autenticazione**: Passport.js con sessioni
-- **Validazione**: Validazione lato client e server
-- **CSRF Protection**: Protezione CSRF integrata
+- **Autenticazione Multi-Strategia**: Passport.js con strategia locale e Google OAuth
+- **Password Sicure**: Hashing bcrypt con 12 rounds di salt e validazione robusta
+- **Sessioni Sicure**: Storage database con timeout automatico e protezione CSRF
+- **Validazione Completa**: Validazione lato client e server con messaggi specifici
 - **SQL Injection**: Prevenuta tramite Prisma ORM
+- **Rate Limiting**: Protezione contro attacchi brute force
+- **Soft Delete**: Gestione cancellazioni logiche per sicurezza dati
 
 ## Performance
 
