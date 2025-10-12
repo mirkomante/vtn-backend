@@ -135,10 +135,33 @@ npx prisma migrate reset
 Crea un file `.env` nella root del progetto:
 
 ```env
+# Database
 DATABASE_URL="postgresql://user:password@localhost:5432/vtn_db"
+
+# Sessioni
 SESSION_SECRET="your-session-secret"
+
+# Google OAuth
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Configurazione Strategie di Autenticazione
+AUTH_LOCAL_ENABLED=true
+AUTH_GOOGLE_ENABLED=true
+```
+
+#### Configurazioni Raccomandate per Ambiente
+
+**Sviluppo** (entrambe le strategie per testing):
+```env
+AUTH_LOCAL_ENABLED=true
+AUTH_GOOGLE_ENABLED=true
+```
+
+**Produzione** (solo Google OAuth per sicurezza):
+```env
+AUTH_LOCAL_ENABLED=false
+AUTH_GOOGLE_ENABLED=true
 ```
 
 ### Installazione

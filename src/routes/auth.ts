@@ -1,19 +1,27 @@
 import express from 'express';
 import passport from 'passport';
-import { isAuthenticated } from '../middlewares/auth';
+import { isAuthenticated, validateAuthStrategy, requireAuthStrategy } from '../middlewares/auth';
+import { getLoginUIConfig, isStrategyEnabled } from '../config/auth';
 
 const router = express.Router();
+
+// Middleware per verificare che almeno una strategia sia abilitata
+router.use(requireAuthStrategy);
 
 // Route per il login
 router.get('/login', (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect('/');
   }
+  
+  const uiConfig = getLoginUIConfig();
+  
   res.render('pages/auth', {
     title: 'Login',
     layout: 'layouts/default',
     error: req.flash('error'),
-    success: req.flash('success')
+    success: req.flash('success'),
+    ...uiConfig
   });
 });
 
@@ -28,27 +36,36 @@ router.get('/logout', isAuthenticated, (req, res, next) => {
   });
 });
 
-// Route per l'autenticazione Google
-router.get('/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
+// Route per l'autenticazione Google (solo se abilitata)
+if (isStrategyEnabled('google')) {
+  router.get('/google',
+    validateAuthStrategy,
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+  );
 
-// Callback per l'autenticazione Google
-router.get('/google/callback',
-  passport.authenticate('google', { 
-    failureRedirect: '/auth/login',
-    failureFlash: true
-  }),
-  (req, res) => {
-    res.redirect('/');
-  }
-);
+  // Callback per l'autenticazione Google
+  router.get('/google/callback',
+    validateAuthStrategy,
+    passport.authenticate('google', { 
+      failureRedirect: '/auth/login',
+      failureFlash: true
+    }),
+    (req, res) => {
+      res.redirect('/');
+    }
+  );
+}
 
-// Rota per il login locale
-router.post('/local', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/auth/login',
-  failureFlash: true
-}));
+// Route per il login locale (solo se abilitata)
+if (isStrategyEnabled('local')) {
+  router.post('/local', 
+    validateAuthStrategy,
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/auth/login',
+      failureFlash: true
+    })
+  );
+}
 
 export default router; 

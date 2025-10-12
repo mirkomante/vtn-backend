@@ -2,10 +2,12 @@
 
 ## Panoramica
 
-Il sistema VTN Backend implementa un sistema di autenticazione completo e sicuro utilizzando **Passport.js** con supporto per due strategie:
+Il sistema VTN Backend implementa un sistema di autenticazione completo e sicuro utilizzando **Passport.js** con supporto per due strategie configurabili:
 
-- **Strategia Locale**: Autenticazione con email e password
-- **Strategia Google OAuth**: Autenticazione tramite Google Account
+- **Strategia Locale**: Autenticazione con email e password (opzionale)
+- **Strategia Google OAuth**: Autenticazione tramite Google Account (raccomandata)
+
+> **🔧 Configurazione Condizionale**: Le strategie possono essere abilitate/disabilitate tramite variabili d'ambiente per massima flessibilità tra ambienti di sviluppo e produzione.
 
 ## Architettura
 
@@ -14,6 +16,7 @@ Il sistema VTN Backend implementa un sistema di autenticazione completo e sicuro
 ```
 src/
 ├── config/
+│   ├── auth.ts              # Configurazione strategie di autenticazione
 │   └── passport.ts          # Configurazione Passport.js
 ├── middlewares/
 │   ├── auth.ts              # Middleware di autenticazione
@@ -34,6 +37,107 @@ src/
   "bcryptjs": "^2.4.3",
   "express-session": "^1.18.2"
 }
+```
+
+## Configurazione Condizionale delle Strategie
+
+### Panoramica
+
+Il sistema supporta la configurazione condizionale delle strategie di autenticazione tramite variabili d'ambiente, permettendo di abilitare/disabilitare le diverse opzioni di login in base all'ambiente.
+
+### File di Configurazione
+
+La configurazione è centralizzata in `src/config/auth.ts`:
+
+```typescript
+export const authConfig: AuthConfig = {
+  strategies: {
+    local: {
+      enabled: process.env.AUTH_LOCAL_ENABLED === 'true',
+      requirePasswordChange: false
+    },
+    google: {
+      enabled: process.env.AUTH_GOOGLE_ENABLED !== 'false', // Default true
+      requirePasswordChange: false
+    }
+  },
+  ui: {
+    showLocalLogin: process.env.AUTH_LOCAL_ENABLED === 'true',
+    showGoogleLogin: process.env.AUTH_GOOGLE_ENABLED !== 'false'
+  }
+};
+```
+
+### Variabili d'Ambiente
+
+```env
+# Strategia Locale (Email + Password)
+AUTH_LOCAL_ENABLED=true
+
+# Strategia Google OAuth
+AUTH_GOOGLE_ENABLED=true
+```
+
+### Configurazioni Raccomandate
+
+#### Sviluppo
+```env
+AUTH_LOCAL_ENABLED=true
+AUTH_GOOGLE_ENABLED=true
+```
+- **Entrambe le strategie abilitate** per testing completo
+- **UI completa** con tutte le opzioni di login
+
+#### Produzione
+```env
+AUTH_LOCAL_ENABLED=false
+AUTH_GOOGLE_ENABLED=true
+```
+- **Solo Google OAuth** per massima sicurezza
+- **UI semplificata** con solo login Google
+- **Admin gestisce utenti** tramite backend
+
+#### Staging
+```env
+AUTH_LOCAL_ENABLED=false
+AUTH_GOOGLE_ENABLED=true
+```
+- **Configurazione personalizzabile** per test
+- **Simula ambiente produzione**
+
+### Controlli di Sicurezza
+
+Il sistema include controlli automatici:
+
+```typescript
+// Verifica che almeno una strategia sia abilitata
+export const hasEnabledStrategy = (): boolean => {
+  return authConfig.strategies.local.enabled || authConfig.strategies.google.enabled;
+};
+
+// Validazione strategie nelle route
+export const validateAuthStrategy = (req: Request, res: Response, next: NextFunction) => {
+  const strategy = req.params.strategy;
+  
+  if (strategy === 'local' && !isStrategyEnabled('local')) {
+    req.flash('error', 'Autenticazione locale non disponibile');
+    return res.redirect('/auth/login');
+  }
+  
+  next();
+};
+```
+
+### Log di Configurazione
+
+All'avvio, il sistema logga la configurazione attiva:
+
+```
+🔐 Configurazione Autenticazione:
+  - Strategia Locale: ✅ Abilitata
+  - Strategia Google: ✅ Abilitata
+  - UI Locale: ✅ Visibile
+  - UI Google: ✅ Visibile
 ```
 
 ## Strategia Locale (Email + Password)
@@ -254,6 +358,30 @@ SESSION_SECRET="your-session-secret"
 # Google OAuth
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Configurazione Strategie di Autenticazione
+AUTH_LOCAL_ENABLED=true
+AUTH_GOOGLE_ENABLED=true
+```
+
+### Configurazioni per Ambiente
+
+#### Sviluppo
+```env
+AUTH_LOCAL_ENABLED=true
+AUTH_GOOGLE_ENABLED=true
+```
+
+#### Produzione
+```env
+AUTH_LOCAL_ENABLED=false
+AUTH_GOOGLE_ENABLED=true
+```
+
+#### Staging
+```env
+AUTH_LOCAL_ENABLED=false
+AUTH_GOOGLE_ENABLED=true
 ```
 
 ### Setup Google OAuth

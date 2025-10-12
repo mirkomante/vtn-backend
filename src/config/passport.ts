@@ -4,10 +4,13 @@ import { PrismaClient, User } from '@prisma/client';
 import { DoneCallback } from 'passport';
 import { Request } from 'express';
 import bcrypt from 'bcryptjs';
+import { isStrategyEnabled, logAuthConfig } from './auth';
 
 const prisma = new PrismaClient();
 
 export const configurePassport = (passport: any) => {
+  // Log della configurazione all'avvio
+  logAuthConfig();
   passport.serializeUser((user: User, done: DoneCallback) => {
     done(null, user.id);
   });
@@ -21,13 +24,14 @@ export const configurePassport = (passport: any) => {
     }
   });
 
-  // Strategia Google OAuth
-  passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID!,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: '/auth/google/callback',
-    passReqToCallback: true
-  }, async (_req: Request, _accessToken: string, _refreshToken: string, profile: Profile, done: VerifyCallback) => {
+  // Strategia Google OAuth (solo se abilitata)
+  if (isStrategyEnabled('google')) {
+    passport.use(new GoogleStrategy({
+      clientID: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      callbackURL: '/auth/google/callback',
+      passReqToCallback: true
+    }, async (_req: Request, _accessToken: string, _refreshToken: string, profile: Profile, done: VerifyCallback) => {
     try {
       const userCount = await prisma.user.count();
       const isFirstUser = userCount === 0;
@@ -75,9 +79,11 @@ export const configurePassport = (passport: any) => {
       return done(error, undefined);
     }
   }));
+  }
 
-  // Strategia Locale (email e password)
-  passport.use(new LocalStrategy({
+  // Strategia Locale (email e password) - solo se abilitata
+  if (isStrategyEnabled('local')) {
+    passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
   }, async (email: string, password: string, done: (error: any, user?: any, info?: any) => void) => {
@@ -120,4 +126,5 @@ export const configurePassport = (passport: any) => {
       return done(error, false);
     }
   }));
+  }
 }; 
