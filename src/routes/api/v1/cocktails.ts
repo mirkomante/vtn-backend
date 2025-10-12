@@ -37,7 +37,23 @@ router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req, r
 
     res.json({
       success: true,
-      data: cocktails,
+      data: cocktails.map(cocktail => ({
+        id: cocktail.id,
+        nome: cocktail.nome,
+        descrizione: cocktail.descrizione,
+        prezzo: cocktail.prezzo.toString(),
+        inLista: cocktail.inLista,
+        nazione: cocktail.nazione ? {
+          id: cocktail.nazione.id,
+          nome: cocktail.nazione.nome,
+          sigla: cocktail.nazione.sigla
+        } : null,
+        tipologia: cocktail.tipologia ? {
+          id: cocktail.tipologia.id,
+          nome: cocktail.tipologia.nome,
+          descrizione: cocktail.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: cocktails.length,
         timestamp: new Date().toISOString()
@@ -168,7 +184,23 @@ router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (r
 
     res.json({
       success: true,
-      data: cocktail,
+      data: {
+        id: cocktail.id,
+        nome: cocktail.nome,
+        descrizione: cocktail.descrizione,
+        prezzo: cocktail.prezzo.toString(),
+        inLista: cocktail.inLista,
+        nazione: cocktail.nazione ? {
+          id: cocktail.nazione.id,
+          nome: cocktail.nazione.nome,
+          sigla: cocktail.nazione.sigla
+        } : null,
+        tipologia: cocktail.tipologia ? {
+          id: cocktail.tipologia.id,
+          nome: cocktail.tipologia.nome,
+          descrizione: cocktail.tipologia.descrizione
+        } : null
+      },
       meta: {
         timestamp: new Date().toISOString()
       }
@@ -217,7 +249,23 @@ router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidat
 
     res.json({
       success: true,
-      data: cocktails,
+      data: cocktails.map(cocktail => ({
+        id: cocktail.id,
+        nome: cocktail.nome,
+        descrizione: cocktail.descrizione,
+        prezzo: cocktail.prezzo.toString(),
+        inLista: cocktail.inLista,
+        nazione: cocktail.nazione ? {
+          id: cocktail.nazione.id,
+          nome: cocktail.nazione.nome,
+          sigla: cocktail.nazione.sigla
+        } : null,
+        tipologia: cocktail.tipologia ? {
+          id: cocktail.tipologia.id,
+          nome: cocktail.tipologia.nome,
+          descrizione: cocktail.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: cocktails.length,
         nazioneId: req.params.nazioneId,
@@ -268,7 +316,23 @@ router.get('/tipologia/:tipologiaId', cocktailsValidation.getByType, handleValid
 
     res.json({
       success: true,
-      data: cocktails,
+      data: cocktails.map(cocktail => ({
+        id: cocktail.id,
+        nome: cocktail.nome,
+        descrizione: cocktail.descrizione,
+        prezzo: cocktail.prezzo.toString(),
+        inLista: cocktail.inLista,
+        nazione: cocktail.nazione ? {
+          id: cocktail.nazione.id,
+          nome: cocktail.nazione.nome,
+          sigla: cocktail.nazione.sigla
+        } : null,
+        tipologia: cocktail.tipologia ? {
+          id: cocktail.tipologia.id,
+          nome: cocktail.tipologia.nome,
+          descrizione: cocktail.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: cocktails.length,
         tipologiaId: req.params.tipologiaId,

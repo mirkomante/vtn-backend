@@ -1498,6 +1498,7 @@ function validateApiResponse(data) {
 - ✅ **Chiarito**: Distinzione tra "bevande alcoliche" e "bevande analcoliche"
 - ✅ **Migliorato**: Esempi pratici per utilizzo API bevande
 - ✅ **Aggiunto**: Supporto paginazione e filtri per endpoint vini
+- ✅ **Corretto**: Tutti gli endpoint bevande ora restituiscono tutti i campi (grado, invecchiamento, capacita, etc.)
 
 ### v1.1.0 (2024-01-15)
 - ✅ **Nuovo**: Campo `soloMenuFissi` per piatti

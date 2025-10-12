@@ -37,7 +37,26 @@ router.get('/', liquoriValidation.list, handleValidationErrors, async (_req, res
 
     res.json({
       success: true,
-      data: liquori,
+      data: liquori.map(liquore => ({
+        id: liquore.id,
+        nome: liquore.nome,
+        descrizione: liquore.descrizione,
+        grado: liquore.grado,
+        invecchiamento: liquore.invecchiamento,
+        capacita: liquore.capacita,
+        prezzo: liquore.prezzo.toString(),
+        inLista: liquore.inLista,
+        nazione: liquore.nazione ? {
+          id: liquore.nazione.id,
+          nome: liquore.nazione.nome,
+          sigla: liquore.nazione.sigla
+        } : null,
+        tipologia: liquore.tipologia ? {
+          id: liquore.tipologia.id,
+          nome: liquore.tipologia.nome,
+          descrizione: liquore.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: liquori.length,
         timestamp: new Date().toISOString()
@@ -172,7 +191,26 @@ router.get('/:id', liquoriValidation.getById, handleValidationErrors, async (req
 
     res.json({
       success: true,
-      data: liquore,
+      data: {
+        id: liquore.id,
+        nome: liquore.nome,
+        descrizione: liquore.descrizione,
+        grado: liquore.grado,
+        invecchiamento: liquore.invecchiamento,
+        capacita: liquore.capacita,
+        prezzo: liquore.prezzo.toString(),
+        inLista: liquore.inLista,
+        nazione: liquore.nazione ? {
+          id: liquore.nazione.id,
+          nome: liquore.nazione.nome,
+          sigla: liquore.nazione.sigla
+        } : null,
+        tipologia: liquore.tipologia ? {
+          id: liquore.tipologia.id,
+          nome: liquore.tipologia.nome,
+          descrizione: liquore.tipologia.descrizione
+        } : null
+      },
       meta: {
         timestamp: new Date().toISOString()
       }
@@ -221,7 +259,26 @@ router.get('/nazione/:nazioneId', liquoriValidation.getByNation, handleValidatio
 
     res.json({
       success: true,
-      data: liquori,
+      data: liquori.map(liquore => ({
+        id: liquore.id,
+        nome: liquore.nome,
+        descrizione: liquore.descrizione,
+        grado: liquore.grado,
+        invecchiamento: liquore.invecchiamento,
+        capacita: liquore.capacita,
+        prezzo: liquore.prezzo.toString(),
+        inLista: liquore.inLista,
+        nazione: liquore.nazione ? {
+          id: liquore.nazione.id,
+          nome: liquore.nazione.nome,
+          sigla: liquore.nazione.sigla
+        } : null,
+        tipologia: liquore.tipologia ? {
+          id: liquore.tipologia.id,
+          nome: liquore.tipologia.nome,
+          descrizione: liquore.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: liquori.length,
         nazioneId: req.params.nazioneId,
@@ -272,7 +329,26 @@ router.get('/tipologia/:tipologiaId', liquoriValidation.getByType, handleValidat
 
     res.json({
       success: true,
-      data: liquori,
+      data: liquori.map(liquore => ({
+        id: liquore.id,
+        nome: liquore.nome,
+        descrizione: liquore.descrizione,
+        grado: liquore.grado,
+        invecchiamento: liquore.invecchiamento,
+        capacita: liquore.capacita,
+        prezzo: liquore.prezzo.toString(),
+        inLista: liquore.inLista,
+        nazione: liquore.nazione ? {
+          id: liquore.nazione.id,
+          nome: liquore.nazione.nome,
+          sigla: liquore.nazione.sigla
+        } : null,
+        tipologia: liquore.tipologia ? {
+          id: liquore.tipologia.id,
+          nome: liquore.tipologia.nome,
+          descrizione: liquore.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: liquori.length,
         tipologiaId: req.params.tipologiaId,

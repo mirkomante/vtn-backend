@@ -37,7 +37,25 @@ router.get('/', birreValidation.list, handleValidationErrors, async (_req, res) 
 
     res.json({
       success: true,
-      data: birre,
+      data: birre.map(birra => ({
+        id: birra.id,
+        nome: birra.nome,
+        descrizione: birra.descrizione,
+        grado: birra.grado,
+        capacita: birra.capacita,
+        prezzo: birra.prezzo.toString(),
+        inLista: birra.inLista,
+        nazione: birra.nazione ? {
+          id: birra.nazione.id,
+          nome: birra.nazione.nome,
+          sigla: birra.nazione.sigla
+        } : null,
+        tipologia: birra.tipologia ? {
+          id: birra.tipologia.id,
+          nome: birra.tipologia.nome,
+          descrizione: birra.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: birre.length,
         timestamp: new Date().toISOString()
@@ -171,7 +189,25 @@ router.get('/:id', birreValidation.getById, handleValidationErrors, async (req, 
 
     res.json({
       success: true,
-      data: birra,
+      data: {
+        id: birra.id,
+        nome: birra.nome,
+        descrizione: birra.descrizione,
+        grado: birra.grado,
+        capacita: birra.capacita,
+        prezzo: birra.prezzo.toString(),
+        inLista: birra.inLista,
+        nazione: birra.nazione ? {
+          id: birra.nazione.id,
+          nome: birra.nazione.nome,
+          sigla: birra.nazione.sigla
+        } : null,
+        tipologia: birra.tipologia ? {
+          id: birra.tipologia.id,
+          nome: birra.tipologia.nome,
+          descrizione: birra.tipologia.descrizione
+        } : null
+      },
       meta: {
         timestamp: new Date().toISOString()
       }
@@ -220,7 +256,25 @@ router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationE
 
     res.json({
       success: true,
-      data: birre,
+      data: birre.map(birra => ({
+        id: birra.id,
+        nome: birra.nome,
+        descrizione: birra.descrizione,
+        grado: birra.grado,
+        capacita: birra.capacita,
+        prezzo: birra.prezzo.toString(),
+        inLista: birra.inLista,
+        nazione: birra.nazione ? {
+          id: birra.nazione.id,
+          nome: birra.nazione.nome,
+          sigla: birra.nazione.sigla
+        } : null,
+        tipologia: birra.tipologia ? {
+          id: birra.tipologia.id,
+          nome: birra.tipologia.nome,
+          descrizione: birra.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: birre.length,
         nazioneId: req.params.nazioneId,
@@ -271,7 +325,25 @@ router.get('/tipologia/:tipologiaId', birreValidation.getByType, handleValidatio
 
     res.json({
       success: true,
-      data: birre,
+      data: birre.map(birra => ({
+        id: birra.id,
+        nome: birra.nome,
+        descrizione: birra.descrizione,
+        grado: birra.grado,
+        capacita: birra.capacita,
+        prezzo: birra.prezzo.toString(),
+        inLista: birra.inLista,
+        nazione: birra.nazione ? {
+          id: birra.nazione.id,
+          nome: birra.nazione.nome,
+          sigla: birra.nazione.sigla
+        } : null,
+        tipologia: birra.tipologia ? {
+          id: birra.tipologia.id,
+          nome: birra.tipologia.nome,
+          descrizione: birra.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: birre.length,
         tipologiaId: req.params.tipologiaId,

@@ -8,6 +8,10 @@
   - Chiarita la distinzione tra "bevande alcoliche" e "bevande analcoliche"
   - Corretta la confusione terminologica nella documentazione
   - Aggiunti esempi pratici per l'utilizzo delle API bevande
+- **Endpoint API Bevande** ora restituiscono tutti i campi
+  - Corretto problema per cui `grado`, `invecchiamento`, `capacita` non venivano restituiti
+  - Tutti gli endpoint ora mappano correttamente tutti i campi del modello
+  - Risolto inconsistenza tra endpoint `/raggruppati-per-tipologia` e altri endpoint
 
 ### 📚 Documentazione
 - **Endpoint Vini**: Aggiunto supporto paginazione, filtri e ordinamento

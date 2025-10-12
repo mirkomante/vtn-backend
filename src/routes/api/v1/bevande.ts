@@ -37,7 +37,23 @@ router.get('/', bevandeValidation.list, handleValidationErrors, async (_req, res
 
     res.json({
       success: true,
-      data: bevande,
+      data: bevande.map(bevanda => ({
+        id: bevanda.id,
+        nome: bevanda.nome,
+        descrizione: bevanda.descrizione,
+        prezzo: bevanda.prezzo.toString(),
+        inLista: bevanda.inLista,
+        nazione: bevanda.nazione ? {
+          id: bevanda.nazione.id,
+          nome: bevanda.nazione.nome,
+          sigla: bevanda.nazione.sigla
+        } : null,
+        tipologia: bevanda.tipologia ? {
+          id: bevanda.tipologia.id,
+          nome: bevanda.tipologia.nome,
+          descrizione: bevanda.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: bevande.length,
         timestamp: new Date().toISOString()
@@ -168,7 +184,23 @@ router.get('/:id', bevandeValidation.getById, handleValidationErrors, async (req
 
     res.json({
       success: true,
-      data: bevanda,
+      data: {
+        id: bevanda.id,
+        nome: bevanda.nome,
+        descrizione: bevanda.descrizione,
+        prezzo: bevanda.prezzo.toString(),
+        inLista: bevanda.inLista,
+        nazione: bevanda.nazione ? {
+          id: bevanda.nazione.id,
+          nome: bevanda.nazione.nome,
+          sigla: bevanda.nazione.sigla
+        } : null,
+        tipologia: bevanda.tipologia ? {
+          id: bevanda.tipologia.id,
+          nome: bevanda.tipologia.nome,
+          descrizione: bevanda.tipologia.descrizione
+        } : null
+      },
       meta: {
         timestamp: new Date().toISOString()
       }
@@ -217,7 +249,23 @@ router.get('/nazione/:nazioneId', bevandeValidation.getByNation, handleValidatio
 
     res.json({
       success: true,
-      data: bevande,
+      data: bevande.map(bevanda => ({
+        id: bevanda.id,
+        nome: bevanda.nome,
+        descrizione: bevanda.descrizione,
+        prezzo: bevanda.prezzo.toString(),
+        inLista: bevanda.inLista,
+        nazione: bevanda.nazione ? {
+          id: bevanda.nazione.id,
+          nome: bevanda.nazione.nome,
+          sigla: bevanda.nazione.sigla
+        } : null,
+        tipologia: bevanda.tipologia ? {
+          id: bevanda.tipologia.id,
+          nome: bevanda.tipologia.nome,
+          descrizione: bevanda.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: bevande.length,
         nazioneId: req.params.nazioneId,
@@ -268,7 +316,23 @@ router.get('/tipologia/:tipologiaId', bevandeValidation.getByType, handleValidat
 
     res.json({
       success: true,
-      data: bevande,
+      data: bevande.map(bevanda => ({
+        id: bevanda.id,
+        nome: bevanda.nome,
+        descrizione: bevanda.descrizione,
+        prezzo: bevanda.prezzo.toString(),
+        inLista: bevanda.inLista,
+        nazione: bevanda.nazione ? {
+          id: bevanda.nazione.id,
+          nome: bevanda.nazione.nome,
+          sigla: bevanda.nazione.sigla
+        } : null,
+        tipologia: bevanda.tipologia ? {
+          id: bevanda.tipologia.id,
+          nome: bevanda.tipologia.nome,
+          descrizione: bevanda.tipologia.descrizione
+        } : null
+      })),
       meta: {
         count: bevande.length,
         tipologiaId: req.params.tipologiaId,
