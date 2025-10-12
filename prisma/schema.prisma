@@ -335,6 +335,7 @@ model Vino {
   grado           String?  // Grado alcolico (es. "13.5%", "12%")
   certificazione  String?
   capacita        String?  // Capacità (es. "750ml", "1L")
+  anno            String?  // Anno di produzione (es. "2020", "2019")
   prezzoCalice    Decimal? @db.Decimal(10, 2) // Prezzo per calice
   prezzo          Decimal  @db.Decimal(10, 2) // Prezzo bottiglia
   inLista         Boolean  @default(true)
@@ -420,8 +421,8 @@ model Cocktail {
   updatedAt       DateTime @updatedAt
 
   // Relazioni geografiche
-  nazioneId       String
-  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+  nazioneId       String?
+  nazione         Nazione? @relation(fields: [nazioneId], references: [id])
 
   // Relazione tipologia
   tipologiaId     String
@@ -442,12 +443,34 @@ model Bevanda {
   updatedAt       DateTime @updatedAt
 
   // Relazioni geografiche
-  nazioneId       String
-  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+  nazioneId       String?
+  nazione         Nazione? @relation(fields: [nazioneId], references: [id])
 
   // Relazione tipologia
   tipologiaId     String
   tipologia       TipologiaBevanda @relation(fields: [tipologiaId], references: [id])
 
   @@map("bevande")
+}
+
+// === TABELLA LOGS ===
+
+model Logs {
+  id          BigInt    @id @default(autoincrement())
+  level       String    @db.VarChar(10)
+  message     String
+  timestamp   DateTime  @default(now())
+  category    String    @db.VarChar(20)
+  request_id  String?   @db.VarChar(100)
+  user_id     String?   @db.VarChar(100)
+  ip_address  String?   @db.Inet
+  user_agent  String?
+  method      String?   @db.VarChar(10)
+  url         String?
+  status_code Int?
+  duration    Int?
+  metadata    Json?
+  created_at  DateTime  @default(now())
+
+  @@map("logs")
 }

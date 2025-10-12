@@ -1270,6 +1270,306 @@ router.delete('/piatti', async (req, res) => {
   }
 });
 
+// Route per eliminazione singola vino
+router.delete('/vini/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.vino.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Vino eliminato con successo'
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione del vino:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore durante l\'eliminazione del vino' 
+    });
+  }
+});
+
+// Route per eliminazione multipla vini
+router.delete('/vini', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun vino selezionato' 
+    });
+  }
+
+  try {
+    const deletedCount = await prisma.vino.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: `Eliminati ${deletedCount.count} vini con successo`
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla dei vini:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// Route per eliminazione singola birra
+router.delete('/birre/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.birra.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Birra eliminata con successo'
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della birra:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore durante l\'eliminazione della birra' 
+    });
+  }
+});
+
+// Route per eliminazione multipla birre
+router.delete('/birre', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna birra selezionata' 
+    });
+  }
+
+  try {
+    const deletedCount = await prisma.birra.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: `Eliminate ${deletedCount.count} birre con successo`
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla delle birre:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// Route per eliminazione singola liquore
+router.delete('/liquori/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.liquore.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Liquore eliminato con successo'
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione del liquore:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore durante l\'eliminazione del liquore' 
+    });
+  }
+});
+
+// Route per eliminazione multipla liquori
+router.delete('/liquori', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun liquore selezionato' 
+    });
+  }
+
+  try {
+    const deletedCount = await prisma.liquore.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: `Eliminati ${deletedCount.count} liquori con successo`
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla dei liquori:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// Route per eliminazione singola cocktail
+router.delete('/cocktail/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.cocktail.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Cocktail eliminato con successo'
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione del cocktail:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore durante l\'eliminazione del cocktail' 
+    });
+  }
+});
+
+// Route per eliminazione multipla cocktail
+router.delete('/cocktail', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessun cocktail selezionato' 
+    });
+  }
+
+  try {
+    const deletedCount = await prisma.cocktail.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: `Eliminati ${deletedCount.count} cocktail con successo`
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla dei cocktail:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
+// Route per eliminazione singola bevanda
+router.delete('/bevande/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    await prisma.bevanda.update({
+      where: { id },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Bevanda eliminata con successo'
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione della bevanda:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Errore durante l\'eliminazione della bevanda' 
+    });
+  }
+});
+
+// Route per eliminazione multipla bevande
+router.delete('/bevande', async (req, res) => {
+  const { itemIds } = req.body;
+  
+  if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Nessuna bevanda selezionata' 
+    });
+  }
+
+  try {
+    const deletedCount = await prisma.bevanda.updateMany({
+      where: {
+        id: { in: itemIds },
+        deletedAt: null
+      },
+      data: {
+        deletedAt: new Date()
+      }
+    });
+
+    res.json({
+      success: true,
+      message: `Eliminate ${deletedCount.count} bevande con successo`
+    });
+  } catch (error) {
+    console.error('Errore nell\'eliminazione multipla delle bevande:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Si è verificato un errore durante la cancellazione' 
+    });
+  }
+});
+
 // === SEZIONE IMPOSTAZIONI CON SOTTOSEZIONI ===
 router.get('/impostazioni', (req, res) => {
   const currentPath = '/ristorante-menu/impostazioni';
@@ -4993,6 +5293,106 @@ router.post('/restore', async (req, res) => {
             skipped = (ids as string[]).length;
           }
           break;
+
+        case 'vino':
+          const existingVini = await prisma.vino.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingVini.length > 0) {
+            const validIds = existingVini.map(item => item.id);
+            await prisma.vino.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'birra':
+          const existingBirre = await prisma.birra.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingBirre.length > 0) {
+            const validIds = existingBirre.map(item => item.id);
+            await prisma.birra.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'liquore':
+          const existingLiquori = await prisma.liquore.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingLiquori.length > 0) {
+            const validIds = existingLiquori.map(item => item.id);
+            await prisma.liquore.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'cocktail':
+          const existingCocktails = await prisma.cocktail.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingCocktails.length > 0) {
+            const validIds = existingCocktails.map(item => item.id);
+            await prisma.cocktail.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
+
+        case 'bevanda':
+          const existingBevande = await prisma.bevanda.findMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          if (existingBevande.length > 0) {
+            const validIds = existingBevande.map(item => item.id);
+            await prisma.bevanda.updateMany({
+              where: { id: { in: validIds } },
+              data: { deletedAt: null }
+            });
+            restored = validIds.length;
+            skipped = (ids as string[]).length - validIds.length;
+          } else {
+            skipped = (ids as string[]).length;
+          }
+          break;
       }
 
       totalRestored += restored;
@@ -5373,6 +5773,62 @@ router.delete('/permanent-delete', async (req, res) => {
           deleted = deletedMenuFissi.count;
           skipped = (ids as string[]).length - deleted;
           break;
+
+        case 'vino':
+          const deletedVini = await prisma.vino.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedVini.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'birra':
+          const deletedBirre = await prisma.birra.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedBirre.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'liquore':
+          const deletedLiquori = await prisma.liquore.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedLiquori.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'cocktail':
+          const deletedCocktails = await prisma.cocktail.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedCocktails.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
+        case 'bevanda':
+          const deletedBevande = await prisma.bevanda.deleteMany({
+            where: { 
+              id: { in: ids as string[] },
+              deletedAt: { not: null }
+            }
+          });
+          deleted = deletedBevande.count;
+          skipped = (ids as string[]).length - deleted;
+          break;
+
       }
 
       totalDeleted += deleted;
@@ -6520,6 +6976,7 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     tipologiaId, 
     nazioneId, 
     regioneId, 
@@ -6554,6 +7011,7 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
         grado: grado || null,
         certificazione: certificazione || null,
         capacita: capacita || null,
+        anno: anno || null,
         tipologiaId,
         nazioneId,
         regioneId: regioneId || null,
@@ -6587,6 +7045,7 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     tipologiaId, 
     nazioneId, 
     regioneId, 
@@ -6635,6 +7094,7 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
         grado: grado || null,
         certificazione: certificazione || null,
         capacita: capacita || null,
+        anno: anno || null,
         tipologiaId,
         nazioneId,
         regioneId: regioneId || null,
@@ -6671,6 +7131,7 @@ router.post('/vini/modifica-massa/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     prezzo, 
     prezzoCalice, 
     inLista 
@@ -6716,6 +7177,10 @@ router.post('/vini/modifica-massa/ajax', async (req, res) => {
     
     if (capacita !== undefined && capacita !== '') {
       updateData.capacita = capacita;
+    }
+    
+    if (anno !== undefined && anno !== '') {
+      updateData.anno = anno;
     }
     
     if (prezzo !== undefined && prezzo !== '') {
@@ -7532,7 +7997,7 @@ router.get('/cocktails', async (req, res) => {
     const items = cocktails.map(cocktail => ({
       ...cocktail,
       tipologia_nome: cocktail.tipologia.nome,
-      nazione_nome: cocktail.nazione.nome
+      nazione_nome: cocktail.nazione?.nome || null
     }));
     
     // Calcola paginazione
@@ -7764,11 +8229,11 @@ router.get('/cocktails/dettagli/:id', async (req, res) => {
     const item = {
       ...cocktail,
       tipologia_nome: cocktail.tipologia.nome,
-      nazione_nome: cocktail.nazione.nome
+      nazione_nome: cocktail.nazione?.nome || null
     };
     
     // Configurazione actionNav per questa pagina
-    const actionNavConfig = actionNavConfigs['cocktails.view'];
+    const actionNavConfig = JSON.parse(JSON.stringify(actionNavConfigs['cocktails.view']));
     
     // Sostituisci :id nell'href del pulsante Modifica
     if (actionNavConfig.actions) {
@@ -7923,7 +8388,7 @@ router.post('/cocktails/nuovo/ajax', async (req, res) => {
         nome: nome.trim(),
         descrizione: descrizione?.trim() || null,
         tipologiaId: tipologiaId,
-        nazioneId: nazioneId,
+        nazioneId: nazioneId && nazioneId !== '' ? nazioneId : null,
         prezzo: parseFloat(prezzo),
         inLista: inLista === 'true' || inLista === true
       }
@@ -7984,7 +8449,7 @@ router.post('/cocktails/modifica/:id/ajax', async (req, res) => {
         nome: nome.trim(),
         descrizione: descrizione?.trim() || null,
         tipologiaId: tipologiaId,
-        nazioneId: nazioneId,
+        nazioneId: nazioneId && nazioneId !== '' ? nazioneId : null,
         prezzo: parseFloat(prezzo),
         inLista: inLista === 'true' || inLista === true
       }
@@ -8023,8 +8488,8 @@ router.post('/cocktails/modifica-massa/ajax', async (req, res) => {
       updateData.tipologiaId = tipologiaId;
     }
     
-    if (nazioneId !== undefined && nazioneId !== '') {
-      updateData.nazioneId = nazioneId;
+    if (nazioneId !== undefined) {
+      updateData.nazioneId = nazioneId && nazioneId !== '' ? nazioneId : null;
     }
     
     if (prezzo !== undefined && prezzo !== '') {
@@ -8106,7 +8571,7 @@ router.get('/bevande', async (req, res) => {
     const items = bevande.map(bevanda => ({
       ...bevanda,
       tipologia_nome: bevanda.tipologia.nome,
-      nazione_nome: bevanda.nazione.nome
+      nazione_nome: bevanda.nazione?.nome || null
     }));
     
     // Calcola paginazione
@@ -8338,11 +8803,11 @@ router.get('/bevande/dettagli/:id', async (req, res) => {
     const item = {
       ...bevanda,
       tipologia_nome: bevanda.tipologia.nome,
-      nazione_nome: bevanda.nazione.nome
+      nazione_nome: bevanda.nazione?.nome || null
     };
     
     // Configurazione actionNav per questa pagina
-    const actionNavConfig = actionNavConfigs['bevande.view'];
+    const actionNavConfig = JSON.parse(JSON.stringify(actionNavConfigs['bevande.view']));
     
     // Sostituisci :id nell'href del pulsante Modifica
     if (actionNavConfig.actions) {
@@ -8497,7 +8962,7 @@ router.post('/bevande/nuovo/ajax', async (req, res) => {
         nome: nome.trim(),
         descrizione: descrizione?.trim() || null,
         tipologiaId: tipologiaId,
-        nazioneId: nazioneId,
+        nazioneId: nazioneId && nazioneId !== '' ? nazioneId : null,
         prezzo: parseFloat(prezzo),
         inLista: inLista === 'true' || inLista === true
       }
@@ -8558,7 +9023,7 @@ router.post('/bevande/modifica/:id/ajax', async (req, res) => {
         nome: nome.trim(),
         descrizione: descrizione?.trim() || null,
         tipologiaId: tipologiaId,
-        nazioneId: nazioneId,
+        nazioneId: nazioneId && nazioneId !== '' ? nazioneId : null,
         prezzo: parseFloat(prezzo),
         inLista: inLista === 'true' || inLista === true
       }
@@ -8597,8 +9062,8 @@ router.post('/bevande/modifica-massa/ajax', async (req, res) => {
       updateData.tipologiaId = tipologiaId;
     }
     
-    if (nazioneId !== undefined && nazioneId !== '') {
-      updateData.nazioneId = nazioneId;
+    if (nazioneId !== undefined) {
+      updateData.nazioneId = nazioneId && nazioneId !== '' ? nazioneId : null;
     }
     
     if (prezzo !== undefined && prezzo !== '') {

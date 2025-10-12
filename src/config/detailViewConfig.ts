@@ -540,6 +540,12 @@ export const viniDetailViewConfig: DetailViewConfig = {
       conditional: 'capacita'
     },
     {
+      name: 'anno',
+      label: 'Anno',
+      type: 'text',
+      conditional: 'anno'
+    },
+    {
       name: 'tipologia_nome',
       label: 'Tipologia',
       type: 'text',
@@ -780,7 +786,7 @@ export const cocktailsDetailViewConfig: DetailViewConfig = {
       name: 'nazione_nome',
       label: 'Nazione',
       type: 'text',
-      required: true
+      required: false
     },
     {
       name: 'prezzo',
@@ -839,7 +845,7 @@ export const bevandeDetailViewConfig: DetailViewConfig = {
       name: 'nazione_nome',
       label: 'Nazione',
       type: 'text',
-      required: true
+      required: false
     },
     {
       name: 'prezzo',
