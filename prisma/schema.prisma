@@ -335,6 +335,7 @@ model Vino {
   grado           String?  // Grado alcolico (es. "13.5%", "12%")
   certificazione  String?
   capacita        String?  // Capacità (es. "750ml", "1L")
+  anno            String?  // Anno di produzione (es. "2020", "2019")
   prezzoCalice    Decimal? @db.Decimal(10, 2) // Prezzo per calice
   prezzo          Decimal  @db.Decimal(10, 2) // Prezzo bottiglia
   inLista         Boolean  @default(true)

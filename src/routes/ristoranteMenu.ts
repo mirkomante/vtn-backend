@@ -6976,6 +6976,7 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     tipologiaId, 
     nazioneId, 
     regioneId, 
@@ -7010,6 +7011,7 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
         grado: grado || null,
         certificazione: certificazione || null,
         capacita: capacita || null,
+        anno: anno || null,
         tipologiaId,
         nazioneId,
         regioneId: regioneId || null,
@@ -7043,6 +7045,7 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     tipologiaId, 
     nazioneId, 
     regioneId, 
@@ -7091,6 +7094,7 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
         grado: grado || null,
         certificazione: certificazione || null,
         capacita: capacita || null,
+        anno: anno || null,
         tipologiaId,
         nazioneId,
         regioneId: regioneId || null,
@@ -7127,6 +7131,7 @@ router.post('/vini/modifica-massa/ajax', async (req, res) => {
     grado, 
     certificazione, 
     capacita, 
+    anno,
     prezzo, 
     prezzoCalice, 
     inLista 
@@ -7172,6 +7177,10 @@ router.post('/vini/modifica-massa/ajax', async (req, res) => {
     
     if (capacita !== undefined && capacita !== '') {
       updateData.capacita = capacita;
+    }
+    
+    if (anno !== undefined && anno !== '') {
+      updateData.anno = anno;
     }
     
     if (prezzo !== undefined && prezzo !== '') {

@@ -55,6 +55,90 @@ router.get('/', birreValidation.list, handleValidationErrors, async (_req, res) 
   }
 });
 
+// GET /api/v1/birre/raggruppati-per-tipologia - Birre raggruppate per tipologia
+router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationErrors, async (_req, res) => {
+  try {
+    // Recupera tutte le tipologie di birre
+    const tipologieBirre = await prisma.tipologiaBirra.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+
+    // Recupera tutte le birre raggruppate per tipologia
+    const birrePerTipologia = await Promise.all(
+      tipologieBirre.map(async (tipologia) => {
+        const birre = await prisma.birra.findMany({
+          where: {
+            tipologiaId: tipologia.id,
+            deletedAt: null,
+            inLista: true
+          },
+          include: {
+            nazione: {
+              select: {
+                id: true,
+                nome: true,
+                sigla: true
+              }
+            }
+          },
+          orderBy: {
+            nome: 'asc'
+          }
+        });
+
+        return {
+          tipologia: {
+            id: tipologia.id,
+            nome: tipologia.nome,
+            descrizione: tipologia.descrizione
+          },
+          birre: birre.map(birra => ({
+            id: birra.id,
+            nome: birra.nome,
+            descrizione: birra.descrizione,
+            grado: birra.grado,
+            capacita: birra.capacita,
+            prezzo: birra.prezzo.toString(),
+            inLista: birra.inLista,
+            nazione: birra.nazione ? {
+              id: birra.nazione.id,
+              nome: birra.nazione.nome,
+              sigla: birra.nazione.sigla
+            } : null
+          }))
+        };
+      })
+    );
+
+    // Filtra le tipologie che hanno birre
+    const tipologieConBirre = birrePerTipologia.filter(item => item.birre.length > 0);
+
+    res.json({
+      success: true,
+      data: tipologieConBirre,
+      meta: {
+        count: tipologieConBirre.length,
+        totalBirre: tipologieConBirre.reduce((sum, item) => sum + item.birre.length, 0),
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle birre raggruppate per tipologia:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Errore interno del server'
+      }
+    });
+  }
+});
+
 // GET /api/v1/birre/:id - Dettagli di una birra specifica
 router.get('/:id', birreValidation.getById, handleValidationErrors, async (req, res) => {
   try {

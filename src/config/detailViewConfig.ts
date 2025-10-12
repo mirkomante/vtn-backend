@@ -540,6 +540,12 @@ export const viniDetailViewConfig: DetailViewConfig = {
       conditional: 'capacita'
     },
     {
+      name: 'anno',
+      label: 'Anno',
+      type: 'text',
+      conditional: 'anno'
+    },
+    {
       name: 'tipologia_nome',
       label: 'Tipologia',
       type: 'text',

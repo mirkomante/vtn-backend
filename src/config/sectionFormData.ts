@@ -458,6 +458,19 @@ export const vinoFormData: FormDataSchema = {
       bulkRequired: false
     },
     {
+      type: 'text',
+      name: 'anno',
+      id: 'anno',
+      label: 'Anno',
+      required: false,
+      placeholder: '2020, 2019, etc.',
+      errorMessage: 'L\'anno deve essere un valore valido',
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna anno per tutti i vini selezionati',
+      bulkPlaceholder: 'Nuovo anno (opzionale)',
+      bulkRequired: false
+    },
+    {
       type: 'select',
       name: 'tipologiaId',
       id: 'tipologiaId',

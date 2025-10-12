@@ -81,6 +81,114 @@ router.get('/', viniValidation.list, handleValidationErrors, async (req, res, ne
   }
 });
 
+// GET /api/v1/vini/raggruppati-per-tipologia - Vini raggruppati per tipologia
+router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationErrors, async (_req, res) => {
+  try {
+    // Recupera tutte le tipologie di vini
+    const tipologieVini = await prisma.tipologiaVino.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+
+    // Recupera tutti i vini raggruppati per tipologia
+    const viniPerTipologia = await Promise.all(
+      tipologieVini.map(async (tipologia) => {
+        const vini = await prisma.vino.findMany({
+          where: {
+            tipologiaId: tipologia.id,
+            deletedAt: null,
+            inLista: true
+          },
+          include: {
+            nazione: {
+              select: {
+                id: true,
+                nome: true,
+                sigla: true
+              }
+            },
+            regione: {
+              select: {
+                id: true,
+                nome: true
+              }
+            },
+            zona: {
+              select: {
+                id: true,
+                nome: true
+              }
+            }
+          },
+          orderBy: {
+            nome: 'asc'
+          }
+        });
+
+        return {
+          tipologia: {
+            id: tipologia.id,
+            nome: tipologia.nome,
+            descrizione: tipologia.descrizione
+          },
+          vini: vini.map(vino => ({
+            id: vino.id,
+            nome: vino.nome,
+            descrizione: vino.descrizione,
+            cantina: vino.cantina,
+            grado: vino.grado,
+            certificazione: vino.certificazione,
+            capacita: vino.capacita,
+            anno: vino.anno,
+            prezzoCalice: vino.prezzoCalice ? vino.prezzoCalice.toString() : null,
+            prezzo: vino.prezzo.toString(),
+            inLista: vino.inLista,
+            nazione: vino.nazione ? {
+              id: vino.nazione.id,
+              nome: vino.nazione.nome,
+              sigla: vino.nazione.sigla
+            } : null,
+            regione: vino.regione ? {
+              id: vino.regione.id,
+              nome: vino.regione.nome
+            } : null,
+            zona: vino.zona ? {
+              id: vino.zona.id,
+              nome: vino.zona.nome
+            } : null
+          }))
+        };
+      })
+    );
+
+    // Filtra le tipologie che hanno vini
+    const tipologieConVini = viniPerTipologia.filter(item => item.vini.length > 0);
+
+    res.json({
+      success: true,
+      data: tipologieConVini,
+      meta: {
+        count: tipologieConVini.length,
+        totalVini: tipologieConVini.reduce((sum, item) => sum + item.vini.length, 0),
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei vini raggruppati per tipologia:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Errore interno del server'
+      }
+    });
+  }
+});
+
 // GET /api/v1/vini/:id - Dettagli di un vino specifico
 router.get('/:id', viniValidation.getById, handleValidationErrors, async (req, res, next) => {
   try {
