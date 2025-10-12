@@ -6,6 +6,12 @@ import { DetailViewConfig } from './detailViewSchema';
 export const serviziDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -379,6 +385,12 @@ export const utentiDetailViewConfig: DetailViewConfig = {
 export const piattiDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -415,6 +427,42 @@ export const piattiDetailViewConfig: DetailViewConfig = {
       customRender: 'allergeniList'
     },
     {
+      name: 'glutenFree',
+      label: 'Gluten Free',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Sì',
+          falseText: 'No',
+          showBadge: true
+        }
+      }
+    },
+    {
+      name: 'noLatticini',
+      label: 'No Latticini',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Sì',
+          falseText: 'No',
+          showBadge: true
+        }
+      }
+    },
+    {
+      name: 'vegan',
+      label: 'Vegan',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Sì',
+          falseText: 'No',
+          showBadge: true
+        }
+      }
+    },
+    {
       name: 'inLista',
       label: 'Stato',
       type: 'boolean',
@@ -438,6 +486,12 @@ export const piattiDetailViewConfig: DetailViewConfig = {
 // Mappa delle configurazioni per facile accesso
 export const menuFissiDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -503,6 +557,12 @@ export const menuFissiDetailViewConfig: DetailViewConfig = {
 
 export const viniDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -617,6 +677,12 @@ export const viniDetailViewConfig: DetailViewConfig = {
 export const birreDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -687,6 +753,12 @@ export const birreDetailViewConfig: DetailViewConfig = {
 
 export const liquoriDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -765,6 +837,12 @@ export const liquoriDetailViewConfig: DetailViewConfig = {
 export const cocktailsDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -823,6 +901,12 @@ export const cocktailsDetailViewConfig: DetailViewConfig = {
 
 export const bevandeDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',

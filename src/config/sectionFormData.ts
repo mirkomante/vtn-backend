@@ -271,6 +271,39 @@ export const piattoFormData: FormDataSchema = {
     },
     {
       type: 'toggle',
+      name: 'glutenFree',
+      id: 'glutenFree',
+      label: 'Gluten Free',
+      required: false,
+      value: false,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna opzione gluten free per tutti i piatti selezionati',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'noLatticini',
+      id: 'noLatticini',
+      label: 'No Latticini',
+      required: false,
+      value: false,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna opzione no latticini per tutti i piatti selezionati',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
+      name: 'vegan',
+      id: 'vegan',
+      label: 'Vegan',
+      required: false,
+      value: false,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna opzione vegan per tutti i piatti selezionati',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
       name: 'inLista',
       id: 'inLista',
       label: 'Visibile nel menu',
