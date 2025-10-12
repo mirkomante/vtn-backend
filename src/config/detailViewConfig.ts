@@ -60,6 +60,12 @@ export const serviziDetailViewConfig: DetailViewConfig = {
 export const allergeniDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -83,6 +89,12 @@ export const allergeniDetailViewConfig: DetailViewConfig = {
 // Configurazione per le Categorie Menu Fisso
 export const categoriaMenuFissoDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -120,6 +132,12 @@ export const categoriaMenuFissoDetailViewConfig: DetailViewConfig = {
 export const categoriaPiattiDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -156,6 +174,12 @@ export const categoriaPiattiDetailViewConfig: DetailViewConfig = {
 export const nazioniDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -184,6 +208,12 @@ export const nazioniDetailViewConfig: DetailViewConfig = {
 export const regioniDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -206,6 +236,12 @@ export const regioniDetailViewConfig: DetailViewConfig = {
 
 export const zoneDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -236,6 +272,12 @@ export const zoneDetailViewConfig: DetailViewConfig = {
 export const tipologieVinoDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -258,6 +300,12 @@ export const tipologieVinoDetailViewConfig: DetailViewConfig = {
 
 export const tipologieBirraDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',
@@ -282,6 +330,12 @@ export const tipologieBirraDetailViewConfig: DetailViewConfig = {
 export const tipologieLiquoreDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -305,6 +359,12 @@ export const tipologieLiquoreDetailViewConfig: DetailViewConfig = {
 export const tipologieCocktailDetailViewConfig: DetailViewConfig = {
   fields: [
     {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
+    {
       name: 'nome',
       label: 'Nome',
       type: 'text',
@@ -327,6 +387,12 @@ export const tipologieCocktailDetailViewConfig: DetailViewConfig = {
 
 export const tipologieBevandaDetailViewConfig: DetailViewConfig = {
   fields: [
+    {
+      name: 'id',
+      label: 'ID',
+      type: 'text',
+      required: true
+    },
     {
       name: 'nome',
       label: 'Nome',

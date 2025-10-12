@@ -13,6 +13,7 @@ Implementare una gestione centralizzata per le viste in dettaglio, simile a quel
 ### **2. Configurazioni Specifiche**
 - **File**: `src/config/detailViewConfig.ts`
 - **Configurazioni**: `serviziDetailViewConfig`, `allergeniDetailViewConfig`, `categoriaMenuFissoDetailViewConfig`, `categoriaPiattiDetailViewConfig`, `utentiDetailViewConfig`
+- **Sotto Categorie Impostazioni**: `nazioniDetailViewConfig`, `regioniDetailViewConfig`, `zoneDetailViewConfig`, `tipologieVinoDetailViewConfig`, `tipologieBirraDetailViewConfig`, `tipologieLiquoreDetailViewConfig`, `tipologieCocktailDetailViewConfig`, `tipologieBevandaDetailViewConfig`
 
 ### **3. Template Generico**
 - **File**: `src/views/ui/detailViews/genericDetailView.ejs`
@@ -122,6 +123,40 @@ format: {
 - ✅ **Categoria Menu Fisso**: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/:id`
 - ✅ **Categoria Piatti**: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/:id`
 
+## 🆕 **Aggiornamento Campi ID - Sotto Categorie Impostazioni**
+
+### **Modifiche Applicate (Dicembre 2024)**
+Tutte le configurazioni delle sotto categorie di impostazioni sono state aggiornate per includere il campo ID come primo campo visualizzato, garantendo consistenza con le sezioni principali del menu.
+
+### **Configurazioni Aggiornate**
+- ✅ **Allergeni**: Aggiunto campo ID
+- ✅ **Categorie Menu Fisso**: Aggiunto campo ID  
+- ✅ **Categorie Piatti**: Aggiunto campo ID
+- ✅ **Nazioni**: Aggiunto campo ID
+- ✅ **Regioni**: Aggiunto campo ID
+- ✅ **Zone**: Aggiunto campo ID
+- ✅ **Tipologie Vino**: Aggiunto campo ID
+- ✅ **Tipologie Birra**: Aggiunto campo ID
+- ✅ **Tipologie Liquore**: Aggiunto campo ID
+- ✅ **Tipologie Cocktail**: Aggiunto campo ID
+- ✅ **Tipologie Bevanda**: Aggiunto campo ID
+
+### **Struttura Campo ID**
+```typescript
+{
+  name: 'id',
+  label: 'ID',
+  type: 'text',
+  required: true
+}
+```
+
+### **Benefici dell'Aggiornamento**
+- **Consistenza**: Tutte le viste di dettaglio mostrano ora il campo ID
+- **Identificazione**: Facilità nell'identificazione univoca degli elementi
+- **Debugging**: Migliore supporto per il debugging e la manutenzione
+- **Uniformità**: Esperienza utente coerente in tutte le sezioni
+
 ### **Integrazione Componenti Centralizzati**
 - ✅ **Action Navigation**: Integrato correttamente con `actionNavConfig.ts`
 - ✅ **Alert di Successo**: Integrato con `ui/alerts/simple.ejs`
@@ -201,15 +236,24 @@ format: {
 
 ### **Test da Eseguire**
 1. **Servizi**: Verificare formattazione prezzo e stato
-2. **Allergeni**: Verificare visualizzazione nome e descrizione
-3. **Categorie**: Verificare badge stato e timestamps
+2. **Allergeni**: Verificare visualizzazione nome e descrizione + campo ID
+3. **Categorie**: Verificare badge stato e timestamps + campo ID
 4. **Utenti**: Verificare nome completo e link email
+5. **Sotto Categorie Impostazioni**: Verificare campo ID come primo campo
 
 ### **URL di Test**
 - `/ristorante-menu/servizi/dettagli/[ID]`
 - `/ristorante-menu/impostazioni/allergeni/dettagli/[ID]`
 - `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/[ID]`
 - `/ristorante-menu/impostazioni/categoria-piatti/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/nazioni/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/regioni/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/zone/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/tipologie-vino/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/tipologie-birra/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/[ID]`
+- `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/[ID]`
 
 ## 🎉 **Risultato Finale**
 

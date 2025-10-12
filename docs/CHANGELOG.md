@@ -1,5 +1,33 @@
 # Changelog VTN Backend
 
+## [1.1.2] - 2024-12-19
+
+### 🔄 Modificato
+- **Viste di Dettaglio Sotto Categorie Impostazioni**
+  - Aggiunto campo ID come primo campo in tutte le viste di dettaglio delle sotto categorie
+  - Garantita consistenza con le sezioni principali del menu (piatti, vini, birre, ecc.)
+  - Migliorata l'identificazione univoca degli elementi per debugging e manutenzione
+
+### 📊 Configurazioni Aggiornate
+- **Allergeni**: Aggiunto campo ID nella vista di dettaglio
+- **Categorie Menu Fisso**: Aggiunto campo ID nella vista di dettaglio
+- **Categorie Piatti**: Aggiunto campo ID nella vista di dettaglio
+- **Nazioni**: Aggiunto campo ID nella vista di dettaglio
+- **Regioni**: Aggiunto campo ID nella vista di dettaglio
+- **Zone**: Aggiunto campo ID nella vista di dettaglio
+- **Tipologie Vino**: Aggiunto campo ID nella vista di dettaglio
+- **Tipologie Birra**: Aggiunto campo ID nella vista di dettaglio
+- **Tipologie Liquore**: Aggiunto campo ID nella vista di dettaglio
+- **Tipologie Cocktail**: Aggiunto campo ID nella vista di dettaglio
+- **Tipologie Bevanda**: Aggiunto campo ID nella vista di dettaglio
+
+### 📚 Documentazione
+- **Detail Views**: Aggiornata documentazione per includere le nuove configurazioni
+- **Testing**: Aggiunti URL di test per tutte le sotto categorie di impostazioni
+- **Changelog**: Documentate le modifiche apportate
+
+---
+
 ## [1.1.1] - 2024-01-15
 
 ### 🔧 Corretto
