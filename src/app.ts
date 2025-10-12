@@ -5,9 +5,9 @@ import expressLayouts from 'express-ejs-layouts';
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import passport from 'passport';
-import flash from 'express-flash';
 import { configurePassport } from './config/passport';
-import { flashMessages, userToLocals } from './middlewares/global';
+import { flashMessages as customFlashMessages } from './middlewares/flashMessages';
+import { userToLocals } from './middlewares/global';
 import { Pool } from 'pg';
 import { jsonErrorHandler } from './middlewares/api/errorHandler';
 import DatabaseLogger from './utils/dbLogger';
@@ -42,11 +42,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 configurePassport(passport);
 
-// Configurazione di Flash
-app.use(flash());
-
 // Middleware globali
-app.use(flashMessages);
+app.use(customFlashMessages);
 app.use(userToLocals);
 
 // Configurazione EJS

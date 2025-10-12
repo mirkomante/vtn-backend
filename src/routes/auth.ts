@@ -12,7 +12,8 @@ router.get('/login', (req, res) => {
   res.render('pages/auth', {
     title: 'Login',
     layout: 'layouts/default',
-    error: req.flash('error')
+    error: req.flash('error'),
+    success: req.flash('success')
   });
 });
 
@@ -22,7 +23,8 @@ router.get('/logout', isAuthenticated, (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/login');
+    req.flash('success', 'Logout effettuato con successo');
+    res.redirect('/auth/login');
   });
 });
 
@@ -45,7 +47,7 @@ router.get('/google/callback',
 // Rota per il login locale
 router.post('/local', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/auth',
+  failureRedirect: '/auth/login',
   failureFlash: true
 }));
 

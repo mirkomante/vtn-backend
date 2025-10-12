@@ -10,6 +10,7 @@ import { userFormData } from '../config/sectionFormData';
 import { scriptManager } from '../config/scriptManager';
 import { actionNavConfigs } from '../config/actionNavConfig';
 import { getDetailViewConfig } from '../config/detailViewConfig';
+import { PasswordUtils } from '../utils/passwordUtils';
 
 const router = express.Router();
 
@@ -168,6 +169,28 @@ router.post('/utenti/nuovo', async (req, res) => {
   const { nome, cognome, email, password, ruolo } = req.body;
   
   try {
+    // Validazione password
+    const passwordValidation = PasswordUtils.validatePasswordStrength(password);
+    if (!passwordValidation.isValid) {
+      const formConfig = userFormData.getFormData(userFormData, false, null, req.body);
+      
+      return res.status(400).render('pages/users/new', {
+        title: 'Nuovo Utente',
+        layout: 'layouts/sections',
+        mainMenu: mainMenuItems,
+        sectionMenu: adminItems,
+        sectionIcons,
+        currentPath: '/admin/utenti/nuovo',
+        formConfig,
+        breadcrumbs: [
+          { label: 'Admin', href: '/admin' },
+          { label: 'Utenti', href: '/admin/utenti' },
+          { label: 'Nuovo Utente', href: '/admin/utenti/nuovo' }
+        ],
+        error: passwordValidation.errors.join(', ')
+      });
+    }
+
     // Verifica se esiste già un utente con la stessa email
     const existingUser = await prisma.user.findUnique({
       where: { email }
@@ -193,13 +216,16 @@ router.post('/utenti/nuovo', async (req, res) => {
       });
     }
 
+    // Hasha la password
+    const hashedPassword = await PasswordUtils.hashPassword(password);
+
     // Crea il nuovo utente
     const newUser = await prisma.user.create({
       data: {
         givenName: nome,
         familyName: cognome,
         email,
-        password, // Nota: in produzione dovresti hashare la password
+        password: hashedPassword,
         role: ruolo,
         authProvider: 'local',
         auth: ruolo
@@ -537,6 +563,15 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
   const { nome, cognome, email, password, ruolo } = req.body;
   
   try {
+    // Validazione password
+    const passwordValidation = PasswordUtils.validatePasswordStrength(password);
+    if (!passwordValidation.isValid) {
+      return res.json({
+        success: false,
+        message: passwordValidation.errors.join(', ')
+      });
+    }
+
     // Verifica se esiste già un utente con la stessa email
     const existingUser = await prisma.user.findUnique({
       where: { email }
@@ -549,13 +584,16 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
       });
     }
 
+    // Hasha la password
+    const hashedPassword = await PasswordUtils.hashPassword(password);
+
     // Crea il nuovo utente
     const newUser = await prisma.user.create({
       data: {
         givenName: nome,
         familyName: cognome,
         email,
-        password, // Nota: in produzione dovresti hashare la password
+        password: hashedPassword,
         role: ruolo,
         authProvider: 'local',
         auth: ruolo
@@ -728,7 +766,27 @@ router.post('/utenti/modifica/:id', async (req, res) => {
 
     // Aggiungi la password solo se fornita
     if (password && password.trim() !== '') {
-      updateData.password = password; // Nota: in produzione dovresti hashare la password
+      // Validazione password
+      const passwordValidation = PasswordUtils.validatePasswordStrength(password);
+      if (!passwordValidation.isValid) {
+        return res.status(400).render('pages/users/edit', {
+          title: 'Modifica Utente',
+          layout: 'layouts/sections',
+          mainMenu: mainMenuItems,
+          sectionMenu: adminItems,
+          sectionIcons,
+          currentPath: `/admin/utenti/modifica/${userId}`,
+          formConfig,
+          breadcrumbs: [
+            { label: 'Admin', href: '/admin' },
+            { label: 'Utenti', href: '/admin/utenti' },
+            { label: 'Modifica Utente', href: `/admin/utenti/modifica/${userId}` }
+          ],
+          error: passwordValidation.errors.join(', ')
+        });
+      }
+      
+      updateData.password = await PasswordUtils.hashPassword(password);
     }
 
     // Aggiorna l'utente
@@ -806,7 +864,16 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
 
     // Aggiungi la password solo se fornita
     if (password && password.trim() !== '') {
-      updateData.password = password; // Nota: in produzione dovresti hashare la password
+      // Validazione password
+      const passwordValidation = PasswordUtils.validatePasswordStrength(password);
+      if (!passwordValidation.isValid) {
+        return res.json({
+          success: false,
+          message: passwordValidation.errors.join(', ')
+        });
+      }
+      
+      updateData.password = await PasswordUtils.hashPassword(password);
     }
 
     // Aggiorna l'utente
