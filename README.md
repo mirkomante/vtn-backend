@@ -148,20 +148,48 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 # Configurazione Strategie di Autenticazione
 AUTH_LOCAL_ENABLED=true
 AUTH_GOOGLE_ENABLED=true
+
+# Configurazione Menu Principali
+MENU_RISTORANTE_ENABLED=true
+MENU_RISTORANTE_VISIBLE=true
+MENU_ADMIN_ENABLED=true
+MENU_ADMIN_VISIBLE=true
+
+# Menu Futuri (Sviluppo)
+MENU_ANALYTICS_ENABLED=false
+MENU_ANALYTICS_VISIBLE=false
+MENU_REPORTS_ENABLED=false
+MENU_REPORTS_VISIBLE=false
+MENU_SETTINGS_ENABLED=false
+MENU_SETTINGS_VISIBLE=false
+MENU_DASHBOARD_ENABLED=false
+MENU_DASHBOARD_VISIBLE=false
 ```
 
 #### Configurazioni Raccomandate per Ambiente
 
-**Sviluppo** (entrambe le strategie per testing):
+**Sviluppo** (tutte le funzionalità per testing):
 ```env
 AUTH_LOCAL_ENABLED=true
 AUTH_GOOGLE_ENABLED=true
+MENU_RISTORANTE_ENABLED=true
+MENU_RISTORANTE_VISIBLE=true
+MENU_ADMIN_ENABLED=true
+MENU_ADMIN_VISIBLE=true
+MENU_ANALYTICS_ENABLED=true
+MENU_ANALYTICS_VISIBLE=true
 ```
 
-**Produzione** (solo Google OAuth per sicurezza):
+**Produzione** (solo funzionalità della prima release):
 ```env
 AUTH_LOCAL_ENABLED=false
 AUTH_GOOGLE_ENABLED=true
+MENU_RISTORANTE_ENABLED=true
+MENU_RISTORANTE_VISIBLE=true
+MENU_ADMIN_ENABLED=true
+MENU_ADMIN_VISIBLE=true
+MENU_ANALYTICS_ENABLED=false
+MENU_ANALYTICS_VISIBLE=false
 ```
 
 ### Installazione

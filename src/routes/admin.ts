@@ -6,6 +6,7 @@ import { uiIcons } from '../config/uiIcons';
 import { prisma } from '../app';
 import { utentiTableData } from '../config/sectionTableData';
 import { isAdmin } from '../middlewares/auth';
+import { checkMenuAccess, requireEnabledMenus } from '../middlewares/menuAccess';
 import { userFormData } from '../config/sectionFormData';
 import { scriptManager } from '../config/scriptManager';
 import { actionNavConfigs } from '../config/actionNavConfig';
@@ -13,6 +14,12 @@ import { getDetailViewConfig } from '../config/detailViewConfig';
 import { PasswordUtils } from '../utils/passwordUtils';
 
 const router = express.Router();
+
+// Middleware per verificare che almeno un menu sia abilitato
+router.use(requireEnabledMenus);
+
+// Middleware per verificare l'accesso al menu admin
+router.use(checkMenuAccess('admin'));
 
 // Tutte le route admin richiedono autenticazione e ruolo admin
 router.use(isAdmin);

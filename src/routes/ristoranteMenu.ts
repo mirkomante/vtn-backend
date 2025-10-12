@@ -8,6 +8,7 @@ import { uiIcons } from '../config/uiIcons';
 import { elementiCancellatiTableData, serviziTableData, piattiTableData, menuFissiTableData, viniTableData, birreTableData, liquoriTableData, cocktailsTableData, bevandeTableData } from '../config/sectionTableData';
 import { getCountText } from '../config/pluralHelper';
 import { isAuthenticated } from '../middlewares/auth';
+import { checkMenuAccess, requireEnabledMenus } from '../middlewares/menuAccess';
 import { 
   allergeniConfig, 
   categoriaMenuFissoConfig, 
@@ -75,6 +76,12 @@ import {
 const prisma = new PrismaClient();
 
 const router = express.Router();
+
+// Middleware per verificare che almeno un menu sia abilitato
+router.use(requireEnabledMenus);
+
+// Middleware per verificare l'accesso al menu ristorante
+router.use(checkMenuAccess('ristorante'));
 
 // Middleware per tutte le route del ristorante menu
 router.use(isAuthenticated);

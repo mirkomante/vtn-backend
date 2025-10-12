@@ -4,8 +4,12 @@ import { sectionMenuItems } from '../config/sectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
 import { scriptManager } from '../config/scriptManager';
 import { isAuthenticated } from '../middlewares/auth';
+import { requireEnabledMenus } from '../middlewares/menuAccess';
 
 const router = express.Router();
+
+// Middleware per verificare che almeno un menu sia abilitato
+router.use(requireEnabledMenus);
 
 // Tutte le route richiedono autenticazione
 router.use(isAuthenticated);
