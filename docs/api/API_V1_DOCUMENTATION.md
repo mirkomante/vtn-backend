@@ -68,6 +68,10 @@ L'API implementa rate limiting per proteggere contro abusi:
 
 Lista tutti i piatti attivi del ristorante.
 
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico
+
 **Parametri**: Nessuno
 
 **Risposta**:
@@ -111,6 +115,10 @@ Lista tutti i piatti attivi del ristorante.
 
 Dettagli di un piatto specifico.
 
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Restituisce 404 se il piatto è solo per menu fissi
+
 **Parametri**:
 - `id` (path): UUID del piatto
 
@@ -119,6 +127,10 @@ Dettagli di un piatto specifico.
 ### `GET /api/v1/piatti/categoria/:categoriaId`
 
 Piatti di una categoria specifica.
+
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico della categoria
 
 **Parametri**:
 - `categoriaId` (path): UUID della categoria
@@ -129,6 +141,10 @@ Piatti di una categoria specifica.
 
 Piatti che contengono un allergene specifico.
 
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico che contengono l'allergene
+
 **Parametri**:
 - `allergeneId` (path): UUID dell'allergene
 
@@ -137,6 +153,10 @@ Piatti che contengono un allergene specifico.
 ### `GET /api/v1/piatti/categorie`
 
 Piatti raggruppati per categorie nell'ordine di creazione.
+
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico
 
 **Parametri**: Nessuno
 
@@ -178,6 +198,10 @@ Piatti raggruppati per categorie nell'ordine di creazione.
 
 Piatti raggruppati per categorie con ordine personalizzato.
 
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico
+
 **Parametri Query**:
 - `categorie` (required): Lista di UUID delle categorie separate da virgola
 
@@ -201,6 +225,10 @@ GET /api/v1/piatti/categorie/ordine?categorie=uuid-1,uuid-2,uuid-3
 ### `GET /api/v1/piatti/categorie/filtro`
 
 Piatti raggruppati per categorie con filtri avanzati.
+
+**Comportamento**: 
+- Esclude automaticamente i piatti con `soloMenuFissi = true`
+- Include solo i piatti visibili nel menu pubblico
 
 **Parametri Query**:
 - `escludi` (optional): Lista di UUID delle categorie da escludere
@@ -240,6 +268,73 @@ GET /api/v1/piatti/categorie/filtro?escludi=uuid-dolci&ordine=nome
   }
 }
 ```
+
+---
+
+## 🔒 Gestione Piatti "Solo Menu Fissi"
+
+### Panoramica
+
+Il sistema supporta due tipi di piatti:
+- **Piatti Pubblici**: Visibili in tutti gli endpoint API e nel menu pubblico
+- **Piatti Solo Menu Fissi**: Visibili solo nei form di gestione menu fissi
+
+### Comportamento degli Endpoint
+
+#### Endpoint Piatti Pubblici
+Tutti gli endpoint `/api/v1/piatti/*` escludono automaticamente i piatti con `soloMenuFissi = true`:
+
+```json
+// Query automatica applicata
+{
+  "where": {
+    "deletedAt": null,
+    "inLista": true,
+    "soloMenuFissi": false  // ← Esclusione automatica
+  }
+}
+```
+
+#### Endpoint Menu Fissi
+Gli endpoint `/api/v1/menu-fisso/*` includono TUTTI i piatti (sia pubblici che solo per menu fissi):
+
+```json
+// Query per menu fissi
+{
+  "where": {
+    "deletedAt": null,
+    "inLista": true
+    // ← Nessuna esclusione per soloMenuFissi
+  }
+}
+```
+
+### Esempi Pratici
+
+#### Scenario 1: Menu Pubblico
+```javascript
+// Recupera menu pubblico (esclude piatti solo per menu fissi)
+const response = await fetch('/api/v1/piatti/categorie');
+const menuPubblico = await response.json();
+
+// Risultato: Solo piatti con soloMenuFissi = false
+```
+
+#### Scenario 2: Gestione Menu Fissi
+```javascript
+// Recupera tutti i piatti per creare un menu fisso
+const response = await fetch('/api/v1/menu-fisso');
+const menuFissi = await response.json();
+
+// Risultato: Include sia piatti pubblici che solo per menu fissi
+```
+
+### Vantaggi
+
+1. **Separazione Chiara**: Distinzione netta tra menu pubblico e menu fissi
+2. **Flessibilità**: I menu fissi possono includere piatti speciali non disponibili al pubblico
+3. **Sicurezza**: I piatti solo per menu fissi non sono esposti pubblicamente
+4. **Gestione Semplificata**: Nessun filtro manuale necessario
 
 ---
 
@@ -341,13 +436,19 @@ Menu fissi di una categoria con allergeni unici dei piatti.
           "id": "uuid-piatto-1",
           "nome": "Spaghetti Carbonara",
           "descrizione": "Pasta con uova e pancetta",
-          "prezzo": "12.00"
+          "prezzo": "12.00",
+          "glutenFree": false,
+          "noLatticini": false,
+          "vegan": false
         },
         {
           "id": "uuid-piatto-2",
           "nome": "Saltimbocca alla Romana",
           "descrizione": "Vitello con prosciutto e salvia",
-          "prezzo": "18.00"
+          "prezzo": "18.00",
+          "glutenFree": true,
+          "noLatticini": false,
+          "vegan": false
         }
       ],
       "allergeni": [
@@ -830,6 +931,13 @@ function validateApiResponse(data) {
 ---
 
 ## Changelog
+
+### v1.1.0 (2024-01-15)
+- ✅ **Nuovo**: Campo `soloMenuFissi` per piatti
+- ✅ **Modificato**: Endpoint piatti escludono automaticamente piatti solo per menu fissi
+- ✅ **Migliorato**: Separazione chiara tra menu pubblico e menu fissi
+- ✅ **Aggiunto**: Documentazione completa per gestione piatti "solo menu fissi"
+- ✅ **Mantenuto**: Compatibilità totale con sistema esistente
 
 ### v1.0.0 (2024-01-01)
 - ✅ Endpoint piatti completi

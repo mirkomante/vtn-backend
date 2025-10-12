@@ -105,6 +105,7 @@ export const menuFissoFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutti i menu selezionati',
       bulkRequired: false
@@ -144,6 +145,9 @@ export const menuFissoFormData: FormDataSchema = {
           } else {
             value = menuFisso[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         if (isBulkEdit && !field.bulkEditable) {

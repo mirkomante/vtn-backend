@@ -39,7 +39,8 @@ export const piattiValidation = {
     query('sortOrder').optional().isIn(['asc', 'desc']).withMessage('SortOrder deve essere asc o desc'),
     query('categoriaId').optional().isUUID().withMessage('CategoriaId deve essere un UUID valido'),
     query('allergeneId').optional().isUUID().withMessage('AllergeneId deve essere un UUID valido'),
-    query('inLista').optional().isBoolean().withMessage('InLista deve essere un valore booleano')
+    query('inLista').optional().isBoolean().withMessage('InLista deve essere un valore booleano'),
+    query('soloMenuFissi').optional().isBoolean().withMessage('SoloMenuFissi deve essere un valore booleano')
   ],
   
   // GET /api/v1/piatti/:id - Dettagli piatto

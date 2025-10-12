@@ -29,6 +29,14 @@ Guide e documentazione di riferimento per sviluppatori.
 - **[Database Schema](./guides/database-schema.md)** - Schema completo del database
 - **[Standard Messages](./guides/standard-messages.md)** - Messaggi standardizzati del sistema
 
+### 📋 [Changelog](./CHANGELOG.md)
+Registro delle modifiche e aggiornamenti del sistema.
+
+- **Versioni**: Storia completa delle release
+- **Breaking Changes**: Modifiche che richiedono attenzione
+- **Nuove Funzionalità**: Descrizione dettagliata delle nuove feature
+- **Guide di Migrazione**: Istruzioni per aggiornamenti
+
 ## 🎯 Come Usare Questa Documentazione
 
 ### Per Sviluppatori
@@ -65,5 +73,13 @@ Per aggiornamenti manuali, modifica i file nella cartella appropriata e aggiorna
 
 ---
 
-**Ultimo aggiornamento**: $(date +"%Y-%m-%d")  
-**Versione**: 1.0.0
+**Ultimo aggiornamento**: 2024-01-15  
+**Versione**: 1.1.0
+
+### 🆕 Novità in v1.1.0
+- **Campo "Solo Menu Fissi"** per piatti
+- **Separazione automatica** tra menu pubblico e menu fissi
+- **Miglioramenti di sicurezza** e performance
+- **Documentazione aggiornata** con esempi pratici
+
+Vedi [Changelog](./CHANGELOG.md) per dettagli completi.

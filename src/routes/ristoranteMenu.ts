@@ -629,7 +629,8 @@ router.get('/piatti', async (req, res) => {
     
     // Costruisci la clausola WHERE
     const whereClause: any = {
-      deletedAt: null
+      deletedAt: null,
+      soloMenuFissi: false
     };
     
     if (categoriaFilter && categoriaFilter.trim() !== '') {
@@ -795,7 +796,7 @@ router.get('/piatti/nuovo', async (req, res) => {
 // Route per creazione piatto
 router.post('/piatti/nuovo', async (req, res) => {
   try {
-    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan } = req.body;
+    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
     
     // Crea il piatto
     const piatto = await prisma.piatto.create({
@@ -807,7 +808,8 @@ router.post('/piatti/nuovo', async (req, res) => {
         inLista: inLista === 'true' || inLista === true,
         glutenFree: glutenFree === 'true' || glutenFree === true,
         noLatticini: noLatticini === 'true' || noLatticini === true,
-        vegan: vegan === 'true' || vegan === true
+        vegan: vegan === 'true' || vegan === true,
+        soloMenuFissi: soloMenuFissi === 'true' || soloMenuFissi === true
       }
     });
     
@@ -1012,7 +1014,7 @@ router.get('/piatti/modifica/:id', async (req, res) => {
 router.post('/piatti/modifica/:id', async (req, res) => {
   try {
     const piattoId = req.params.id;
-    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan } = req.body;
+    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
     
     // Verifica che il piatto esista
     const existingPiatto = await prisma.piatto.findFirst({
@@ -1037,7 +1039,8 @@ router.post('/piatti/modifica/:id', async (req, res) => {
         inLista: inLista === 'true' || inLista === true,
         glutenFree: glutenFree === 'true' || glutenFree === true,
         noLatticini: noLatticini === 'true' || noLatticini === true,
-        vegan: vegan === 'true' || vegan === true
+        vegan: vegan === 'true' || vegan === true,
+        soloMenuFissi: soloMenuFissi === 'true' || soloMenuFissi === true
       }
     });
 
@@ -6814,7 +6817,7 @@ router.post('/servizi/modifica-massa/ajax', async (req, res) => {
 
 // Route AJAX per creazione piatto
 router.post('/piatti/nuovo/ajax', async (req, res) => {
-  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan } = req.body;
+  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
   
   try {
     // Verifica se esiste già un piatto con lo stesso nome
@@ -6842,7 +6845,8 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
         inLista: inLista === 'on' || inLista === true,
         glutenFree: glutenFree === 'on' || glutenFree === true,
         noLatticini: noLatticini === 'on' || noLatticini === true,
-        vegan: vegan === 'on' || vegan === true
+        vegan: vegan === 'on' || vegan === true,
+        soloMenuFissi: soloMenuFissi === 'on' || soloMenuFissi === true
       }
     });
     
@@ -6872,7 +6876,7 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
 
 // Route AJAX per modifica piatto
 router.post('/piatti/modifica/:id/ajax', async (req, res) => {
-  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan } = req.body;
+  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
   const piattoId = req.params.id;
   
   try {
@@ -6914,7 +6918,8 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
         inLista: inLista === 'on' || inLista === true,
         glutenFree: glutenFree === 'on' || glutenFree === true,
         noLatticini: noLatticini === 'on' || noLatticini === true,
-        vegan: vegan === 'on' || vegan === true
+        vegan: vegan === 'on' || vegan === true,
+        soloMenuFissi: soloMenuFissi === 'on' || soloMenuFissi === true
       }
     });
 
@@ -6949,7 +6954,7 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
 
 // Route AJAX per modifica massiva piatti
 router.post('/piatti/modifica-massa/ajax', async (req, res) => {
-  const { itemIds, categoriaId, prezzo, inLista, glutenFree, noLatticini, vegan } = req.body;
+  const { itemIds, categoriaId, prezzo, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
   
   try {
     if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
@@ -6983,6 +6988,10 @@ router.post('/piatti/modifica-massa/ajax', async (req, res) => {
     
     if (vegan !== undefined && vegan !== null) {
       updateData.vegan = vegan === 'on' || vegan === true;
+    }
+    
+    if (soloMenuFissi !== undefined && soloMenuFissi !== null) {
+      updateData.soloMenuFissi = soloMenuFissi === 'on' || soloMenuFissi === true;
     }
 
     // Aggiorna i piatti

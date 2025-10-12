@@ -125,7 +125,7 @@ export const userFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map((field: any) => {
-        let value = '';
+        let value: any = '';
         
         // Determina il valore del campo
         if (formData && formData[field.name]) {
@@ -304,11 +304,24 @@ export const piattoFormData: FormDataSchema = {
     },
     {
       type: 'toggle',
+      name: 'soloMenuFissi',
+      id: 'soloMenuFissi',
+      label: 'Solo Menu Fissi',
+      required: false,
+      value: false,
+      defaultValue: false,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna opzione solo menu fissi per tutti i piatti selezionati',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
       name: 'inLista',
       id: 'inLista',
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutti i piatti selezionati',
       bulkRequired: false
@@ -338,7 +351,7 @@ export const piattoFormData: FormDataSchema = {
         method: isBulkEdit ? 'POST' : 'POST'
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (piatto && field.name in piatto) {
           if (field.name === 'allergeni') {
@@ -347,6 +360,9 @@ export const piattoFormData: FormDataSchema = {
           } else {
             value = piatto[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -596,6 +612,7 @@ export const vinoFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutti i vini selezionati',
       bulkRequired: false
@@ -625,7 +642,7 @@ export const vinoFormData: FormDataSchema = {
         method: isBulkEdit ? 'POST' : 'POST'
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (vino && field.name in vino) {
           if (field.name === 'tipologiaId') {
@@ -639,6 +656,9 @@ export const vinoFormData: FormDataSchema = {
           } else {
             value = vino[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -806,6 +826,7 @@ export const birraFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutte le birre selezionate',
       bulkRequired: false
@@ -835,7 +856,7 @@ export const birraFormData: FormDataSchema = {
         method: isBulkEdit ? 'POST' : 'POST'
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (birra && field.name in birra) {
           if (field.name === 'tipologiaId') {
@@ -845,6 +866,9 @@ export const birraFormData: FormDataSchema = {
           } else {
             value = birra[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -1025,6 +1049,7 @@ export const liquoreFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutti i liquori selezionati',
       bulkRequired: false
@@ -1060,7 +1085,7 @@ export const liquoreFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (liquore && field.name in liquore) {
           if (field.name === 'tipologiaId') {
@@ -1070,6 +1095,9 @@ export const liquoreFormData: FormDataSchema = {
           } else {
             value = liquore[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -1211,6 +1239,7 @@ export const cocktailFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutti i cocktails selezionati',
       bulkRequired: false
@@ -1246,7 +1275,7 @@ export const cocktailFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (cocktail && field.name in cocktail) {
           if (field.name === 'tipologiaId') {
@@ -1256,6 +1285,9 @@ export const cocktailFormData: FormDataSchema = {
           } else {
             value = cocktail[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -1397,6 +1429,7 @@ export const bevandaFormData: FormDataSchema = {
       label: 'Visibile nel menu',
       required: false,
       value: true,
+      defaultValue: true,
       bulkEditable: true,
       bulkLabel: 'Aggiorna visibilità per tutte le bevande selezionate',
       bulkRequired: false
@@ -1432,7 +1465,7 @@ export const bevandaFormData: FormDataSchema = {
         ] : undefined
       },
       fields: data.fields.map(field => {
-        let value = '';
+        let value: any = '';
         
         if (bevanda && field.name in bevanda) {
           if (field.name === 'tipologiaId') {
@@ -1442,6 +1475,9 @@ export const bevandaFormData: FormDataSchema = {
           } else {
             value = bevanda[field.name] || '';
           }
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue;
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili

@@ -237,6 +237,9 @@ router.get('/categoria/:categoriaId/dettagli', menuFissoValidation.getByCategory
                 nome: true,
                 descrizione: true,
                 prezzo: true,
+                glutenFree: true,
+                noLatticini: true,
+                vegan: true,
                 allergeni: {
                   include: {
                     allergene: {
@@ -298,7 +301,10 @@ router.get('/categoria/:categoriaId/dettagli', menuFissoValidation.getByCategory
           id: menuPiatto.piatto.id,
           nome: menuPiatto.piatto.nome,
           descrizione: menuPiatto.piatto.descrizione,
-          prezzo: menuPiatto.piatto.prezzo
+          prezzo: menuPiatto.piatto.prezzo,
+          glutenFree: menuPiatto.piatto.glutenFree,
+          noLatticini: menuPiatto.piatto.noLatticini,
+          vegan: menuPiatto.piatto.vegan
         })),
         allergeni: Array.from(allergeniUnici.values()),
         servizi: menuFisso.servizi.map(menuServizio => ({

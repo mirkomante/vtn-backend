@@ -255,7 +255,242 @@ model TipologiaBevanda {
 - Acqua
 - Energetica
 
-### 3. Modelli Bevande
+### 3. Modelli Ristorante Menu
+
+#### CategoriaPiatti
+```typescript
+model CategoriaPiatti {
+  id          String    @id @default(uuid())
+  nome        String    @unique
+  descrizione String?
+  inLista     Boolean   @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relazioni
+  piatti      Piatto[]
+
+  @@map("categoria_piatti")
+}
+```
+
+**Campi:**
+- `nome`: Nome della categoria (es. "Antipasti", "Primi Piatti")
+- `descrizione`: Descrizione opzionale della categoria
+- `inLista`: Se la categoria è visibile nel menu pubblico
+
+#### Allergene
+```typescript
+model Allergene {
+  id          String            @id @default(uuid())
+  nome        String            @unique
+  descrizione String?
+  deletedAt   DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relazioni
+  piatti      PiattoAllergene[]
+
+  @@map("allergeni")
+}
+```
+
+**Campi:**
+- `nome`: Nome dell'allergene (es. "Glutine", "Latte", "Uova")
+- `descrizione`: Descrizione opzionale dell'allergene
+
+#### Piatto
+```typescript
+model Piatto {
+  id            String   @id @default(uuid())
+  nome          String
+  descrizione   String?
+  prezzo        Decimal  @db.Decimal(10, 2)
+  inLista       Boolean  @default(true)
+  glutenFree    Boolean  @default(false)
+  noLatticini   Boolean  @default(false)
+  vegan         Boolean  @default(false)
+  soloMenuFissi Boolean  @default(false)
+  deletedAt     DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relazioni
+  categoriaId String
+  categoria   CategoriaPiatti @relation(fields: [categoriaId], references: [id])
+  
+  allergeni   PiattoAllergene[]
+  menuFissi   MenuFissoPiatto[]
+
+  @@map("piatti")
+}
+```
+
+**Campi:**
+- `nome`: Nome del piatto
+- `descrizione`: Descrizione opzionale del piatto
+- `prezzo`: Prezzo del piatto (max 10 cifre, 2 decimali)
+- `inLista`: Se il piatto è visibile nel menu pubblico
+- `glutenFree`: Se il piatto è senza glutine
+- `noLatticini`: Se il piatto non contiene latticini
+- `vegan`: Se il piatto è vegano
+- `soloMenuFissi`: Se il piatto è disponibile solo nei menu fissi (non nel menu pubblico)
+
+**Relazioni:**
+- `categoria`: Categoria del piatto (obbligatoria)
+- `allergeni`: Allergeni del piatto (molti-a-molti)
+- `menuFissi`: Menu fissi che includono questo piatto (molti-a-molti)
+
+#### PiattoAllergene
+```typescript
+model PiattoAllergene {
+  id          String    @id @default(uuid())
+  piattoId    String
+  allergeneId String
+  createdAt   DateTime  @default(now())
+  allergene   Allergene @relation(fields: [allergeneId], references: [id], onDelete: Cascade)
+  piatto      Piatto    @relation(fields: [piattoId], references: [id], onDelete: Cascade)
+
+  @@unique([piattoId, allergeneId])
+  @@map("piatto_allergene")
+}
+```
+
+**Relazioni:**
+- `piatto`: Piatto (obbligatorio)
+- `allergene`: Allergene (obbligatorio)
+
+**Vincoli:**
+- `@@unique([piattoId, allergeneId])`: Evita duplicati piatto-allergene
+
+#### ServizioAccessorio
+```typescript
+model ServizioAccessorio {
+  id          String                        @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal                       @db.Decimal(10, 2)
+  inLista     Boolean                       @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime                      @default(now())
+  updatedAt   DateTime                      @updatedAt
+
+  // Relazioni
+  menuFissi   MenuFissoServizioAccessorio[]
+
+  @@map("servizi_accessori")
+}
+```
+
+**Campi:**
+- `nome`: Nome del servizio (es. "Coperto", "Pane e Grissini")
+- `descrizione`: Descrizione opzionale del servizio
+- `prezzo`: Prezzo del servizio
+- `inLista`: Se il servizio è visibile nel menu
+
+#### CategoriaMenuFisso
+```typescript
+model CategoriaMenuFisso {
+  id          String      @id @default(uuid())
+  nome        String      @unique
+  descrizione String?
+  inLista     Boolean     @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relazioni
+  menuFissi   MenuFisso[]
+
+  @@map("categoria_menu_fisso")
+}
+```
+
+**Campi:**
+- `nome`: Nome della categoria (es. "Menu Completi", "Menu Degustazione")
+- `descrizione`: Descrizione opzionale della categoria
+- `inLista`: Se la categoria è visibile nel menu
+
+#### MenuFisso
+```typescript
+model MenuFisso {
+  id          String                        @id @default(uuid())
+  nome        String
+  descrizione String?
+  prezzo      Decimal                       @db.Decimal(10, 2)
+  inLista     Boolean                       @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime                      @default(now())
+  updatedAt   DateTime                      @updatedAt
+
+  // Relazioni
+  categoriaId String
+  categoria   CategoriaMenuFisso            @relation(fields: [categoriaId], references: [id])
+  piatti      MenuFissoPiatto[]
+  servizi     MenuFissoServizioAccessorio[]
+
+  @@map("menu_fisso")
+}
+```
+
+**Campi:**
+- `nome`: Nome del menu fisso
+- `descrizione`: Descrizione opzionale del menu
+- `prezzo`: Prezzo del menu fisso
+- `inLista`: Se il menu è visibile nel menu pubblico
+
+**Relazioni:**
+- `categoria`: Categoria del menu fisso (obbligatoria)
+- `piatti`: Piatti inclusi nel menu (molti-a-molti)
+- `servizi`: Servizi inclusi nel menu (molti-a-molti)
+
+#### MenuFissoPiatto
+```typescript
+model MenuFissoPiatto {
+  id          String    @id @default(uuid())
+  menuFissoId String
+  piattoId    String
+  createdAt   DateTime  @default(now())
+  menuFisso   MenuFisso @relation(fields: [menuFissoId], references: [id], onDelete: Cascade)
+  piatto      Piatto    @relation(fields: [piattoId], references: [id], onDelete: Cascade)
+
+  @@unique([menuFissoId, piattoId])
+  @@map("menu_fisso_piatto")
+}
+```
+
+**Relazioni:**
+- `menuFisso`: Menu fisso (obbligatorio)
+- `piatto`: Piatto (obbligatorio)
+
+**Vincoli:**
+- `@@unique([menuFissoId, piattoId])`: Evita duplicati menu-piatto
+
+#### MenuFissoServizioAccessorio
+```typescript
+model MenuFissoServizioAccessorio {
+  id                   String             @id @default(uuid())
+  menuFissoId          String
+  servizioAccessorioId String
+  createdAt            DateTime           @default(now())
+  menuFisso            MenuFisso          @relation(fields: [menuFissoId], references: [id], onDelete: Cascade)
+  servizioAccessorio   ServizioAccessorio @relation(fields: [servizioAccessorioId], references: [id], onDelete: Cascade)
+
+  @@unique([menuFissoId, servizioAccessorioId])
+  @@map("menu_fisso_servizio_accessorio")
+}
+```
+
+**Relazioni:**
+- `menuFisso`: Menu fisso (obbligatorio)
+- `servizioAccessorio`: Servizio accessorio (obbligatorio)
+
+**Vincoli:**
+- `@@unique([menuFissoId, servizioAccessorioId])`: Evita duplicati menu-servizio
+
+### 4. Modelli Bevande
 
 #### Vino
 ```typescript
@@ -446,6 +681,15 @@ Nazione (1) ──→ (N) Regione (1) ──→ (N) Zona
     └─── (N) Bevanda
 ```
 
+### Relazioni Ristorante Menu
+```
+CategoriaPiatti (1) ──→ (N) Piatto
+Allergene (1) ──→ (N) PiattoAllergene (N) ──→ (1) Piatto
+MenuFisso (1) ──→ (N) MenuFissoPiatto (N) ──→ (1) Piatto
+MenuFisso (1) ──→ (N) MenuFissoServizioAccessorio (N) ──→ (1) ServizioAccessorio
+CategoriaMenuFisso (1) ──→ (N) MenuFisso
+```
+
 ### Relazioni Tipologie
 ```
 TipologiaVino (1) ──→ (N) Vino
@@ -476,6 +720,40 @@ Tutti i modelli includono:
 ### Gestione Prezzi
 - **Vini**: Supportano prezzo bottiglia e prezzo calice
 - **Altre Bevande**: Supportano solo prezzo singolo
+
+### Gestione Piatti "Solo Menu Fissi"
+Il campo `soloMenuFissi` nel modello `Piatto` permette di distinguere tra:
+
+#### Piatti Pubblici (`soloMenuFissi = false`)
+- Visibili in tutti gli endpoint API pubblici
+- Inclusi nel menu pubblico del ristorante
+- Accessibili tramite tutti i filtri e le query
+
+#### Piatti Solo Menu Fissi (`soloMenuFissi = true`)
+- **NON** visibili negli endpoint API pubblici
+- **NON** inclusi nel menu pubblico del ristorante
+- Accessibili solo nei form di gestione menu fissi
+- Possono essere inclusi nei menu fissi insieme ai piatti pubblici
+
+#### Comportamento degli Endpoint
+```sql
+-- Query per endpoint pubblici (esclude piatti solo per menu fissi)
+SELECT * FROM piatti 
+WHERE deleted_at IS NULL 
+  AND in_lista = true 
+  AND solo_menu_fissi = false;
+
+-- Query per gestione menu fissi (include tutti i piatti)
+SELECT * FROM piatti 
+WHERE deleted_at IS NULL 
+  AND in_lista = true;
+```
+
+#### Vantaggi
+1. **Separazione Chiara**: Distinzione netta tra menu pubblico e menu fissi
+2. **Flessibilità**: I menu fissi possono includere piatti speciali non disponibili al pubblico
+3. **Sicurezza**: I piatti solo per menu fissi non sono esposti pubblicamente
+4. **Gestione Semplificata**: Nessun filtro manuale necessario negli endpoint pubblici
 
 ## Esempi di Utilizzo
 
@@ -540,6 +818,63 @@ INSERT INTO liquori (
 );
 ```
 
+### Inserimento Piatto Pubblico
+```sql
+-- Inserimento piatto visibile nel menu pubblico
+INSERT INTO piatti (
+  nome, descrizione, prezzo, in_lista, gluten_free, no_latticini, vegan, solo_menu_fissi,
+  categoria_id
+) VALUES (
+  'Spaghetti Carbonara',
+  'Pasta con uova, pancetta e pecorino romano',
+  14.00,
+  true,
+  false,
+  false,
+  false,
+  false,  -- Piatto pubblico
+  'uuid-categoria-primi'
+);
+```
+
+### Inserimento Piatto Solo Menu Fissi
+```sql
+-- Inserimento piatto disponibile solo nei menu fissi
+INSERT INTO piatti (
+  nome, descrizione, prezzo, in_lista, gluten_free, no_latticini, vegan, solo_menu_fissi,
+  categoria_id
+) VALUES (
+  'Tartufo Nero Tagliatelle',
+  'Pasta fresca con tartufo nero di Norcia e burro',
+  28.00,
+  true,
+  false,
+  false,
+  false,
+  true,   -- Solo per menu fissi
+  'uuid-categoria-primi'
+);
+```
+
+### Inserimento Menu Fisso
+```sql
+-- Inserimento menu fisso che può includere piatti pubblici e solo per menu fissi
+INSERT INTO menu_fisso (
+  nome, descrizione, prezzo, in_lista, categoria_id
+) VALUES (
+  'Menu Degustazione Chef',
+  'Menu completo con specialità del giorno',
+  45.00,
+  true,
+  'uuid-categoria-menu-degustazione'
+);
+
+-- Collegamento piatti al menu fisso (sia pubblici che solo per menu fissi)
+INSERT INTO menu_fisso_piatto (menu_fisso_id, piatto_id) VALUES
+  ('uuid-menu-degustazione', 'uuid-piatto-carbonara'),      -- Piatto pubblico
+  ('uuid-menu-degustazione', 'uuid-piatto-tartufo');       -- Piatto solo menu fissi
+```
+
 ## Query Utili
 
 ### Vini per Regione
@@ -587,6 +922,73 @@ SELECT
 FROM bevande WHERE deleted_at IS NULL;
 ```
 
+### Piatti per Categoria (Menu Pubblico)
+```sql
+-- Piatti visibili nel menu pubblico raggruppati per categoria
+SELECT 
+  c.nome as categoria,
+  p.nome as piatto,
+  p.prezzo,
+  p.gluten_free,
+  p.no_latticini,
+  p.vegan
+FROM piatti p
+JOIN categoria_piatti c ON p.categoria_id = c.id
+WHERE p.deleted_at IS NULL 
+  AND p.in_lista = true 
+  AND p.solo_menu_fissi = false  -- Solo piatti pubblici
+ORDER BY c.nome, p.nome;
+```
+
+### Piatti Solo per Menu Fissi
+```sql
+-- Piatti disponibili solo nei menu fissi
+SELECT 
+  p.nome,
+  p.descrizione,
+  p.prezzo,
+  c.nome as categoria
+FROM piatti p
+JOIN categoria_piatti c ON p.categoria_id = c.id
+WHERE p.deleted_at IS NULL 
+  AND p.in_lista = true 
+  AND p.solo_menu_fissi = true  -- Solo piatti per menu fissi
+ORDER BY c.nome, p.nome;
+```
+
+### Menu Fissi con Tutti i Piatti
+```sql
+-- Menu fissi con piatti (sia pubblici che solo per menu fissi)
+SELECT 
+  mf.nome as menu_fisso,
+  mf.prezzo as prezzo_menu,
+  p.nome as piatto,
+  p.prezzo as prezzo_piatto,
+  p.solo_menu_fissi,
+  c.nome as categoria
+FROM menu_fisso mf
+JOIN menu_fisso_piatto mfp ON mf.id = mfp.menu_fisso_id
+JOIN piatti p ON mfp.piatto_id = p.id
+JOIN categoria_piatti c ON p.categoria_id = c.id
+WHERE mf.deleted_at IS NULL 
+  AND p.deleted_at IS NULL
+ORDER BY mf.nome, c.nome, p.nome;
+```
+
+### Statistiche Piatti
+```sql
+-- Conteggio piatti per tipo
+SELECT 
+  CASE 
+    WHEN solo_menu_fissi = true THEN 'Solo Menu Fissi'
+    ELSE 'Pubblici'
+  END as tipo,
+  COUNT(*) as quantita
+FROM piatti 
+WHERE deleted_at IS NULL AND in_lista = true
+GROUP BY solo_menu_fissi;
+```
+
 ## Migrazioni
 
 ### Applicare Migrazioni
@@ -616,6 +1018,7 @@ npx prisma migrate reset
 - `20251006120450_add_cocktail_table` - Tabella cocktail
 - `20251006120652_add_bevanda_table` - Tabella bevande analcoliche
 - `20251006115843_add_grado_to_vino` - Aggiunta campo grado ai vini
+- `20250115000000_add_solo_menu_fissi_to_piatti` - Aggiunta campo soloMenuFissi ai piatti
 
 ## Considerazioni di Performance
 
@@ -623,16 +1026,20 @@ npx prisma migrate reset
 - Tutti i campi `id` sono indicizzati automaticamente (chiavi primarie)
 - Campi `deletedAt` dovrebbero essere indicizzati per query di soft delete
 - Campi `nome` con vincolo `@unique` sono automaticamente indicizzati
+- Campo `soloMenuFissi` dovrebbe essere indicizzato per query di filtraggio piatti
 
 ### Query Ottimizzate
 - Utilizzare sempre `WHERE deletedAt IS NULL` per elementi attivi
 - Utilizzare `JOIN` invece di query separate per relazioni
 - Considerare l'aggiunta di indici compositi per query frequenti
+- Per endpoint pubblici: aggiungere sempre `AND soloMenuFissi = false` per escludere piatti solo per menu fissi
+- Per gestione menu fissi: non filtrare per `soloMenuFissi` per includere tutti i piatti
 
 ### Scalabilità
-- Il sistema supporta migliaia di bevande
+- Il sistema supporta migliaia di bevande e piatti
 - Le relazioni geografiche sono ottimizzate per query gerarchiche
 - Il soft delete permette di mantenere storico senza impattare le performance
+- La separazione tra piatti pubblici e solo per menu fissi migliora le performance delle query pubbliche
 
 ## Sicurezza
 
@@ -650,3 +1057,5 @@ npx prisma migrate reset
 - Utilizzare sempre filtri `deletedAt IS NULL` per dati attivi
 - Implementare controlli di autorizzazione a livello applicativo
 - Validare input utente prima delle operazioni database
+- Per endpoint pubblici: filtrare sempre `soloMenuFissi = false` per proteggere piatti riservati
+- Per gestione menu fissi: verificare autorizzazioni prima di accedere a tutti i piatti

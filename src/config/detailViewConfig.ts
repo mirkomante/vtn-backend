@@ -463,6 +463,18 @@ export const piattiDetailViewConfig: DetailViewConfig = {
       }
     },
     {
+      name: 'soloMenuFissi',
+      label: 'Solo Menu Fissi',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Sì',
+          falseText: 'No',
+          showBadge: true
+        }
+      }
+    },
+    {
       name: 'inLista',
       label: 'Stato',
       type: 'boolean',

@@ -70,17 +70,18 @@ model Allergene {
 }
 
 model Piatto {
-  id          String   @id @default(uuid())
-  nome        String
-  descrizione String?
-  prezzo      Decimal  @db.Decimal(10, 2)
-  inLista     Boolean  @default(true)
-  glutenFree  Boolean  @default(false)
-  noLatticini Boolean  @default(false)
-  vegan       Boolean  @default(false)
-  deletedAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(uuid())
+  nome          String
+  descrizione   String?
+  prezzo        Decimal  @db.Decimal(10, 2)
+  inLista       Boolean  @default(true)
+  glutenFree    Boolean  @default(false)
+  noLatticini   Boolean  @default(false)
+  vegan         Boolean  @default(false)
+  soloMenuFissi Boolean  @default(false)
+  deletedAt     DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   // Relazioni
   categoriaId String

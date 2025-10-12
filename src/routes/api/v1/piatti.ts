@@ -7,13 +7,33 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/piatti - Lista tutti i piatti
-router.get('/', piattiValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', piattiValidation.list, handleValidationErrors, async (req, res) => {
   try {
+    // Costruisci la condizione WHERE basata sui filtri di query
+    const where: any = {
+      deletedAt: null,
+      inLista: true,
+      soloMenuFissi: false
+    };
+
+    // Filtro per categoria
+    if (req.query.categoriaId) {
+      where.categoriaId = req.query.categoriaId;
+    }
+
+    // Filtro per allergene
+    if (req.query.allergeneId) {
+      where.allergeni = {
+        some: {
+          allergeneId: req.query.allergeneId
+        }
+      };
+    }
+
+    // Nota: soloMenuFissi è sempre false per escludere i piatti solo per menu fissi
+
     const piatti = await prisma.piatto.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         categoria: {
           select: {
@@ -65,7 +85,8 @@ router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req,
     const piatto = await prisma.piatto.findFirst({
       where: {
         id: req.params.id,
-        deletedAt: null
+        deletedAt: null,
+        soloMenuFissi: false
       },
       include: {
         categoria: {
@@ -119,7 +140,8 @@ router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleVali
       where: {
         categoriaId: req.params.categoriaId,
         deletedAt: null,
-        inLista: true
+        inLista: true,
+        soloMenuFissi: false
       },
       include: {
         categoria: {
@@ -174,6 +196,7 @@ router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleVali
       where: {
         deletedAt: null,
         inLista: true,
+        soloMenuFissi: false,
         allergeni: {
           some: {
             allergeneId: req.params.allergeneId
@@ -244,7 +267,8 @@ router.get('/categorie', piattiValidation.list, handleValidationErrors, async (r
     const piatti = await prisma.piatto.findMany({
       where: {
         deletedAt: null,
-        inLista: true
+        inLista: true,
+        soloMenuFissi: false
       },
       include: {
         categoria: {
@@ -360,7 +384,8 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
           in: categoriaIdsArray
         },
         deletedAt: null,
-        inLista: true
+        inLista: true,
+        soloMenuFissi: false
       },
       include: {
         categoria: {
@@ -493,7 +518,8 @@ router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, a
           in: categoriaIds
         },
         deletedAt: null,
-        inLista: true
+        inLista: true,
+        soloMenuFissi: false
       },
       include: {
         categoria: {
