@@ -13,7 +13,7 @@ Questa cartella contiene la documentazione completa delle API e dei middleware a
 
 Per la documentazione completa degli endpoint API v1, inclusi esempi di chiamate, formati di risposta e best practices, consulta:
 
-**[API v1 - Documentazione Completa](../API_V1_DOCUMENTATION.md)**
+**[API v1 - Documentazione Completa](./API_V1_DOCUMENTATION.md)**
 
 ## 🚀 Quick Start
 

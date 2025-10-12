@@ -1270,7 +1270,7 @@ Il sistema VTN Backend fornisce un'API REST completa per l'integrazione con fron
 
 ### Documentazione Completa
 
-📋 **Per la documentazione dettagliata completa delle API v1**, inclusi esempi di chiamate, formati di risposta, codici di errore e best practices, consulta il file [API_V1_DOCUMENTATION.md](./API_V1_DOCUMENTATION.md).
+📋 **Per la documentazione dettagliata completa delle API v1**, inclusi esempi di chiamate, formati di risposta, codici di errore e best practices, consulta il file [API v1 - Documentazione Completa](./docs/api/API_V1_DOCUMENTATION.md).
 
 ## 📚 Documentazione Tecnica
 
