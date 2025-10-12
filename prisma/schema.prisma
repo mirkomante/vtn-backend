@@ -420,8 +420,8 @@ model Cocktail {
   updatedAt       DateTime @updatedAt
 
   // Relazioni geografiche
-  nazioneId       String
-  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+  nazioneId       String?
+  nazione         Nazione? @relation(fields: [nazioneId], references: [id])
 
   // Relazione tipologia
   tipologiaId     String
@@ -442,8 +442,8 @@ model Bevanda {
   updatedAt       DateTime @updatedAt
 
   // Relazioni geografiche
-  nazioneId       String
-  nazione         Nazione @relation(fields: [nazioneId], references: [id])
+  nazioneId       String?
+  nazione         Nazione? @relation(fields: [nazioneId], references: [id])
 
   // Relazione tipologia
   tipologiaId     String

@@ -55,6 +55,87 @@ router.get('/', bevandeValidation.list, handleValidationErrors, async (_req, res
   }
 });
 
+// GET /api/v1/bevande/raggruppate-per-tipologia - Bevande raggruppate per tipologia
+router.get('/raggruppate-per-tipologia', bevandeValidation.list, handleValidationErrors, async (_req, res) => {
+  try {
+    // Recupera tutte le tipologie di bevande analcoliche
+    const tipologieBevande = await prisma.tipologiaBevanda.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+
+    // Recupera tutte le bevande raggruppate per tipologia
+    const bevandePerTipologia = await Promise.all(
+      tipologieBevande.map(async (tipologia) => {
+        const bevande = await prisma.bevanda.findMany({
+          where: {
+            tipologiaId: tipologia.id,
+            deletedAt: null,
+            inLista: true
+          },
+          include: {
+            nazione: {
+              select: {
+                id: true,
+                nome: true,
+                sigla: true
+              }
+            }
+          },
+          orderBy: {
+            nome: 'asc'
+          }
+        });
+
+        return {
+          tipologia: {
+            id: tipologia.id,
+            nome: tipologia.nome,
+            descrizione: tipologia.descrizione
+          },
+          bevande: bevande.map(bevanda => ({
+            id: bevanda.id,
+            nome: bevanda.nome,
+            descrizione: bevanda.descrizione,
+            prezzo: bevanda.prezzo.toString(),
+            nazione: bevanda.nazione ? {
+              id: bevanda.nazione.id,
+              nome: bevanda.nazione.nome,
+              sigla: bevanda.nazione.sigla
+            } : null
+          }))
+        };
+      })
+    );
+
+    // Filtra le tipologie che hanno bevande
+    const tipologieConBevande = bevandePerTipologia.filter(item => item.bevande.length > 0);
+
+    res.json({
+      success: true,
+      data: tipologieConBevande,
+      meta: {
+        count: tipologieConBevande.length,
+        totalBevande: tipologieConBevande.reduce((sum, item) => sum + item.bevande.length, 0),
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero delle bevande raggruppate per tipologia:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Errore interno del server'
+      }
+    });
+  }
+});
+
 // GET /api/v1/bevande/:id - Dettagli di una bevanda specifica
 router.get('/:id', bevandeValidation.getById, handleValidationErrors, async (req, res) => {
   try {

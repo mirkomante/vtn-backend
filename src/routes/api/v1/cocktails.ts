@@ -55,6 +55,87 @@ router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req, r
   }
 });
 
+// GET /api/v1/cocktails/raggruppati-per-tipologia - Cocktails raggruppati per tipologia
+router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidationErrors, async (_req, res) => {
+  try {
+    // Recupera tutte le tipologie di cocktails
+    const tipologieCocktails = await prisma.tipologiaCocktail.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+
+    // Recupera tutti i cocktails raggruppati per tipologia
+    const cocktailsPerTipologia = await Promise.all(
+      tipologieCocktails.map(async (tipologia) => {
+        const cocktails = await prisma.cocktail.findMany({
+          where: {
+            tipologiaId: tipologia.id,
+            deletedAt: null,
+            inLista: true
+          },
+          include: {
+            nazione: {
+              select: {
+                id: true,
+                nome: true,
+                sigla: true
+              }
+            }
+          },
+          orderBy: {
+            nome: 'asc'
+          }
+        });
+
+        return {
+          tipologia: {
+            id: tipologia.id,
+            nome: tipologia.nome,
+            descrizione: tipologia.descrizione
+          },
+          cocktails: cocktails.map(cocktail => ({
+            id: cocktail.id,
+            nome: cocktail.nome,
+            descrizione: cocktail.descrizione,
+            prezzo: cocktail.prezzo.toString(),
+            nazione: cocktail.nazione ? {
+              id: cocktail.nazione.id,
+              nome: cocktail.nazione.nome,
+              sigla: cocktail.nazione.sigla
+            } : null
+          }))
+        };
+      })
+    );
+
+    // Filtra le tipologie che hanno cocktails
+    const tipologieConCocktails = cocktailsPerTipologia.filter(item => item.cocktails.length > 0);
+
+    res.json({
+      success: true,
+      data: tipologieConCocktails,
+      meta: {
+        count: tipologieConCocktails.length,
+        totalCocktails: tipologieConCocktails.reduce((sum, item) => sum + item.cocktails.length, 0),
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei cocktails raggruppati per tipologia:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Errore interno del server'
+      }
+    });
+  }
+});
+
 // GET /api/v1/cocktails/:id - Dettagli di un cocktail specifico
 router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (req, res) => {
   try {

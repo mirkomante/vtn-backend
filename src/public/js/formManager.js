@@ -460,6 +460,11 @@ class FormManager {
       return [];
     }
     
+    // Per campi select opzionali, restituisci null se il valore è vuoto
+    if (field.type === 'select' && !field.required && field.value === '') {
+      return null;
+    }
+    
     return field.value;
   }
 
@@ -598,19 +603,18 @@ class FormManager {
           }
         }
       } else {
-        // Per form normali, includi tutti i campi tranne quelli null
-        if (value !== null) {
-          if (field.name.includes('[]')) {
-            // Campo multiplo
-            if (!data[fieldName]) {
-              data[fieldName] = [];
-            }
-            if (value !== false) { // Includi solo valori true per checkbox
-              data[fieldName].push(value);
-            }
-          } else {
-            data[field.name] = value;
+        // Per form normali, includi tutti i campi
+        if (field.name.includes('[]')) {
+          // Campo multiplo
+          if (!data[fieldName]) {
+            data[fieldName] = [];
           }
+          if (value !== false) { // Includi solo valori true per checkbox
+            data[fieldName].push(value);
+          }
+        } else {
+          // Per campi singoli, includi sempre il valore (anche null)
+          data[field.name] = value;
         }
       }
     });

@@ -55,6 +55,91 @@ router.get('/', liquoriValidation.list, handleValidationErrors, async (_req, res
   }
 });
 
+// GET /api/v1/liquori/raggruppati-per-tipologia - Liquori raggruppati per tipologia
+router.get('/raggruppati-per-tipologia', liquoriValidation.list, handleValidationErrors, async (_req, res) => {
+  try {
+    // Recupera tutte le tipologie di liquori
+    const tipologieLiquori = await prisma.tipologiaLiquore.findMany({
+      where: {
+        deletedAt: null
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+
+    // Recupera tutti i liquori raggruppati per tipologia
+    const liquoriPerTipologia = await Promise.all(
+      tipologieLiquori.map(async (tipologia) => {
+        const liquori = await prisma.liquore.findMany({
+          where: {
+            tipologiaId: tipologia.id,
+            deletedAt: null,
+            inLista: true
+          },
+          include: {
+            nazione: {
+              select: {
+                id: true,
+                nome: true,
+                sigla: true
+              }
+            }
+          },
+          orderBy: {
+            nome: 'asc'
+          }
+        });
+
+        return {
+          tipologia: {
+            id: tipologia.id,
+            nome: tipologia.nome,
+            descrizione: tipologia.descrizione
+          },
+          liquori: liquori.map(liquore => ({
+            id: liquore.id,
+            nome: liquore.nome,
+            descrizione: liquore.descrizione,
+            grado: liquore.grado,
+            invecchiamento: liquore.invecchiamento,
+            capacita: liquore.capacita,
+            prezzo: liquore.prezzo.toString(),
+            inLista: liquore.inLista,
+            nazione: liquore.nazione ? {
+              id: liquore.nazione.id,
+              nome: liquore.nazione.nome,
+              sigla: liquore.nazione.sigla
+            } : null
+          }))
+        };
+      })
+    );
+
+    // Filtra le tipologie che hanno liquori
+    const tipologieConLiquori = liquoriPerTipologia.filter(item => item.liquori.length > 0);
+
+    res.json({
+      success: true,
+      data: tipologieConLiquori,
+      meta: {
+        count: tipologieConLiquori.length,
+        totalLiquori: tipologieConLiquori.reduce((sum, item) => sum + item.liquori.length, 0),
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei liquori raggruppati per tipologia:', error);
+    res.status(500).json({
+      success: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Errore interno del server'
+      }
+    });
+  }
+});
+
 // GET /api/v1/liquori/:id - Dettagli di un liquore specifico
 router.get('/:id', liquoriValidation.getById, handleValidationErrors, async (req, res) => {
   try {
