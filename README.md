@@ -39,7 +39,10 @@ vtn-backend/
 │   └── server.ts        # Entry point
 ├── prisma/              # Schema database e migrazioni
 ├── dist/                # Build TypeScript
-└── docs/                # Documentazione
+├── docs/                # Documentazione centralizzata
+│   ├── api/             # Documentazione API e middleware
+│   ├── systems/         # Documentazione sistemi e componenti
+│   └── guides/          # Guide e riferimenti per sviluppatori
 ```
 
 ## Sistema di Form Unificato
@@ -112,7 +115,7 @@ Il database utilizza PostgreSQL con Prisma ORM e include:
 - **Relazioni Flessibili**: Struttura ottimizzata per query efficienti
 
 ### Documentazione Completa
-📋 **Per una documentazione dettagliata completa del database**, inclusi tutti i modelli, campi, relazioni ed esempi di utilizzo, consulta il file [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md).
+📋 **Per una documentazione dettagliata completa del database**, inclusi tutti i modelli, campi, relazioni ed esempi di utilizzo, consulta il file [DATABASE_SCHEMA.md](./docs/guides/database-schema.md).
 
 ### Migrazioni
 ```bash
@@ -1268,6 +1271,30 @@ Il sistema VTN Backend fornisce un'API REST completa per l'integrazione con fron
 ### Documentazione Completa
 
 📋 **Per la documentazione dettagliata completa delle API v1**, inclusi esempi di chiamate, formati di risposta, codici di errore e best practices, consulta il file [API_V1_DOCUMENTATION.md](./API_V1_DOCUMENTATION.md).
+
+## 📚 Documentazione Tecnica
+
+Tutta la documentazione tecnica è stata centralizzata nella cartella `docs/` per facilitare la navigazione e la manutenzione:
+
+### 🔌 [API Documentation](./docs/api/)
+- **[Rate Limiting](./docs/api/rate-limiting.md)** - Sistema di limitazione delle richieste
+- **[Response Format](./docs/api/response-format.md)** - Formato standardizzato delle risposte JSON
+- **[Error Handling](./docs/api/error-handling.md)** - Gestione centralizzata degli errori
+- **[Validation](./docs/api/validation.md)** - Sistema di validazione dei parametri
+
+### ⚙️ [Systems Documentation](./docs/systems/)
+- **[Toast System](./docs/systems/toast-system.md)** - Sistema di notifiche toast
+- **[Form Manager](./docs/systems/form-manager.md)** - Gestione unificata dei form
+- **[Pagination](./docs/systems/pagination.md)** - Sistema di paginazione per tabelle
+- **[Script Management](./docs/systems/script-management.md)** - Gestione centralizzata degli script JavaScript
+- **[Detail Views](./docs/systems/detail-views.md)** - Sistema di viste in dettaglio centralizzate
+- **[Logging](./docs/systems/logging.md)** - Sistema di logging avanzato
+
+### 📖 [Guides](./docs/guides/)
+- **[Database Schema](./docs/guides/database-schema.md)** - Schema completo del database
+- **[Standard Messages](./docs/guides/standard-messages.md)** - Messaggi standardizzati del sistema
+
+Per una panoramica completa della documentazione, consulta il [README della documentazione](./docs/README.md).
 
 ### Autenticazione Web
 - `GET /auth/google` - Login Google OAuth
