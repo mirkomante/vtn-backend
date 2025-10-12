@@ -7,6 +7,7 @@ import liquoriRoutes from './liquori';
 import cocktailsRoutes from './cocktails';
 import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
+import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import { apiRateLimiter, healthCheckRateLimiter } from '../../../middlewares/api/rateLimiter';
 import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
 import { validationLogger } from '../../../middlewares/api/validation';
@@ -46,6 +47,7 @@ router.use('/liquori', liquoriRoutes);
 router.use('/cocktails', cocktailsRoutes);
 router.use('/bevande', bevandeRoutes);
 router.use('/servizi', serviziRoutes);
+router.use('/categoria-menu-fisso', categoriaMenuFissoRoutes);
 
 // Endpoint di health check per l'API v1 (con rate limiting specifico)
 router.get('/health', healthCheckRateLimiter, (req, res) => {

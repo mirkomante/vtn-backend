@@ -29,6 +29,23 @@ export const menuFissoValidation = {
   ]
 };
 
+// Validazione per endpoint Categorie Menu Fisso
+export const categoriaMenuFissoValidation = {
+  // GET /api/v1/categoria-menu-fisso - Lista categorie menu fisso
+  list: [
+    query('page').optional().isInt({ min: 1 }).withMessage('Page deve essere un numero >= 1'),
+    query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('Limit deve essere tra 1 e 100'),
+    query('sortBy').optional().isIn(['nome', 'createdAt']).withMessage('SortBy non valido'),
+    query('sortOrder').optional().isIn(['asc', 'desc']).withMessage('SortOrder deve essere asc o desc'),
+    query('inLista').optional().isBoolean().withMessage('InLista deve essere un valore booleano')
+  ],
+  
+  // GET /api/v1/categoria-menu-fisso/:id - Dettagli categoria menu fisso
+  getById: [
+    param('id').isUUID().withMessage('ID deve essere un UUID valido')
+  ]
+};
+
 // Validazione per endpoint Piatti
 export const piattiValidation = {
   // GET /api/v1/piatti - Lista piatti

@@ -1182,6 +1182,107 @@ Bevande analcoliche di una tipologia specifica.
 
 ---
 
+## 🏷️ Endpoint Categorie Menu Fisso
+
+### `GET /api/v1/categoria-menu-fisso`
+
+Lista tutte le categorie menu fisso attive.
+
+**Parametri Query**:
+- `page` (optional): Numero di pagina (default: 1)
+- `limit` (optional): Elementi per pagina (default: 20, max: 100)
+- `sortBy` (optional): Campo di ordinamento (`nome`, `createdAt`)
+- `sortOrder` (optional): Ordine (`asc`, `desc`)
+- `inLista` (optional): Filtro per stato attivo (true/false)
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-categoria-1",
+      "nome": "Menu Completi",
+      "descrizione": "Menu fissi completi con antipasto, primo e secondo",
+      "inLista": true,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "menuFissiCount": 5
+    },
+    {
+      "id": "uuid-categoria-2",
+      "nome": "Menu Degustazione",
+      "descrizione": "Menu di degustazione con portate multiple",
+      "inLista": true,
+      "createdAt": "2024-01-02T00:00:00.000Z",
+      "updatedAt": "2024-01-02T00:00:00.000Z",
+      "menuFissiCount": 3
+    }
+  ],
+  "meta": {
+    "count": 2,
+    "totalCount": 2,
+    "page": 1,
+    "limit": 20,
+    "totalPages": 1,
+    "sortBy": "nome",
+    "sortOrder": "asc",
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+### `GET /api/v1/categoria-menu-fisso/:id`
+
+Dettagli di una categoria menu fisso specifica con i menu fissi associati.
+
+**Parametri**:
+- `id` (path): UUID della categoria
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": "uuid-categoria-1",
+    "nome": "Menu Completi",
+    "descrizione": "Menu fissi completi con antipasto, primo e secondo",
+    "inLista": true,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "menuFissi": [
+      {
+        "id": "uuid-menu-1",
+        "nome": "Menu della Casa",
+        "descrizione": "Menu completo con antipasto, primo e secondo",
+        "prezzo": "25.00",
+        "createdAt": "2024-01-01T00:00:00.000Z",
+        "updatedAt": "2024-01-01T00:00:00.000Z"
+      },
+      {
+        "id": "uuid-menu-2",
+        "nome": "Menu Vegetariano",
+        "descrizione": "Menu completo per vegetariani",
+        "prezzo": "22.00",
+        "createdAt": "2024-01-02T00:00:00.000Z",
+        "updatedAt": "2024-01-02T00:00:00.000Z"
+      }
+    ],
+    "menuFissiCount": 2
+  },
+  "meta": {
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+**Errori**:
+- `404 NOT_FOUND`: Categoria non trovata o eliminata
+- `400 BAD_REQUEST`: Parametri di validazione non validi
+- `500 INTERNAL_ERROR`: Errore interno del server
+
+---
+
 ## ⚙️ Endpoint Servizi
 
 ### `GET /api/v1/servizi`
@@ -1516,6 +1617,38 @@ function validateApiResponse(data) {
 - ✅ Rate limiting
 - ✅ Gestione errori standardizzata
 - ✅ Health check endpoint
+
+---
+
+## Esempi di Utilizzo
+
+### Categorie Menu Fisso
+
+```javascript
+// Recupera tutte le categorie menu fisso
+const response = await fetch('/api/v1/categoria-menu-fisso');
+const data = await response.json();
+
+// Stampa le categorie
+data.data.forEach(categoria => {
+  console.log(`\n=== ${categoria.nome} ===`);
+  console.log(`Descrizione: ${categoria.descrizione || 'Nessuna descrizione'}`);
+  console.log(`Menu fissi disponibili: ${categoria.menuFissiCount}`);
+});
+
+// Recupera dettagli di una categoria specifica
+const categoriaId = 'uuid-categoria-1';
+const dettagliResponse = await fetch(`/api/v1/categoria-menu-fisso/${categoriaId}`);
+const dettagliData = await dettagliResponse.json();
+
+console.log(`\n=== Dettagli ${dettagliData.data.nome} ===`);
+dettagliData.data.menuFissi.forEach(menu => {
+  console.log(`- ${menu.nome}: €${menu.prezzo}`);
+  if (menu.descrizione) {
+    console.log(`  ${menu.descrizione}`);
+  }
+});
+```
 
 ---
 
