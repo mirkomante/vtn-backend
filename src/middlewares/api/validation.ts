@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult, ValidationChain } from 'express-validator';
+const { validationResult, ValidationChain } = require('express-validator');
 
 /**
  * Middleware per gestire i risultati della validazione
@@ -14,7 +14,7 @@ export const handleValidationErrors = (req: Request, res: Response, next: NextFu
       error: {
         code: 'VALIDATION_ERROR',
         message: 'Dati di input non validi',
-        details: errors.array().map(error => ({
+        details: errors.array().map((error: any) => ({
           field: error.type === 'field' ? error.path : 'unknown',
           message: error.msg,
           value: error.type === 'field' ? error.value : undefined

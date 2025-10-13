@@ -110,7 +110,7 @@ export function handlePaginationResponse(
  * Helper per creare query Prisma con paginazione
  */
 export function createPaginatedQuery(
-  model: any,
+  _model: any,
   where: any = {},
   orderBy: any = {},
   paginationConfig: PaginationConfig
@@ -127,7 +127,7 @@ export function createPaginatedQuery(
  * Helper per contare elementi con filtri
  */
 export function createCountQuery(
-  model: any,
+  _model: any,
   where: any = {}
 ) {
   return {

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { cocktailsValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/cocktails - Lista tutti i cocktails
-router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req: Request, res: Response) => {
   try {
     const cocktails = await prisma.cocktail.findMany({
       where: {
@@ -72,7 +72,7 @@ router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req, r
 });
 
 // GET /api/v1/cocktails/raggruppati-per-tipologia - Cocktails raggruppati per tipologia
-router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidationErrors, async (_req: Request, res: Response) => {
   try {
     // Recupera tutte le tipologie di cocktails
     const tipologieCocktails = await prisma.tipologiaCocktail.findMany({
@@ -153,7 +153,7 @@ router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidat
 });
 
 // GET /api/v1/cocktails/:id - Dettagli di un cocktail specifico
-router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const cocktail = await prisma.cocktail.findFirst({
       where: {
@@ -218,7 +218,7 @@ router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (r
 });
 
 // GET /api/v1/cocktails/nazione/:nazioneId - Cocktails per nazione
-router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidationErrors, async (req, res) => {
+router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const cocktails = await prisma.cocktail.findMany({
       where: {
@@ -285,7 +285,7 @@ router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidat
 });
 
 // GET /api/v1/cocktails/tipologia/:tipologiaId - Cocktails per tipologia
-router.get('/tipologia/:tipologiaId', cocktailsValidation.getByType, handleValidationErrors, async (req, res) => {
+router.get('/tipologia/:tipologiaId', cocktailsValidation.getByType, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const cocktails = await prisma.cocktail.findMany({
       where: {

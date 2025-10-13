@@ -1,4 +1,4 @@
-import { FormDataSchema } from "./sectionFormSchema";
+import { FormDataSchema, FormField } from "./sectionFormSchema";
 
 export const userFormData: FormDataSchema = {
   formConfig: {
@@ -107,7 +107,7 @@ export const userFormData: FormDataSchema = {
     requireAtLeastOneField: true, // Almeno un campo deve essere compilato
     allowPartialUpdates: true // Permette aggiornamenti parziali
   },
-  getFormData: (data: any, isEdit: boolean = false, user?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+  getFormData: (data: any, isEdit: boolean = false, user?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -124,7 +124,7 @@ export const userFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         // Determina il valore del campo
@@ -177,7 +177,7 @@ export const userFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -338,7 +338,7 @@ export const piattoFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, piatto?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, piatto?: any, __formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -402,7 +402,7 @@ export const piattoFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -629,7 +629,7 @@ export const vinoFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, vino?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, vino?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -698,7 +698,7 @@ export const vinoFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -843,7 +843,7 @@ export const birraFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, birra?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, birra?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -908,7 +908,7 @@ export const birraFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1066,7 +1066,7 @@ export const liquoreFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, liquore?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, liquore?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -1137,7 +1137,7 @@ export const liquoreFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1256,7 +1256,7 @@ export const cocktailFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, cocktail?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, cocktail?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -1327,7 +1327,7 @@ export const cocktailFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1446,7 +1446,7 @@ export const bevandaFormData: FormDataSchema = {
       classes: 'rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
     }
   },
-  getFormData: (data: FormDataSchema, isEdit: boolean = false, bevanda?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
+  getFormData: (data: FormDataSchema, isEdit: boolean = false, bevanda?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]): FormDataSchema => {
     return {
       ...data,
       formConfig: {
@@ -1517,7 +1517,7 @@ export const bevandaFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {

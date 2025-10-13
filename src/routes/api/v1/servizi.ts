@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { serviziValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/servizi - Lista tutti i servizi accessori
-router.get('/', serviziValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', serviziValidation.list, handleValidationErrors, async (_req: Request, res: Response) => {
   try {
     const servizi = await prisma.servizioAccessorio.findMany({
       where: {
@@ -40,7 +40,7 @@ router.get('/', serviziValidation.list, handleValidationErrors, async (_req, res
 });
 
 // GET /api/v1/servizi/:id - Dettagli di un servizio accessorio specifico
-router.get('/:id', serviziValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', serviziValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const servizio = await prisma.servizioAccessorio.findFirst({
       where: {

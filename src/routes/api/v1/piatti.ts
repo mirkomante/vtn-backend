@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { piattiValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/piatti - Lista tutti i piatti
-router.get('/', piattiValidation.list, handleValidationErrors, async (req, res) => {
+router.get('/', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     // Costruisci la condizione WHERE basata sui filtri di query
     const where: any = {
@@ -80,7 +80,7 @@ router.get('/', piattiValidation.list, handleValidationErrors, async (req, res) 
 });
 
 // GET /api/v1/piatti/:id - Dettagli di un piatto specifico
-router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const piatto = await prisma.piatto.findFirst({
       where: {
@@ -134,7 +134,7 @@ router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req,
 });
 
 // GET /api/v1/piatti/categoria/:categoriaId - Piatti per categoria
-router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleValidationErrors, async (req, res) => {
+router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const piatti = await prisma.piatto.findMany({
       where: {
@@ -190,7 +190,7 @@ router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleVali
 });
 
 // GET /api/v1/piatti/allergene/:allergeneId - Piatti per allergene
-router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleValidationErrors, async (req, res) => {
+router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const piatti = await prisma.piatto.findMany({
       where: {
@@ -250,7 +250,7 @@ router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleVali
 });
 
 // GET /api/v1/piatti/categorie - Piatti raggruppati per categorie
-router.get('/categorie', piattiValidation.list, handleValidationErrors, async (req, res) => {
+router.get('/categorie', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     // Recupera tutte le categorie attive nell'ordine di creazione
     const categorie = await prisma.categoriaPiatti.findMany({
@@ -344,7 +344,7 @@ router.get('/categorie', piattiValidation.list, handleValidationErrors, async (r
 });
 
 // GET /api/v1/piatti/categorie/ordine - Piatti raggruppati per categorie con ordine personalizzato
-router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, async (req, res) => {
+router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     // Recupera gli ID delle categorie dall'query parameter
     const categoriaIds = req.query.categorie as string;
@@ -459,7 +459,7 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
 });
 
 // GET /api/v1/piatti/categorie/filtro - Piatti raggruppati per categorie con filtri avanzati
-router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, async (req, res) => {
+router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const { escludi, includi, ordine } = req.query;
     

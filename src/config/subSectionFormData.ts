@@ -1,4 +1,4 @@
-import { FormDataSchema } from "./sectionFormSchema";
+import { FormDataSchema, FormField } from "./sectionFormSchema";
 
 // Configurazione form per allergeni
 export const allergeneFormData: FormDataSchema = {
@@ -49,7 +49,7 @@ export const allergeneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/allergeni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/allergeni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
         
         if (formData && formData[field.name]) {
@@ -126,7 +126,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -203,7 +203,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -280,7 +280,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -357,7 +357,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -434,7 +434,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -511,7 +511,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -588,7 +588,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -665,7 +665,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -742,7 +742,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -819,7 +819,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -896,7 +896,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -973,7 +973,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1050,7 +1050,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1127,7 +1127,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1204,7 +1204,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1281,7 +1281,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1358,7 +1358,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1435,7 +1435,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1512,7 +1512,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1589,7 +1589,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1666,7 +1666,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1743,7 +1743,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1820,7 +1820,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1919,7 +1919,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -1996,7 +1996,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2073,7 +2073,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2150,7 +2150,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2227,7 +2227,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2304,7 +2304,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2381,7 +2381,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2458,7 +2458,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2535,7 +2535,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2612,7 +2612,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2689,7 +2689,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2766,7 +2766,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2843,7 +2843,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2920,7 +2920,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -2997,7 +2997,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3074,7 +3074,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3151,7 +3151,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3228,7 +3228,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3305,7 +3305,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3382,7 +3382,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3459,7 +3459,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3536,7 +3536,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3613,7 +3613,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3690,7 +3690,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3773,7 +3773,7 @@ export const regioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/regioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/regioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3850,7 +3850,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -3927,7 +3927,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4004,7 +4004,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4081,7 +4081,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4158,7 +4158,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4235,7 +4235,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4312,7 +4312,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4389,7 +4389,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4466,7 +4466,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4543,7 +4543,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4620,7 +4620,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4697,7 +4697,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4774,7 +4774,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4851,7 +4851,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -4928,7 +4928,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5005,7 +5005,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5082,7 +5082,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5159,7 +5159,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5236,7 +5236,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5313,7 +5313,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5390,7 +5390,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5467,7 +5467,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5544,7 +5544,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5643,7 +5643,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5720,7 +5720,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5797,7 +5797,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5874,7 +5874,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -5951,7 +5951,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6028,7 +6028,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6105,7 +6105,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6182,7 +6182,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6259,7 +6259,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6336,7 +6336,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6413,7 +6413,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6490,7 +6490,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6567,7 +6567,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6644,7 +6644,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6721,7 +6721,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6798,7 +6798,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6875,7 +6875,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -6952,7 +6952,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7029,7 +7029,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7106,7 +7106,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7183,7 +7183,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7260,7 +7260,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7337,7 +7337,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7414,7 +7414,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7514,7 +7514,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
         
         // Determina il valore del campo
@@ -7541,7 +7541,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -7625,7 +7625,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7702,7 +7702,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7779,7 +7779,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7856,7 +7856,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -7933,7 +7933,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8010,7 +8010,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8087,7 +8087,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8164,7 +8164,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8241,7 +8241,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8318,7 +8318,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8395,7 +8395,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8472,7 +8472,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8549,7 +8549,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8626,7 +8626,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8703,7 +8703,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8780,7 +8780,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8857,7 +8857,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -8934,7 +8934,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9011,7 +9011,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9088,7 +9088,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9165,7 +9165,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9242,7 +9242,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9319,7 +9319,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9418,7 +9418,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9495,7 +9495,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9572,7 +9572,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9649,7 +9649,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9726,7 +9726,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9803,7 +9803,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9880,7 +9880,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -9957,7 +9957,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10034,7 +10034,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10111,7 +10111,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10188,7 +10188,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10265,7 +10265,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10342,7 +10342,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10419,7 +10419,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10496,7 +10496,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10573,7 +10573,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10650,7 +10650,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10727,7 +10727,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10804,7 +10804,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10881,7 +10881,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -10958,7 +10958,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11035,7 +11035,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11112,7 +11112,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11189,7 +11189,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11272,7 +11272,7 @@ export const regioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/regioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/regioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11349,7 +11349,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11426,7 +11426,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11503,7 +11503,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11580,7 +11580,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11657,7 +11657,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11734,7 +11734,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11811,7 +11811,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11888,7 +11888,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -11965,7 +11965,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12042,7 +12042,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12119,7 +12119,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12196,7 +12196,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12273,7 +12273,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12350,7 +12350,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12427,7 +12427,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12504,7 +12504,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12581,7 +12581,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12658,7 +12658,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12735,7 +12735,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12812,7 +12812,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12889,7 +12889,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -12966,7 +12966,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13043,7 +13043,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13142,7 +13142,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13219,7 +13219,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13296,7 +13296,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13373,7 +13373,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13450,7 +13450,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13527,7 +13527,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13604,7 +13604,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13681,7 +13681,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13758,7 +13758,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13835,7 +13835,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13912,7 +13912,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -13989,7 +13989,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14066,7 +14066,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14143,7 +14143,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14220,7 +14220,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14297,7 +14297,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14374,7 +14374,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14451,7 +14451,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14528,7 +14528,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14605,7 +14605,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14682,7 +14682,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14759,7 +14759,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14836,7 +14836,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -14913,7 +14913,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15013,7 +15013,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
         
         // Determina il valore del campo
@@ -15040,7 +15040,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -15124,7 +15124,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15201,7 +15201,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15278,7 +15278,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15355,7 +15355,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15432,7 +15432,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15509,7 +15509,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15586,7 +15586,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15663,7 +15663,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15740,7 +15740,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15817,7 +15817,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15894,7 +15894,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -15971,7 +15971,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16048,7 +16048,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16125,7 +16125,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16202,7 +16202,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16279,7 +16279,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16356,7 +16356,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16433,7 +16433,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16510,7 +16510,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16587,7 +16587,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16664,7 +16664,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16741,7 +16741,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16818,7 +16818,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16917,7 +16917,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -16994,7 +16994,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17071,7 +17071,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17148,7 +17148,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17225,7 +17225,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17302,7 +17302,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17379,7 +17379,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17456,7 +17456,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17533,7 +17533,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17610,7 +17610,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17687,7 +17687,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17764,7 +17764,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17841,7 +17841,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17918,7 +17918,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -17995,7 +17995,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18072,7 +18072,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18149,7 +18149,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18226,7 +18226,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18303,7 +18303,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18380,7 +18380,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18457,7 +18457,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18534,7 +18534,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18611,7 +18611,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18688,7 +18688,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18771,7 +18771,7 @@ export const regioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/regioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/regioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18848,7 +18848,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -18925,7 +18925,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19002,7 +19002,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19079,7 +19079,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19156,7 +19156,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19233,7 +19233,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19310,7 +19310,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19387,7 +19387,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19464,7 +19464,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19541,7 +19541,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19618,7 +19618,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19695,7 +19695,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19772,7 +19772,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19849,7 +19849,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -19926,7 +19926,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20003,7 +20003,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20080,7 +20080,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20157,7 +20157,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20234,7 +20234,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20311,7 +20311,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20388,7 +20388,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20465,7 +20465,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20542,7 +20542,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20641,7 +20641,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20718,7 +20718,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20795,7 +20795,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20872,7 +20872,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -20949,7 +20949,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21026,7 +21026,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21103,7 +21103,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21180,7 +21180,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21257,7 +21257,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21334,7 +21334,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21411,7 +21411,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21488,7 +21488,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21565,7 +21565,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21642,7 +21642,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21719,7 +21719,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21796,7 +21796,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21873,7 +21873,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -21950,7 +21950,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22027,7 +22027,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22104,7 +22104,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22181,7 +22181,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22258,7 +22258,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22335,7 +22335,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22412,7 +22412,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22490,7 +22490,7 @@ export const nazioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/nazioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/nazioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
         
         if (formData && formData[field.name]) {
@@ -22567,7 +22567,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22644,7 +22644,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22721,7 +22721,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22798,7 +22798,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22875,7 +22875,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -22952,7 +22952,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23029,7 +23029,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23106,7 +23106,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23183,7 +23183,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23260,7 +23260,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23337,7 +23337,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23414,7 +23414,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23491,7 +23491,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23568,7 +23568,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23645,7 +23645,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23722,7 +23722,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23799,7 +23799,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23876,7 +23876,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -23953,7 +23953,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24030,7 +24030,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24107,7 +24107,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24184,7 +24184,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24261,7 +24261,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24360,7 +24360,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24437,7 +24437,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24514,7 +24514,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24591,7 +24591,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24668,7 +24668,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24745,7 +24745,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24822,7 +24822,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24899,7 +24899,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -24976,7 +24976,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25053,7 +25053,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25130,7 +25130,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25207,7 +25207,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25284,7 +25284,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25361,7 +25361,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25438,7 +25438,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25515,7 +25515,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25592,7 +25592,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25669,7 +25669,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25746,7 +25746,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25823,7 +25823,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25900,7 +25900,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -25977,7 +25977,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26054,7 +26054,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26131,7 +26131,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26214,7 +26214,7 @@ export const regioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/regioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/regioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26291,7 +26291,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26368,7 +26368,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26445,7 +26445,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26522,7 +26522,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26599,7 +26599,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26676,7 +26676,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26753,7 +26753,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26830,7 +26830,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26907,7 +26907,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -26984,7 +26984,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27061,7 +27061,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27138,7 +27138,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27215,7 +27215,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27292,7 +27292,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27369,7 +27369,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27446,7 +27446,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27523,7 +27523,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27600,7 +27600,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27677,7 +27677,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27754,7 +27754,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27831,7 +27831,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27908,7 +27908,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -27985,7 +27985,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28084,7 +28084,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28161,7 +28161,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28238,7 +28238,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28315,7 +28315,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28392,7 +28392,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28469,7 +28469,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28546,7 +28546,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28623,7 +28623,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28700,7 +28700,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28777,7 +28777,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28854,7 +28854,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -28931,7 +28931,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29008,7 +29008,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29085,7 +29085,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29162,7 +29162,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29239,7 +29239,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29316,7 +29316,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29393,7 +29393,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29470,7 +29470,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29547,7 +29547,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29624,7 +29624,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29701,7 +29701,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29778,7 +29778,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29855,7 +29855,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -29972,7 +29972,7 @@ export const servizioFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
         
         // Determina il valore del campo
@@ -29999,7 +29999,7 @@ export const servizioFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter(field => field !== null),
+      }).filter((field: FormField | null) => field !== null),
       buttons: {
         ...data.buttons,
         submit: {
@@ -30079,7 +30079,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30156,7 +30156,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30233,7 +30233,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30310,7 +30310,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30387,7 +30387,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30464,7 +30464,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30541,7 +30541,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30618,7 +30618,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30695,7 +30695,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30772,7 +30772,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30849,7 +30849,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -30926,7 +30926,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31003,7 +31003,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31080,7 +31080,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31157,7 +31157,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31234,7 +31234,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31311,7 +31311,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31388,7 +31388,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31465,7 +31465,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31542,7 +31542,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31619,7 +31619,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31696,7 +31696,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31773,7 +31773,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31872,7 +31872,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -31949,7 +31949,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32026,7 +32026,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32103,7 +32103,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32180,7 +32180,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32257,7 +32257,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32334,7 +32334,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32411,7 +32411,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32488,7 +32488,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32565,7 +32565,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32642,7 +32642,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32719,7 +32719,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32796,7 +32796,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32873,7 +32873,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -32950,7 +32950,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33027,7 +33027,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33104,7 +33104,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33181,7 +33181,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33258,7 +33258,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33335,7 +33335,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33412,7 +33412,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33489,7 +33489,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33566,7 +33566,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33643,7 +33643,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33726,7 +33726,7 @@ export const regioneFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/regioni/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/regioni/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33803,7 +33803,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33880,7 +33880,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -33957,7 +33957,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34034,7 +34034,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34111,7 +34111,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34188,7 +34188,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34265,7 +34265,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34342,7 +34342,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34419,7 +34419,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34496,7 +34496,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34573,7 +34573,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34650,7 +34650,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34727,7 +34727,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34804,7 +34804,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34881,7 +34881,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -34958,7 +34958,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35035,7 +35035,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35112,7 +35112,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35189,7 +35189,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35266,7 +35266,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35343,7 +35343,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35420,7 +35420,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35497,7 +35497,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35596,7 +35596,7 @@ export const zonaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/zone/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/zone/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35673,7 +35673,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35750,7 +35750,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35827,7 +35827,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35904,7 +35904,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -35981,7 +35981,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36058,7 +36058,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36135,7 +36135,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36212,7 +36212,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36289,7 +36289,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36366,7 +36366,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36443,7 +36443,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36520,7 +36520,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-vino/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-vino/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36597,7 +36597,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36674,7 +36674,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36751,7 +36751,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
+      fields: data.fields.map((field: FormField) => {
         let value = '';
 
         if (formData && formData[field.name]) {
@@ -36828,569 +36828,10 @@ export const tipologiaCocktailFormData: FormDataSchema = {
           ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
           : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
       },
-      fields: data.fields.map((field: any) => {
-        let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-cocktail'
-        }
-      }
+      fields: data.fields,
+      buttons: data.buttons,
+      getFormData: data.getFormData
     };
   }
 };
-
-// Configurazione form per tipologie bevanda
-export const tipologiaBevandaFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax', // Route AJAX
-    id: 'tipologiaBevandaForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Bevanda',
-      required: true,
-      placeholder: 'Analcolica',
-      errorMessage: 'Il nome della tipologia bevanda è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia bevanda...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-bevanda',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-bevanda'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie birra
-export const tipologiaBirraFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax', // Route AJAX
-    id: 'tipologiaBirraForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Birra',
-      required: true,
-      placeholder: 'IPA',
-      errorMessage: 'Il nome della tipologia birra è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia birra...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-birra',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-birra/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-birra/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-birra'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie cocktail
-export const tipologiaCocktailFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax', // Route AJAX
-    id: 'tipologiaCocktailForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Cocktail',
-      required: true,
-      placeholder: 'Classico',
-      errorMessage: 'Il nome della tipologia cocktail è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia cocktail...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-cocktail',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-cocktail'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie bevanda
-export const tipologiaBevandaFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax', // Route AJAX
-    id: 'tipologiaBevandaForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Bevanda',
-      required: true,
-      placeholder: 'Analcolica',
-      errorMessage: 'Il nome della tipologia bevanda è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia bevanda...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-bevanda',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-bevanda'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie liquore
-export const tipologiaLiquoreFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax', // Route AJAX
-    id: 'tipologiaLiquoreForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Liquore',
-      required: true,
-      placeholder: 'Whisky',
-      errorMessage: 'Il nome della tipologia liquore è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia liquore...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-liquore',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-liquore/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-liquore'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie cocktail
-export const tipologiaCocktailFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax', // Route AJAX
-    id: 'tipologiaCocktailForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Cocktail',
-      required: true,
-      placeholder: 'Classico',
-      errorMessage: 'Il nome della tipologia cocktail è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia cocktail...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-cocktail',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-cocktail'
-        }
-      }
-    };
-  }
-};
-
-// Configurazione form per tipologie bevanda
-export const tipologiaBevandaFormData: FormDataSchema = {
-  formConfig: {
-    method: 'POST',
-    action: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax', // Route AJAX
-    id: 'tipologiaBevandaForm',
-    novalidate: true
-  },
-  fields: [
-    {
-      type: 'text',
-      name: 'nome',
-      id: 'nome',
-      label: 'Nome Tipologia Bevanda',
-      required: true,
-      placeholder: 'Analcolica',
-      errorMessage: 'Il nome della tipologia bevanda è obbligatorio',
-      bulkEditable: true
-    },
-    {
-      type: 'textarea',
-      name: 'descrizione',
-      id: 'descrizione',
-      label: 'Descrizione',
-      required: false,
-      placeholder: 'Descrizione dettagliata della tipologia bevanda...',
-      errorMessage: '',
-      bulkEditable: true
-    }
-  ],
-  buttons: {
-    submit: {
-      text: 'Salva',
-      classes: 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed'
-    },
-    cancel: {
-      text: 'Annulla',
-      href: '/ristorante-menu/impostazioni/tipologie-bevanda',
-      classes: 'text-sm font-semibold leading-6 text-gray-900'
-    }
-  },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
-    return {
-      formConfig: {
-        ...data.formConfig,
-        action: isEdit
-          ? `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${item?.id}/ajax` // Route AJAX
-          : '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo/ajax' // Route AJAX
-      },
-      fields: data.fields.map((field: any) => {
-        let value = '';
-
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
-        } else if (isEdit && item) {
-          value = item[field.name] || '';
-        }
-
-        return { ...field, value };
-      }),
-      buttons: {
-        ...data.buttons,
-        submit: {
-          ...data.buttons.submit,
-          text: isEdit ? 'Modifica' : 'Salva'
-        },
-        cancel: {
-          ...data.buttons.cancel,
-          href: isEdit
-            ? `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${item?.id}`
-            : '/ristorante-menu/impostazioni/tipologie-bevanda'
-        }
-      }
-    };
-  }
-}; 

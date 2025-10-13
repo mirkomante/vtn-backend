@@ -1,4 +1,4 @@
-import { body, query, param } from 'express-validator';
+const { body, query, param } = require('express-validator');
 
 /**
  * Schemi di validazione specifici per ogni endpoint API

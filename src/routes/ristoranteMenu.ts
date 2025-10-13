@@ -46,7 +46,8 @@ import {
   tipologiaBevandaFormData,
   servizioFormData
 } from '../config/subSectionFormData';
-import { createSubSectionActionNav, actionNavConfigs } from '../config/actionNavConfig';
+import { FormField } from '../config/sectionFormSchema';
+import { createSubSectionActionNav, actionNavConfigs, ActionNavAction } from '../config/actionNavConfig';
 import { scriptManager } from '../config/scriptManager';
 import { getPaginationParams, calculatePagination } from '../config/paginationHelper';
 import { 
@@ -1898,7 +1899,7 @@ router.get('/vini/nuovo', async (req, res) => {
     const formData = vinoFormData.getFormData(vinoFormData, false);
     
     // Popola le opzioni dei select
-    formData.fields = formData.fields.map(field => {
+    formData.fields = formData.fields.map((field: FormField) => {
       if (field.name === 'tipologiaId') {
         return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
       } else if (field.name === 'nazioneId') {
@@ -1989,7 +1990,7 @@ router.get('/vini/modifica/:id', async (req, res) => {
     const formData = vinoFormData.getFormData(vinoFormData, true, vino);
     
     // Popola le opzioni dei select
-    formData.fields = formData.fields.map(field => {
+    formData.fields = formData.fields.map((field: FormField) => {
       if (field.name === 'tipologiaId') {
         return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
       } else if (field.name === 'nazioneId') {
@@ -2163,7 +2164,7 @@ router.get('/vini/modifica-massa', async (req, res) => {
     const formData = vinoFormData.getFormData(vinoFormData, false, undefined, undefined, true, vini);
     
     // Popola le opzioni dei select
-    formData.fields = formData.fields.map(field => {
+    formData.fields = formData.fields.map((field: FormField) => {
       if (field.name === 'tipologiaId') {
         return { ...field, options: tipologie.map(t => ({ value: t.id, label: t.nome })) };
       } else if (field.name === 'nazioneId') {
@@ -2335,7 +2336,7 @@ router.get('/birre/nuovo', async (req, res) => {
     const formData = birraFormData.getFormData(birraFormData, false);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -2412,7 +2413,7 @@ router.get('/birre/modifica/:id', async (req, res) => {
     const formData = birraFormData.getFormData(birraFormData, true, birra);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -2571,7 +2572,7 @@ router.get('/birre/modifica-massa', async (req, res) => {
     const formData = birraFormData.getFormData(birraFormData, false, undefined, undefined, true, birre);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -7560,7 +7561,7 @@ router.get('/liquori/nuovo', async (req, res) => {
     const formData = liquoreFormData.getFormData(liquoreFormData, false);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -7635,7 +7636,7 @@ router.get('/liquori/modifica/:id', async (req, res) => {
     const formData = liquoreFormData.getFormData(liquoreFormData, true, liquore);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -7793,7 +7794,7 @@ router.get('/liquori/modifica-massa', async (req, res) => {
     const formData = liquoreFormData.getFormData(liquoreFormData, false, undefined, undefined, true, liquori);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8138,7 +8139,7 @@ router.get('/cocktails/nuovo', async (req, res) => {
     const formData = cocktailFormData.getFormData(cocktailFormData, false);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8214,7 +8215,7 @@ router.get('/cocktails/modifica/:id', async (req, res) => {
     const formData = cocktailFormData.getFormData(cocktailFormData, true, cocktail);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8289,7 +8290,7 @@ router.get('/cocktails/dettagli/:id', async (req, res) => {
     
     // Sostituisci :id nell'href del pulsante Modifica
     if (actionNavConfig.actions) {
-      actionNavConfig.actions.forEach(action => {
+      actionNavConfig.actions.forEach((action: ActionNavAction) => {
         if (action.href && action.href.includes(':id')) {
           action.href = action.href.replace(':id', cocktail.id);
         }
@@ -8370,7 +8371,7 @@ router.get('/cocktails/modifica-massa', async (req, res) => {
     const formData = cocktailFormData.getFormData(cocktailFormData, false, undefined, undefined, true, cocktails);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8712,7 +8713,7 @@ router.get('/bevande/nuovo', async (req, res) => {
     const formData = bevandaFormData.getFormData(bevandaFormData, false);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8788,7 +8789,7 @@ router.get('/bevande/modifica/:id', async (req, res) => {
     const formData = bevandaFormData.getFormData(bevandaFormData, true, bevanda);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,
@@ -8863,7 +8864,7 @@ router.get('/bevande/dettagli/:id', async (req, res) => {
     
     // Sostituisci :id nell'href del pulsante Modifica
     if (actionNavConfig.actions) {
-      actionNavConfig.actions.forEach(action => {
+      actionNavConfig.actions.forEach((action: ActionNavAction) => {
         if (action.href && action.href.includes(':id')) {
           action.href = action.href.replace(':id', bevanda.id);
         }
@@ -8944,7 +8945,7 @@ router.get('/bevande/modifica-massa', async (req, res) => {
     const formData = bevandaFormData.getFormData(bevandaFormData, false, undefined, undefined, true, bevande);
     
     // Popola le opzioni dei select
-    formData.fields.forEach(field => {
+    formData.fields.forEach((field: FormField) => {
       if (field.name === 'tipologiaId') {
         field.options = tipologie.map(tipologia => ({
           value: tipologia.id,

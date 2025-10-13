@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { categoriaMenuFissoValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/categoria-menu-fisso - Lista tutte le categorie menu fisso
-router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async (req, res) => {
+router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     // Costruisci la condizione WHERE basata sui filtri di query
     const where: any = {
@@ -91,7 +91,7 @@ router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async
 });
 
 // GET /api/v1/categoria-menu-fisso/:id - Dettagli di una categoria menu fisso specifica
-router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
   try {
     const categoria = await prisma.categoriaMenuFisso.findFirst({
       where: {

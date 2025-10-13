@@ -210,7 +210,7 @@ export const apiErrorHandler = (
   error: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   // Genera un ID univoco per la richiesta se non esiste
   const requestId = (req as any).requestId || generateRequestId();
@@ -288,7 +288,7 @@ export const apiErrorHandler = (
 /**
  * Middleware per gestire route non trovate
  */
-export const notFoundHandler = (req: Request, res: Response, next: NextFunction) => {
+export const notFoundHandler = (req: Request, res: Response, _next: NextFunction) => {
   const requestId = generateRequestId();
   (req as any).requestId = requestId;
 
