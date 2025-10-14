@@ -33,13 +33,14 @@ export const performanceLogger = (req: Request, res: Response, next: NextFunctio
         const queryDuration = Number(queryEnd - queryStart) / 1_000_000;
         
         // Log database error
+        const err = error as Error;
         DatabaseLogger.error('Database Query Error', {
           requestId: (req as any).requestId,
           operation: 'queryRaw',
           duration: queryDuration,
           url: req.originalUrl,
           method: req.method,
-          error: error.message
+          error: err.message
         });
         
         throw error;

@@ -128,8 +128,8 @@ export const userFormData: FormDataSchema = {
         let value: any = '';
         
         // Determina il valore del campo
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && user && !isBulkEdit) {
           switch (field.name) {
             case 'nome':
@@ -162,7 +162,7 @@ export const userFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -177,7 +177,7 @@ export const userFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -350,7 +350,7 @@ export const piattoFormData: FormDataSchema = {
             : '/ristorante-menu/piatti/nuovo/ajax',
         method: isBulkEdit ? 'POST' : 'POST'
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (piatto && field.name in piatto) {
@@ -367,7 +367,7 @@ export const piattoFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -402,7 +402,7 @@ export const piattoFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -415,6 +415,7 @@ export const piattoFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/piatti' 
             : isEdit 
@@ -641,7 +642,7 @@ export const vinoFormData: FormDataSchema = {
             : '/ristorante-menu/vini/nuovo/ajax',
         method: isBulkEdit ? 'POST' : 'POST'
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (vino && field.name in vino) {
@@ -663,7 +664,7 @@ export const vinoFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -698,7 +699,7 @@ export const vinoFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -711,6 +712,7 @@ export const vinoFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/vini' 
             : isEdit 
@@ -855,7 +857,7 @@ export const birraFormData: FormDataSchema = {
             : '/ristorante-menu/birre/nuovo/ajax',
         method: isBulkEdit ? 'POST' : 'POST'
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (birra && field.name in birra) {
@@ -873,7 +875,7 @@ export const birraFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -908,7 +910,7 @@ export const birraFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -921,6 +923,7 @@ export const birraFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/birre' 
             : isEdit 
@@ -1084,7 +1087,7 @@ export const liquoreFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (liquore && field.name in liquore) {
@@ -1102,7 +1105,7 @@ export const liquoreFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -1137,7 +1140,7 @@ export const liquoreFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1150,6 +1153,7 @@ export const liquoreFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/liquori' 
             : isEdit 
@@ -1274,7 +1278,7 @@ export const cocktailFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (cocktail && field.name in cocktail) {
@@ -1292,7 +1296,7 @@ export const cocktailFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -1327,7 +1331,7 @@ export const cocktailFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1340,6 +1344,7 @@ export const cocktailFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/cocktails' 
             : isEdit 
@@ -1464,7 +1469,7 @@ export const bevandaFormData: FormDataSchema = {
           }
         ] : undefined
       },
-      fields: data.fields.map(field => {
+      fields: data.fields.map((field: FormField) => {
         let value: any = '';
         
         if (bevanda && field.name in bevanda) {
@@ -1482,7 +1487,7 @@ export const bevandaFormData: FormDataSchema = {
         
         // Per la modifica massiva, mostra solo i campi modificabili
         if (isBulkEdit && !field.bulkEditable) {
-          return null;
+          return { ...field, value: '', skip: true };
         }
         
         // Per la modifica massiva, usa configurazione specifica
@@ -1517,7 +1522,7 @@ export const bevandaFormData: FormDataSchema = {
         }
         
         return { ...field, value };
-      }).filter((field: FormField | null) => field !== null),
+      }).filter((field: any): field is FormField => field !== null && !field.skip),
       buttons: {
         ...data.buttons,
         submit: {
@@ -1530,6 +1535,7 @@ export const bevandaFormData: FormDataSchema = {
         },
         cancel: {
           ...data.buttons.cancel,
+          text: 'Annulla',
           href: isBulkEdit 
             ? '/ristorante-menu/bevande' 
             : isEdit 

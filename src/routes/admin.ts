@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { mainMenuItems } from '../config/mainMenu';
 import { adminItems } from '../config/sectionMenu';
 import { sectionIcons } from '../config/sectionIcons';
@@ -24,7 +24,7 @@ router.use(checkMenuAccess('admin'));
 // Tutte le route admin richiedono autenticazione e ruolo admin
 router.use(isAdmin);
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   const currentPath = '/admin';
   let sectionMenu = adminItems;
   
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/utenti', async (req, res) => {
+router.get('/utenti', async (req: Request, res: Response): Promise<void> => {
   const currentPath = '/admin/utenti';
   let sectionMenu = adminItems;
   
@@ -143,7 +143,7 @@ router.get('/utenti', async (req, res) => {
   }
 });
 
-router.get('/utenti/nuovo', (req, res) => {
+router.get('/utenti/nuovo', (_req, res) => {
   const currentPath = '/admin/utenti/nuovo';
   let sectionMenu = adminItems;
 
@@ -172,7 +172,7 @@ router.get('/utenti/nuovo', (req, res) => {
   });
 });
 
-router.post('/utenti/nuovo', async (req, res) => {
+router.post('/utenti/nuovo', async (req: Request, res: Response): Promise<void> => {
   const { nome, cognome, email, password, ruolo } = req.body;
   
   try {
@@ -241,6 +241,7 @@ router.post('/utenti/nuovo', async (req, res) => {
 
     // Reindirizza alla pagina dei dettagli dell'utente con messaggio di successo
     res.redirect(`/admin/utenti/dettagli/${newUser.id}?success=Utente creato con successo`);
+      return;
   } catch (error) {
     console.error('Errore nella creazione dell\'utente:', error);
     
@@ -264,7 +265,7 @@ router.post('/utenti/nuovo', async (req, res) => {
   }
 });
 
-router.get('/utenti/dettagli/:id', async (req, res) => {
+router.get('/utenti/dettagli/:id', async (req: Request, res: Response): Promise<void> => {
   const currentPath = '/admin/utenti/dettagli';
   let sectionMenu = adminItems;
   
@@ -354,14 +355,15 @@ router.get('/utenti/dettagli/:id', async (req, res) => {
 });
 
 // Route per modifica massiva utenti - DEVE ESSERE PRIMA di /utenti/modifica/:id
-router.get('/utenti/modifica-massa', async (req, res) => {
+router.get('/utenti/modifica-massa', async (req: Request, res: Response): Promise<void> => {
   const currentPath = '/admin/utenti/modifica-massa';
   let sectionMenu = adminItems;
   
   const userIds = req.query.ids ? (req.query.ids as string).split(',') : [];
   
   if (userIds.length === 0) {
-    return res.redirect('/admin/utenti');
+    res.redirect('/admin/utenti');
+      return;
   }
   
   try {
@@ -381,7 +383,8 @@ router.get('/utenti/modifica-massa', async (req, res) => {
     });
 
     if (selectedUsers.length === 0) {
-      return res.redirect('/admin/utenti');
+      res.redirect('/admin/utenti');
+      return;
     }
 
     // Configurazione actionNav per questa pagina
@@ -412,11 +415,12 @@ router.get('/utenti/modifica-massa', async (req, res) => {
   } catch (error) {
     console.error('Errore nel recupero degli utenti per modifica massiva:', error);
     res.redirect('/admin/utenti');
+      return;
   }
 });
 
 // Route POST per modifica massiva utenti - DEVE ESSERE PRIMA di /utenti/modifica/:id
-router.post('/utenti/modifica-massa', async (req, res) => {
+router.post('/utenti/modifica-massa', async (req: Request, res: Response): Promise<void> => {
   const { itemIds, ruolo, auth } = req.body;
   
   let userIds: string[] = [];
@@ -428,9 +432,13 @@ router.post('/utenti/modifica-massa', async (req, res) => {
   
   if (userIds.length === 0) {
     if (req.xhr || req.headers.accept?.includes('application/json')) {
-      return res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+      res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+      return;
+      return;
     }
-    return res.redirect('/admin/utenti?error=Nessun utente selezionato per la modifica');
+    res.redirect('/admin/utenti?error=Nessun utente selezionato per la modifica');
+      return;
+    return;
   }
   
   try {
@@ -443,9 +451,13 @@ router.post('/utenti/modifica-massa', async (req, res) => {
 
     if (existingUsers.length === 0) {
       if (req.xhr || req.headers.accept?.includes('application/json')) {
-        return res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+        res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+      return;
+        return;
       }
-      return res.redirect('/admin/utenti?error=Nessun utente valido trovato per la modifica');
+      res.redirect('/admin/utenti?error=Nessun utente valido trovato per la modifica');
+      return;
+      return;
     }
 
     // Prepara i dati per l'aggiornamento (solo i campi forniti)
@@ -463,9 +475,11 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     // Se non ci sono dati da aggiornare, restituisci errore
     if (Object.keys(updateData).length === 0) {
       if (req.xhr || req.headers.accept?.includes('application/json')) {
-        return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+        res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+      return;
       }
-      return res.redirect('/admin/utenti?error=Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.');
+      res.redirect('/admin/utenti?error=Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.');
+      return;
     }
 
     await prisma.user.updateMany({
@@ -484,7 +498,8 @@ router.post('/utenti/modifica-massa', async (req, res) => {
     }
     
     if (req.xhr || req.headers.accept?.includes('application/json')) {
-      return res.json({ success: true, message });
+      res.json({ success: true, message });
+      return;
     }
     
     res.redirect(`/admin/utenti?success=${encodeURIComponent(message)}`);
@@ -492,14 +507,16 @@ router.post('/utenti/modifica-massa', async (req, res) => {
   } catch (error) {
     console.error('Errore durante la modifica massiva:', error);
     if (req.xhr || req.headers.accept?.includes('application/json')) {
-      return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+      res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+      return;
     }
     res.redirect('/admin/utenti?error=Errore interno del server durante la modifica massiva');
+      return;
   }
 });
 
 // Route AJAX per modifica massiva utenti
-router.post('/utenti/modifica-massa/ajax', async (req, res) => {
+router.post('/utenti/modifica-massa/ajax', async (req: Request, res: Response): Promise<void> => {
   const { itemIds, ruolo, auth } = req.body;
   
   let userIds: string[] = [];
@@ -510,7 +527,8 @@ router.post('/utenti/modifica-massa/ajax', async (req, res) => {
   }
   
   if (userIds.length === 0) {
-    return res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+    res.json({ success: false, message: 'Nessun utente selezionato per la modifica' });
+      return;
   }
   
   try {
@@ -522,7 +540,8 @@ router.post('/utenti/modifica-massa/ajax', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+      res.json({ success: false, message: 'Nessun utente valido trovato per la modifica' });
+      return;
     }
 
     // Prepara i dati per l'aggiornamento (solo i campi forniti)
@@ -539,7 +558,8 @@ router.post('/utenti/modifica-massa/ajax', async (req, res) => {
 
     // Se non ci sono dati da aggiornare, restituisci errore
     if (Object.keys(updateData).length === 0) {
-      return res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+      res.json({ success: false, message: 'Nessun campo valido fornito per l\'aggiornamento. Seleziona almeno un campo da modificare.' });
+      return;
     }
 
     await prisma.user.updateMany({
@@ -557,23 +577,25 @@ router.post('/utenti/modifica-massa/ajax', async (req, res) => {
       message += `. ${skippedCount} utente${skippedCount === 1 ? '' : 'i'} non trovato${skippedCount === 1 ? '' : 'i'} o già cancellato${skippedCount === 1 ? '' : 'i'}.`;
     }
     
-    return res.json({ success: true, message });
+    res.json({ success: true, message });
+      return;
     
   } catch (error) {
     console.error('Errore durante la modifica massiva:', error);
-    return res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+    res.json({ success: false, message: 'Errore interno del server durante la modifica massiva' });
+      return;
   }
 });
 
 // Route AJAX per creazione nuovo utente
-router.post('/utenti/nuovo/ajax', async (req, res) => {
+router.post('/utenti/nuovo/ajax', async (req: Request, res: Response): Promise<void> => {
   const { nome, cognome, email, password, ruolo } = req.body;
   
   try {
     // Validazione password
     const passwordValidation = PasswordUtils.validatePasswordStrength(password);
     if (!passwordValidation.isValid) {
-      return res.json({
+      res.json({
         success: false,
         message: passwordValidation.errors.join(', ')
       });
@@ -585,7 +607,7 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
     });
 
     if (existingUser) {
-      return res.json({
+      res.json({
         success: false,
         message: 'Un utente con questa email esiste già'
       });
@@ -607,7 +629,7 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
       }
     });
 
-    return res.json({
+    res.json({
       success: true,
       message: 'Utente creato con successo',
       data: { id: newUser.id },
@@ -615,7 +637,7 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
     });
   } catch (error) {
     console.error('Errore nella creazione dell\'utente:', error);
-    return res.json({
+    res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione dell\'utente'
     });
@@ -623,7 +645,7 @@ router.post('/utenti/nuovo/ajax', async (req, res) => {
 });
 
 // Route per modifica singola utente - DEVE ESSERE DOPO le route specifiche
-router.get('/utenti/modifica/:id', async (req, res) => {
+router.get('/utenti/modifica/:id', async (req: Request, res: Response): Promise<void> => {
   const currentPath = '/admin/utenti/modifica';
   let sectionMenu = adminItems;
   
@@ -707,13 +729,16 @@ router.get('/utenti/modifica/:id', async (req, res) => {
   }
 });
 
-router.post('/utenti/modifica/:id', async (req, res) => {
+router.post('/utenti/modifica/:id', async (req: Request, res: Response): Promise<void> => {
   const { nome, cognome, email, password, ruolo } = req.body;
   const userId = req.params.id;
   
+  // Dichiaro existingUser fuori dal try per renderlo accessibile nel catch
+  let existingUser: any = null;
+  
   try {
     // Verifica se l'utente esiste
-    const existingUser = await prisma.user.findUnique({
+    existingUser = await prisma.user.findUnique({
       where: { id: userId }
     });
 
@@ -804,6 +829,7 @@ router.post('/utenti/modifica/:id', async (req, res) => {
 
     // Reindirizza alla pagina dei dettagli dell'utente con messaggio di successo
     res.redirect(`/admin/utenti/dettagli/${updatedUser.id}?success=Utente aggiornato con successo`);
+      return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento dell\'utente:', error);
     
@@ -829,7 +855,7 @@ router.post('/utenti/modifica/:id', async (req, res) => {
 });
 
 // Route AJAX per modifica utente
-router.post('/utenti/modifica/:id/ajax', async (req, res) => {
+router.post('/utenti/modifica/:id/ajax', async (req: Request, res: Response): Promise<void> => {
   const { nome, cognome, email, password, ruolo } = req.body;
   const userId = req.params.id;
   
@@ -840,7 +866,7 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
     });
 
     if (!existingUser) {
-      return res.json({
+      res.json({
         success: false,
         message: 'Utente non trovato'
       });
@@ -853,7 +879,7 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
       });
 
       if (userWithSameEmail) {
-        return res.json({
+        res.json({
           success: false,
           message: 'Un altro utente con questa email esiste già'
         });
@@ -874,7 +900,7 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
       // Validazione password
       const passwordValidation = PasswordUtils.validatePasswordStrength(password);
       if (!passwordValidation.isValid) {
-        return res.json({
+        res.json({
           success: false,
           message: passwordValidation.errors.join(', ')
         });
@@ -889,14 +915,14 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
       data: updateData
     });
 
-    return res.json({
+    res.json({
       success: true,
       message: 'Utente aggiornato con successo',
       redirectUrl: `/admin/utenti/dettagli/${updatedUser.id}`
     });
   } catch (error) {
     console.error('Errore nell\'aggiornamento dell\'utente:', error);
-    return res.json({
+    res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento dell\'utente'
     });
@@ -904,14 +930,15 @@ router.post('/utenti/modifica/:id/ajax', async (req, res) => {
 });
 
 // Route per soft delete di uno o più utenti
-router.delete('/utenti', async (req, res) => {
+router.delete('/utenti', async (req: Request, res: Response): Promise<void> => {
   const { itemIds } = req.body;
   
   if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
-    return res.status(400).json({ 
+    res.status(400).json({ 
       success: false, 
       message: 'Nessun utente selezionato per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -924,10 +951,11 @@ router.delete('/utenti', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.status(404).json({ 
+      res.status(404).json({ 
         success: false, 
         message: 'Nessun utente valido trovato per la cancellazione' 
       });
+      return;
     }
 
     // Esegui soft delete per tutti gli utenti validi
@@ -965,7 +993,7 @@ router.delete('/utenti', async (req, res) => {
 });
 
 // Route per visualizzare gli utenti cancellati
-router.get('/utenti/cancellati', async (req, res) => {
+router.get('/utenti/cancellati', async (_req: Request, res: Response): Promise<void> => {
   const currentPath = '/admin/utenti/cancellati';
   let sectionMenu = adminItems;
   
@@ -1123,14 +1151,15 @@ router.get('/utenti/cancellati', async (req, res) => {
 });
 
 // Route per ripristinare uno o più utenti cancellati
-router.post('/utenti/restore', async (req, res) => {
+router.post('/utenti/restore', async (req: Request, res: Response): Promise<void> => {
   const { itemIds } = req.body;
   
   if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
-    return res.status(400).json({ 
+    res.status(400).json({ 
       success: false, 
       message: 'Nessun utente selezionato per il ripristino' 
     });
+    return;
   }
   
   try {
@@ -1145,10 +1174,11 @@ router.post('/utenti/restore', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.status(404).json({ 
+      res.status(404).json({ 
         success: false, 
         message: 'Nessun utente cancellato trovato per il ripristino' 
       });
+      return;
     }
 
     // Ripristina tutti gli utenti validi
@@ -1186,14 +1216,15 @@ router.post('/utenti/restore', async (req, res) => {
 });
 
 // Route per eliminazione fisica definitiva di uno o più utenti cancellati
-router.delete('/utenti/permanent-delete', async (req, res) => {
+router.delete('/utenti/permanent-delete', async (req: Request, res: Response): Promise<void> => {
   const { itemIds } = req.body;
   
   if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
-    return res.status(400).json({ 
+    res.status(400).json({ 
       success: false, 
       message: 'Dati mancanti per l\'eliminazione definitiva' 
     });
+    return;
   }
   
   try {
@@ -1208,10 +1239,11 @@ router.delete('/utenti/permanent-delete', async (req, res) => {
     });
 
     if (existingUsers.length === 0) {
-      return res.status(404).json({ 
+      res.status(404).json({ 
         success: false, 
         message: 'Nessun utente valido trovato per l\'eliminazione definitiva' 
       });
+      return;
     }
 
     // Elimina fisicamente gli utenti

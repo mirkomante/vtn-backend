@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/servizi - Lista tutti i servizi accessori
-router.get('/', serviziValidation.list, handleValidationErrors, async (_req: Request, res: Response) => {
+router.get('/', serviziValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     const servizi = await prisma.servizioAccessorio.findMany({
       where: {
@@ -29,18 +29,19 @@ router.get('/', serviziValidation.list, handleValidationErrors, async (_req: Req
     });
   } catch (error) {
     console.error('Errore nel recupero dei servizi accessori:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/servizi/:id - Dettagli di un servizio accessorio specifico
-router.get('/:id', serviziValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/:id', serviziValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const servizio = await prisma.servizioAccessorio.findFirst({
       where: {

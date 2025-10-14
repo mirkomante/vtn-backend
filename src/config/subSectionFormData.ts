@@ -41,7 +41,7 @@ export const allergeneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -52,8 +52,8 @@ export const allergeneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
         
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -118,7 +118,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -129,8 +129,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -195,7 +195,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -206,8 +206,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -272,7 +272,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -283,8 +283,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -349,7 +349,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -360,8 +360,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -426,7 +426,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -437,8 +437,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -503,7 +503,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -514,8 +514,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -580,7 +580,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -591,8 +591,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -657,7 +657,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -668,8 +668,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -734,7 +734,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -745,8 +745,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -811,7 +811,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -822,8 +822,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -888,7 +888,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -899,8 +899,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -965,7 +965,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -976,8 +976,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1042,7 +1042,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1053,8 +1053,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1119,7 +1119,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1130,8 +1130,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1196,7 +1196,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1207,8 +1207,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1273,7 +1273,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1284,8 +1284,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1350,7 +1350,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1361,8 +1361,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1427,7 +1427,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1438,8 +1438,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1504,7 +1504,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1515,8 +1515,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1581,7 +1581,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1592,8 +1592,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1658,7 +1658,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1669,8 +1669,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1735,7 +1735,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1746,8 +1746,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1812,7 +1812,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1823,8 +1823,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1877,11 +1877,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -1893,11 +1888,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -1911,7 +1901,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1922,8 +1912,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -1988,7 +1978,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -1999,8 +1989,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2065,7 +2055,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2076,8 +2066,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2142,7 +2132,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2153,8 +2143,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2219,7 +2209,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2230,8 +2220,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2296,7 +2286,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2307,8 +2297,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2373,7 +2363,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2384,8 +2374,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2450,7 +2440,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2461,8 +2451,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2527,7 +2517,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2538,8 +2528,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2604,7 +2594,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2615,8 +2605,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2681,7 +2671,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2692,8 +2682,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2758,7 +2748,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2769,8 +2759,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2835,7 +2825,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2846,8 +2836,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2912,7 +2902,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -2923,8 +2913,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -2989,7 +2979,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3000,8 +2990,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3066,7 +3056,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3077,8 +3067,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3143,7 +3133,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3154,8 +3144,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3220,7 +3210,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3231,8 +3221,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3297,7 +3287,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3308,8 +3298,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3374,7 +3364,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3385,8 +3375,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3451,7 +3441,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3462,8 +3452,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3528,7 +3518,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3539,8 +3529,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3605,7 +3595,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3616,8 +3606,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3682,7 +3672,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3693,8 +3683,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3747,11 +3737,6 @@ export const regioneFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -3765,7 +3750,7 @@ export const regioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3776,8 +3761,8 @@ export const regioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3842,7 +3827,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3853,8 +3838,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3919,7 +3904,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -3930,8 +3915,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -3996,7 +3981,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4007,8 +3992,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4073,7 +4058,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4084,8 +4069,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4150,7 +4135,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4161,8 +4146,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4227,7 +4212,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4238,8 +4223,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4304,7 +4289,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4315,8 +4300,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4381,7 +4366,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4392,8 +4377,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4458,7 +4443,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4469,8 +4454,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4535,7 +4520,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4546,8 +4531,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4612,7 +4597,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4623,8 +4608,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4689,7 +4674,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4700,8 +4685,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4766,7 +4751,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4777,8 +4762,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4843,7 +4828,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4854,8 +4839,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4920,7 +4905,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -4931,8 +4916,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -4997,7 +4982,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5008,8 +4993,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5074,7 +5059,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5085,8 +5070,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5151,7 +5136,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5162,8 +5147,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5228,7 +5213,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5239,8 +5224,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5305,7 +5290,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5316,8 +5301,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5382,7 +5367,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5393,8 +5378,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5459,7 +5444,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5470,8 +5455,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5536,7 +5521,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5547,8 +5532,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5601,11 +5586,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -5617,11 +5597,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -5635,7 +5610,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5646,8 +5621,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5712,7 +5687,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5723,8 +5698,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5789,7 +5764,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5800,8 +5775,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5866,7 +5841,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5877,8 +5852,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -5943,7 +5918,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -5954,8 +5929,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6020,7 +5995,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6031,8 +6006,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6097,7 +6072,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6108,8 +6083,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6174,7 +6149,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6185,8 +6160,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6251,7 +6226,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6262,8 +6237,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6328,7 +6303,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6339,8 +6314,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6405,7 +6380,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6416,8 +6391,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6482,7 +6457,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6493,8 +6468,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6559,7 +6534,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6570,8 +6545,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6636,7 +6611,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6647,8 +6622,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6713,7 +6688,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6724,8 +6699,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6790,7 +6765,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6801,8 +6776,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6867,7 +6842,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6878,8 +6853,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -6944,7 +6919,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -6955,8 +6930,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7021,7 +6996,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7032,8 +7007,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7098,7 +7073,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7109,8 +7084,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7175,7 +7150,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7186,8 +7161,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7252,7 +7227,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7263,8 +7238,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7329,7 +7304,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7340,8 +7315,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7406,7 +7381,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7417,8 +7392,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7497,7 +7472,7 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7518,8 +7493,8 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
         let value = '';
         
         // Determina il valore del campo
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
         }
@@ -7617,7 +7592,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7628,8 +7603,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7694,7 +7669,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7705,8 +7680,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7771,7 +7746,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7782,8 +7757,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7848,7 +7823,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7859,8 +7834,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -7925,7 +7900,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -7936,8 +7911,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8002,7 +7977,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8013,8 +7988,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8079,7 +8054,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8090,8 +8065,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8156,7 +8131,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8167,8 +8142,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8233,7 +8208,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8244,8 +8219,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8310,7 +8285,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8321,8 +8296,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8387,7 +8362,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8398,8 +8373,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8464,7 +8439,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8475,8 +8450,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8541,7 +8516,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8552,8 +8527,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8618,7 +8593,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8629,8 +8604,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8695,7 +8670,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8706,8 +8681,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8772,7 +8747,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8783,8 +8758,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8849,7 +8824,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8860,8 +8835,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -8926,7 +8901,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -8937,8 +8912,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9003,7 +8978,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9014,8 +8989,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9080,7 +9055,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9091,8 +9066,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9157,7 +9132,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9168,8 +9143,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9234,7 +9209,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9245,8 +9220,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9311,7 +9286,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9322,8 +9297,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9376,11 +9351,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -9392,11 +9362,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -9410,7 +9375,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9421,8 +9386,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9487,7 +9452,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9498,8 +9463,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9564,7 +9529,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9575,8 +9540,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9641,7 +9606,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9652,8 +9617,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9718,7 +9683,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9729,8 +9694,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9795,7 +9760,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9806,8 +9771,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9872,7 +9837,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9883,8 +9848,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -9949,7 +9914,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -9960,8 +9925,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10026,7 +9991,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10037,8 +10002,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10103,7 +10068,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10114,8 +10079,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10180,7 +10145,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10191,8 +10156,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10257,7 +10222,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10268,8 +10233,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10334,7 +10299,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10345,8 +10310,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10411,7 +10376,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10422,8 +10387,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10488,7 +10453,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10499,8 +10464,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10565,7 +10530,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10576,8 +10541,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10642,7 +10607,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10653,8 +10618,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10719,7 +10684,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10730,8 +10695,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10796,7 +10761,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10807,8 +10772,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10873,7 +10838,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10884,8 +10849,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -10950,7 +10915,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -10961,8 +10926,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11027,7 +10992,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11038,8 +11003,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11104,7 +11069,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11115,8 +11080,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11181,7 +11146,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11192,8 +11157,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11246,11 +11211,6 @@ export const regioneFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -11264,7 +11224,7 @@ export const regioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11275,8 +11235,8 @@ export const regioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11341,7 +11301,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11352,8 +11312,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11418,7 +11378,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11429,8 +11389,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11495,7 +11455,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11506,8 +11466,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11572,7 +11532,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11583,8 +11543,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11649,7 +11609,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11660,8 +11620,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11726,7 +11686,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11737,8 +11697,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11803,7 +11763,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11814,8 +11774,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11880,7 +11840,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11891,8 +11851,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -11957,7 +11917,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -11968,8 +11928,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12034,7 +11994,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12045,8 +12005,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12111,7 +12071,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12122,8 +12082,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12188,7 +12148,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12199,8 +12159,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12265,7 +12225,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12276,8 +12236,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12342,7 +12302,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12353,8 +12313,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12419,7 +12379,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12430,8 +12390,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12496,7 +12456,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12507,8 +12467,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12573,7 +12533,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12584,8 +12544,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12650,7 +12610,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12661,8 +12621,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12727,7 +12687,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12738,8 +12698,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12804,7 +12764,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12815,8 +12775,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12881,7 +12841,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12892,8 +12852,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -12958,7 +12918,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -12969,8 +12929,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13035,7 +12995,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13046,8 +13006,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13100,11 +13060,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -13116,11 +13071,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -13134,7 +13084,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13145,8 +13095,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13211,7 +13161,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13222,8 +13172,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13288,7 +13238,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13299,8 +13249,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13365,7 +13315,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13376,8 +13326,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13442,7 +13392,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13453,8 +13403,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13519,7 +13469,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13530,8 +13480,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13596,7 +13546,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13607,8 +13557,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13673,7 +13623,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13684,8 +13634,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13750,7 +13700,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13761,8 +13711,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13827,7 +13777,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13838,8 +13788,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13904,7 +13854,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13915,8 +13865,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -13981,7 +13931,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -13992,8 +13942,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14058,7 +14008,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14069,8 +14019,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14135,7 +14085,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14146,8 +14096,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14212,7 +14162,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14223,8 +14173,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14289,7 +14239,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14300,8 +14250,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14366,7 +14316,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14377,8 +14327,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14443,7 +14393,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14454,8 +14404,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14520,7 +14470,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14531,8 +14481,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14597,7 +14547,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14608,8 +14558,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14674,7 +14624,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14685,8 +14635,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14751,7 +14701,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14762,8 +14712,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14828,7 +14778,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14839,8 +14789,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14905,7 +14855,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -14916,8 +14866,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -14996,7 +14946,7 @@ export const categoriaPiattiFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15017,8 +14967,8 @@ export const categoriaPiattiFormData: FormDataSchema = {
         let value = '';
         
         // Determina il valore del campo
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
         }
@@ -15116,7 +15066,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15127,8 +15077,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15193,7 +15143,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15204,8 +15154,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15270,7 +15220,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15281,8 +15231,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15347,7 +15297,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15358,8 +15308,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15424,7 +15374,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15435,8 +15385,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15501,7 +15451,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15512,8 +15462,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15578,7 +15528,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15589,8 +15539,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15655,7 +15605,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15666,8 +15616,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15732,7 +15682,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15743,8 +15693,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15809,7 +15759,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15820,8 +15770,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15886,7 +15836,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15897,8 +15847,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -15963,7 +15913,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -15974,8 +15924,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16040,7 +15990,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16051,8 +16001,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16117,7 +16067,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16128,8 +16078,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16194,7 +16144,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16205,8 +16155,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16271,7 +16221,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16282,8 +16232,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16348,7 +16298,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16359,8 +16309,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16425,7 +16375,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16436,8 +16386,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16502,7 +16452,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16513,8 +16463,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16579,7 +16529,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16590,8 +16540,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16656,7 +16606,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16667,8 +16617,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16733,7 +16683,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16744,8 +16694,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16810,7 +16760,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16821,8 +16771,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16875,11 +16825,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -16891,11 +16836,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -16909,7 +16849,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16920,8 +16860,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -16986,7 +16926,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -16997,8 +16937,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17063,7 +17003,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17074,8 +17014,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17140,7 +17080,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17151,8 +17091,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17217,7 +17157,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17228,8 +17168,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17294,7 +17234,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17305,8 +17245,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17371,7 +17311,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17382,8 +17322,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17448,7 +17388,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17459,8 +17399,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17525,7 +17465,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17536,8 +17476,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17602,7 +17542,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17613,8 +17553,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17679,7 +17619,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17690,8 +17630,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17756,7 +17696,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17767,8 +17707,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17833,7 +17773,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17844,8 +17784,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17910,7 +17850,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17921,8 +17861,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -17987,7 +17927,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -17998,8 +17938,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18064,7 +18004,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18075,8 +18015,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18141,7 +18081,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18152,8 +18092,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18218,7 +18158,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18229,8 +18169,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18295,7 +18235,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18306,8 +18246,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18372,7 +18312,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18383,8 +18323,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18449,7 +18389,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18460,8 +18400,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18526,7 +18466,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18537,8 +18477,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18603,7 +18543,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18614,8 +18554,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18680,7 +18620,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18691,8 +18631,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18745,11 +18685,6 @@ export const regioneFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -18763,7 +18698,7 @@ export const regioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18774,8 +18709,8 @@ export const regioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18840,7 +18775,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18851,8 +18786,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18917,7 +18852,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -18928,8 +18863,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -18994,7 +18929,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19005,8 +18940,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19071,7 +19006,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19082,8 +19017,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19148,7 +19083,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19159,8 +19094,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19225,7 +19160,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19236,8 +19171,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19302,7 +19237,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19313,8 +19248,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19379,7 +19314,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19390,8 +19325,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19456,7 +19391,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19467,8 +19402,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19533,7 +19468,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19544,8 +19479,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19610,7 +19545,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19621,8 +19556,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19687,7 +19622,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19698,8 +19633,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19764,7 +19699,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19775,8 +19710,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19841,7 +19776,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19852,8 +19787,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19918,7 +19853,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -19929,8 +19864,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -19995,7 +19930,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20006,8 +19941,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20072,7 +20007,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20083,8 +20018,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20149,7 +20084,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20160,8 +20095,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20226,7 +20161,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20237,8 +20172,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20303,7 +20238,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20314,8 +20249,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20380,7 +20315,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20391,8 +20326,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20457,7 +20392,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20468,8 +20403,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20534,7 +20469,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20545,8 +20480,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20599,11 +20534,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -20615,11 +20545,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -20633,7 +20558,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20644,8 +20569,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20710,7 +20635,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20721,8 +20646,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20787,7 +20712,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20798,8 +20723,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20864,7 +20789,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20875,8 +20800,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -20941,7 +20866,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -20952,8 +20877,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21018,7 +20943,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21029,8 +20954,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21095,7 +21020,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21106,8 +21031,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21172,7 +21097,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21183,8 +21108,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21249,7 +21174,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21260,8 +21185,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21326,7 +21251,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21337,8 +21262,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21403,7 +21328,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21414,8 +21339,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21480,7 +21405,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21491,8 +21416,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21557,7 +21482,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21568,8 +21493,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21634,7 +21559,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21645,8 +21570,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21711,7 +21636,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21722,8 +21647,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21788,7 +21713,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21799,8 +21724,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21865,7 +21790,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21876,8 +21801,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -21942,7 +21867,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -21953,8 +21878,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22019,7 +21944,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22030,8 +21955,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22096,7 +22021,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22107,8 +22032,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22173,7 +22098,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22184,8 +22109,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22250,7 +22175,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22261,8 +22186,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22327,7 +22252,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22338,8 +22263,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22404,7 +22329,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22415,8 +22340,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22482,7 +22407,7 @@ export const nazioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22493,8 +22418,8 @@ export const nazioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
         
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22559,7 +22484,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22570,8 +22495,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22636,7 +22561,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22647,8 +22572,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22713,7 +22638,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22724,8 +22649,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22790,7 +22715,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22801,8 +22726,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22867,7 +22792,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22878,8 +22803,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -22944,7 +22869,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -22955,8 +22880,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23021,7 +22946,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23032,8 +22957,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23098,7 +23023,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23109,8 +23034,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23175,7 +23100,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23186,8 +23111,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23252,7 +23177,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23263,8 +23188,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23329,7 +23254,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23340,8 +23265,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23406,7 +23331,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23417,8 +23342,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23483,7 +23408,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23494,8 +23419,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23560,7 +23485,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23571,8 +23496,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23637,7 +23562,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23648,8 +23573,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23714,7 +23639,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23725,8 +23650,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23791,7 +23716,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23802,8 +23727,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23868,7 +23793,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23879,8 +23804,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -23945,7 +23870,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -23956,8 +23881,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24022,7 +23947,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24033,8 +23958,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24099,7 +24024,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24110,8 +24035,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24176,7 +24101,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24187,8 +24112,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24253,7 +24178,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24264,8 +24189,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24318,11 +24243,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -24334,11 +24254,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -24352,7 +24267,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24363,8 +24278,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24429,7 +24344,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24440,8 +24355,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24506,7 +24421,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24517,8 +24432,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24583,7 +24498,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24594,8 +24509,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24660,7 +24575,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24671,8 +24586,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24737,7 +24652,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24748,8 +24663,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24814,7 +24729,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24825,8 +24740,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24891,7 +24806,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24902,8 +24817,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -24968,7 +24883,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -24979,8 +24894,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25045,7 +24960,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25056,8 +24971,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25122,7 +25037,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25133,8 +25048,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25199,7 +25114,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25210,8 +25125,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25276,7 +25191,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25287,8 +25202,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25353,7 +25268,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25364,8 +25279,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25430,7 +25345,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25441,8 +25356,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25507,7 +25422,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25518,8 +25433,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25584,7 +25499,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25595,8 +25510,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25661,7 +25576,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25672,8 +25587,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25738,7 +25653,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25749,8 +25664,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25815,7 +25730,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25826,8 +25741,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25892,7 +25807,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25903,8 +25818,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -25969,7 +25884,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -25980,8 +25895,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26046,7 +25961,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26057,8 +25972,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26123,7 +26038,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26134,8 +26049,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26188,11 +26103,6 @@ export const regioneFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -26206,7 +26116,7 @@ export const regioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26217,8 +26127,8 @@ export const regioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26283,7 +26193,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26294,8 +26204,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26360,7 +26270,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26371,8 +26281,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26437,7 +26347,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26448,8 +26358,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26514,7 +26424,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26525,8 +26435,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26591,7 +26501,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26602,8 +26512,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26668,7 +26578,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26679,8 +26589,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26745,7 +26655,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26756,8 +26666,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26822,7 +26732,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26833,8 +26743,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26899,7 +26809,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26910,8 +26820,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -26976,7 +26886,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -26987,8 +26897,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27053,7 +26963,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27064,8 +26974,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27130,7 +27040,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27141,8 +27051,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27207,7 +27117,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27218,8 +27128,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27284,7 +27194,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27295,8 +27205,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27361,7 +27271,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27372,8 +27282,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27438,7 +27348,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27449,8 +27359,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27515,7 +27425,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27526,8 +27436,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27592,7 +27502,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27603,8 +27513,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27669,7 +27579,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27680,8 +27590,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27746,7 +27656,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27757,8 +27667,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27823,7 +27733,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27834,8 +27744,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27900,7 +27810,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27911,8 +27821,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -27977,7 +27887,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -27988,8 +27898,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28042,11 +27952,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -28058,11 +27963,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -28076,7 +27976,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28087,8 +27987,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28153,7 +28053,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28164,8 +28064,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28230,7 +28130,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28241,8 +28141,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28307,7 +28207,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28318,8 +28218,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28384,7 +28284,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28395,8 +28295,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28461,7 +28361,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28472,8 +28372,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28538,7 +28438,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28549,8 +28449,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28615,7 +28515,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28626,8 +28526,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28692,7 +28592,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28703,8 +28603,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28769,7 +28669,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28780,8 +28680,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28846,7 +28746,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28857,8 +28757,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -28923,7 +28823,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -28934,8 +28834,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29000,7 +28900,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29011,8 +28911,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29077,7 +28977,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29088,8 +28988,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29154,7 +29054,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29165,8 +29065,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29231,7 +29131,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29242,8 +29142,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29308,7 +29208,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29319,8 +29219,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29385,7 +29285,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29396,8 +29296,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29462,7 +29362,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29473,8 +29373,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29539,7 +29439,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29550,8 +29450,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29616,7 +29516,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29627,8 +29527,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29693,7 +29593,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29704,8 +29604,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29770,7 +29670,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29781,8 +29681,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29847,7 +29747,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29858,8 +29758,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -29955,7 +29855,7 @@ export const servizioFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any, isBulkEdit: boolean = false, selectedItems?: any[]) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -29976,8 +29876,8 @@ export const servizioFormData: FormDataSchema = {
         let value = '';
         
         // Determina il valore del campo
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
         }
@@ -30071,7 +29971,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30082,8 +29982,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30148,7 +30048,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30159,8 +30059,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30225,7 +30125,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30236,8 +30136,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30302,7 +30202,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30313,8 +30213,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30379,7 +30279,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30390,8 +30290,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30456,7 +30356,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30467,8 +30367,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30533,7 +30433,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30544,8 +30444,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30610,7 +30510,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30621,8 +30521,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30687,7 +30587,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30698,8 +30598,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30764,7 +30664,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30775,8 +30675,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30841,7 +30741,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30852,8 +30752,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30918,7 +30818,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -30929,8 +30829,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -30995,7 +30895,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31006,8 +30906,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31072,7 +30972,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31083,8 +30983,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31149,7 +31049,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31160,8 +31060,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31226,7 +31126,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31237,8 +31137,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31303,7 +31203,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31314,8 +31214,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31380,7 +31280,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31391,8 +31291,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31457,7 +31357,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31468,8 +31368,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31534,7 +31434,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31545,8 +31445,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31611,7 +31511,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31622,8 +31522,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31688,7 +31588,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31699,8 +31599,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31765,7 +31665,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31776,8 +31676,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31830,11 +31730,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -31846,11 +31741,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -31864,7 +31754,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31875,8 +31765,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -31941,7 +31831,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -31952,8 +31842,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32018,7 +31908,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32029,8 +31919,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32095,7 +31985,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32106,8 +31996,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32172,7 +32062,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32183,8 +32073,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32249,7 +32139,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32260,8 +32150,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32326,7 +32216,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32337,8 +32227,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32403,7 +32293,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32414,8 +32304,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32480,7 +32370,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32491,8 +32381,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32557,7 +32447,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32568,8 +32458,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32634,7 +32524,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32645,8 +32535,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32711,7 +32601,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32722,8 +32612,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32788,7 +32678,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32799,8 +32689,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32865,7 +32755,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32876,8 +32766,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -32942,7 +32832,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -32953,8 +32843,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33019,7 +32909,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33030,8 +32920,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33096,7 +32986,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33107,8 +32997,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33173,7 +33063,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33184,8 +33074,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33250,7 +33140,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33261,8 +33151,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33327,7 +33217,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33338,8 +33228,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33404,7 +33294,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33415,8 +33305,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33481,7 +33371,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33492,8 +33382,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33558,7 +33448,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33569,8 +33459,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33635,7 +33525,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33646,8 +33536,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33700,11 +33590,6 @@ export const regioneFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -33718,7 +33603,7 @@ export const regioneFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33729,8 +33614,8 @@ export const regioneFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33795,7 +33680,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33806,8 +33691,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33872,7 +33757,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33883,8 +33768,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -33949,7 +33834,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -33960,8 +33845,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34026,7 +33911,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34037,8 +33922,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34103,7 +33988,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34114,8 +33999,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34180,7 +34065,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34191,8 +34076,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34257,7 +34142,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34268,8 +34153,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34334,7 +34219,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34345,8 +34230,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34411,7 +34296,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34422,8 +34307,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34488,7 +34373,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34499,8 +34384,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34565,7 +34450,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34576,8 +34461,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34642,7 +34527,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34653,8 +34538,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34719,7 +34604,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34730,8 +34615,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34796,7 +34681,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34807,8 +34692,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34873,7 +34758,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34884,8 +34769,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -34950,7 +34835,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -34961,8 +34846,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35027,7 +34912,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35038,8 +34923,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35104,7 +34989,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35115,8 +35000,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35181,7 +35066,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35192,8 +35077,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35258,7 +35143,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35269,8 +35154,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35335,7 +35220,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35346,8 +35231,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35412,7 +35297,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35423,8 +35308,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35489,7 +35374,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35500,8 +35385,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35554,11 +35439,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La regione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna regione disponibile',
-        actionText: 'Aggiungi Regione',
-        actionHref: '/ristorante-menu/impostazioni/regioni/nuovo'
-      }
     },
     {
       type: 'select',
@@ -35570,11 +35450,6 @@ export const zonaFormData: FormDataSchema = {
       errorMessage: 'La nazione è obbligatoria',
       bulkEditable: true,
       options: [], // Sarà popolato dinamicamente
-      emptyState: {
-        message: 'Nessuna nazione disponibile',
-        actionText: 'Aggiungi Nazione',
-        actionHref: '/ristorante-menu/impostazioni/nazioni/nuovo'
-      }
     }
   ],
   buttons: {
@@ -35588,7 +35463,7 @@ export const zonaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35599,8 +35474,8 @@ export const zonaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35665,7 +35540,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35676,8 +35551,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35742,7 +35617,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35753,8 +35628,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35819,7 +35694,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35830,8 +35705,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35896,7 +35771,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35907,8 +35782,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -35973,7 +35848,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -35984,8 +35859,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36050,7 +35925,7 @@ export const tipologiaBirraFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36061,8 +35936,8 @@ export const tipologiaBirraFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36127,7 +36002,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36138,8 +36013,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36204,7 +36079,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36215,8 +36090,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36281,7 +36156,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36292,8 +36167,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36358,7 +36233,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36369,8 +36244,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36435,7 +36310,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36446,8 +36321,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36512,7 +36387,7 @@ export const tipologiaVinoFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36523,8 +36398,8 @@ export const tipologiaVinoFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36589,7 +36464,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36600,8 +36475,8 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36666,7 +36541,7 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36677,8 +36552,8 @@ export const tipologiaBevandaFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36743,7 +36618,7 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,
@@ -36754,8 +36629,8 @@ export const tipologiaLiquoreFormData: FormDataSchema = {
       fields: data.fields.map((field: FormField) => {
         let value = '';
 
-        if (formData && formData[field.name]) {
-          value = formData[field.name];
+        if (_formData && _formData[field.name]) {
+          value = _formData[field.name];
         } else if (isEdit && item) {
           value = item[field.name] || '';
         }
@@ -36820,7 +36695,7 @@ export const tipologiaCocktailFormData: FormDataSchema = {
       classes: 'text-sm font-semibold leading-6 text-gray-900'
     }
   },
-  getFormData: (data: any, isEdit: boolean = false, item?: any, formData?: any) => {
+  getFormData: (data: any, isEdit: boolean = false, item?: any, _formData?: any) => {
     return {
       formConfig: {
         ...data.formConfig,

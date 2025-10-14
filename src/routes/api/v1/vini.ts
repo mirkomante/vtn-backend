@@ -8,7 +8,7 @@ import { createPaginationOptions, createFilterOptions, createSortingOptions } fr
 const router = express.Router();
 
 // GET /api/v1/vini - Lista tutti i vini
-router.get('/', viniValidation.list, handleValidationErrors, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', viniValidation.list, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const vini = await prisma.vino.findMany({
       where: {
@@ -82,7 +82,7 @@ router.get('/', viniValidation.list, handleValidationErrors, async (req: Request
 });
 
 // GET /api/v1/vini/raggruppati-per-tipologia - Vini raggruppati per tipologia
-router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationErrors, async (_req: Request, res: Response) => {
+router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di vini
     const tipologieVini = await prisma.tipologiaVino.findMany({
@@ -190,7 +190,7 @@ router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationEr
 });
 
 // GET /api/v1/vini/:id - Dettagli di un vino specifico
-router.get('/:id', viniValidation.getById, handleValidationErrors, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/:id', viniValidation.getById, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const vino = await prisma.vino.findFirst({
       where: {
@@ -238,7 +238,7 @@ router.get('/:id', viniValidation.getById, handleValidationErrors, async (req: R
 });
 
 // GET /api/v1/vini/nazione/:nazioneId - Vini per nazione
-router.get('/nazione/:nazioneId', viniValidation.getByNation, handleValidationErrors, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/nazione/:nazioneId', viniValidation.getByNation, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const vini = await prisma.vino.findMany({
       where: {
@@ -296,7 +296,7 @@ router.get('/nazione/:nazioneId', viniValidation.getByNation, handleValidationEr
 });
 
 // GET /api/v1/vini/tipologia/:tipologiaId - Vini per tipologia
-router.get('/tipologia/:tipologiaId', viniValidation.getByType, handleValidationErrors, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/tipologia/:tipologiaId', viniValidation.getByType, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const vini = await prisma.vino.findMany({
       where: {

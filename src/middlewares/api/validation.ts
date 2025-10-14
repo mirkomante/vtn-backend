@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-const { validationResult, ValidationChain } = require('express-validator');
+const { validationResult, ValidationChain: _ValidationChain } = require('express-validator');
 
 /**
  * Middleware per gestire i risultati della validazione
@@ -26,14 +26,14 @@ export const handleValidationErrors = (req: Request, res: Response, next: NextFu
     });
   }
   
-  next();
+  return next();
 };
 
 /**
  * Middleware per validazione UUID
  * Verifica che un parametro sia un UUID valido
  */
-export const validateUUID = (paramName: string): ValidationChain => {
+export const validateUUID = (paramName: string): any => {
   const { param } = require('express-validator');
   return param(paramName)
     .isUUID()

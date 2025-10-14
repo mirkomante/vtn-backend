@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/piatti - Lista tutti i piatti
-router.get('/', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Costruisci la condizione WHERE basata sui filtri di query
     const where: any = {
@@ -69,18 +69,19 @@ router.get('/', piattiValidation.list, handleValidationErrors, async (req: Reque
     });
   } catch (error) {
     console.error('Errore nel recupero dei piatti:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/piatti/:id - Dettagli di un piatto specifico
-router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const piatto = await prisma.piatto.findFirst({
       where: {
@@ -134,7 +135,7 @@ router.get('/:id', piattiValidation.getById, handleValidationErrors, async (req:
 });
 
 // GET /api/v1/piatti/categoria/:categoriaId - Piatti per categoria
-router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const piatti = await prisma.piatto.findMany({
       where: {
@@ -190,7 +191,7 @@ router.get('/categoria/:categoriaId', piattiValidation.getByCategory, handleVali
 });
 
 // GET /api/v1/piatti/allergene/:allergeneId - Piatti per allergene
-router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const piatti = await prisma.piatto.findMany({
       where: {
@@ -250,7 +251,7 @@ router.get('/allergene/:allergeneId', piattiValidation.getByAllergen, handleVali
 });
 
 // GET /api/v1/piatti/categorie - Piatti raggruppati per categorie
-router.get('/categorie', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/categorie', piattiValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le categorie attive nell'ordine di creazione
     const categorie = await prisma.categoriaPiatti.findMany({
@@ -344,19 +345,20 @@ router.get('/categorie', piattiValidation.list, handleValidationErrors, async (r
 });
 
 // GET /api/v1/piatti/categorie/ordine - Piatti raggruppati per categorie con ordine personalizzato
-router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Recupera gli ID delle categorie dall'query parameter
     const categoriaIds = req.query.categorie as string;
     
     if (!categoriaIds) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: {
           code: 'MISSING_PARAMETER',
           message: 'Parametro "categorie" richiesto. Formato: ?categorie=id1,id2,id3'
         }
       });
+      return;
     }
 
     const categoriaIdsArray = categoriaIds.split(',').map(id => id.trim());
@@ -459,7 +461,7 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
 });
 
 // GET /api/v1/piatti/categorie/filtro - Piatti raggruppati per categorie con filtri avanzati
-router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const { escludi, includi, ordine } = req.query;
     
@@ -507,7 +509,7 @@ router.get('/categorie/filtro', piattiValidation.list, handleValidationErrors, a
       const ordinePersonalizzato = (ordine as string).split(',').map(id => id.trim());
       categorieOrdinate = ordinePersonalizzato
         .map(id => categorie.find(cat => cat.id === id))
-        .filter(Boolean);
+        .filter((cat): cat is NonNullable<typeof cat> => Boolean(cat));
     }
 
     // Recupera tutti i piatti delle categorie filtrate

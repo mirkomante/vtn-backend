@@ -138,7 +138,7 @@ export const allergeniConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -173,12 +173,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -204,7 +204,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -239,12 +239,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -270,7 +270,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -305,12 +305,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -336,7 +336,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -371,12 +371,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -402,7 +402,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -437,12 +437,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -468,7 +468,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -503,12 +503,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -534,7 +534,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -569,12 +569,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -600,7 +600,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -635,12 +635,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -666,7 +666,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -701,12 +701,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -732,7 +732,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -767,12 +767,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -798,7 +798,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -833,12 +833,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -864,7 +864,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -899,12 +899,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -930,7 +930,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -965,12 +965,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -996,7 +996,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1031,12 +1031,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1062,7 +1062,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1097,12 +1097,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1128,7 +1128,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1163,12 +1163,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1194,7 +1194,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1229,12 +1229,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1260,7 +1260,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1295,12 +1295,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1326,7 +1326,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1361,12 +1361,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1392,7 +1392,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1427,12 +1427,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1458,7 +1458,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1493,12 +1493,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1524,7 +1524,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1559,12 +1559,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1590,7 +1590,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1625,12 +1625,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1693,12 +1693,12 @@ export const zoneConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/zone/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/zone/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Zona',
       href: '/ristorante-menu/impostazioni/zone/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1724,7 +1724,7 @@ export const zoneConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1759,12 +1759,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1790,7 +1790,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1825,12 +1825,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1856,7 +1856,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1891,12 +1891,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1922,7 +1922,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -1957,12 +1957,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -1988,7 +1988,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2023,12 +2023,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2054,7 +2054,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2089,12 +2089,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2120,7 +2120,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2155,12 +2155,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2186,7 +2186,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2221,12 +2221,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2252,7 +2252,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2287,12 +2287,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2318,7 +2318,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2353,12 +2353,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2384,7 +2384,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2419,12 +2419,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2450,7 +2450,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2485,12 +2485,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2516,7 +2516,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2551,12 +2551,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2582,7 +2582,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2617,12 +2617,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2648,7 +2648,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2683,12 +2683,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2714,7 +2714,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2749,12 +2749,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2780,7 +2780,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2815,12 +2815,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2846,7 +2846,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2881,12 +2881,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2912,7 +2912,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -2947,12 +2947,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -2978,7 +2978,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3013,12 +3013,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3044,7 +3044,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3079,12 +3079,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3110,7 +3110,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3145,12 +3145,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3176,7 +3176,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3211,12 +3211,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3313,7 +3313,7 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3348,12 +3348,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3379,7 +3379,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3414,12 +3414,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3445,7 +3445,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3480,12 +3480,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3511,7 +3511,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3546,12 +3546,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3577,7 +3577,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3612,12 +3612,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3643,7 +3643,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3678,12 +3678,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3709,7 +3709,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3744,12 +3744,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3775,7 +3775,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3810,12 +3810,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3841,7 +3841,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3876,12 +3876,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3907,7 +3907,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -3942,12 +3942,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -3973,7 +3973,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4008,12 +4008,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4039,7 +4039,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4074,12 +4074,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4105,7 +4105,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4140,12 +4140,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4171,7 +4171,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4206,12 +4206,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4237,7 +4237,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4272,12 +4272,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4303,7 +4303,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4338,12 +4338,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4369,7 +4369,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4404,12 +4404,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4435,7 +4435,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4470,12 +4470,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4501,7 +4501,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4536,12 +4536,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4567,7 +4567,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4602,12 +4602,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4633,7 +4633,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4668,12 +4668,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4699,7 +4699,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4734,12 +4734,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4765,7 +4765,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4800,12 +4800,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4868,12 +4868,12 @@ export const zoneConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/zone/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/zone/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Zona',
       href: '/ristorante-menu/impostazioni/zone/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4899,7 +4899,7 @@ export const zoneConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -4934,12 +4934,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -4965,7 +4965,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5000,12 +5000,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5031,7 +5031,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5066,12 +5066,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5097,7 +5097,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5132,12 +5132,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5163,7 +5163,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5198,12 +5198,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5229,7 +5229,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5264,12 +5264,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5295,7 +5295,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5330,12 +5330,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5361,7 +5361,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5396,12 +5396,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5427,7 +5427,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5462,12 +5462,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5493,7 +5493,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5528,12 +5528,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5559,7 +5559,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5594,12 +5594,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5625,7 +5625,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5660,12 +5660,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5691,7 +5691,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5726,12 +5726,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5757,7 +5757,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5792,12 +5792,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5823,7 +5823,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5858,12 +5858,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5889,7 +5889,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5924,12 +5924,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -5955,7 +5955,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -5990,12 +5990,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6021,7 +6021,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6056,12 +6056,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6087,7 +6087,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6122,12 +6122,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6153,7 +6153,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6188,12 +6188,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6219,7 +6219,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6254,12 +6254,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6285,7 +6285,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6320,12 +6320,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6351,7 +6351,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6386,12 +6386,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6488,7 +6488,7 @@ export const categoriaPiattiConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6523,12 +6523,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6554,7 +6554,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6589,12 +6589,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6620,7 +6620,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6655,12 +6655,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6686,7 +6686,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6721,12 +6721,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6752,7 +6752,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6787,12 +6787,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6818,7 +6818,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6853,12 +6853,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6884,7 +6884,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6919,12 +6919,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -6950,7 +6950,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -6985,12 +6985,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7016,7 +7016,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7051,12 +7051,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7082,7 +7082,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7117,12 +7117,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7148,7 +7148,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7183,12 +7183,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7214,7 +7214,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7249,12 +7249,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7280,7 +7280,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7315,12 +7315,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7346,7 +7346,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7381,12 +7381,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7412,7 +7412,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7447,12 +7447,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7478,7 +7478,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7513,12 +7513,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7544,7 +7544,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7579,12 +7579,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7610,7 +7610,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7645,12 +7645,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7676,7 +7676,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7711,12 +7711,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7742,7 +7742,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7777,12 +7777,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7808,7 +7808,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7843,12 +7843,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7874,7 +7874,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7909,12 +7909,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -7940,7 +7940,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -7975,12 +7975,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8043,12 +8043,12 @@ export const zoneConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/zone/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/zone/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Zona',
       href: '/ristorante-menu/impostazioni/zone/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8074,7 +8074,7 @@ export const zoneConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8109,12 +8109,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8140,7 +8140,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8175,12 +8175,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8206,7 +8206,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8241,12 +8241,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8272,7 +8272,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8307,12 +8307,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8338,7 +8338,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8373,12 +8373,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8404,7 +8404,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8439,12 +8439,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8470,7 +8470,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8505,12 +8505,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8536,7 +8536,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8571,12 +8571,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8602,7 +8602,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8637,12 +8637,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8668,7 +8668,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8703,12 +8703,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8734,7 +8734,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8769,12 +8769,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8800,7 +8800,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8835,12 +8835,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8866,7 +8866,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8901,12 +8901,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8932,7 +8932,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -8967,12 +8967,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -8998,7 +8998,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9033,12 +9033,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9064,7 +9064,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9099,12 +9099,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9130,7 +9130,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9165,12 +9165,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9196,7 +9196,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9231,12 +9231,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9262,7 +9262,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9297,12 +9297,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9328,7 +9328,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9363,12 +9363,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9394,7 +9394,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9429,12 +9429,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9460,7 +9460,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9495,12 +9495,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9526,7 +9526,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9561,12 +9561,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9661,7 +9661,7 @@ export const nazioniConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9696,12 +9696,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9727,7 +9727,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9762,12 +9762,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9793,7 +9793,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9828,12 +9828,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9859,7 +9859,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9894,12 +9894,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9925,7 +9925,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -9960,12 +9960,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -9991,7 +9991,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10026,12 +10026,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10057,7 +10057,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10092,12 +10092,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10123,7 +10123,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10158,12 +10158,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10189,7 +10189,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10224,12 +10224,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10255,7 +10255,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10290,12 +10290,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10321,7 +10321,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10356,12 +10356,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10387,7 +10387,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10422,12 +10422,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10453,7 +10453,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10488,12 +10488,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10519,7 +10519,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10554,12 +10554,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10585,7 +10585,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10620,12 +10620,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10651,7 +10651,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10686,12 +10686,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10717,7 +10717,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10752,12 +10752,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10783,7 +10783,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10818,12 +10818,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10849,7 +10849,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10884,12 +10884,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10915,7 +10915,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -10950,12 +10950,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -10981,7 +10981,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11016,12 +11016,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11047,7 +11047,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11082,12 +11082,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11113,7 +11113,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11148,12 +11148,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11216,12 +11216,12 @@ export const zoneConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/zone/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/zone/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Zona',
       href: '/ristorante-menu/impostazioni/zone/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11247,7 +11247,7 @@ export const zoneConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11282,12 +11282,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11313,7 +11313,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11348,12 +11348,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11379,7 +11379,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11414,12 +11414,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11445,7 +11445,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11480,12 +11480,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11511,7 +11511,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11546,12 +11546,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11577,7 +11577,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11612,12 +11612,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11643,7 +11643,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11678,12 +11678,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11709,7 +11709,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11744,12 +11744,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11775,7 +11775,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11810,12 +11810,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11841,7 +11841,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11876,12 +11876,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11907,7 +11907,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -11942,12 +11942,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -11973,7 +11973,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12008,12 +12008,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12039,7 +12039,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12074,12 +12074,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12105,7 +12105,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12140,12 +12140,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12171,7 +12171,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12206,12 +12206,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12237,7 +12237,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12272,12 +12272,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12303,7 +12303,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12338,12 +12338,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12369,7 +12369,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12404,12 +12404,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12435,7 +12435,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12470,12 +12470,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12501,7 +12501,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12536,12 +12536,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12567,7 +12567,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12602,12 +12602,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12633,7 +12633,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12668,12 +12668,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12699,7 +12699,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12734,12 +12734,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12827,12 +12827,12 @@ export const regioniConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/regioni/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/regioni/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Regione',
       href: '/ristorante-menu/impostazioni/regioni/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12858,7 +12858,7 @@ export const regioniConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12893,12 +12893,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12924,7 +12924,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -12959,12 +12959,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -12990,7 +12990,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13025,12 +13025,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13056,7 +13056,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13091,12 +13091,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13122,7 +13122,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13157,12 +13157,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13188,7 +13188,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13223,12 +13223,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13254,7 +13254,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13289,12 +13289,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13320,7 +13320,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13355,12 +13355,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13386,7 +13386,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13421,12 +13421,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13452,7 +13452,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13487,12 +13487,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13518,7 +13518,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13553,12 +13553,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13584,7 +13584,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13619,12 +13619,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13650,7 +13650,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13685,12 +13685,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13716,7 +13716,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13751,12 +13751,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13782,7 +13782,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13817,12 +13817,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13848,7 +13848,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13883,12 +13883,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13914,7 +13914,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -13949,12 +13949,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -13980,7 +13980,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14015,12 +14015,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14046,7 +14046,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14081,12 +14081,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14112,7 +14112,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14147,12 +14147,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14178,7 +14178,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14213,12 +14213,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14244,7 +14244,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14279,12 +14279,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14310,7 +14310,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14345,12 +14345,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14413,12 +14413,12 @@ export const zoneConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/zone/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/zone/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Zona',
       href: '/ristorante-menu/impostazioni/zone/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14444,7 +14444,7 @@ export const zoneConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14479,12 +14479,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14510,7 +14510,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14545,12 +14545,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14576,7 +14576,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14611,12 +14611,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14642,7 +14642,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14677,12 +14677,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14708,7 +14708,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14743,12 +14743,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14774,7 +14774,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14809,12 +14809,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14840,7 +14840,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14875,12 +14875,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14906,7 +14906,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -14941,12 +14941,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -14972,7 +14972,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15007,12 +15007,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15038,7 +15038,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15073,12 +15073,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15104,7 +15104,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15139,12 +15139,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15170,7 +15170,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie vino
-export const tipologieVinoConfig: SubSectionConfig = {
+export const tipologieVinoConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15205,12 +15205,12 @@ export const tipologieVinoConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-vino/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-vino/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Vino',
       href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15236,7 +15236,7 @@ export const tipologieVinoConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15271,12 +15271,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15302,7 +15302,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15337,12 +15337,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15368,7 +15368,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15403,12 +15403,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15434,7 +15434,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15469,12 +15469,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15500,7 +15500,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15535,12 +15535,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15566,7 +15566,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie birra
-export const tipologieBirraConfig: SubSectionConfig = {
+export const tipologieBirraConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15601,12 +15601,12 @@ export const tipologieBirraConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-birra/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-birra/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Birra',
       href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15632,7 +15632,7 @@ export const tipologieBirraConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15667,12 +15667,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15698,7 +15698,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15733,12 +15733,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15764,7 +15764,7 @@ export const tipologieBevandaConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie liquore
-export const tipologieLiquoreConfig: SubSectionConfig = {
+export const tipologieLiquoreConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15799,12 +15799,12 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-liquore/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-liquore/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Liquore',
       href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15830,7 +15830,7 @@ export const tipologieLiquoreConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie cocktail
-export const tipologieCocktailConfig: SubSectionConfig = {
+export const tipologieCocktailConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15865,12 +15865,12 @@ export const tipologieCocktailConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-cocktail/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Cocktail',
       href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -15896,7 +15896,7 @@ export const tipologieCocktailConfig: SubSectionConfig = {
 };
 
 // Configurazioni per tipologie bevanda
-export const tipologieBevandaConfig: SubSectionConfig = {
+export const tipologieBevandaConfig3: SubSectionConfig = {
   hasItems: false,
   items: [],
   emptyState: {
@@ -15931,12 +15931,12 @@ export const tipologieBevandaConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/tipologie-bevanda/modifica/:id',
-    bulkEditUrl: null,
+    // bulkEditUrl: undefined, // Non necessario per questa configurazione
     actionButton: {
       text: 'Nuova Tipologia Bevanda',
       href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo'
     },
-    editMultipleButton: null,
+    // editMultipleButton: undefined, // Non necessario per questa configurazione
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'

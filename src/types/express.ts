@@ -1,5 +1,3 @@
-import { User as PrismaUser } from '@prisma/client';
-
 export type User = {
   id: string;
   email: string;
@@ -29,4 +27,5 @@ declare global {
       redirect(url: string): void;
     }
   }
-} 
+}
+

@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/categoria-menu-fisso - Lista tutte le categorie menu fisso
-router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Costruisci la condizione WHERE basata sui filtri di query
     const where: any = {
@@ -80,18 +80,19 @@ router.get('/', categoriaMenuFissoValidation.list, handleValidationErrors, async
     });
   } catch (error) {
     console.error('Errore nel recupero delle categorie menu fisso:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/categoria-menu-fisso/:id - Dettagli di una categoria menu fisso specifica
-router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors, async (req: Request, res: Response) => {
+router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const categoria = await prisma.categoriaMenuFisso.findFirst({
       where: {
@@ -155,23 +156,26 @@ router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors,
   } catch (error) {
     console.error('Errore nel recupero della categoria menu fisso:', error);
     
-    if (error.name === 'NotFoundError') {
-      return res.status(404).json({
+    const err = error as Error;
+    if (err.name === 'NotFoundError') {
+      res.status(404).json({
         success: false,
         error: {
           code: 'NOT_FOUND',
-          message: error.message
+          message: err.message
         }
       });
+      return;
     }
 
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
