@@ -177,9 +177,11 @@ router.get('/servizi', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei servizi:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -295,6 +297,7 @@ router.post('/servizi/nuovo', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante la creazione del servizio'
     });
+    return;
   }
 });
 
@@ -313,6 +316,7 @@ router.get('/servizi/dettagli/:id', async (req, res) => {
 
     if (!servizio) {
       return res.status(404).send('Servizio non trovato');
+    return;
     }
 
     const actionNavConfig = { ...actionNavConfigs['servizi.view'] };
@@ -349,9 +353,11 @@ router.get('/servizi/dettagli/:id', async (req, res) => {
         { label: servizio.nome, href: `/ristorante-menu/servizi/dettagli/${servizio.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del servizio:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -410,6 +416,7 @@ router.get('/servizi/modifica/:id', async (req, res) => {
         { label: servizio.nome, href: `/ristorante-menu/servizi/modifica/${servizio.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del servizio per modifica:', error);
     res.status(500).render('error', {
@@ -426,6 +433,7 @@ router.get('/servizi/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore nel recupero del servizio'
     });
+    return;
   }
 });
 
@@ -531,6 +539,7 @@ router.post('/servizi/modifica/:id', async (req, res) => {
       error: 'Si è verificato un errore durante l\'aggiornamento del servizio',
       formData: req.body
     });
+    return;
   }
 });
 
@@ -547,9 +556,11 @@ router.delete('/servizi/:id', async (req, res) => {
     });
     
     res.json({ success: true, message: 'Servizio eliminato con successo' });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del servizio:', error);
     res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+    return;
   }
 });
 
@@ -562,6 +573,7 @@ router.delete('/servizi', async (req, res) => {
       success: false, 
       message: 'Nessun servizio selezionato per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -578,6 +590,7 @@ router.delete('/servizi', async (req, res) => {
         success: false, 
         message: 'Nessun servizio valido trovato per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutti i servizi validi
@@ -605,12 +618,14 @@ router.delete('/servizi', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione dei servizi:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -722,9 +737,11 @@ router.get('/piatti', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei piatti:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -788,9 +805,11 @@ router.get('/piatti/nuovo', async (req, res) => {
         { label: 'Nuovo Piatto', href: '/ristorante-menu/piatti/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuovo piatto:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -849,6 +868,7 @@ router.post('/piatti/nuovo', async (req, res) => {
         { label: 'Nuovo Piatto', href: '/ristorante-menu/piatti/nuovo' }
       ]
     });
+    return;
   }
 });
 
@@ -875,6 +895,7 @@ router.get('/piatti/dettagli/:id', async (req, res) => {
 
     if (!piatto) {
       return res.status(404).send('Piatto non trovato');
+    return;
     }
 
     // Trasforma i dati per la vista
@@ -917,9 +938,11 @@ router.get('/piatti/dettagli/:id', async (req, res) => {
         { label: piatto.nome, href: `/ristorante-menu/piatti/dettagli/${piatto.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del piatto:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -946,6 +969,7 @@ router.get('/piatti/modifica/:id', async (req, res) => {
 
     if (!piatto) {
       return res.status(404).send('Piatto non trovato');
+    return;
     }
 
     // Recupera categorie e allergeni per i select
@@ -1005,9 +1029,11 @@ router.get('/piatti/modifica/:id', async (req, res) => {
         { label: piatto.nome, href: `/ristorante-menu/piatti/modifica/${piatto.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica piatto:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -1027,6 +1053,7 @@ router.post('/piatti/modifica/:id', async (req, res) => {
 
     if (!existingPiatto) {
       return res.status(404).send('Piatto non trovato');
+    return;
     }
 
     // Aggiorna il piatto
@@ -1094,6 +1121,7 @@ router.post('/piatti/modifica/:id', async (req, res) => {
         { label: existingPiatto?.nome || 'Modifica Piatto', href: `/ristorante-menu/piatti/modifica/${req.params.id}` }
       ]
     });
+    return;
   }
 });
 
@@ -1171,9 +1199,11 @@ router.get('/piatti/modifica-massa', async (req, res) => {
         { label: 'Modifica Massiva', href: '/ristorante-menu/piatti/modifica-massa' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento della modifica massiva piatti:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -1187,6 +1217,7 @@ router.post('/piatti/modifica-massa', async (req, res) => {
         success: false, 
         message: 'Nessun piatto selezionato' 
       });
+    return;
     }
 
     // Prepara i dati da aggiornare
@@ -1230,12 +1261,14 @@ router.post('/piatti/modifica-massa', async (req, res) => {
       message: `Aggiornati ${updatedCount.count} piatti con successo`,
       redirectUrl: '/ristorante-menu/piatti'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento massivo dei piatti:', error);
     return res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'aggiornamento massivo' 
     });
+    return;
   }
 });
 
@@ -1255,12 +1288,14 @@ router.delete('/piatti/:id', async (req, res) => {
       success: true,
       message: 'Piatto eliminato con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del piatto:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione del piatto' 
     });
+    return;
   }
 });
 
@@ -1273,6 +1308,7 @@ router.delete('/piatti', async (req, res) => {
       success: false, 
       message: 'Nessun piatto selezionato' 
     });
+    return;
   }
 
   try {
@@ -1290,12 +1326,14 @@ router.delete('/piatti', async (req, res) => {
       success: true,
       message: `Eliminati ${deletedCount.count} piatti con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla dei piatti:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1315,12 +1353,14 @@ router.delete('/vini/:id', async (req, res) => {
       success: true,
       message: 'Vino eliminato con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del vino:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione del vino' 
     });
+    return;
   }
 });
 
@@ -1333,6 +1373,7 @@ router.delete('/vini', async (req, res) => {
       success: false, 
       message: 'Nessun vino selezionato' 
     });
+    return;
   }
 
   try {
@@ -1350,12 +1391,14 @@ router.delete('/vini', async (req, res) => {
       success: true,
       message: `Eliminati ${deletedCount.count} vini con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla dei vini:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1375,12 +1418,14 @@ router.delete('/birre/:id', async (req, res) => {
       success: true,
       message: 'Birra eliminata con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della birra:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione della birra' 
     });
+    return;
   }
 });
 
@@ -1393,6 +1438,7 @@ router.delete('/birre', async (req, res) => {
       success: false, 
       message: 'Nessuna birra selezionata' 
     });
+    return;
   }
 
   try {
@@ -1410,12 +1456,14 @@ router.delete('/birre', async (req, res) => {
       success: true,
       message: `Eliminate ${deletedCount.count} birre con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla delle birre:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1435,12 +1483,14 @@ router.delete('/liquori/:id', async (req, res) => {
       success: true,
       message: 'Liquore eliminato con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del liquore:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione del liquore' 
     });
+    return;
   }
 });
 
@@ -1453,6 +1503,7 @@ router.delete('/liquori', async (req, res) => {
       success: false, 
       message: 'Nessun liquore selezionato' 
     });
+    return;
   }
 
   try {
@@ -1470,12 +1521,14 @@ router.delete('/liquori', async (req, res) => {
       success: true,
       message: `Eliminati ${deletedCount.count} liquori con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla dei liquori:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1495,12 +1548,14 @@ router.delete('/cocktail/:id', async (req, res) => {
       success: true,
       message: 'Cocktail eliminato con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del cocktail:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione del cocktail' 
     });
+    return;
   }
 });
 
@@ -1513,6 +1568,7 @@ router.delete('/cocktail', async (req, res) => {
       success: false, 
       message: 'Nessun cocktail selezionato' 
     });
+    return;
   }
 
   try {
@@ -1530,12 +1586,14 @@ router.delete('/cocktail', async (req, res) => {
       success: true,
       message: `Eliminati ${deletedCount.count} cocktail con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla dei cocktail:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1555,12 +1613,14 @@ router.delete('/bevande/:id', async (req, res) => {
       success: true,
       message: 'Bevanda eliminata con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della bevanda:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore durante l\'eliminazione della bevanda' 
     });
+    return;
   }
 });
 
@@ -1573,6 +1633,7 @@ router.delete('/bevande', async (req, res) => {
       success: false, 
       message: 'Nessuna bevanda selezionata' 
     });
+    return;
   }
 
   try {
@@ -1590,12 +1651,14 @@ router.delete('/bevande', async (req, res) => {
       success: true,
       message: `Eliminate ${deletedCount.count} bevande con successo`
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla delle bevande:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -1693,9 +1756,11 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle categorie menu fisso:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -1743,12 +1808,14 @@ router.get('/impostazioni/categoria-menu-fisso/ajax', async (req, res) => {
       pagination,
       message: 'Dati caricati con successo'
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle categorie menu fisso (AJAX):', error);
     res.status(500).json({
       success: false,
       message: 'Errore interno del server'
     });
+    return;
   }
 });
 
@@ -1859,9 +1926,11 @@ router.get('/vini', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei vini:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -1933,9 +2002,11 @@ router.get('/vini/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -1960,6 +2031,7 @@ router.get('/vini/modifica/:id', async (req, res) => {
 
     if (!vino) {
       return res.status(404).send('Vino non trovato');
+    return;
     }
 
     // Recupera le tipologie per il form
@@ -2026,9 +2098,11 @@ router.get('/vini/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2053,6 +2127,7 @@ router.get('/vini/dettagli/:id', async (req, res) => {
 
     if (!vino) {
       return res.status(404).send('Vino non trovato');
+    return;
     }
 
     // Trasforma i dati per la vista
@@ -2098,9 +2173,11 @@ router.get('/vini/dettagli/:id', async (req, res) => {
         { label: vino.nome, href: `/ristorante-menu/vini/dettagli/${vino.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2199,9 +2276,11 @@ router.get('/vini/modifica-massa', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento della modifica massiva vini:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2308,9 +2387,11 @@ router.get('/birre', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle birre:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2371,9 +2452,11 @@ router.get('/birre/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2395,6 +2478,7 @@ router.get('/birre/modifica/:id', async (req, res) => {
     
     if (!birra) {
       return res.status(404).send('Birra non trovata');
+    return;
     }
     
     // Recupera le tipologie per il form
@@ -2450,9 +2534,11 @@ router.get('/birre/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2474,6 +2560,7 @@ router.get('/birre/dettagli/:id', async (req, res) => {
     
     if (!birra) {
       return res.status(404).send('Birra non trovata');
+    return;
     }
     
     // Trasforma i dati per la vista dettaglio
@@ -2516,9 +2603,11 @@ router.get('/birre/dettagli/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2608,9 +2697,11 @@ router.get('/birre/modifica-massa', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento della modifica massiva birre:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2723,9 +2814,11 @@ router.get('/menu-fissi', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei menu fissi:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2798,9 +2891,11 @@ router.get('/menu-fissi/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuovo menu fisso:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2832,6 +2927,7 @@ router.get('/menu-fissi/dettagli/:id', async (req, res) => {
 
     if (!menuFisso) {
       return res.status(404).send('Menu fisso non trovato');
+    return;
     }
 
     // Prepara i dati per la vista dettaglio
@@ -2876,9 +2972,11 @@ router.get('/menu-fissi/dettagli/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del menu fisso:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -2910,6 +3008,7 @@ router.get('/menu-fissi/modifica/:id', async (req, res) => {
 
     if (!menuFisso) {
       return res.status(404).send('Menu fisso non trovato');
+    return;
     }
 
     // Recupera categorie, piatti e servizi per i select
@@ -2977,9 +3076,11 @@ router.get('/menu-fissi/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica menu fisso:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3056,9 +3157,11 @@ router.get('/menu-fissi/modifica-massa', async (req, res) => {
       actionNavConfig,
       isInternalPage: true
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento della modifica massiva menu fissi:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3132,9 +3235,11 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle categorie piatti:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3208,9 +3313,11 @@ router.get('/impostazioni/allergeni', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero degli allergeni:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3325,6 +3432,7 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante la creazione dell\'allergene'
     });
+    return;
   }
 });
 
@@ -3344,6 +3452,7 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
 
     if (!allergene) {
       return res.status(404).send('Allergene non trovato');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('allergeni', 'view', allergene.id);
@@ -3372,9 +3481,11 @@ router.get('/impostazioni/allergeni/dettagli/:id', async (req, res) => {
         { label: allergene.nome, href: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dell\'allergene:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3440,6 +3551,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
         { label: allergene.nome, href: `/ristorante-menu/impostazioni/allergeni/modifica/${allergene.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dell\'allergene per modifica:', error);
     const actionNavConfig = createSubSectionActionNav('allergeni', 'edit');
@@ -3461,6 +3573,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore nel recupero dell\'allergene',
     });
+    return;
   }
 });
 
@@ -3578,6 +3691,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante l\'aggiornamento dell\'allergene'
     });
+    return;
   }
 });
 
@@ -3594,9 +3708,11 @@ router.delete('/impostazioni/allergeni/:id', async (req, res) => {
     });
     
     res.json({ success: true, message: 'Allergene eliminato con successo' });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione dell\'allergene:', error);
     res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+    return;
   }
 });
 
@@ -3609,6 +3725,7 @@ router.delete('/impostazioni/allergeni', async (req, res) => {
       success: false, 
       message: 'Nessun allergene selezionato per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -3625,6 +3742,7 @@ router.delete('/impostazioni/allergeni', async (req, res) => {
         success: false, 
         message: 'Nessun allergene valido trovato per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutti gli allergeni validi
@@ -3652,12 +3770,14 @@ router.delete('/impostazioni/allergeni', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione degli allergeni:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -3775,6 +3895,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante la creazione della categoria'
     });
+    return;
   }
 });
 
@@ -3794,6 +3915,7 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
 
     if (!categoria) {
       return res.status(404).send('Categoria non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('categoria-menu-fisso', 'view', categoria.id);
@@ -3823,9 +3945,11 @@ router.get('/impostazioni/categoria-menu-fisso/dettagli/:id', async (req, res) =
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della categoria:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -3890,6 +4014,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-menu-fisso/modifica/${categoria.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della categoria per modifica:', error);
     res.status(500).render('error', {
@@ -3909,6 +4034,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       error: 'Si è verificato un errore nel recupero della categoria',
       isInternalPage: true 
     });
+    return;
   }
 });
 
@@ -4023,6 +4149,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
       ],
       error: 'Si è verificato un errore durante l\'aggiornamento della categoria'
     });
+    return;
   }
 });
 
@@ -4083,6 +4210,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica-massa', async (req, res)
         { label: 'Modifica Massiva', href: '#' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle categorie per modifica massiva:', error);
     res.redirect('/ristorante-menu/impostazioni/categoria-menu-fisso');
@@ -4177,9 +4305,11 @@ router.delete('/impostazioni/categoria-menu-fisso/:id', async (req, res) => {
     });
     
     res.json({ success: true, message: 'Categoria eliminata con successo' });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della categoria:', error);
     res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+    return;
   }
 });
 
@@ -4192,6 +4322,7 @@ router.delete('/impostazioni/categoria-menu-fisso', async (req, res) => {
       success: false, 
       message: 'Nessuna categoria selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -4208,6 +4339,7 @@ router.delete('/impostazioni/categoria-menu-fisso', async (req, res) => {
         success: false, 
         message: 'Nessuna categoria valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le categorie validi
@@ -4235,12 +4367,14 @@ router.delete('/impostazioni/categoria-menu-fisso', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle categorie:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -4357,6 +4491,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante la creazione della categoria'
     });
+    return;
   }
 });
 
@@ -4376,6 +4511,7 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
 
     if (!categoria) {
       return res.status(404).send('Categoria non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'view', categoria.id);
@@ -4405,9 +4541,11 @@ router.get('/impostazioni/categoria-piatti/dettagli/:id', async (req, res) => {
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della categoria:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -4474,6 +4612,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
         { label: categoria.nome, href: `/ristorante-menu/impostazioni/categoria-piatti/modifica/${categoria.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della categoria per modifica:', error);
     const actionNavConfig = createSubSectionActionNav('categoria-piatti', 'edit');
@@ -4495,6 +4634,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore nel recupero della categoria'
     });
+    return;
   }
 });
 
@@ -4613,6 +4753,7 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       ],
       error: 'Si è verificato un errore durante l\'aggiornamento della categoria'
     });
+    return;
   }
 });
 
@@ -4673,6 +4814,7 @@ router.get('/impostazioni/categoria-piatti/modifica-massa', async (req, res) => 
         { label: 'Modifica Massiva', href: '#' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle categorie per modifica massiva:', error);
     res.redirect('/ristorante-menu/impostazioni/categoria-piatti');
@@ -4767,9 +4909,11 @@ router.delete('/impostazioni/categoria-piatti/:id', async (req, res) => {
     });
     
     res.json({ success: true, message: 'Categoria eliminata con successo' });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della categoria:', error);
     res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+    return;
   }
 });
 
@@ -4782,6 +4926,7 @@ router.delete('/impostazioni/categoria-piatti', async (req, res) => {
       success: false, 
       message: 'Nessuna categoria selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -4798,6 +4943,7 @@ router.delete('/impostazioni/categoria-piatti', async (req, res) => {
         success: false, 
         message: 'Nessuna categoria valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le categorie validi
@@ -4825,12 +4971,14 @@ router.delete('/impostazioni/categoria-piatti', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle categorie:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -4945,6 +5093,7 @@ router.get('/cancellati', async (req, res) => {
         buttonIcon: uiIcons['freccia-sx']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero degli elementi cancellati:', error);
     
@@ -5025,6 +5174,7 @@ router.post('/restore', async (req, res) => {
       success: false, 
       message: 'Dati mancanti per il ripristino' 
     });
+    return;
   }
   
   try {
@@ -5441,12 +5591,14 @@ router.post('/restore', async (req, res) => {
       skippedCount: totalSkipped,
       results
     });
+    return;
   } catch (error) {
     console.error('Errore nel ripristino degli elementi:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante il ripristino' 
     });
+    return;
   }
 });
 
@@ -5460,6 +5612,7 @@ router.delete('/permanent-delete', async (req, res) => {
       success: false, 
       message: 'Dati mancanti per l\'eliminazione definitiva' 
     });
+    return;
   }
   
   try {
@@ -5877,12 +6030,14 @@ router.delete('/permanent-delete', async (req, res) => {
       skippedCount: totalSkipped,
       results
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione definitiva degli elementi:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'eliminazione definitiva' 
     });
+    return;
   }
 });
 
@@ -5972,9 +6127,11 @@ router.get('/impostazioni/nazioni', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle nazioni:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -6001,6 +6158,7 @@ router.get('/impostazioni/nazioni/dettagli/:id', async (req, res) => {
 
     if (!nazione) {
       return res.status(404).send('Nazione non trovata');
+    return;
     }
 
     // Trasforma i dati per la vista
@@ -6035,9 +6193,11 @@ router.get('/impostazioni/nazioni/dettagli/:id', async (req, res) => {
         { label: nazione.nome, href: `/ristorante-menu/impostazioni/nazioni/dettagli/${nazione.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero della nazione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -6075,9 +6235,11 @@ router.get('/impostazioni/nazioni/nuovo', async (req, res) => {
         { label: 'Nuova Nazione', href: '/ristorante-menu/impostazioni/nazioni/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova nazione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -6097,6 +6259,7 @@ router.get('/impostazioni/nazioni/modifica/:id', async (req, res) => {
 
     if (!nazione) {
       return res.status(404).send('Nazione non trovata');
+    return;
     }
 
     const formConfig = nazioneFormData.getFormData ? nazioneFormData.getFormData(nazioneFormData, true, nazione, req.body) : nazioneFormData;
@@ -6130,9 +6293,11 @@ router.get('/impostazioni/nazioni/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/nazioni/modifica/${nazione.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica nazione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -6149,9 +6314,11 @@ router.delete('/impostazioni/nazioni/:id', async (req, res) => {
     });
     
     res.json({ success: true, message: 'Nazione eliminata con successo' });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della nazione:', error);
     res.status(500).json({ success: false, message: 'Errore nell\'eliminazione' });
+    return;
   }
 });
 
@@ -6164,6 +6331,7 @@ router.delete('/impostazioni/nazioni', async (req, res) => {
       success: false, 
       message: 'Nessuna nazione selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -6180,6 +6348,7 @@ router.delete('/impostazioni/nazioni', async (req, res) => {
         success: false, 
         message: 'Nessuna nazione valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le nazioni valide
@@ -6207,12 +6376,14 @@ router.delete('/impostazioni/nazioni', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle nazioni:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -6247,12 +6418,14 @@ router.post('/impostazioni/allergeni/nuovo/ajax', async (req, res) => {
       message: 'Allergene creato con successo',
       data: { id: allergene.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione dell\'allergene:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione dell\'allergene' 
     });
+    return;
   }
 });
 
@@ -6299,12 +6472,14 @@ router.post('/impostazioni/allergeni/modifica/:id/ajax', async (req, res) => {
       message: 'Allergene aggiornato con successo',
       data: { id: updatedAllergene.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento dell\'allergene:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento dell\'allergene' 
     });
+    return;
   }
 });
 
@@ -6337,12 +6512,14 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo/ajax', async (req, res) =>
       message: 'Categoria creata con successo',
       data: { id: categoria.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della categoria:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione della categoria' 
     });
+    return;
   }
 });
 
@@ -6390,12 +6567,14 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id/ajax', async (req, 
       message: 'Categoria aggiornata con successo',
       data: { id: updatedCategoria.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della categoria:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
     });
+    return;
   }
 });
 
@@ -6428,12 +6607,14 @@ router.post('/impostazioni/categoria-piatti/nuovo/ajax', async (req, res) => {
       message: 'Categoria creata con successo',
       data: { id: categoria.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della categoria:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione della categoria' 
     });
+    return;
   }
 });
 
@@ -6481,12 +6662,14 @@ router.post('/impostazioni/categoria-piatti/modifica/:id/ajax', async (req, res)
       message: 'Categoria aggiornata con successo',
       data: { id: updatedCategoria.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della categoria:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della categoria' 
     });
+    return;
   }
 });
 
@@ -6526,12 +6709,14 @@ router.post('/impostazioni/nazioni/nuovo/ajax', async (req, res) => {
       message: 'Nazione creata con successo',
       data: { id: nazione.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della nazione:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione della nazione' 
     });
+    return;
   }
 });
 
@@ -6591,12 +6776,14 @@ router.post('/impostazioni/nazioni/modifica/:id/ajax', async (req, res) => {
       message: 'Nazione aggiornata con successo',
       data: { id: updatedNazione.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della nazione:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della nazione' 
     });
+    return;
   }
 });
 
@@ -6657,6 +6844,7 @@ router.get('/servizi/modifica-massa', async (req, res) => {
         { label: 'Modifica Massiva', href: '#' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei servizi per modifica massiva:', error);
     res.redirect('/ristorante-menu/servizi');
@@ -6804,13 +6992,14 @@ router.post('/servizi/modifica-massa/ajax', async (req, res) => {
       updatedCount,
       skippedCount
     });
-    
+    return;
   } catch (error) {
     console.error('Errore durante la modifica massiva:', error);
     res.json({ 
       success: false, 
       message: 'Errore interno del server durante la modifica massiva' 
     });
+    return;
   }
 });
 
@@ -6866,12 +7055,14 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
       message: 'Piatto creato con successo',
       data: { id: piatto.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del piatto:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione del piatto' 
     });
+    return;
   }
 });
 
@@ -6944,12 +7135,14 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
       message: 'Piatto aggiornato con successo',
       data: { id: updatedPiatto.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento del piatto:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento del piatto' 
     });
+    return;
   }
 });
 
@@ -7009,12 +7202,14 @@ router.post('/piatti/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} piatto/i aggiornato/i con successo`,
       data: { updatedCount: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva dei piatti:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei piatti' 
     });
+    return;
   }
 });
 
@@ -7080,12 +7275,14 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
       message: 'Vino creato con successo',
       data: { id: vino.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del vino:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione del vino' 
     });
+    return;
   }
 });
 
@@ -7163,12 +7360,14 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
       message: 'Vino aggiornato con successo',
       data: { id: updatedVino.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento del vino:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento del vino' 
     });
+    return;
   }
 });
 
@@ -7262,12 +7461,14 @@ router.post('/vini/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} vino/i aggiornato/i con successo`,
       data: { updatedCount: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva dei vini:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei vini' 
     });
+    return;
   }
 });
 
@@ -7305,12 +7506,14 @@ router.post('/birre/nuovo/ajax', async (req, res) => {
       message: 'Birra creata con successo',
       data: { id: birra.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della birra:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione della birra' 
     });
+    return;
   }
 });
 
@@ -7360,12 +7563,14 @@ router.post('/birre/modifica/:id/ajax', async (req, res) => {
       message: 'Birra aggiornata con successo',
       data: { id: birra.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della birra:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento della birra' 
     });
+    return;
   }
 });
 
@@ -7422,12 +7627,14 @@ router.post('/birre/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} birra aggiornata/e con successo`,
       data: { count: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva delle birre:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva delle birre' 
     });
+    return;
   }
 });
 
@@ -7534,9 +7741,11 @@ router.get('/liquori', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei liquori:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -7595,9 +7804,11 @@ router.get('/liquori/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuovo liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -7619,6 +7830,7 @@ router.get('/liquori/modifica/:id', async (req, res) => {
     
     if (!liquore) {
       return res.status(404).send('Liquore non trovato');
+    return;
     }
     
     // Recupera le tipologie e nazioni per i select
@@ -7672,9 +7884,11 @@ router.get('/liquori/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -7696,6 +7910,7 @@ router.get('/liquori/dettagli/:id', async (req, res) => {
     
     if (!liquore) {
       return res.status(404).send('Liquore non trovato');
+    return;
     }
     
     // Trasforma i dati per la vista dettaglio
@@ -7738,9 +7953,11 @@ router.get('/liquori/dettagli/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero del liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -7830,9 +8047,11 @@ router.get('/liquori/modifica-massa', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica massiva liquori:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -7871,12 +8090,14 @@ router.post('/liquori/nuovo/ajax', async (req, res) => {
       message: 'Liquore creato con successo',
       data: { id: liquore.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del liquore:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione del liquore' 
     });
+    return;
   }
 });
 
@@ -7927,12 +8148,14 @@ router.post('/liquori/modifica/:id/ajax', async (req, res) => {
       message: 'Liquore aggiornato con successo',
       data: { id: liquore.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento del liquore:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento del liquore' 
     });
+    return;
   }
 });
 
@@ -8000,12 +8223,14 @@ router.post('/liquori/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} liquore aggiornato/i con successo`,
       data: { count: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva dei liquori:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei liquori' 
     });
+    return;
   }
 });
 
@@ -8112,9 +8337,11 @@ router.get('/cocktails', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei cocktails:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8173,9 +8400,11 @@ router.get('/cocktails/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuovo cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8198,6 +8427,7 @@ router.get('/cocktails/modifica/:id', async (req, res) => {
     
     if (!cocktail || cocktail.deletedAt) {
       return res.status(404).send('Cocktail non trovato');
+    return;
     }
     
     // Recupera le tipologie e nazioni per i select
@@ -8251,9 +8481,11 @@ router.get('/cocktails/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8276,6 +8508,7 @@ router.get('/cocktails/dettagli/:id', async (req, res) => {
     
     if (!cocktail || cocktail.deletedAt) {
       return res.status(404).send('Cocktail non trovato');
+    return;
     }
     
     // Trasforma i dati per la vista dettaglio
@@ -8315,9 +8548,11 @@ router.get('/cocktails/dettagli/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei dettagli del cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8407,9 +8642,11 @@ router.get('/cocktails/modifica-massa', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica massiva cocktails:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8452,12 +8689,14 @@ router.post('/cocktails/nuovo/ajax', async (req, res) => {
       message: 'Cocktail creato con successo',
       data: { id: cocktail.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del cocktail:', error);
     res.json({
       success: false,
       message: 'Errore durante la creazione del cocktail'
     });
+    return;
   }
 });
 
@@ -8513,12 +8752,14 @@ router.post('/cocktails/modifica/:id/ajax', async (req, res) => {
       message: 'Cocktail aggiornato con successo',
       data: { id: updatedCocktail.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica del cocktail:', error);
     res.json({
       success: false,
       message: 'Errore durante la modifica del cocktail'
     });
+    return;
   }
 });
 
@@ -8574,12 +8815,14 @@ router.post('/cocktails/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} cocktail aggiornato/i con successo`,
       data: { count: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva dei cocktails:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei cocktails' 
     });
+    return;
   }
 });
 
@@ -8686,9 +8929,11 @@ router.get('/bevande', async (req, res) => {
         buttonIcon: uiIcons['piu']
       }
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle bevande:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8747,9 +8992,11 @@ router.get('/bevande/nuovo', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8772,6 +9019,7 @@ router.get('/bevande/modifica/:id', async (req, res) => {
     
     if (!bevanda || bevanda.deletedAt) {
       return res.status(404).send('Bevanda non trovata');
+    return;
     }
     
     // Recupera le tipologie e nazioni per i select
@@ -8825,9 +9073,11 @@ router.get('/bevande/modifica/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8850,6 +9100,7 @@ router.get('/bevande/dettagli/:id', async (req, res) => {
     
     if (!bevanda || bevanda.deletedAt) {
       return res.status(404).send('Bevanda non trovata');
+    return;
     }
     
     // Trasforma i dati per la vista dettaglio
@@ -8889,9 +9140,11 @@ router.get('/bevande/dettagli/:id', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero dei dettagli della bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -8981,9 +9234,11 @@ router.get('/bevande/modifica-massa', async (req, res) => {
       ],
       actionNavConfig
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica massiva bevande:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -9026,12 +9281,14 @@ router.post('/bevande/nuovo/ajax', async (req, res) => {
       message: 'Bevanda creata con successo',
       data: { id: bevanda.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della bevanda:', error);
     res.json({
       success: false,
       message: 'Errore durante la creazione della bevanda'
     });
+    return;
   }
 });
 
@@ -9087,12 +9344,14 @@ router.post('/bevande/modifica/:id/ajax', async (req, res) => {
       message: 'Bevanda aggiornata con successo',
       data: { id: updatedBevanda.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica della bevanda:', error);
     res.json({
       success: false,
       message: 'Errore durante la modifica della bevanda'
     });
+    return;
   }
 });
 
@@ -9148,12 +9407,14 @@ router.post('/bevande/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} bevanda aggiornata/e con successo`,
       data: { count: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva delle bevande:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva delle bevande' 
     });
+    return;
   }
 });
 
@@ -9193,12 +9454,14 @@ router.post('/servizi/nuovo/ajax', async (req, res) => {
       message: 'Servizio creato con successo',
       data: { id: servizio.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del servizio:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione del servizio' 
     });
+    return;
   }
 });
 
@@ -9250,12 +9513,14 @@ router.post('/servizi/modifica/:id/ajax', async (req, res) => {
       message: 'Servizio aggiornato con successo',
       data: { id: updatedServizio.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento del servizio:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento del servizio' 
     });
+    return;
   }
 });
 
@@ -9317,12 +9582,14 @@ router.post('/menu-fissi/nuovo/ajax', async (req, res) => {
       message: 'Menu fisso creato con successo',
       data: { id: menuFisso.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione del menu fisso:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la creazione del menu fisso' 
     });
+    return;
   }
 });
 
@@ -9406,12 +9673,14 @@ router.post('/menu-fissi/modifica/:id/ajax', async (req, res) => {
       message: 'Menu fisso aggiornato con successo',
       data: { id: updatedMenuFisso.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento del menu fisso:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante l\'aggiornamento del menu fisso' 
     });
+    return;
   }
 });
 
@@ -9455,12 +9724,14 @@ router.post('/menu-fissi/modifica-massa/ajax', async (req, res) => {
       message: `${result.count} menu fissi aggiornati con successo`,
       data: { updatedCount: result.count }
     });
+    return;
   } catch (error) {
     console.error('Errore nella modifica massiva dei menu fissi:', error);
     res.json({ 
       success: false, 
       message: 'Si è verificato un errore durante la modifica massiva dei menu fissi' 
     });
+    return;
   }
 });
 
@@ -9480,12 +9751,14 @@ router.delete('/menu-fissi/:id', async (req, res) => {
       success: true, 
       message: 'Menu fisso eliminato con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione del menu fisso:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -9498,6 +9771,7 @@ router.delete('/menu-fissi', async (req, res) => {
       success: false, 
       message: 'Nessun menu fisso selezionato' 
     });
+    return;
   }
 
   try {
@@ -9515,12 +9789,14 @@ router.delete('/menu-fissi', async (req, res) => {
       success: true, 
       message: `${result.count} menu fisso/i eliminato/i con successo` 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione multipla dei menu fissi:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -9583,9 +9859,11 @@ router.get('/impostazioni/regioni', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle regioni:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -9608,6 +9886,7 @@ router.get('/impostazioni/regioni/dettagli/:id', async (req, res) => {
 
     if (!regione) {
       return res.status(404).send('Regione non trovata');
+    return;
     }
 
     // Trasforma i dati per la vista
@@ -9643,9 +9922,11 @@ router.get('/impostazioni/regioni/dettagli/:id', async (req, res) => {
         { label: regione.nome, href: `/ristorante-menu/impostazioni/regioni/dettagli/${regione.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli regione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -9702,9 +9983,11 @@ router.get('/impostazioni/regioni/nuovo', async (req, res) => {
         { label: 'Nuova Regione', href: '/ristorante-menu/impostazioni/regioni/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova regione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -9725,6 +10008,7 @@ router.get('/impostazioni/regioni/modifica/:id', async (req, res) => {
 
     if (!regione) {
       return res.status(404).send('Regione non trovata');
+    return;
     }
 
     // Recupera le nazioni per il select
@@ -9777,9 +10061,11 @@ router.get('/impostazioni/regioni/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/regioni/modifica/${regione.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica regione:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -9828,12 +10114,14 @@ router.post('/impostazioni/regioni/nuovo/ajax', async (req, res) => {
       message: 'Regione creata con successo',
       data: { id: regione.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della regione:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della regione'
     });
+    return;
   }
 });
 
@@ -9897,12 +10185,14 @@ router.post('/impostazioni/regioni/modifica/:id/ajax', async (req, res) => {
       message: 'Regione aggiornata con successo',
       data: { id: regione.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della regione:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della regione'
     });
+    return;
   }
 });
 
@@ -9922,12 +10212,14 @@ router.delete('/impostazioni/regioni/:id', async (req, res) => {
       success: true, 
       message: 'Regione eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della regione:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -9940,6 +10232,7 @@ router.delete('/impostazioni/regioni', async (req, res) => {
       success: false, 
       message: 'Nessuna regione selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -9956,6 +10249,7 @@ router.delete('/impostazioni/regioni', async (req, res) => {
         success: false, 
         message: 'Nessuna regione valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le regioni valide
@@ -9983,12 +10277,14 @@ router.delete('/impostazioni/regioni', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle regioni:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -10053,9 +10349,11 @@ router.get('/impostazioni/zone', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle zone:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10079,6 +10377,7 @@ router.get('/impostazioni/zone/dettagli/:id', async (req, res) => {
 
     if (!zona) {
       return res.status(404).send('Zona non trovata');
+    return;
     }
 
     // Trasforma i dati per la vista
@@ -10115,9 +10414,11 @@ router.get('/impostazioni/zone/dettagli/:id', async (req, res) => {
         { label: zona.nome, href: `/ristorante-menu/impostazioni/zone/dettagli/${zona.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli zona:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10186,9 +10487,11 @@ router.get('/impostazioni/zone/nuovo', async (req, res) => {
         { label: 'Nuova Zona', href: '/ristorante-menu/impostazioni/zone/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova zona:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10212,6 +10515,7 @@ router.get('/impostazioni/zone/modifica/:id', async (req, res) => {
 
     if (!zona) {
       return res.status(404).send('Zona non trovata');
+    return;
     }
 
     // Recupera le regioni e nazioni per i select
@@ -10276,9 +10580,11 @@ router.get('/impostazioni/zone/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/zone/modifica/${zona.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica zona:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10343,12 +10649,14 @@ router.post('/impostazioni/zone/nuovo/ajax', async (req, res) => {
       message: 'Zona creata con successo',
       data: { id: zona.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della zona:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della zona'
     });
+    return;
   }
 });
 
@@ -10428,12 +10736,14 @@ router.post('/impostazioni/zone/modifica/:id/ajax', async (req, res) => {
       message: 'Zona aggiornata con successo',
       data: { id: zona.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della zona:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della zona'
     });
+    return;
   }
 });
 
@@ -10453,12 +10763,14 @@ router.delete('/impostazioni/zone/:id', async (req, res) => {
       success: true, 
       message: 'Zona eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della zona:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -10471,6 +10783,7 @@ router.delete('/impostazioni/zone', async (req, res) => {
       success: false, 
       message: 'Nessuna zona selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -10487,6 +10800,7 @@ router.delete('/impostazioni/zone', async (req, res) => {
         success: false, 
         message: 'Nessuna zona valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le zone valide
@@ -10514,12 +10828,14 @@ router.delete('/impostazioni/zone', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle zone:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -10575,9 +10891,11 @@ router.get('/impostazioni/tipologie-vino', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle tipologie vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10597,6 +10915,7 @@ router.get('/impostazioni/tipologie-vino/dettagli/:id', async (req, res) => {
 
     if (!tipologiaVino) {
       return res.status(404).send('Tipologia vino non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('tipologie-vino', 'view', tipologiaVino.id);
@@ -10626,9 +10945,11 @@ router.get('/impostazioni/tipologie-vino/dettagli/:id', async (req, res) => {
         { label: tipologiaVino.nome, href: `/ristorante-menu/impostazioni/tipologie-vino/dettagli/${tipologiaVino.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli tipologia vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10669,9 +10990,11 @@ router.get('/impostazioni/tipologie-vino/nuovo', async (req, res) => {
         { label: 'Nuova Tipologia Vino', href: '/ristorante-menu/impostazioni/tipologie-vino/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova tipologia vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10691,6 +11014,7 @@ router.get('/impostazioni/tipologie-vino/modifica/:id', async (req, res) => {
 
     if (!tipologiaVino) {
       return res.status(404).send('Tipologia vino non trovata');
+    return;
     }
 
     // Configura il form
@@ -10727,9 +11051,11 @@ router.get('/impostazioni/tipologie-vino/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-vino/modifica/${tipologiaVino.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica tipologia vino:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10765,12 +11091,14 @@ router.post('/impostazioni/tipologie-vino/nuovo/ajax', async (req, res) => {
       message: 'Tipologia vino creata con successo',
       data: { id: tipologiaVino.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della tipologia vino:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della tipologia vino'
     });
+    return;
   }
 });
 
@@ -10821,12 +11149,14 @@ router.post('/impostazioni/tipologie-vino/modifica/:id/ajax', async (req, res) =
       message: 'Tipologia vino aggiornata con successo',
       data: { id: tipologiaVino.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della tipologia vino:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della tipologia vino'
     });
+    return;
   }
 });
 
@@ -10846,12 +11176,14 @@ router.delete('/impostazioni/tipologie-vino/:id', async (req, res) => {
       success: true, 
       message: 'Tipologia vino eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della tipologia vino:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -10864,6 +11196,7 @@ router.delete('/impostazioni/tipologie-vino', async (req, res) => {
       success: false, 
       message: 'Nessuna tipologia vino selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -10880,6 +11213,7 @@ router.delete('/impostazioni/tipologie-vino', async (req, res) => {
         success: false, 
         message: 'Nessuna tipologia vino valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le tipologie vino valide
@@ -10907,12 +11241,14 @@ router.delete('/impostazioni/tipologie-vino', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle tipologie vino:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -10968,9 +11304,11 @@ router.get('/impostazioni/tipologie-birra', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle tipologie birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -10990,6 +11328,7 @@ router.get('/impostazioni/tipologie-birra/dettagli/:id', async (req, res) => {
 
     if (!tipologiaBirra) {
       return res.status(404).send('Tipologia birra non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('tipologie-birra', 'view', tipologiaBirra.id);
@@ -11019,9 +11358,11 @@ router.get('/impostazioni/tipologie-birra/dettagli/:id', async (req, res) => {
         { label: tipologiaBirra.nome, href: `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${tipologiaBirra.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli tipologia birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11062,9 +11403,11 @@ router.get('/impostazioni/tipologie-birra/nuovo', async (req, res) => {
         { label: 'Nuova Tipologia Birra', href: '/ristorante-menu/impostazioni/tipologie-birra/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova tipologia birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11084,6 +11427,7 @@ router.get('/impostazioni/tipologie-birra/modifica/:id', async (req, res) => {
 
     if (!tipologiaBirra) {
       return res.status(404).send('Tipologia birra non trovata');
+    return;
     }
 
     // Configura il form
@@ -11120,9 +11464,11 @@ router.get('/impostazioni/tipologie-birra/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-birra/modifica/${tipologiaBirra.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica tipologia birra:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11158,12 +11504,14 @@ router.post('/impostazioni/tipologie-birra/nuovo/ajax', async (req, res) => {
       message: 'Tipologia birra creata con successo',
       data: { id: tipologiaBirra.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della tipologia birra:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della tipologia birra'
     });
+    return;
   }
 });
 
@@ -11214,12 +11562,14 @@ router.post('/impostazioni/tipologie-birra/modifica/:id/ajax', async (req, res) 
       message: 'Tipologia birra aggiornata con successo',
       data: { id: tipologiaBirra.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della tipologia birra:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della tipologia birra'
     });
+    return;
   }
 });
 
@@ -11239,12 +11589,14 @@ router.delete('/impostazioni/tipologie-birra/:id', async (req, res) => {
       success: true, 
       message: 'Tipologia birra eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della tipologia birra:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -11257,6 +11609,7 @@ router.delete('/impostazioni/tipologie-birra', async (req, res) => {
       success: false, 
       message: 'Nessuna tipologia birra selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -11273,6 +11626,7 @@ router.delete('/impostazioni/tipologie-birra', async (req, res) => {
         success: false, 
         message: 'Nessuna tipologia birra valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le tipologie birra valide
@@ -11300,12 +11654,14 @@ router.delete('/impostazioni/tipologie-birra', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle tipologie birra:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -11361,9 +11717,11 @@ router.get('/impostazioni/tipologie-liquore', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle tipologie liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11383,6 +11741,7 @@ router.get('/impostazioni/tipologie-liquore/dettagli/:id', async (req, res) => {
 
     if (!tipologiaLiquore) {
       return res.status(404).send('Tipologia liquore non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('tipologie-liquore', 'view', tipologiaLiquore.id);
@@ -11412,9 +11771,11 @@ router.get('/impostazioni/tipologie-liquore/dettagli/:id', async (req, res) => {
         { label: tipologiaLiquore.nome, href: `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${tipologiaLiquore.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli tipologia liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11455,9 +11816,11 @@ router.get('/impostazioni/tipologie-liquore/nuovo', async (req, res) => {
         { label: 'Nuova Tipologia Liquore', href: '/ristorante-menu/impostazioni/tipologie-liquore/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova tipologia liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11477,6 +11840,7 @@ router.get('/impostazioni/tipologie-liquore/modifica/:id', async (req, res) => {
 
     if (!tipologiaLiquore) {
       return res.status(404).send('Tipologia liquore non trovata');
+    return;
     }
 
     // Configura il form
@@ -11513,9 +11877,11 @@ router.get('/impostazioni/tipologie-liquore/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-liquore/modifica/${tipologiaLiquore.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica tipologia liquore:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11551,12 +11917,14 @@ router.post('/impostazioni/tipologie-liquore/nuovo/ajax', async (req, res) => {
       message: 'Tipologia liquore creata con successo',
       data: { id: tipologiaLiquore.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della tipologia liquore:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della tipologia liquore'
     });
+    return;
   }
 });
 
@@ -11607,12 +11975,14 @@ router.post('/impostazioni/tipologie-liquore/modifica/:id/ajax', async (req, res
       message: 'Tipologia liquore aggiornata con successo',
       data: { id: tipologiaLiquore.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della tipologia liquore:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della tipologia liquore'
     });
+    return;
   }
 });
 
@@ -11632,12 +12002,14 @@ router.delete('/impostazioni/tipologie-liquore/:id', async (req, res) => {
       success: true, 
       message: 'Tipologia liquore eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della tipologia liquore:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -11650,6 +12022,7 @@ router.delete('/impostazioni/tipologie-liquore', async (req, res) => {
       success: false, 
       message: 'Nessuna tipologia liquore selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -11666,6 +12039,7 @@ router.delete('/impostazioni/tipologie-liquore', async (req, res) => {
         success: false, 
         message: 'Nessuna tipologia liquore valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le tipologie liquore valide
@@ -11693,12 +12067,14 @@ router.delete('/impostazioni/tipologie-liquore', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle tipologie liquore:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -11754,9 +12130,11 @@ router.get('/impostazioni/tipologie-cocktail', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle tipologie cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11776,6 +12154,7 @@ router.get('/impostazioni/tipologie-cocktail/dettagli/:id', async (req, res) => 
 
     if (!tipologiaCocktail) {
       return res.status(404).send('Tipologia cocktail non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('tipologie-cocktail', 'view', tipologiaCocktail.id);
@@ -11805,9 +12184,11 @@ router.get('/impostazioni/tipologie-cocktail/dettagli/:id', async (req, res) => 
         { label: tipologiaCocktail.nome, href: `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${tipologiaCocktail.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli tipologia cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11848,9 +12229,11 @@ router.get('/impostazioni/tipologie-cocktail/nuovo', async (req, res) => {
         { label: 'Nuova Tipologia Cocktail', href: '/ristorante-menu/impostazioni/tipologie-cocktail/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova tipologia cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11870,6 +12253,7 @@ router.get('/impostazioni/tipologie-cocktail/modifica/:id', async (req, res) => 
 
     if (!tipologiaCocktail) {
       return res.status(404).send('Tipologia cocktail non trovata');
+    return;
     }
 
     // Configura il form
@@ -11906,9 +12290,11 @@ router.get('/impostazioni/tipologie-cocktail/modifica/:id', async (req, res) => 
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-cocktail/modifica/${tipologiaCocktail.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica tipologia cocktail:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -11944,12 +12330,14 @@ router.post('/impostazioni/tipologie-cocktail/nuovo/ajax', async (req, res) => {
       message: 'Tipologia cocktail creata con successo',
       data: { id: tipologiaCocktail.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della tipologia cocktail:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della tipologia cocktail'
     });
+    return;
   }
 });
 
@@ -12000,12 +12388,14 @@ router.post('/impostazioni/tipologie-cocktail/modifica/:id/ajax', async (req, re
       message: 'Tipologia cocktail aggiornata con successo',
       data: { id: tipologiaCocktail.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della tipologia cocktail:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della tipologia cocktail'
     });
+    return;
   }
 });
 
@@ -12025,12 +12415,14 @@ router.delete('/impostazioni/tipologie-cocktail/:id', async (req, res) => {
       success: true, 
       message: 'Tipologia cocktail eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della tipologia cocktail:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -12043,6 +12435,7 @@ router.delete('/impostazioni/tipologie-cocktail', async (req, res) => {
       success: false, 
       message: 'Nessuna tipologia cocktail selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -12059,6 +12452,7 @@ router.delete('/impostazioni/tipologie-cocktail', async (req, res) => {
         success: false, 
         message: 'Nessuna tipologia cocktail valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le tipologie cocktail valide
@@ -12086,12 +12480,14 @@ router.delete('/impostazioni/tipologie-cocktail', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle tipologie cocktail:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
@@ -12147,9 +12543,11 @@ router.get('/impostazioni/tipologie-bevanda', async (req, res) => {
       pagination,
       ...config
     });
+    return;
   } catch (error) {
     console.error('Errore nel recupero delle tipologie bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -12169,6 +12567,7 @@ router.get('/impostazioni/tipologie-bevanda/dettagli/:id', async (req, res) => {
 
     if (!tipologiaBevanda) {
       return res.status(404).send('Tipologia bevanda non trovata');
+    return;
     }
 
     const actionNavConfig = createSubSectionActionNav('tipologie-bevanda', 'view', tipologiaBevanda.id);
@@ -12198,9 +12597,11 @@ router.get('/impostazioni/tipologie-bevanda/dettagli/:id', async (req, res) => {
         { label: tipologiaBevanda.nome, href: `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${tipologiaBevanda.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento dei dettagli tipologia bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -12241,9 +12642,11 @@ router.get('/impostazioni/tipologie-bevanda/nuovo', async (req, res) => {
         { label: 'Nuova Tipologia Bevanda', href: '/ristorante-menu/impostazioni/tipologie-bevanda/nuovo' }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form nuova tipologia bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -12263,6 +12666,7 @@ router.get('/impostazioni/tipologie-bevanda/modifica/:id', async (req, res) => {
 
     if (!tipologiaBevanda) {
       return res.status(404).send('Tipologia bevanda non trovata');
+    return;
     }
 
     // Configura il form
@@ -12299,9 +12703,11 @@ router.get('/impostazioni/tipologie-bevanda/modifica/:id', async (req, res) => {
         { label: 'Modifica', href: `/ristorante-menu/impostazioni/tipologie-bevanda/modifica/${tipologiaBevanda.id}` }
       ]
     });
+    return;
   } catch (error) {
     console.error('Errore nel caricamento del form modifica tipologia bevanda:', error);
     res.status(500).send('Errore interno del server');
+    return;
   }
 });
 
@@ -12337,12 +12743,14 @@ router.post('/impostazioni/tipologie-bevanda/nuovo/ajax', async (req, res) => {
       message: 'Tipologia bevanda creata con successo',
       data: { id: tipologiaBevanda.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nella creazione della tipologia bevanda:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante la creazione della tipologia bevanda'
     });
+    return;
   }
 });
 
@@ -12393,12 +12801,14 @@ router.post('/impostazioni/tipologie-bevanda/modifica/:id/ajax', async (req, res
       message: 'Tipologia bevanda aggiornata con successo',
       data: { id: tipologiaBevanda.id }
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'aggiornamento della tipologia bevanda:', error);
     res.json({
       success: false,
       message: 'Si è verificato un errore durante l\'aggiornamento della tipologia bevanda'
     });
+    return;
   }
 });
 
@@ -12418,12 +12828,14 @@ router.delete('/impostazioni/tipologie-bevanda/:id', async (req, res) => {
       success: true, 
       message: 'Tipologia bevanda eliminata con successo' 
     });
+    return;
   } catch (error) {
     console.error('Errore nell\'eliminazione della tipologia bevanda:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Errore nell\'eliminazione' 
     });
+    return;
   }
 });
 
@@ -12436,6 +12848,7 @@ router.delete('/impostazioni/tipologie-bevanda', async (req, res) => {
       success: false, 
       message: 'Nessuna tipologia bevanda selezionata per la cancellazione' 
     });
+    return;
   }
   
   try {
@@ -12452,6 +12865,7 @@ router.delete('/impostazioni/tipologie-bevanda', async (req, res) => {
         success: false, 
         message: 'Nessuna tipologia bevanda valida trovata per la cancellazione' 
       });
+    return;
     }
 
     // Esegui soft delete per tutte le tipologie bevanda valide
@@ -12479,12 +12893,14 @@ router.delete('/impostazioni/tipologie-bevanda', async (req, res) => {
       deletedCount,
       skippedCount
     });
+    return;
   } catch (error) {
     console.error('Errore nella cancellazione delle tipologie bevanda:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Si è verificato un errore durante la cancellazione' 
     });
+    return;
   }
 });
 
