@@ -801,6 +801,7 @@ router.post('/utenti/modifica/:id', async (req: Request, res: Response): Promise
       // Validazione password
       const passwordValidation = PasswordUtils.validatePasswordStrength(password);
       if (!passwordValidation.isValid) {
+        const formConfig = userFormData.getFormData(userFormData, true, existingUser, req.body);
         return res.status(400).render('pages/users/edit', {
           title: 'Modifica Utente',
           layout: 'layouts/sections',
@@ -870,6 +871,7 @@ router.post('/utenti/modifica/:id/ajax', async (req: Request, res: Response): Pr
         success: false,
         message: 'Utente non trovato'
       });
+      return;
     }
 
     // Verifica se esiste già un altro utente con la stessa email

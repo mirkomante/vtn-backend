@@ -416,6 +416,8 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
 
     // Raggruppa i piatti per categoria nell'ordine specificato
     const categorieConPiatti = categorieOrdinate.map(categoria => {
+      if (!categoria) return null;
+      
       const piattiCategoria = piatti
         .filter(piatto => piatto.categoriaId === categoria.id)
         .map(piatto => ({
@@ -436,7 +438,7 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
         descrizione: categoria.descrizione,
         piatti: piattiCategoria
       };
-    });
+    }).filter(Boolean);
 
     res.json({
       success: true,

@@ -53,7 +53,6 @@ import { getPaginationParams, calculatePagination } from '../config/paginationHe
 import { 
   serviziDetailViewConfig,
   piattiDetailViewConfig,
-  menuFissiDetailViewConfig,
   viniDetailViewConfig,
   birreDetailViewConfig,
   liquoriDetailViewConfig,
@@ -70,7 +69,6 @@ import {
   tipologieLiquoreDetailViewConfig,
   tipologieCocktailDetailViewConfig,
   tipologieBevandaDetailViewConfig,
-  utentiDetailViewConfig,
   getDetailViewConfig
 } from '../config/detailViewConfig';
 
@@ -88,7 +86,7 @@ router.use(checkMenuAccess('ristorante'));
 router.use(isAuthenticated);
 
 // === ROUTE PRINCIPALI ===
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   const currentPath = '/ristorante-menu';
   let sectionMenu = ristoranteMenuItems;
   
@@ -186,7 +184,7 @@ router.get('/servizi', async (req, res) => {
 });
 
 // === ROUTE CRUD SERVIZI ===
-router.get('/servizi/nuovo', (req, res) => {
+router.get('/servizi/nuovo', (_req, res) => {
   const currentPath = '/ristorante-menu/servizi/nuovo';
   let sectionMenu = ristoranteMenuItems;
   
@@ -746,7 +744,7 @@ router.get('/piatti', async (req, res) => {
 });
 
 // Route per form nuovo piatto
-router.get('/piatti/nuovo', async (req, res) => {
+router.get('/piatti/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/piatti/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -1663,7 +1661,7 @@ router.delete('/bevande', async (req, res) => {
 });
 
 // === SEZIONE IMPOSTAZIONI CON SOTTOSEZIONI ===
-router.get('/impostazioni', (req, res) => {
+router.get('/impostazioni', (_req, res) => {
   const currentPath = '/ristorante-menu/impostazioni';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
@@ -1935,7 +1933,7 @@ router.get('/vini', async (req, res) => {
 });
 
 // Route per form nuovo vino
-router.get('/vini/nuovo', async (req, res) => {
+router.get('/vini/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/vini/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -2396,7 +2394,7 @@ router.get('/birre', async (req, res) => {
 });
 
 // Route per visualizzare form nuovo birra
-router.get('/birre/nuovo', async (req, res) => {
+router.get('/birre/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/birre/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -2823,7 +2821,7 @@ router.get('/menu-fissi', async (req, res) => {
 });
 
 // Route per form nuovo menu fisso
-router.get('/menu-fissi/nuovo', async (req, res) => {
+router.get('/menu-fissi/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/menu-fissi/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -3322,7 +3320,7 @@ router.get('/impostazioni/allergeni', async (req, res) => {
 });
 
 // === ROUTE CRUD ALLERGENI ===
-router.get('/impostazioni/allergeni/nuovo', (req, res) => {
+router.get('/impostazioni/allergeni/nuovo', (_req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/allergeni/nuovo';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
@@ -3782,7 +3780,7 @@ router.delete('/impostazioni/allergeni', async (req, res) => {
 });
 
 // === ROUTE CRUD CATEGORIE MENU FISSO ===
-router.get('/impostazioni/categoria-menu-fisso/nuovo', (req, res) => {
+router.get('/impostazioni/categoria-menu-fisso/nuovo', (_req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/categoria-menu-fisso/nuovo';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
@@ -4379,7 +4377,7 @@ router.delete('/impostazioni/categoria-menu-fisso', async (req, res) => {
 });
 
 // === ROUTE CRUD CATEGORIE PIATTI ===
-router.get('/impostazioni/categoria-piatti/nuovo', (req, res) => {
+router.get('/impostazioni/categoria-piatti/nuovo', (_req, res) => {
   const currentPath = '/ristorante-menu/impostazioni/categoria-piatti/nuovo';
   let sectionMenu = ristoranteMenuItems;
   let sectionTabs = ristoranteMenuImpostazioniSubItems;
@@ -7750,7 +7748,7 @@ router.get('/liquori', async (req, res) => {
 });
 
 // Route per visualizzare form nuovo liquore
-router.get('/liquori/nuovo', async (req, res) => {
+router.get('/liquori/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/liquori/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -8346,7 +8344,7 @@ router.get('/cocktails', async (req, res) => {
 });
 
 // Route per visualizzare form nuovo cocktail
-router.get('/cocktails/nuovo', async (req, res) => {
+router.get('/cocktails/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/cocktails/nuovo';
     let sectionMenu = ristoranteMenuItems;
@@ -8938,7 +8936,7 @@ router.get('/bevande', async (req, res) => {
 });
 
 // Route per visualizzare form nuova bevanda
-router.get('/bevande/nuovo', async (req, res) => {
+router.get('/bevande/nuovo', async (_req, res) => {
   try {
     const currentPath = '/ristorante-menu/bevande/nuovo';
     let sectionMenu = ristoranteMenuItems;
