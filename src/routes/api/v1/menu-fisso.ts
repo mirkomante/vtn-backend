@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { menuFissoValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/menu-fisso - Lista tutti i menu fissi
-router.get('/', menuFissoValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', menuFissoValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     const menuFissi = await prisma.menuFisso.findMany({
       where: {
@@ -62,18 +62,19 @@ router.get('/', menuFissoValidation.list, handleValidationErrors, async (_req, r
     });
   } catch (error) {
     console.error('Errore nel recupero dei menu fissi:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/menu-fisso/:id - Dettagli di un menu fisso specifico
-router.get('/:id', menuFissoValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', menuFissoValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const menuFisso = await prisma.menuFisso.findFirst({
       where: {
@@ -145,7 +146,7 @@ router.get('/:id', menuFissoValidation.getById, handleValidationErrors, async (r
 });
 
 // GET /api/v1/menu-fisso/categoria/:categoriaId - Menu fissi per categoria
-router.get('/categoria/:categoriaId', menuFissoValidation.getByCategory, handleValidationErrors, async (req, res) => {
+router.get('/categoria/:categoriaId', menuFissoValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const menuFissi = await prisma.menuFisso.findMany({
       where: {
@@ -213,7 +214,7 @@ router.get('/categoria/:categoriaId', menuFissoValidation.getByCategory, handleV
 });
 
 // GET /api/v1/menu-fisso/categoria/:categoriaId/dettagli - Menu fissi per categoria con allergeni
-router.get('/categoria/:categoriaId/dettagli', menuFissoValidation.getByCategory, handleValidationErrors, async (req, res) => {
+router.get('/categoria/:categoriaId/dettagli', menuFissoValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const menuFissi = await prisma.menuFisso.findMany({
       where: {

@@ -68,7 +68,7 @@ export interface FormDataSchema {
   formConfig: FormConfig;
   fields: FormField[];
   buttons: FormButtons;
-  getFormData?: (data: any, isEdit?: boolean, user?: any, formData?: any, isBulkEdit?: boolean, selectedItems?: any[]) => any;
+  getFormData: (data: any, isEdit?: boolean, user?: any, formData?: any, isBulkEdit?: boolean, selectedItems?: any[]) => any;
   bulkEditConfig?: {
     title: string;
     description: string;

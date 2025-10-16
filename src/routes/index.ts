@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import express from 'express';
 import { mainMenuItems } from '../config/mainMenu';
 import { sectionMenuItems } from '../config/sectionMenu';
@@ -14,7 +15,7 @@ router.use(requireEnabledMenus);
 // Tutte le route richiedono autenticazione
 router.use(isAuthenticated);
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   const currentPath = '/';
   let sectionMenu = sectionMenuItems.defaultNavigationItems;
   
@@ -29,7 +30,7 @@ router.get('/', (req, res) => {
 });
 
 // Rotta di test per il Script Manager
-router.get('/test-scripts', (req, res) => {
+router.get('/test-scripts', (_req, res) => {
   // Test con tutti gli script disponibili
   const allScripts = [
     ...scriptManager.getScriptsForPage('dashboard'), // Script comuni
@@ -52,7 +53,7 @@ router.get('/test-scripts', (req, res) => {
 });
 
 // Route protette
-router.get('/profile', (req, res) => {
+router.get('/profile', (_req, res) => {
   res.render('profile', {
     title: 'Profilo'
   });

@@ -210,7 +210,7 @@ export const apiErrorHandler = (
   error: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   // Genera un ID univoco per la richiesta se non esiste
   const requestId = (req as any).requestId || generateRequestId();
@@ -288,7 +288,7 @@ export const apiErrorHandler = (
 /**
  * Middleware per gestire route non trovate
  */
-export const notFoundHandler = (req: Request, res: Response, next: NextFunction) => {
+export const notFoundHandler = (req: Request, res: Response, _next: NextFunction) => {
   const requestId = generateRequestId();
   (req as any).requestId = requestId;
 
@@ -306,7 +306,7 @@ export const notFoundHandler = (req: Request, res: Response, next: NextFunction)
  * Middleware per gestire errori di parsing JSON
  */
 export const jsonErrorHandler = (error: any, req: Request, res: Response, next: NextFunction) => {
-  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+  if (error instanceof SyntaxError && (error as any).status === 400 && 'body' in error) {
     const requestId = generateRequestId();
     (req as any).requestId = requestId;
 
@@ -320,7 +320,7 @@ export const jsonErrorHandler = (error: any, req: Request, res: Response, next: 
     const errorResponse = createErrorResponse(apiError, requestId);
     return res.status(HttpStatusCode.BAD_REQUEST).json(errorResponse);
   }
-  next(error);
+  return next(error);
 };
 
 /**

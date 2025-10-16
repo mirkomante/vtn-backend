@@ -4,7 +4,7 @@ import DatabaseLogger from '../../utils/dbLogger';
 /**
  * Middleware per audit logging delle operazioni sensibili
  */
-export const auditLogger = (req: Request, res: Response, next: NextFunction) => {
+export const auditLogger = (req: Request, _res: Response, next: NextFunction) => {
   // Log delle operazioni API
   if (req.originalUrl.startsWith('/api/')) {
     const auditData = {
@@ -39,31 +39,31 @@ export const auditLogger = (req: Request, res: Response, next: NextFunction) => 
 /**
  * Estrae il nome della risorsa dall'URL
  */
-function getResourceFromUrl(url: string): string {
-  const parts = url.split('/');
-  const apiIndex = parts.findIndex(part => part === 'api');
-  
-  if (apiIndex !== -1 && parts[apiIndex + 2]) {
-    return parts[apiIndex + 2].replace(/[^a-zA-Z0-9]/g, '');
-  }
-  
-  return 'Unknown';
-}
+// function _getResourceFromUrl(_url: string): string {
+//   const parts = _url.split('/');
+//   const apiIndex = parts.findIndex(part => part === 'api');
+//   
+//   if (apiIndex !== -1 && parts[apiIndex + 2]) {
+//     return parts[apiIndex + 2].replace(/[^a-zA-Z0-9]/g, '');
+//   }
+//   
+//   return 'Unknown';
+// }
 
 /**
  * Estrae l'ID della risorsa dall'URL
  */
-function getResourceIdFromUrl(url: string): string | undefined {
-  const parts = url.split('/');
-  const lastPart = parts[parts.length - 1];
-  
-  // Controlla se l'ultima parte è un UUID
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  
-  if (uuidRegex.test(lastPart)) {
-    return lastPart;
-  }
-  
-  return undefined;
-}
+// function _getResourceIdFromUrl(_url: string): string | undefined {
+//   const parts = _url.split('/');
+//   const lastPart = parts[parts.length - 1];
+//   
+//   // Controlla se l'ultima parte è un UUID
+//   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+//   
+//   if (uuidRegex.test(lastPart)) {
+//     return lastPart;
+//   }
+//   
+//   return undefined;
+// }
 

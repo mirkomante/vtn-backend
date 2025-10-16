@@ -4,7 +4,7 @@ import DatabaseLogger from '../../utils/dbLogger';
 /**
  * Middleware per logging degli errori con Winston
  */
-export const errorLogger = async (error: any, req: Request, res: Response, next: NextFunction) => {
+export const errorLogger = async (error: any, req: Request, _res: Response, next: NextFunction) => {
   const errorData = {
     requestId: (req as any).requestId,
     error: error.message,

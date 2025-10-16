@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { bevandeValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/bevande - Lista tutte le bevande
-router.get('/', bevandeValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', bevandeValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     const bevande = await prisma.bevanda.findMany({
       where: {
@@ -61,18 +61,19 @@ router.get('/', bevandeValidation.list, handleValidationErrors, async (_req, res
     });
   } catch (error) {
     console.error('Errore nel recupero delle bevande:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/bevande/raggruppate-per-tipologia - Bevande raggruppate per tipologia
-router.get('/raggruppate-per-tipologia', bevandeValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/raggruppate-per-tipologia', bevandeValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di bevande analcoliche
     const tipologieBevande = await prisma.tipologiaBevanda.findMany({
@@ -153,7 +154,7 @@ router.get('/raggruppate-per-tipologia', bevandeValidation.list, handleValidatio
 });
 
 // GET /api/v1/bevande/:id - Dettagli di una bevanda specifica
-router.get('/:id', bevandeValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', bevandeValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const bevanda = await prisma.bevanda.findFirst({
       where: {
@@ -218,7 +219,7 @@ router.get('/:id', bevandeValidation.getById, handleValidationErrors, async (req
 });
 
 // GET /api/v1/bevande/nazione/:nazioneId - Bevande per nazione
-router.get('/nazione/:nazioneId', bevandeValidation.getByNation, handleValidationErrors, async (req, res) => {
+router.get('/nazione/:nazioneId', bevandeValidation.getByNation, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const bevande = await prisma.bevanda.findMany({
       where: {
@@ -285,7 +286,7 @@ router.get('/nazione/:nazioneId', bevandeValidation.getByNation, handleValidatio
 });
 
 // GET /api/v1/bevande/tipologia/:tipologiaId - Bevande per tipologia
-router.get('/tipologia/:tipologiaId', bevandeValidation.getByType, handleValidationErrors, async (req, res) => {
+router.get('/tipologia/:tipologiaId', bevandeValidation.getByType, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const bevande = await prisma.bevanda.findMany({
       where: {

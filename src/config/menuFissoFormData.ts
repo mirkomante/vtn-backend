@@ -147,7 +147,7 @@ export const menuFissoFormData: FormDataSchema = {
           }
         } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
           // Per i nuovi elementi, usa il defaultValue se disponibile
-          value = field.defaultValue;
+          value = field.defaultValue.toString();
         }
         
         if (isBulkEdit && !field.bulkEditable) {

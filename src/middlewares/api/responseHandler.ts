@@ -13,7 +13,7 @@ import {
   BatchResponse,
   ResponseOptions,
   API_RESPONSE_CONFIG,
-  ResourceType
+  ResourceType as _ResourceType
 } from './responseTypes';
 
 /**

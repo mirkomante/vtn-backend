@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { birreValidation } from '../../../middlewares/api/validationSchemas';
@@ -7,7 +7,7 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/birre - Lista tutte le birre
-router.get('/', birreValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/', birreValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     const birre = await prisma.birra.findMany({
       where: {
@@ -63,18 +63,19 @@ router.get('/', birreValidation.list, handleValidationErrors, async (_req, res) 
     });
   } catch (error) {
     console.error('Errore nel recupero delle birre:', error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: {
         code: 'INTERNAL_ERROR',
         message: 'Errore interno del server'
       }
     });
+    return;
   }
 });
 
 // GET /api/v1/birre/raggruppati-per-tipologia - Birre raggruppate per tipologia
-router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationErrors, async (_req, res) => {
+router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di birre
     const tipologieBirre = await prisma.tipologiaBirra.findMany({
@@ -158,7 +159,7 @@ router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationE
 });
 
 // GET /api/v1/birre/:id - Dettagli di una birra specifica
-router.get('/:id', birreValidation.getById, handleValidationErrors, async (req, res) => {
+router.get('/:id', birreValidation.getById, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const birra = await prisma.birra.findFirst({
       where: {
@@ -225,7 +226,7 @@ router.get('/:id', birreValidation.getById, handleValidationErrors, async (req, 
 });
 
 // GET /api/v1/birre/nazione/:nazioneId - Birre per nazione
-router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationErrors, async (req, res) => {
+router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const birre = await prisma.birra.findMany({
       where: {
@@ -294,7 +295,7 @@ router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationE
 });
 
 // GET /api/v1/birre/tipologia/:tipologiaId - Birre per tipologia
-router.get('/tipologia/:tipologiaId', birreValidation.getByType, handleValidationErrors, async (req, res) => {
+router.get('/tipologia/:tipologiaId', birreValidation.getByType, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     const birre = await prisma.birra.findMany({
       where: {

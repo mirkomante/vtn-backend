@@ -1,78 +1,66 @@
-import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
+import { RateLimiterMemory } from 'rate-limiter-flexible';
+import { Request, Response, NextFunction } from 'express';
 import { getRateLimitConfig, isWhitelistedIP } from '../../config/rateLimitConfig';
 
 // Configurazione rate limiting per API v1
-export const apiRateLimiter = rateLimit({
-  // Configurazione dinamica basata sull'ambiente
-  ...getRateLimitConfig('api'),
-  
-  // Headers di risposta per informare il client sui limiti
-  standardHeaders: true, // Restituisce rate limit info nei headers `RateLimit-*`
-  legacyHeaders: false, // Disabilita i headers `X-RateLimit-*`
-  
-  // Chiave per identificare il client (default: IP)
-  keyGenerator: ipKeyGenerator,
-  
-  // Skip delle richieste che non dovrebbero essere contate
-  skip: (req) => {
-    const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
-    // Esclude IP whitelistati dal rate limiting
-    return isWhitelistedIP(clientIP);
-  },
-  
-  // Handler per quando il limite viene superato
-  handler: (req, res) => {
-    const config = getRateLimitConfig('api');
-    res.status(429).json({
-      ...config.message,
-      meta: {
-        timestamp: new Date().toISOString(),
-        ip: req.ip || req.connection.remoteAddress || 'unknown'
-      }
-    });
-  }
+const apiLimiter = new RateLimiterMemory({
+  keyPrefix: 'api',
+  points: 100, // Numero di richieste
+  duration: 900, // Per 15 minuti (900 secondi)
+  blockDuration: 60, // Blocca per 1 minuto se supera il limite
 });
 
-// Rate limiter più permissivo per endpoint di health check
-export const healthCheckRateLimiter = rateLimit({
-  ...getRateLimitConfig('healthCheck'),
-  standardHeaders: true,
-  legacyHeaders: false,
-  keyGenerator: ipKeyGenerator,
-  skip: (req) => {
-    const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
-    return isWhitelistedIP(clientIP);
-  },
-  handler: (req, res) => {
-    const config = getRateLimitConfig('healthCheck');
-    res.status(429).json({
-      ...config.message,
-      meta: {
-        timestamp: new Date().toISOString(),
-        ip: req.ip || req.connection.remoteAddress || 'unknown'
-      }
-    });
-  }
+// Rate limiter più permissivo per health check
+const healthCheckLimiter = new RateLimiterMemory({
+  keyPrefix: 'health',
+  points: 20, // Numero di richieste
+  duration: 60, // Per 1 minuto
+  blockDuration: 30, // Blocca per 30 secondi
 });
 
-// Rate limiter più restrittivo per endpoint specifici (es. ricerca)
-export const strictRateLimiter = rateLimit({
-  ...getRateLimitConfig('strict'),
-  standardHeaders: true,
-  legacyHeaders: false,
-  keyGenerator: ipKeyGenerator,
-  skip: (req) => {
-    const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
-    return isWhitelistedIP(clientIP);
-  },
-  handler: (req, res) => {
-    const config = getRateLimitConfig('strict');
-    res.status(429).json({
-      ...config.message,
-      meta: {
-        timestamp: new Date().toISOString(),
-        ip: req.ip || req.connection.remoteAddress || 'unknown'
-      }
-    });
-  }
+// Rate limiter più restrittivo per endpoint specifici
+const strictLimiter = new RateLimiterMemory({
+  keyPrefix: 'strict',
+  points: 10, // Numero di richieste
+  duration: 60, // Per 1 minuto
+  blockDuration: 300, // Blocca per 5 minuti
 });
+
+// Middleware per applicare il rate limiting
+export const createRateLimitMiddleware = (limiter: RateLimiterMemory, type: string) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const clientIP = req.ip || req.connection.remoteAddress || 'unknown';
+      
+      // Skip delle richieste whitelistate
+      if (isWhitelistedIP(clientIP)) {
+        return next();
+      }
+
+      // Applica il rate limiting
+      await limiter.consume(clientIP);
+      next();
+    } catch (rateLimiterRes: any) {
+      const config = getRateLimitConfig(type as any);
+      
+      res.status(429).json({
+        ...config.message,
+        meta: {
+          timestamp: new Date().toISOString(),
+          ip: req.ip || req.connection.remoteAddress || 'unknown',
+          retryAfter: Math.round(rateLimiterRes.msBeforeNext / 1000) || 1
+        }
+      });
+    }
+  };
+};
+
+// Esporta i middleware configurati
+export const apiRateLimiterMiddleware = createRateLimitMiddleware(apiLimiter, 'api');
+export const healthCheckRateLimiterMiddleware = createRateLimitMiddleware(healthCheckLimiter, 'healthCheck');
+export const strictRateLimiterMiddleware = createRateLimitMiddleware(strictLimiter, 'strict');
+
+// Manteniamo le esportazioni per compatibilità
+export const apiRateLimiter = apiRateLimiterMiddleware;
+export const healthCheckRateLimiter = healthCheckRateLimiterMiddleware;
+export const strictRateLimiter = strictRateLimiterMiddleware;

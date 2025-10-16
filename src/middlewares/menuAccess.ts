@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { isMenuEnabled, isMenuVisible, menuConfig, MainMenuConfig } from '../config/menuConfig';
+import { isMenuEnabled as _isMenuEnabled, isMenuVisible as _isMenuVisible, menuConfig, MainMenuConfig } from '../config/menuConfig';
 
 /**
  * Middleware per verificare l'accesso ai menu
@@ -56,7 +56,7 @@ export const checkMenuAccess = (menuName: keyof MainMenuConfig) => {
         return res.redirect('/auth/login');
       }
       
-      if (menu.requiredRole === 'admin' && req.user && req.user.role !== 'admin') {
+      if (menu.requiredRole === 'admin' && req.user && (req.user as any).role !== 'admin') {
         console.warn(`Tentativo di accesso a menu admin da utente non admin: ${menuName}`);
         return res.status(403).render('pages/error', {
           title: 'Accesso Negato',
@@ -108,7 +108,7 @@ export const checkMenuAccessByPath = (req: Request, res: Response, next: NextFun
  * Middleware per verificare che almeno un menu sia abilitato
  * Da utilizzare nelle route principali per evitare errori se nessun menu è abilitato
  */
-export const requireEnabledMenus = (req: Request, res: Response, next: NextFunction) => {
+export const requireEnabledMenus = (_req: Request, res: Response, next: NextFunction) => {
   const enabledMenus = Object.values(menuConfig).filter(menu => menu.enabled && menu.visible);
   
   if (enabledMenus.length === 0) {
@@ -127,9 +127,9 @@ export const requireEnabledMenus = (req: Request, res: Response, next: NextFunct
  * Middleware per loggare gli accessi ai menu (opzionale)
  * Utile per audit e debugging
  */
-export const logMenuAccess = (req: Request, res: Response, next: NextFunction) => {
+export const logMenuAccess = (req: Request, _res: Response, next: NextFunction) => {
   const originalUrl = req.originalUrl;
-  const user = req.user ? `${req.user.email} (${req.user.role})` : 'Non autenticato';
+  const user = req.user ? `${(req.user as any).email} (${(req.user as any).role})` : 'Non autenticato';
   
   console.log(`🔍 Accesso menu: ${originalUrl} - Utente: ${user} - IP: ${req.ip}`);
   

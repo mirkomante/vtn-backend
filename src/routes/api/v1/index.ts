@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import express from 'express';
 import menuFissoRoutes from './menu-fisso';
 import piattiRoutes from './piatti';
@@ -50,7 +51,7 @@ router.use('/servizi', serviziRoutes);
 router.use('/categoria-menu-fisso', categoriaMenuFissoRoutes);
 
 // Endpoint di health check per l'API v1 (con rate limiting specifico)
-router.get('/health', healthCheckRateLimiter, (req, res) => {
+router.get('/health', healthCheckRateLimiter, (_req, res) => {
   res.apiHealth('healthy');
 });
 

@@ -18,7 +18,7 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
     return res.redirect('/auth/login');
   }
   
-  if (req.user && req.user.role !== 'admin') {
+  if (req.user && (req.user as any).role !== 'admin') {
     console.log('Utente non admin, accesso negato');
     return res.status(403).send('Accesso negato');
   }
@@ -49,7 +49,7 @@ export const validateAuthStrategy = (req: Request, res: Response, next: NextFunc
 };
 
 // Middleware per verificare che almeno una strategia sia abilitata
-export const requireAuthStrategy = (req: Request, res: Response, next: NextFunction) => {
+export const requireAuthStrategy = (_req: Request, res: Response, next: NextFunction) => {
   if (!hasEnabledStrategy()) {
     console.error('Nessuna strategia di autenticazione è abilitata!');
     return res.status(503).render('pages/error', {
