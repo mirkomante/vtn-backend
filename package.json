@@ -11,8 +11,24 @@
     "build": "tsc && npm run build:css",
     "build:css": "postcss src/public/css/tailwind.css -o src/public/css/styles.css",
     "watch:css": "postcss src/public/css/tailwind.css -o src/public/css/styles.css --watch",
+    
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev"
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:reset": "prisma migrate reset --force",
+    "prisma:status": "prisma migrate status",
+    
+    "setup": "npm run prisma:generate && npm run prisma:migrate:deploy && npm run health:check",
+    "setup:dev": "npm run prisma:generate && npm run prisma:migrate:dev",
+    "setup:reset": "npm run prisma:migrate:reset && npm run setup",
+    
+    "deploy": "npm run build && npm run setup && npm start",
+    "deploy:check": "npm run build && npm run health:check",
+    
+    "health:check": "node scripts/health-check.js",
+    
+    
+    "postinstall": "npm run prisma:generate"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
