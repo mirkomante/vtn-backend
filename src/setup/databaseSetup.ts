@@ -56,16 +56,20 @@ export class DatabaseSetup {
    */
   private static async hasRequiredTables(): Promise<boolean> {
     try {
-      // Verifica tabelle critiche
-      const requiredTables = ['User', 'session', 'logs'];
+      // Verifica tabelle critiche una per una
+      // User table
+      await this.prisma.$queryRaw`SELECT 1 FROM "User" LIMIT 1`;
       
-      for (const table of requiredTables) {
-        await this.prisma.$queryRaw`SELECT 1 FROM "${table}" LIMIT 1`;
-      }
+      // Session table
+      await this.prisma.$queryRaw`SELECT 1 FROM "session" LIMIT 1`;
+      
+      // Logs table
+      await this.prisma.$queryRaw`SELECT 1 FROM "logs" LIMIT 1`;
       
       return true;
     } catch (error) {
       // Se una tabella non esiste, il database non è configurato
+      console.log('⚠️ Tabella mancante rilevata:', error);
       return false;
     }
   }

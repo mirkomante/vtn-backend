@@ -96,10 +96,10 @@ export const checkMenuAccessByPath = (req: Request, res: Response, next: NextFun
  * Da utilizzare nelle route principali per evitare errori se nessun menu è abilitato
  */
 export const requireEnabledMenus = (_req: Request, res: Response, next: NextFunction) => {
-  const enabledMenus = Object.values(menuConfig).filter(menu => menu.enabled && menu.visible);
+  const enabledMenus = Object.values(menuConfig).filter(menu => menu.enabled);
   
   if (enabledMenus.length === 0) {
-    console.error('Nessun menu è abilitato e visibile!');
+    console.error('Nessun menu è abilitato!');
     return res.status(503).render('pages/error', {
       title: 'Servizio Non Disponibile',
       message: 'Nessun menu è attualmente configurato. Contatta l\'amministratore.',

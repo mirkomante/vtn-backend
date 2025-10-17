@@ -35,33 +35,41 @@ export const configurePassport = (passport: any) => {
     try {
       const userCount = await prisma.user.count();
       const isFirstUser = userCount === 0;
+      const hasAdmin = await prisma.user.count({
+        where: { role: 'admin' }
+      }) > 0;
 
       let user = await prisma.user.findFirst({
         where: { googleId: profile.id }
       });
 
       if (!user) {
-        if (isFirstUser) {
-          // Estrai nome e cognome dal displayName di Google
-          const displayName = profile.displayName || '';
-          const nameParts = displayName.split(' ');
-          const givenName = nameParts[0] || '';
-          const familyName = nameParts.slice(1).join(' ') || '';
-          
-          user = await prisma.user.create({
-            data: {
-              googleId: profile.id,
-              email: profile.emails![0].value,
-              givenName: givenName,
-              familyName: familyName,
-              role: 'admin',
-              auth: 'admin',
-              authProvider: 'google',
-              profilePicture: profile.photos?.[0]?.value || null
-            }
-          });
+        // Estrai nome e cognome dal displayName di Google
+        const displayName = profile.displayName || '';
+        const nameParts = displayName.split(' ');
+        const givenName = nameParts[0] || '';
+        const familyName = nameParts.slice(1).join(' ') || '';
+        
+        // Determina il ruolo: admin se è il primo utente del sistema OPPURE se non ci sono admin
+        const shouldBeAdmin = isFirstUser || !hasAdmin;
+        
+        user = await prisma.user.create({
+          data: {
+            googleId: profile.id,
+            email: profile.emails![0].value,
+            givenName: givenName,
+            familyName: familyName,
+            role: shouldBeAdmin ? 'admin' : 'user',
+            auth: shouldBeAdmin ? 'admin' : 'user',
+            authProvider: 'google',
+            profilePicture: profile.photos?.[0]?.value || null
+          }
+        });
+
+        if (shouldBeAdmin) {
+          console.log(`🎉 Primo utente Google creato come admin: ${user.email}`);
         } else {
-          return done(null, false);
+          console.log(`👤 Nuovo utente Google creato: ${user.email}`);
         }
       } else {
         if (!user.profilePicture && profile.photos?.[0]?.value) {
