@@ -5,7 +5,6 @@
 
 export interface MenuConfig {
   enabled: boolean;
-  visible: boolean;
   developmentOnly?: boolean;
   requiredRole?: 'admin' | 'user' | 'all';
   description?: string;
@@ -14,11 +13,6 @@ export interface MenuConfig {
 export interface MainMenuConfig {
   ristorante: MenuConfig;
   admin: MenuConfig;
-  // Menu futuri per sviluppo
-  analytics?: MenuConfig;
-  reports?: MenuConfig;
-  settings?: MenuConfig;
-  dashboard?: MenuConfig;
 }
 
 /**
@@ -27,64 +21,25 @@ export interface MainMenuConfig {
  */
 export const menuConfig: MainMenuConfig = {
   ristorante: {
-    enabled: process.env.MENU_RISTORANTE_ENABLED !== 'false', // Default true
-    visible: process.env.MENU_RISTORANTE_VISIBLE !== 'false', // Default true
+    enabled: process.env.MENU_RISTORANTE !== 'false', // Default true
     developmentOnly: false,
     requiredRole: 'all',
     description: 'Gestione menu ristorante, piatti, bevande e impostazioni'
   },
   admin: {
-    enabled: process.env.MENU_ADMIN_ENABLED !== 'false', // Default true
-    visible: process.env.MENU_ADMIN_VISIBLE !== 'false', // Default true
+    enabled: process.env.MENU_ADMIN !== 'false', // Default true
     developmentOnly: false,
     requiredRole: 'admin',
     description: 'Gestione utenti e configurazioni amministrative'
-  },
-  // Menu futuri per sviluppo
-  analytics: {
-    enabled: process.env.MENU_ANALYTICS_ENABLED === 'true',
-    visible: process.env.MENU_ANALYTICS_VISIBLE === 'true',
-    developmentOnly: true,
-    requiredRole: 'admin',
-    description: 'Analisi e reportistica (in sviluppo)'
-  },
-  reports: {
-    enabled: process.env.MENU_REPORTS_ENABLED === 'true',
-    visible: process.env.MENU_REPORTS_VISIBLE === 'true',
-    developmentOnly: true,
-    requiredRole: 'admin',
-    description: 'Report dettagliati (in sviluppo)'
-  },
-  settings: {
-    enabled: process.env.MENU_SETTINGS_ENABLED === 'true',
-    visible: process.env.MENU_SETTINGS_VISIBLE === 'true',
-    developmentOnly: true,
-    requiredRole: 'admin',
-    description: 'Impostazioni avanzate (in sviluppo)'
-  },
-  dashboard: {
-    enabled: process.env.MENU_DASHBOARD_ENABLED === 'true',
-    visible: process.env.MENU_DASHBOARD_VISIBLE === 'true',
-    developmentOnly: true,
-    requiredRole: 'all',
-    description: 'Dashboard principale (in sviluppo)'
   }
 };
 
 /**
- * Verifica se un menu è abilitato e visibile
+ * Verifica se un menu è abilitato
  */
 export const isMenuEnabled = (menuName: keyof MainMenuConfig): boolean => {
   const menu = menuConfig[menuName];
   return menu ? menu.enabled : false;
-};
-
-/**
- * Verifica se un menu è visibile nell'interfaccia
- */
-export const isMenuVisible = (menuName: keyof MainMenuConfig): boolean => {
-  const menu = menuConfig[menuName];
-  return menu ? menu.enabled && menu.visible : false;
 };
 
 /**
@@ -96,11 +51,11 @@ export const isMenuDevelopmentOnly = (menuName: keyof MainMenuConfig): boolean =
 };
 
 /**
- * Ottiene tutti i menu abilitati e visibili
+ * Ottiene tutti i menu abilitati
  */
 export const getEnabledMenus = (): Array<{ name: keyof MainMenuConfig; config: MenuConfig }> => {
   return Object.entries(menuConfig)
-    .filter(([_, config]) => config.enabled && config.visible)
+    .filter(([_, config]) => config.enabled)
     .map(([name, config]) => ({ name: name as keyof MainMenuConfig, config }));
 };
 
@@ -111,17 +66,16 @@ export const getMenusForRole = (role: 'admin' | 'user' | 'all'): Array<{ name: k
   return Object.entries(menuConfig)
     .filter(([_, config]) => 
       config.enabled && 
-      config.visible && 
       (config.requiredRole === role || config.requiredRole === 'all')
     )
     .map(([name, config]) => ({ name: name as keyof MainMenuConfig, config }));
 };
 
 /**
- * Verifica se almeno un menu è abilitato e visibile
+ * Verifica se almeno un menu è abilitato
  */
 export const hasEnabledMenus = (): boolean => {
-  return Object.values(menuConfig).some(menu => menu.enabled && menu.visible);
+  return Object.values(menuConfig).some(menu => menu.enabled);
 };
 
 /**
@@ -132,21 +86,20 @@ export const logMenuConfig = (): void => {
   
   Object.entries(menuConfig).forEach(([key, config]) => {
     const status = config.enabled ? '✅ Abilitato' : '❌ Disabilitato';
-    const visibility = config.visible ? '(Visibile)' : '(Nascosto)';
     const devOnly = config.developmentOnly ? ' [DEV]' : '';
     const role = config.requiredRole ? ` [${config.requiredRole.toUpperCase()}]` : '';
     
-    console.log(`  - ${key}: ${status} ${visibility}${devOnly}${role}`);
+    console.log(`  - ${key}: ${status}${devOnly}${role}`);
   });
   
-  const enabledCount = Object.values(menuConfig).filter(menu => menu.enabled && menu.visible).length;
+  const enabledCount = Object.values(menuConfig).filter(menu => menu.enabled).length;
   
   if (enabledCount === 0) {
-    console.warn('⚠️  ATTENZIONE: Nessun menu è abilitato e visibile!');
+    console.warn('⚠️  ATTENZIONE: Nessun menu è abilitato!');
   } else if (enabledCount === 1) {
-    console.info('ℹ️  Solo un menu è abilitato e visibile');
+    console.info('ℹ️  Solo un menu è abilitato');
   } else {
-    console.log(`ℹ️  ${enabledCount} menu abilitati e visibili`);
+    console.log(`ℹ️  ${enabledCount} menu abilitati`);
   }
 };
 
@@ -154,19 +107,19 @@ export const logMenuConfig = (): void => {
  * Validazione della configurazione dei menu
  */
 export const validateMenuConfig = (): void => {
-  const enabledMenus = Object.values(menuConfig).filter(menu => menu.enabled && menu.visible);
+  const enabledMenus = Object.values(menuConfig).filter(menu => menu.enabled);
   
   if (enabledMenus.length === 0) {
-    console.error('❌ ERRORE: Nessun menu è abilitato e visibile!');
-    throw new Error('Almeno un menu deve essere abilitato e visibile');
+    console.error('❌ ERRORE: Nessun menu è abilitato!');
+    throw new Error('Almeno un menu deve essere abilitato');
   }
   
   // Verifica che i menu principali siano sempre abilitati in produzione
   if (process.env.NODE_ENV === 'production') {
-    if (!menuConfig.ristorante.enabled || !menuConfig.ristorante.visible) {
+    if (!menuConfig.ristorante.enabled) {
       console.warn('⚠️  ATTENZIONE: Menu Ristorante disabilitato in produzione!');
     }
-    if (!menuConfig.admin.enabled || !menuConfig.admin.visible) {
+    if (!menuConfig.admin.enabled) {
       console.warn('⚠️  ATTENZIONE: Menu Admin disabilitato in produzione!');
     }
   }

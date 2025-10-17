@@ -1,8 +1,8 @@
-# Script di Monitoraggio VTN Backend
+# Script di Utilità VTN Backend
 
 ## Panoramica
 
-Script di monitoraggio e verifica per il sistema VTN Backend ottimizzato.
+Script di utilità per la gestione completa del sistema VTN Backend con setup automatico.
 
 ## Script Disponibili
 
@@ -22,31 +22,91 @@ npm run health:check
 - Indici ottimizzati
 - Foreign keys
 
+### 2. `validate-env.js`
+Valida le variabili d'ambiente e la configurazione.
+
+**Utilizzo:**
+```bash
+npm run env:validate
+```
+
+**Cosa verifica:**
+- Presenza file .env
+- Variabili obbligatorie
+- Formato URL database
+- Configurazione OAuth
+- Sicurezza SESSION_SECRET
+
+### 3. `setup.js`
+Setup completo per primo avvio con verifiche automatiche.
+
+**Utilizzo:**
+```bash
+npm run setup:full
+```
+
+**Cosa fa:**
+- Verifica prerequisiti
+- Crea file .env se mancante
+- Valida configurazione
+- Installa dipendenze
+- Compila progetto
+- Configura database
+- Esegue health check
+
+### 4. `deploy.js`
+Deploy completo per produzione con verifiche di sicurezza.
+
+**Utilizzo:**
+```bash
+npm run deploy:full
+```
+
+**Cosa fa:**
+- Verifica ambiente produzione
+- Valida configurazione
+- Installa dipendenze produzione
+- Compila progetto
+- Configura database
+- Esegue health check
+- Verifica sicurezza
+
 ## Processo di Deploy
 
 ### Per Sviluppo
 ```bash
-# 1. Installa dipendenze
+# Setup completo automatico
+npm run setup:full
+
+# Oppure step by step:
 npm install
-
-# 2. Setup database di sviluppo
 npm run setup:dev
-
-# 3. Avvia in sviluppo
 npm run dev
 ```
 
 ### Per Produzione
 ```bash
-# Deploy completo
-npm run deploy
+# Deploy completo con verifiche
+npm run deploy:full
 
 # Oppure step by step:
+npm run env:validate
 npm run build
-npm run prisma:generate
-npm run prisma:migrate:deploy
+npm run setup
 npm run health:check
 npm start
+```
+
+### Verifica Sistema
+```bash
+# Verifica stato completo
+npm run health:check
+
+# Verifica configurazione
+npm run env:validate
+
+# Verifica solo database
+npx prisma migrate status
 ```
 
 ## Vantaggi dell'Ottimizzazione

@@ -37,39 +37,6 @@ export const mainMenuItems: MenuItem[] = (() => {
       description: 'Gestione utenti e configurazioni amministrative',
       developmentOnly: false,
       requiredRole: 'admin'
-    },
-    // Menu futuri per sviluppo
-    analytics: {
-      label: 'Analytics',
-      link: '/analytics',
-      icon: 'chart',
-      description: 'Analisi e reportistica (in sviluppo)',
-      developmentOnly: true,
-      requiredRole: 'admin'
-    },
-    reports: {
-      label: 'Reports',
-      link: '/reports',
-      icon: 'document',
-      description: 'Report dettagliati (in sviluppo)',
-      developmentOnly: true,
-      requiredRole: 'admin'
-    },
-    settings: {
-      label: 'Settings',
-      link: '/settings',
-      icon: 'cog',
-      description: 'Impostazioni avanzate (in sviluppo)',
-      developmentOnly: true,
-      requiredRole: 'admin'
-    },
-    dashboard: {
-      label: 'Dashboard',
-      link: '/dashboard',
-      icon: 'home',
-      description: 'Dashboard principale (in sviluppo)',
-      developmentOnly: true,
-      requiredRole: 'all'
     }
   };
   

@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import express from 'express';
 import passport from 'passport';
 import { isAuthenticated, validateAuthStrategy, requireAuthStrategy } from '../middlewares/auth';

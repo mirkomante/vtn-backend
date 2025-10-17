@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import { isMenuEnabled as _isMenuEnabled, isMenuVisible as _isMenuVisible, menuConfig, MainMenuConfig } from '../config/menuConfig';
+import { isMenuEnabled as _isMenuEnabled, menuConfig, MainMenuConfig } from '../config/menuConfig';
 
 /**
  * Middleware per verificare l'accesso ai menu
- * Controlla se un menu è abilitato e visibile prima di permettere l'accesso
+ * Controlla se un menu è abilitato prima di permettere l'accesso
  */
 export const checkMenuAccess = (menuName: keyof MainMenuConfig) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -29,15 +29,6 @@ export const checkMenuAccess = (menuName: keyof MainMenuConfig) => {
       });
     }
     
-    // Verifica che il menu sia visibile (doppio controllo)
-    if (!menu.visible) {
-      console.warn(`Tentativo di accesso a menu nascosto: ${menuName}`);
-      return res.status(404).render('pages/error', {
-        title: 'Menu Non Disponibile',
-        message: 'Questo menu non è attualmente visibile',
-        layout: 'layouts/default'
-      });
-    }
     
     // Verifica se il menu è solo per sviluppo
     if (menu.developmentOnly && process.env.NODE_ENV === 'production') {
@@ -85,11 +76,7 @@ export const checkMenuAccessByPath = (req: Request, res: Response, next: NextFun
   // Mappa dei percorsi ai menu
   const pathToMenuMap: Record<string, keyof MainMenuConfig> = {
     '/ristorante-menu': 'ristorante',
-    '/admin': 'admin',
-    '/analytics': 'analytics',
-    '/reports': 'reports',
-    '/settings': 'settings',
-    '/dashboard': 'dashboard'
+    '/admin': 'admin'
   };
   
   // Trova il menu corrispondente al percorso

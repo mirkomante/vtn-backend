@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import express from 'express';
 import menuFissoRoutes from './menu-fisso';
 import piattiRoutes from './piatti';

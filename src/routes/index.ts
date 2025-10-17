@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import express from 'express';
 import { mainMenuItems } from '../config/mainMenu';
 import { sectionMenuItems } from '../config/sectionMenu';
