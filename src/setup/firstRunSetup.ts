@@ -74,9 +74,19 @@ export class FirstRunSetup {
         return;
       }
 
-      console.log('👤 Creazione utente admin...');
+      // Verifica se Google OAuth è abilitato
+      const config = EnvironmentValidator.getConfig();
+      const isGoogleEnabled = config.auth.googleEnabled;
+      
+      if (isGoogleEnabled) {
+        console.log('🔐 Google OAuth abilitato - il primo utente Google diventerà admin');
+        console.log('⏳ In attesa del primo login Google per creare l\'admin...');
+        return;
+      }
 
-      // Crea utente admin di default
+      console.log('👤 Creazione utente admin locale...');
+
+      // Crea utente admin di default solo se Google OAuth non è abilitato
       const adminUser = await this.prisma.user.create({
         data: {
           email: 'admin@vietnamonamour.com',

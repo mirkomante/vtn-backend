@@ -197,7 +197,7 @@ La strategia Google è configurata in `src/config/passport.ts`:
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID!,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-  callbackURL: '/auth/google/callback',
+  callbackURL: `${process.env.BASE_URL || 'http://localhost:8080'}/auth/google/callback`,
   passReqToCallback: true
 }, async (req, accessToken, refreshToken, profile, done) => {
   // Logica di autenticazione Google
@@ -209,6 +209,29 @@ passport.use(new GoogleStrategy({
 - **OAuth 2.0**: Autenticazione sicura tramite Google
 - **Scope limitato**: Solo `profile` e `email`
 - **Auto-registrazione**: Primo utente diventa admin automaticamente
+- **URL assoluto**: Il callback URL deve essere completo per funzionare correttamente
+
+### Configurazione Callback URL
+
+**IMPORTANTE**: Il callback URL deve essere configurato come URL assoluto in Google Cloud Console.
+
+1. **Variabile d'ambiente richiesta**:
+   ```env
+   BASE_URL="http://localhost:8080"  # Per sviluppo
+   BASE_URL="https://tuodominio.com"  # Per produzione
+   ```
+
+2. **Configurazione in Google Cloud Console**:
+   - Vai a APIs & Services → Credentials
+   - Seleziona il tuo OAuth 2.0 Client ID
+   - Aggiungi nei "Authorized redirect URIs":
+     - `http://localhost:8080/auth/google/callback` (sviluppo)
+     - `https://tuodominio.com/auth/google/callback` (produzione)
+
+3. **Callback URL generato automaticamente**:
+   ```
+   ${BASE_URL}/auth/google/callback
+   ```
 - **Gestione profili**: Estrazione automatica di nome, cognome e foto
 - **Aggiornamento dati**: Sincronizzazione profilo ad ogni login
 
