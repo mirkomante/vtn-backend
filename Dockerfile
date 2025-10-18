@@ -23,8 +23,8 @@ FROM base AS builder
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Installa tutte le dipendenze (dev + prod)
-RUN npm ci --only=production --silent && \
+# Installa tutte le dipendenze (dev + prod) per il build
+RUN npm ci --silent && \
     npm cache clean --force
 
 # Copia sorgenti
@@ -35,6 +35,9 @@ RUN npx prisma generate
 
 # Build TypeScript
 RUN npm run build
+
+# Rimuovi devDependencies per ridurre la dimensione dell'immagine
+RUN npm prune --production
 
 # ===========================================
 # STAGE 2: PRODUCTION
