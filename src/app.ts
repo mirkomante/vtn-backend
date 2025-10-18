@@ -21,10 +21,12 @@ const app = express();
 // Validazione configurazione ambiente
 let config;
 try {
+  console.log('🔄 Validazione configurazione ambiente...');
   config = EnvironmentValidator.validate();
   console.log('✅ Configurazione ambiente validata');
 } catch (error) {
   console.error('❌ Errore configurazione ambiente:', error);
+  console.error('💡 Verifica che tutte le variabili d\'ambiente siano configurate correttamente');
   process.exit(1);
 }
 
@@ -92,6 +94,17 @@ app.use('/auth', authRoutes);
 app.get('/health', HealthCheckMiddleware.healthCheck);
 app.get('/health/ready', HealthCheckMiddleware.readinessCheck);
 app.get('/health/live', HealthCheckMiddleware.livenessCheck);
+
+// Endpoint di test semplice
+app.get('/test', (_req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+    port: config.server.port,
+    environment: config.server.nodeEnv
+  });
+});
 
 // API Routes (senza autenticazione)
 app.use('/api/v1', apiV1Routes);

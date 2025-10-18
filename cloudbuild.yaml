@@ -52,7 +52,7 @@ steps:
       - '--concurrency'
       - '80'
       - '--timeout'
-      - '300'
+      - '600'
       - '--set-env-vars'
       - 'NODE_ENV=production,PORT=8080'
       - '--set-secrets'
