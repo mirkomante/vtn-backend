@@ -37,7 +37,7 @@ const PgSession = pgSession(session);
 // Configurazione delle sessioni
 app.use(session({
   store: new PgSession({
-    conString: config.database.url, // Usa conString invece di pool
+    conString: config.database.url,
     tableName: 'session'
   }),
   secret: config.session.secret,
@@ -51,16 +51,6 @@ app.use(session({
   }
 }));
 
-// Middleware per logging delle sessioni
-app.use((req, _res, next) => {
-  console.log('🍪 Session info:', {
-    sessionID: req.sessionID,
-    isAuthenticated: req.isAuthenticated(),
-    userId: (req.user as any)?.id,
-    sessionStore: req.sessionStore ? 'connected' : 'not connected'
-  });
-  next();
-});
 
 // Configurazione di Passport
 app.use(passport.initialize());
