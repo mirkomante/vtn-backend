@@ -83,7 +83,7 @@
       errorMessage: 'Errore durante l\'eliminazione',
       getDisplayValue: (item) => item.nome
     },
-    pagination: (typeof pagination !== 'undefined' && !isFilteredEmpty) ? pagination : undefined
+    pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
   }) %>
 <% } %>
 

@@ -81,7 +81,7 @@
       successMessage: 'Liquori eliminati con successo',
       errorMessage: 'Errore durante l\'eliminazione dei liquori'
     },
-    pagination: (typeof pagination !== 'undefined' && !isFilteredEmpty) ? pagination : undefined
+    pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
   }) %>
 <% } %>
 
