@@ -694,7 +694,7 @@ router.get('/piatti', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le categorie per il filtro
     const categorie = await prisma.categoriaPiatti.findMany({
@@ -1883,7 +1883,7 @@ router.get('/vini', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le tipologie per il filtro
     const tipologie = await prisma.tipologiaVino.findMany({
@@ -2344,7 +2344,7 @@ router.get('/birre', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le tipologie per il filtro
     const tipologie = await prisma.tipologiaBirra.findMany({
@@ -2771,7 +2771,7 @@ router.get('/menu-fissi', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le categorie per il filtro
     const categorie = await prisma.categoriaMenuFisso.findMany({
@@ -7794,7 +7794,7 @@ router.get('/liquori', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le tipologie per il filtro
     const tipologie = await prisma.tipologiaLiquore.findMany({
@@ -8429,7 +8429,7 @@ router.get('/cocktails', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le tipologie per il filtro
     const tipologie = await prisma.tipologiaCocktail.findMany({
@@ -9027,7 +9027,7 @@ router.get('/bevande', async (req, res) => {
     const isFilteredEmpty = totalItemsInSystem > 0 && totalItems === 0;
     const hasItems = items.length > 0;
     
-    const pagination = calculatePagination(page, limit, totalItems);
+    const pagination = calculatePagination(totalItems, page, limit);
     
     // Recupera le tipologie per il filtro
     const tipologie = await prisma.tipologiaBevanda.findMany({
