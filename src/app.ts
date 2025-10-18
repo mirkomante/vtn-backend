@@ -34,12 +34,8 @@ export const prisma = new PrismaClient();
 // Configurazione del session store
 const PgSession = pgSession(session);
 
-// Configurazione delle sessioni
-app.use(session({
-  store: new PgSession({
-    conString: config.database.url,
-    tableName: 'session'
-  }),
+// Configurazione delle sessioni (condizionale per ambiente)
+const sessionConfig: any = {
   secret: config.session.secret,
   resave: false,
   saveUninitialized: false,
@@ -49,7 +45,17 @@ app.use(session({
     httpOnly: true,
     sameSite: 'lax' // Aggiunto per Cloud Run
   }
-}));
+};
+
+// Solo in produzione usa PostgreSQL per le sessioni
+if (config.server.nodeEnv === 'production') {
+  sessionConfig.store = new PgSession({
+    conString: config.database.url,
+    tableName: 'session'
+  });
+}
+
+app.use(session(sessionConfig));
 
 
 // Configurazione di Passport
