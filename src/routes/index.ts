@@ -26,12 +26,13 @@ router.get('/', (req, res) => {
   let sectionMenu = sectionMenuItems.defaultNavigationItems;
   
   res.render('index', {
-    title: 'Prenotazioni',
+    title: 'Dashboard',
     layout: 'layouts/main',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionIcons,
-    currentPath
+    currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard')
   });
 });
 
@@ -49,7 +50,7 @@ router.get('/test-scripts', (_req, res) => {
   
   res.render('pages/test-scripts', {
     title: 'Test Script Manager',
-    layout: 'layouts/sections',
+    layout: 'layouts/main',
     scripts: uniqueScripts,
     mainMenu: mainMenuItems,
     sectionMenu: sectionMenuItems.defaultNavigationItems,

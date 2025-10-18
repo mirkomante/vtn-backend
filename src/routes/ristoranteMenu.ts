@@ -1678,6 +1678,7 @@ router.get('/impostazioni', (_req, res) => {
     sectionIcons,
     currentPath,
     isInternalPage: false,
+    scripts: scriptManager.getScriptsForPage('dashboard'),
     breadcrumbs: [
       { label: 'Menu Ristorante', href: '/ristorante-menu' },
       { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' }

@@ -31,11 +31,12 @@ router.get('/', (_req, res) => {
 
   res.render('index', {
     title: 'Admin',
-    layout: 'layouts/main',
+    layout: 'layouts/sections',
     mainMenu: mainMenuItems,
     sectionMenu,
     sectionIcons,
-    currentPath
+    currentPath,
+    scripts: scriptManager.getScriptsForPage('dashboard')
   });
 });
 

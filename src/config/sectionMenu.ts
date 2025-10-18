@@ -97,7 +97,7 @@ export const adminItems: MenuItem[] = [
 export const defaultNavigationItems: MenuItem[] = [
   {
     label: 'Dashboard',
-    link: '/dashboard',
+    link: '/',
     icon: 'dashboard'
   }
 ];

@@ -19,20 +19,34 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
-      <div class="flex-1 text-sm/6 font-semibold text-gray-900">Dashboard</div>
-      <a href="#">
-        <span class="sr-only">Your profile</span>
-        <img class="size-8 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+      <a href="/profile" class="ml-auto">
+        <span class="sr-only">Il tuo profilo</span>
+        <% if (user && user.avatar) { %>
+          <img class="size-8 rounded-full bg-gray-50" src="<%= user.avatar %>" alt="<%= user.name %>">
+        <% } else { %>
+          <div class="size-8 rounded-full bg-gray-50 flex items-center justify-center">
+            <span class="text-gray-500 text-sm"><%= user ? (user.givenName ? user.givenName.charAt(0).toUpperCase() : 'U') : 'U' %></span>
+          </div>
+        <% } %>
       </a>
     </div>
   
     <main class="lg:pl-72">
-      <!-- <div class="xl:pr-96"> -->
-        <div class="px-4 py-6 sm:px-6 lg:px-8">
-          <!-- Main area -->
+      <div class="px-8 py-6 sm:px-6 lg:px-8">
+        
+        <!-- Breadcrumbs se presenti (sempre in cima) -->
+        <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
+          <div class="mb-8">
+            <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
+          </div>
+        <% } %>
+
+        <!-- Main content area -->
+        <div class="mt-8">
           <%- body %>
         </div>
-      <!-- </div> -->
+        
+      </div>
     </main>
   
     <!-- <aside class="fixed inset-y-0 right-0 hidden w-96 overflow-y-auto border-l border-gray-200 px-4 py-6 sm:px-6 lg:px-8 xl:block"> -->
