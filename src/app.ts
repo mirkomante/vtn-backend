@@ -8,7 +8,6 @@ import passport from 'passport';
 import { configurePassport } from './config/passport';
 import { flashMessages as customFlashMessages } from './middlewares/flashMessages';
 import { userToLocals } from './middlewares/global';
-import { Pool } from 'pg';
 import { jsonErrorHandler } from './middlewares/api/errorHandler';
 import DatabaseLogger from './utils/dbLogger';
 import { EnvironmentValidator } from './config/env';
@@ -34,14 +33,11 @@ export const prisma = new PrismaClient();
 
 // Configurazione del session store
 const PgSession = pgSession(session);
-const pool = new Pool({
-  connectionString: config.database.url
-});
 
 // Configurazione delle sessioni
 app.use(session({
   store: new PgSession({
-    pool: pool,
+    conString: config.database.url, // Usa conString invece di pool
     tableName: 'session'
   }),
   secret: config.session.secret,
@@ -60,7 +56,8 @@ app.use((req, _res, next) => {
   console.log('🍪 Session info:', {
     sessionID: req.sessionID,
     isAuthenticated: req.isAuthenticated(),
-    userId: (req.user as any)?.id
+    userId: (req.user as any)?.id,
+    sessionStore: req.sessionStore ? 'connected' : 'not connected'
   });
   next();
 });
