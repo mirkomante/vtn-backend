@@ -5,6 +5,7 @@ import { DoneCallback } from 'passport';
 import { Request } from 'express';
 import bcrypt from 'bcryptjs';
 import { isStrategyEnabled, logAuthConfig } from './auth';
+import { EnvironmentValidator } from './env';
 
 const prisma = new PrismaClient();
 
@@ -26,10 +27,11 @@ export const configurePassport = (passport: any) => {
 
   // Strategia Google OAuth (solo se abilitata)
   if (isStrategyEnabled('google')) {
+    const config = EnvironmentValidator.getConfig();
     passport.use(new GoogleStrategy({
-      clientID: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: '/auth/google/callback',
+      clientID: config.google.clientId,
+      clientSecret: config.google.clientSecret,
+      callbackURL: config.google.callbackUrl,
       passReqToCallback: true
     }, async (_req: Request, _accessToken: string, _refreshToken: string, profile: Profile, done: VerifyCallback) => {
     try {

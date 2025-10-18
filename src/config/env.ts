@@ -21,6 +21,7 @@ export interface EnvironmentConfig {
     clientId: string;
     clientSecret: string;
     enabled: boolean;
+    callbackUrl: string;
   };
   
   // Autenticazione
@@ -129,7 +130,11 @@ export class EnvironmentValidator {
       google: {
         clientId: googleClientId || '',
         clientSecret: googleClientSecret || '',
-        enabled: googleEnabled
+        enabled: googleEnabled,
+        callbackUrl: process.env.GOOGLE_CALLBACK_URL || 
+          (nodeEnv === 'production' 
+            ? 'https://vtn-backend-203473363873.europe-west1.run.app/auth/google/callback'
+            : '/auth/google/callback')
       },
       auth: {
         localEnabled: process.env.AUTH_LOCAL_ENABLED === 'true',
