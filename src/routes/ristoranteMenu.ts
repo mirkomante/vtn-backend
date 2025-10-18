@@ -646,8 +646,7 @@ router.get('/piatti', async (req, res) => {
     
     // Costruisci la clausola WHERE
     const whereClause: any = {
-      deletedAt: null,
-      soloMenuFissi: false
+      deletedAt: null
     };
     
     if (categoriaFilter && categoriaFilter.trim() !== '') {
