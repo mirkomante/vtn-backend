@@ -28,10 +28,21 @@ export const configurePassport = (passport: any) => {
   // Strategia Google OAuth (solo se abilitata)
   if (isStrategyEnabled('google')) {
     const config = EnvironmentValidator.getConfig();
+    
+    // Costruisci il callback URL dinamicamente
+    const baseUrl = process.env.BASE_URL || 
+      (process.env.NODE_ENV === 'production' 
+        ? 'https://vtn-backend-203473363873.europe-west1.run.app'
+        : 'http://localhost:8080');
+    
+    const callbackURL = `${baseUrl}/auth/google/callback`;
+    
+    console.log(`🔗 Google OAuth Callback URL: ${callbackURL}`);
+    
     passport.use(new GoogleStrategy({
       clientID: config.google.clientId,
       clientSecret: config.google.clientSecret,
-      callbackURL: config.google.callbackUrl,
+      callbackURL: callbackURL,
       passReqToCallback: true
     }, async (_req: Request, _accessToken: string, _refreshToken: string, profile: Profile, done: VerifyCallback) => {
     try {
