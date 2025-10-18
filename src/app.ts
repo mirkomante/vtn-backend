@@ -50,9 +50,20 @@ app.use(session({
   cookie: {
     maxAge: config.session.maxAge,
     secure: config.session.secure,
-    httpOnly: true
+    httpOnly: true,
+    sameSite: 'lax' // Aggiunto per Cloud Run
   }
 }));
+
+// Middleware per logging delle sessioni
+app.use((req, _res, next) => {
+  console.log('🍪 Session info:', {
+    sessionID: req.sessionID,
+    isAuthenticated: req.isAuthenticated(),
+    userId: (req.user as any)?.id
+  });
+  next();
+});
 
 // Configurazione di Passport
 app.use(passport.initialize());

@@ -95,8 +95,17 @@ export const configurePassport = (passport: any) => {
         }
       }
 
+      console.log('👤 Google OAuth user processed:', {
+        userId: user.id,
+        email: user.email,
+        role: user.role,
+        auth: user.auth,
+        isFirstUser: isFirstUser
+      });
+      
       return done(null, user);
     } catch (error) {
+      console.error('❌ Google OAuth error:', error);
       return done(error, undefined);
     }
   }));
