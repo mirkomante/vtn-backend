@@ -219,10 +219,13 @@ router.post('/servizi/nuovo', async (req, res) => {
   const { nome, descrizione, prezzo, inLista } = req.body;
   
   try {
-    // Verifica se esiste già un servizio con lo stesso nome
+    // Verifica se esiste già un servizio con lo stesso nome (case-insensitive)
     const existingServizio = await prisma.servizioAccessorio.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -3358,9 +3361,15 @@ router.post('/impostazioni/allergeni/nuovo', async (req, res) => {
   const { nome, descrizione } = req.body;
   
   try {
-    // Verifica se esiste già un allergene con lo stesso nome
-    const existingAllergene = await prisma.allergene.findUnique({
-      where: { nome }
+    // Verifica se esiste già un allergene con lo stesso nome (case-insensitive)
+    const existingAllergene = await prisma.allergene.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingAllergene) {
@@ -6395,9 +6404,15 @@ router.post('/impostazioni/allergeni/nuovo/ajax', async (req, res) => {
   const { nome, descrizione } = req.body;
   
   try {
-    // Verifica se esiste già un allergene con lo stesso nome
-    const existingAllergene = await prisma.allergene.findUnique({
-      where: { nome }
+    // Verifica se esiste già un allergene con lo stesso nome (case-insensitive)
+    const existingAllergene = await prisma.allergene.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingAllergene) {
@@ -6448,8 +6463,14 @@ router.post('/impostazioni/allergeni/modifica/:id/ajax', async (req, res) => {
     }
 
     if (nome !== existingAllergene.nome) {
-      const allergeneWithSameName = await prisma.allergene.findUnique({
-        where: { nome }
+      const allergeneWithSameName = await prisma.allergene.findFirst({
+        where: { 
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
+          deletedAt: null
+        }
       });
 
       if (allergeneWithSameName) {
@@ -6489,8 +6510,14 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo/ajax', async (req, res) =>
   const { nome, descrizione, inLista } = req.body;
   
   try {
-    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
-      where: { nome }
+    const existingCategoria = await prisma.categoriaMenuFisso.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingCategoria) {
@@ -6542,8 +6569,14 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id/ajax', async (req, 
     }
 
     if (nome !== existingCategoria.nome) {
-      const categoriaWithSameName = await prisma.categoriaMenuFisso.findUnique({
-        where: { nome }
+      const categoriaWithSameName = await prisma.categoriaMenuFisso.findFirst({
+        where: { 
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
+          deletedAt: null
+        }
       });
 
       if (categoriaWithSameName) {
@@ -6584,8 +6617,14 @@ router.post('/impostazioni/categoria-piatti/nuovo/ajax', async (req, res) => {
   const { nome, descrizione, inLista } = req.body;
   
   try {
-    const existingCategoria = await prisma.categoriaPiatti.findUnique({
-      where: { nome }
+    const existingCategoria = await prisma.categoriaPiatti.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingCategoria) {
@@ -6637,8 +6676,14 @@ router.post('/impostazioni/categoria-piatti/modifica/:id/ajax', async (req, res)
     }
 
     if (nome !== existingCategoria.nome) {
-      const categoriaWithSameName = await prisma.categoriaPiatti.findUnique({
-        where: { nome }
+      const categoriaWithSameName = await prisma.categoriaPiatti.findFirst({
+        where: { 
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
+          deletedAt: null
+        }
       });
 
       if (categoriaWithSameName) {
@@ -7011,10 +7056,13 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
   const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
   
   try {
-    // Verifica se esiste già un piatto con lo stesso nome
+    // Verifica se esiste già un piatto con lo stesso nome (case-insensitive)
     const existingPiatto = await prisma.piatto.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -7084,10 +7132,13 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
       });
     }
 
-    // Verifica se esiste già un altro piatto con lo stesso nome
+    // Verifica se esiste già un altro piatto con lo stesso nome (case-insensitive)
     const duplicatePiatto = await prisma.piatto.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null,
         id: { not: piattoId }
       }
@@ -7236,10 +7287,13 @@ router.post('/vini/nuovo/ajax', async (req, res) => {
   } = req.body;
   
   try {
-    // Verifica se esiste già un vino con lo stesso nome
+    // Verifica se esiste già un vino con lo stesso nome (case-insensitive)
     const existingVino = await prisma.vino.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -7319,10 +7373,13 @@ router.post('/vini/modifica/:id/ajax', async (req, res) => {
       });
     }
 
-    // Verifica se esiste già un altro vino con lo stesso nome
+    // Verifica se esiste già un altro vino con lo stesso nome (case-insensitive)
     const duplicateVino = await prisma.vino.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null,
         id: { not: vinoId }
       }
@@ -7488,6 +7545,24 @@ router.post('/birre/nuovo/ajax', async (req, res) => {
       });
     }
     
+    // Verifica se esiste già una birra con lo stesso nome (case-insensitive)
+    const existingBirra = await prisma.birra.findFirst({
+      where: { 
+        nome: { 
+          equals: nome.trim(), 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
+    });
+
+    if (existingBirra) {
+      return res.json({ 
+        success: false, 
+        message: 'Una birra con questo nome esiste già' 
+      });
+    }
+    
     // Crea la birra
     const birra = await prisma.birra.create({
       data: {
@@ -7542,6 +7617,27 @@ router.post('/birre/modifica/:id/ajax', async (req, res) => {
         success: false,
         message: 'Birra non trovata'
       });
+    }
+    
+    // Verifica se esiste già un'altra birra con lo stesso nome (case-insensitive)
+    if (nome.trim() !== existingBirra.nome) {
+      const duplicateBirra = await prisma.birra.findFirst({
+        where: { 
+          nome: { 
+            equals: nome.trim(), 
+            mode: 'insensitive' 
+          },
+          deletedAt: null,
+          id: { not: id }
+        }
+      });
+
+      if (duplicateBirra) {
+        return res.json({ 
+          success: false, 
+          message: 'Una birra con questo nome esiste già' 
+        });
+      }
     }
     
     // Aggiorna la birra
@@ -8071,6 +8167,24 @@ router.post('/liquori/nuovo/ajax', async (req, res) => {
       });
     }
     
+    // Verifica se esiste già un liquore con lo stesso nome (case-insensitive)
+    const existingLiquore = await prisma.liquore.findFirst({
+      where: { 
+        nome: { 
+          equals: nome.trim(), 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
+    });
+
+    if (existingLiquore) {
+      return res.json({ 
+        success: false, 
+        message: 'Un liquore con questo nome esiste già' 
+      });
+    }
+    
     // Crea il liquore
     const liquore = await prisma.liquore.create({
       data: {
@@ -8126,6 +8240,27 @@ router.post('/liquori/modifica/:id/ajax', async (req, res) => {
         success: false,
         message: 'Liquore non trovato'
       });
+    }
+    
+    // Verifica se esiste già un altro liquore con lo stesso nome (case-insensitive)
+    if (nome.trim() !== existingLiquore.nome) {
+      const duplicateLiquore = await prisma.liquore.findFirst({
+        where: { 
+          nome: { 
+            equals: nome.trim(), 
+            mode: 'insensitive' 
+          },
+          deletedAt: null,
+          id: { not: id }
+        }
+      });
+
+      if (duplicateLiquore) {
+        return res.json({ 
+          success: false, 
+          message: 'Un liquore con questo nome esiste già' 
+        });
+      }
     }
     
     // Aggiorna il liquore
@@ -8658,10 +8793,13 @@ router.post('/cocktails/nuovo/ajax', async (req, res) => {
   const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
   
   try {
-    // Verifica se esiste già un cocktail con lo stesso nome
+    // Verifica se esiste già un cocktail con lo stesso nome (case-insensitive)
     const existingCocktail = await prisma.cocktail.findFirst({
       where: {
-        nome: nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -8719,10 +8857,13 @@ router.post('/cocktails/modifica/:id/ajax', async (req, res) => {
       });
     }
     
-    // Verifica se esiste già un altro cocktail con lo stesso nome
+    // Verifica se esiste già un altro cocktail con lo stesso nome (case-insensitive)
     const duplicateCocktail = await prisma.cocktail.findFirst({
       where: {
-        nome: nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         id: { not: cocktailId },
         deletedAt: null
       }
@@ -9250,10 +9391,13 @@ router.post('/bevande/nuovo/ajax', async (req, res) => {
   const { nome, descrizione, tipologiaId, nazioneId, prezzo, inLista } = req.body;
   
   try {
-    // Verifica se esiste già una bevanda con lo stesso nome
+    // Verifica se esiste già una bevanda con lo stesso nome (case-insensitive)
     const existingBevanda = await prisma.bevanda.findFirst({
       where: {
-        nome: nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -9311,10 +9455,13 @@ router.post('/bevande/modifica/:id/ajax', async (req, res) => {
       });
     }
     
-    // Verifica se esiste già un'altra bevanda con lo stesso nome
+    // Verifica se esiste già un'altra bevanda con lo stesso nome (case-insensitive)
     const duplicateBevanda = await prisma.bevanda.findFirst({
       where: {
-        nome: nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         id: { not: bevandaId },
         deletedAt: null
       }
@@ -9426,10 +9573,13 @@ router.post('/servizi/nuovo/ajax', async (req, res) => {
   const { nome, descrizione, prezzo, inLista } = req.body;
   
   try {
-    // Verifica se esiste già un servizio con lo stesso nome
+    // Verifica se esiste già un servizio con lo stesso nome (case-insensitive)
     const existingServizio = await prisma.servizioAccessorio.findFirst({
       where: { 
-        nome,
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
         deletedAt: null
       }
     });
@@ -9486,7 +9636,10 @@ router.post('/servizi/modifica/:id/ajax', async (req, res) => {
     if (nome !== existingServizio.nome) {
       const servizioWithSameName = await prisma.servizioAccessorio.findFirst({
         where: { 
-          nome,
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
           deletedAt: null
         }
       });
