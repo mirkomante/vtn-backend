@@ -14,7 +14,14 @@ router.use(requireEnabledMenus);
 // Tutte le route richiedono autenticazione
 router.use(isAuthenticated);
 
-router.get('/', (_req, res) => {
+router.get('/', (req, res) => {
+  console.log('🏠 Homepage access:', {
+    isAuthenticated: req.isAuthenticated(),
+    userId: (req.user as any)?.id,
+    email: (req.user as any)?.email,
+    role: (req.user as any)?.role
+  });
+  
   const currentPath = '/';
   let sectionMenu = sectionMenuItems.defaultNavigationItems;
   

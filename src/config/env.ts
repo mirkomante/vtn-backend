@@ -124,7 +124,7 @@ export class EnvironmentValidator {
       session: {
         secret: sessionSecret!,
         maxAge: 60 * 60 * 1000, // 1 ora
-        secure: nodeEnv === 'production'
+        secure: false // Disabilitato per Cloud Run
       },
       google: {
         clientId: googleClientId || '',

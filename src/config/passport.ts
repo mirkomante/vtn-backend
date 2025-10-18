@@ -5,6 +5,7 @@ import { DoneCallback } from 'passport';
 import { Request } from 'express';
 import bcrypt from 'bcryptjs';
 import { isStrategyEnabled, logAuthConfig } from './auth';
+import { EnvironmentValidator } from './env';
 
 const prisma = new PrismaClient();
 
@@ -26,10 +27,22 @@ export const configurePassport = (passport: any) => {
 
   // Strategia Google OAuth (solo se abilitata)
   if (isStrategyEnabled('google')) {
+    const config = EnvironmentValidator.getConfig();
+    
+    // Costruisci il callback URL dinamicamente
+    const baseUrl = process.env.BASE_URL || 
+      (process.env.NODE_ENV === 'production' 
+        ? 'https://vtn-backend-203473363873.europe-west1.run.app'
+        : 'http://localhost:8080');
+    
+    const callbackURL = `${baseUrl}/auth/google/callback`;
+    
+    console.log(`🔗 Google OAuth Callback URL: ${callbackURL}`);
+    
     passport.use(new GoogleStrategy({
-      clientID: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      callbackURL: '/auth/google/callback',
+      clientID: config.google.clientId,
+      clientSecret: config.google.clientSecret,
+      callbackURL: callbackURL,
       passReqToCallback: true
     }, async (_req: Request, _accessToken: string, _refreshToken: string, profile: Profile, done: VerifyCallback) => {
     try {
@@ -82,8 +95,17 @@ export const configurePassport = (passport: any) => {
         }
       }
 
+      console.log('👤 Google OAuth user processed:', {
+        userId: user.id,
+        email: user.email,
+        role: user.role,
+        auth: user.auth,
+        isFirstUser: isFirstUser
+      });
+      
       return done(null, user);
     } catch (error) {
+      console.error('❌ Google OAuth error:', error);
       return done(error, undefined);
     }
   }));

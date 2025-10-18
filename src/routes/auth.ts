@@ -50,7 +50,13 @@ if (isStrategyEnabled('google')) {
       failureRedirect: '/auth/login',
       failureFlash: true
     }),
-    (_req, res) => {
+    (req, res) => {
+      console.log('🔐 Google OAuth callback success:', {
+        userId: (req.user as any)?.id,
+        email: (req.user as any)?.email,
+        role: (req.user as any)?.role,
+        isAuthenticated: req.isAuthenticated()
+      });
       res.redirect('/');
     }
   );
