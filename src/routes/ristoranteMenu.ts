@@ -3541,6 +3541,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -3625,6 +3626,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
           actionNavConfig,
+          scripts: scriptManager.getScriptsForPage('form'),
           isInternalPage: true,
           item: existingAllergene,
           formConfig,
@@ -3680,6 +3682,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: existingAllergene ? `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}` : undefined,
       actionNavConfig,
+      scripts: scriptManager.getScriptsForPage('form'),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },

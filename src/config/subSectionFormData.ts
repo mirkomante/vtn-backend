@@ -110,13 +110,13 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
       type: 'toggle',
       name: 'inLista',
       id: 'inLista',
-      label: 'In Lista',
+      label: 'Visibile nel menu',
       required: false,
       description: 'Mostra questa categoria nella lista del menu',
       value: true,
       defaultValue: true,
       bulkEditable: true,
-      bulkLabel: 'Stato In Lista',
+      bulkLabel: 'Visibile nel menu',
       bulkDescription: 'Imposta lo stato "In Lista" per tutte le categorie selezionate',
       bulkHelpText: 'Seleziona per mostrare le categorie nella lista del menu'
     }
@@ -157,6 +157,9 @@ export const categoriaMenuFissoFormData: FormDataSchema = {
           value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue.toString();
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -244,13 +247,13 @@ export const categoriaPiattiFormData: FormDataSchema = {
       type: 'toggle',
       name: 'inLista',
       id: 'inLista',
-      label: 'In Lista',
+      label: 'Visibile nel menu',
       required: false,
       description: 'Mostra questa categoria nella lista del menu',
       value: true,
       defaultValue: true,
       bulkEditable: true,
-      bulkLabel: 'Stato In Lista',
+      bulkLabel: 'Visibile nel menu',
       bulkDescription: 'Imposta lo stato "In Lista" per tutte le categorie selezionate',
       bulkHelpText: 'Seleziona per mostrare le categorie nella lista del menu'
     }
@@ -291,6 +294,9 @@ export const categoriaPiattiFormData: FormDataSchema = {
           value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue.toString();
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
@@ -472,14 +478,14 @@ export const servizioFormData: FormDataSchema = {
       type: 'toggle',
       name: 'inLista',
       id: 'inLista',
-      label: 'Mostra in lista',
+      label: 'Visibile nel menu',
       required: false,
       description: 'Mostra questo servizio nella lista del menu',
       value: true,
       defaultValue: true,
       errorMessage: '',
       bulkEditable: true,
-      bulkLabel: 'Imposta visibilità per tutti i servizi selezionati',
+      bulkLabel: 'Visibile nel menu',
       bulkHelpText: 'Questa impostazione verrà applicata a tutti i servizi selezionati.',
       bulkRequired: false
     }
@@ -520,6 +526,9 @@ export const servizioFormData: FormDataSchema = {
           value = _formData[field.name];
         } else if (isEdit && item && !isBulkEdit) {
           value = item[field.name] || '';
+        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+          // Per i nuovi elementi, usa il defaultValue se disponibile
+          value = field.defaultValue.toString();
         }
         
         // Per la modifica massiva, mostra solo i campi modificabili
