@@ -1,8 +1,16 @@
 import express from 'express';
 import menuFissoRoutes from './menu-fisso';
 import piattiRoutes from './piatti'; // Added for Step 2
+import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
+import { validationLogger } from '../../../middlewares/api/validation';
+import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
+import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
+
+// STEP 3: Aggiungiamo i middleware del router principale GRADUALMENTE
+// Prima solo trustProxyMiddleware
+router.use(trustProxyMiddleware);
 
 // Endpoint di test completamente minimale
 router.get('/test', (_req, res) => {
@@ -84,5 +92,21 @@ router.use('/menu-fisso', menuFissoRoutes);
 
 // Mount del router piatti
 router.use('/piatti', piattiRoutes);
+
+// STEP 3: Test middleware del router principale
+router.get('/test-middleware', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Middleware test endpoint - trustProxyMiddleware only',
+    timestamp: new Date().toISOString(),
+    step: 3,
+    environment: process.env.NODE_ENV,
+    ip: _req.ip,
+    headers: {
+      'x-forwarded-for': _req.headers['x-forwarded-for'],
+      'x-real-ip': _req.headers['x-real-ip']
+    }
+  });
+});
 
 export default router;
