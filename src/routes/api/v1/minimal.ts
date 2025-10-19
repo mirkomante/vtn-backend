@@ -1,6 +1,13 @@
 import express from 'express';
 import menuFissoRoutes from './menu-fisso';
 import piattiRoutes from './piatti'; // Added for Step 2
+import viniRoutes from './vini';
+import birreRoutes from './birre';
+import liquoriRoutes from './liquori';
+import cocktailsRoutes from './cocktails';
+import bevandeRoutes from './bevande';
+import serviziRoutes from './servizi';
+import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
 import { validationLogger } from '../../../middlewares/api/validation';
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
@@ -11,6 +18,18 @@ const router = express.Router();
 // STEP 3: Aggiungiamo i middleware del router principale GRADUALMENTE
 // Prima solo trustProxyMiddleware
 router.use(trustProxyMiddleware);
+
+// Test 2: Aggiungiamo apiRequestLogger
+router.use(apiRequestLogger);
+
+// Test 3: Aggiungiamo validationLogger
+router.use(validationLogger);
+
+// Test 4: Aggiungiamo jsonErrorHandler
+router.use(jsonErrorHandler);
+
+// Test 5: Aggiungiamo responseHandler
+router.use(responseHandler);
 
 // Endpoint di test completamente minimale
 router.get('/test', (_req, res) => {
@@ -87,26 +106,39 @@ router.get('/test-step2', (_req, res) => {
   });
 });
 
-// Mount del router menu-fisso
+// Test 6: Aggiungiamo i sub-router
 router.use('/menu-fisso', menuFissoRoutes);
-
-// Mount del router piatti
 router.use('/piatti', piattiRoutes);
+router.use('/vini', viniRoutes);
+router.use('/birre', birreRoutes);
+router.use('/liquori', liquoriRoutes);
+router.use('/cocktails', cocktailsRoutes);
+router.use('/bevande', bevandeRoutes);
+router.use('/servizi', serviziRoutes);
+router.use('/categoria-menu-fisso', categoriaMenuFissoRoutes);
 
-// STEP 3: Test middleware del router principale
-router.get('/test-middleware', (_req, res) => {
+// STEP 3: Test endpoint semplice
+router.get('/test-simple', (_req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Middleware test endpoint - trustProxyMiddleware only',
+    message: 'Simple test endpoint',
     timestamp: new Date().toISOString(),
-    step: 3,
-    environment: process.env.NODE_ENV,
-    ip: _req.ip,
-    headers: {
-      'x-forwarded-for': _req.headers['x-forwarded-for'],
-      'x-real-ip': _req.headers['x-real-ip']
-    }
+    step: 3
   });
 });
+
+// Test 9: Aggiungiamo l'endpoint /status
+router.get('/status', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Status endpoint working',
+    timestamp: new Date().toISOString(),
+    step: 9
+  });
+});
+
+// Test 7: Aggiungiamo i middleware di gestione errori
+router.use(notFoundHandler);
+router.use(apiErrorHandler);
 
 export default router;
