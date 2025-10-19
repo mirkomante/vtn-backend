@@ -8,24 +8,21 @@ import cocktailsRoutes from './cocktails';
 import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
-import debugRoutes from './debug';
-// FASE 2E: Middleware essenziali (sicuri) - Test insieme
+// Middleware API
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
-// FASE 2F: Middleware di utilità (sicuri) - Test insieme
 import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
 import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
 
-// FASE 2E: Middleware essenziali (sicuri) - Test insieme
+// Middleware essenziali
 router.use(jsonErrorHandler);
 
-// FASE 2F: Middleware di utilità (sicuri) - Test insieme
+// Middleware di utilità
 router.use(apiRequestLogger);
 router.use(responseHandler);
 
 // Mount delle risorse
-router.use('/debug', debugRoutes);
 router.use('/menu-fisso', menuFissoRoutes);
 router.use('/piatti', piattiRoutes);
 router.use('/vini', viniRoutes);
@@ -58,7 +55,7 @@ router.get('/health', (_req, res) => {
   });
 });
 
-// FASE 2E: Middleware per gestione errori (sicuri)
+// Middleware per gestione errori
 router.use(notFoundHandler);
 router.use(apiErrorHandler);
 

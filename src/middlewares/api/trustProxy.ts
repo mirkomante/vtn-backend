@@ -44,9 +44,6 @@ export const apiRequestLogger = (req: Request, res: Response, next: NextFunction
     // Log validazione (solo se status 400)
     if (res.statusCode === 400) {
       console.log(`[VALIDATION] ${req.method} ${req.originalUrl} - Validation failed`);
-      console.log(`[VALIDATION] Body:`, req.body);
-      console.log(`[VALIDATION] Query:`, req.query);
-      console.log(`[VALIDATION] Params:`, req.params);
     }
     
     return originalSend.call(this, data);

@@ -149,12 +149,8 @@ export const endpointValidation = {
 };
 
 /**
- * Middleware per logging delle validazioni (utile per debugging)
- * NOTA: Questo middleware è stato integrato in apiRequestLogger per evitare il doppio override di res.send
- * @deprecated Usare apiRequestLogger che include già la funzionalità di logging delle validazioni
+ * @deprecated Middleware deprecato - la funzionalità è stata integrata in apiRequestLogger
  */
 export const validationLogger = (_req: Request, _res: Response, next: NextFunction) => {
-  // Middleware deprecato - la funzionalità è ora in apiRequestLogger
-  // Mantenuto per compatibilità, ma non fa nulla
   next();
 };
