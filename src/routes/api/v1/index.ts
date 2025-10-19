@@ -9,19 +9,23 @@ import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import debugRoutes from './debug';
-// TEMPORANEAMENTE RIMOSSI: Tutti i middleware API per test
-// import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
+// FASE 2A: Middleware essenziali (sicuri)
+import { trustProxyMiddleware } from '../../../middlewares/api/trustProxy';
+import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
+// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
+// import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
 // import { validationLogger } from '../../../middlewares/api/validation';
-// import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
 // import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
 
-// TEMPORANEAMENTE RIMOSSI: Tutti i middleware API per test
-// router.use(trustProxyMiddleware);
+// FASE 2A: Middleware essenziali (sicuri)
+router.use(trustProxyMiddleware);
+router.use(jsonErrorHandler);
+
+// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
 // router.use(apiRequestLogger);
 // router.use(validationLogger);
-// router.use(jsonErrorHandler);
 // router.use(responseHandler);
 
 // Mount delle risorse
@@ -58,8 +62,8 @@ router.get('/health', (_req, res) => {
   });
 });
 
-// TEMPORANEAMENTE RIMOSSI: Middleware per gestione errori per test
-// router.use(notFoundHandler);
-// router.use(apiErrorHandler);
+// FASE 2A: Middleware per gestione errori (sicuri)
+router.use(notFoundHandler);
+router.use(apiErrorHandler);
 
 export default router;
