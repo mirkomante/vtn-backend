@@ -9,8 +9,8 @@ import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import debugRoutes from './debug';
-// FASE 2C: Rimozione temporanea di trustProxyMiddleware (causa errore Cloud Run)
-// import { trustProxyMiddleware } from '../../../middlewares/api/trustProxy';
+// FASE 2D: Trust proxy configurato globalmente in app.ts
+// RIMOSSI: trustProxyMiddleware (sostituito da app.set('trust proxy', true))
 // RIMOSSI TEMPORANEAMENTE: Altri middleware (da testare uno alla volta)
 // import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
 // import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
@@ -19,8 +19,8 @@ import debugRoutes from './debug';
 
 const router = express.Router();
 
-// FASE 2C: Nessun middleware API (trustProxyMiddleware rimosso per errore Cloud Run)
-// router.use(trustProxyMiddleware); // RIMOSSO: Causa "Cannot set property ip" su Cloud Run
+// FASE 2D: Trust proxy configurato globalmente in app.ts
+// router.use(trustProxyMiddleware); // RIMOSSO: Sostituito da app.set('trust proxy', true)
 
 // RIMOSSI TEMPORANEAMENTE: Altri middleware (da testare uno alla volta)
 // router.use(jsonErrorHandler);

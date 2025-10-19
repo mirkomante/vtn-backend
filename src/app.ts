@@ -17,6 +17,9 @@ import HealthCheckMiddleware from './middlewares/healthCheck';
 
 const app = express();
 
+// Configurazione trust proxy per Cloud Run (per ottenere IP reali dei client)
+app.set('trust proxy', true);
+
 // Validazione configurazione ambiente
 let config;
 try {
