@@ -529,6 +529,18 @@ export const piattiDetailViewConfig: DetailViewConfig = {
       }
     },
     {
+      name: 'noUovo',
+      label: 'No Uovo',
+      type: 'boolean',
+      format: {
+        boolean: {
+          trueText: 'Sì',
+          falseText: 'No',
+          showBadge: true
+        }
+      }
+    },
+    {
       name: 'soloMenuFissi',
       label: 'Solo Menu Fissi',
       type: 'boolean',

@@ -39,6 +39,7 @@ export const piattiTableData: TableDataSchema = {
         { label: 'Gluten Free', sort: true, name: 'glutenFree', mobile: false },
         { label: 'No Latticini', sort: true, name: 'noLatticini', mobile: false },
         { label: 'Vegan', sort: true, name: 'vegan', mobile: false },
+        { label: 'No Uovo', sort: true, name: 'noUovo', mobile: false },
         { label: 'Solo Menu Fissi', sort: true, name: 'soloMenuFissi', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
@@ -50,6 +51,7 @@ export const piattiTableData: TableDataSchema = {
         { name: 'glutenFree', label: false, edit: false, type: 'boolean' },
         { name: 'noLatticini', label: false, edit: false, type: 'boolean' },
         { name: 'vegan', label: false, edit: false, type: 'boolean' },
+        { name: 'noUovo', label: false, edit: false, type: 'boolean' },
         { name: 'soloMenuFissi', label: false, edit: false, type: 'boolean' },
         { name: 'inLista', label: false, edit: false, type: 'boolean' }
     ]
