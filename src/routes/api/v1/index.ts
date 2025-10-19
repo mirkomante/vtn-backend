@@ -157,7 +157,7 @@ router.get('/health', (req, res) => {
     console.log('🔍 [API DEBUG] Risposta inviata con successo');
   } catch (error) {
     console.error('❌ [API DEBUG] Errore in /health endpoint:', error);
-    console.error('❌ [API DEBUG] Stack trace:', error.stack);
+    console.error('❌ [API DEBUG] Stack trace:', error instanceof Error ? error.stack : 'No stack trace available');
     
     res.status(500).json({
       success: false,
