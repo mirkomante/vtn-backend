@@ -150,19 +150,11 @@ export const endpointValidation = {
 
 /**
  * Middleware per logging delle validazioni (utile per debugging)
+ * NOTA: Questo middleware è stato integrato in apiRequestLogger per evitare il doppio override di res.send
+ * @deprecated Usare apiRequestLogger che include già la funzionalità di logging delle validazioni
  */
-export const validationLogger = (req: Request, res: Response, next: NextFunction) => {
-  const originalSend = res.send;
-  
-  res.send = function(data) {
-    if (res.statusCode === 400) {
-      console.log(`[VALIDATION] ${req.method} ${req.originalUrl} - Validation failed`);
-      console.log(`[VALIDATION] Body:`, req.body);
-      console.log(`[VALIDATION] Query:`, req.query);
-      console.log(`[VALIDATION] Params:`, req.params);
-    }
-    return originalSend.call(this, data);
-  };
-  
+export const validationLogger = (_req: Request, _res: Response, next: NextFunction) => {
+  // Middleware deprecato - la funzionalità è ora in apiRequestLogger
+  // Mantenuto per compatibilità, ma non fa nulla
   next();
 };

@@ -24,7 +24,8 @@ export const trustProxyMiddleware = (req: Request, _res: Response, next: NextFun
 };
 
 /**
- * Middleware per logging delle richieste API (utile per debugging del rate limiting)
+ * Middleware combinato per logging delle richieste API e validazione
+ * Sostituisce apiRequestLogger e validationLogger per evitare il doppio override di res.send
  */
 export const apiRequestLogger = (req: Request, res: Response, next: NextFunction) => {
   const startTime = Date.now();
@@ -32,11 +33,22 @@ export const apiRequestLogger = (req: Request, res: Response, next: NextFunction
   // Log della richiesta in arrivo
   console.log(`[API] ${req.method} ${req.originalUrl} - IP: ${req.ip} - User-Agent: ${req.headers['user-agent'] || 'Unknown'}`);
   
-  // Intercetta la risposta per loggare il tempo di risposta
+  // Intercetta la risposta per loggare il tempo di risposta e errori di validazione
   const originalSend = res.send;
   res.send = function(data) {
     const duration = Date.now() - startTime;
+    
+    // Log API (sempre)
     console.log(`[API] ${req.method} ${req.originalUrl} - Status: ${res.statusCode} - Duration: ${duration}ms - IP: ${req.ip}`);
+    
+    // Log validazione (solo se status 400)
+    if (res.statusCode === 400) {
+      console.log(`[VALIDATION] ${req.method} ${req.originalUrl} - Validation failed`);
+      console.log(`[VALIDATION] Body:`, req.body);
+      console.log(`[VALIDATION] Query:`, req.query);
+      console.log(`[VALIDATION] Params:`, req.params);
+    }
+    
     return originalSend.call(this, data);
   };
   
