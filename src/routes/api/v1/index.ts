@@ -11,20 +11,18 @@ import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import debugRoutes from './debug';
 // FASE 2E: Middleware essenziali (sicuri) - Test insieme
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
-// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
-// import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
-// import { validationLogger } from '../../../middlewares/api/validation';
-// import { responseHandler } from '../../../middlewares/api/responseHandler';
+// FASE 2F: Middleware di utilità (sicuri) - Test insieme
+import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
+import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
 
 // FASE 2E: Middleware essenziali (sicuri) - Test insieme
 router.use(jsonErrorHandler);
 
-// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
-// router.use(apiRequestLogger);
-// router.use(validationLogger);
-// router.use(responseHandler);
+// FASE 2F: Middleware di utilità (sicuri) - Test insieme
+router.use(apiRequestLogger);
+router.use(responseHandler);
 
 // Mount delle risorse
 router.use('/debug', debugRoutes);
