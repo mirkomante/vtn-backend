@@ -9,21 +9,19 @@ import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import debugRoutes from './debug';
-// FASE 2D: Trust proxy configurato globalmente in app.ts
-// RIMOSSI: trustProxyMiddleware (sostituito da app.set('trust proxy', true))
-// RIMOSSI TEMPORANEAMENTE: Altri middleware (da testare uno alla volta)
-// import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
+// FASE 2E: Middleware essenziali (sicuri) - Test insieme
+import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
+// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
 // import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
 // import { validationLogger } from '../../../middlewares/api/validation';
 // import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
 
-// FASE 2D: Trust proxy configurato globalmente in app.ts
-// router.use(trustProxyMiddleware); // RIMOSSO: Sostituito da app.set('trust proxy', true)
+// FASE 2E: Middleware essenziali (sicuri) - Test insieme
+router.use(jsonErrorHandler);
 
-// RIMOSSI TEMPORANEAMENTE: Altri middleware (da testare uno alla volta)
-// router.use(jsonErrorHandler);
+// RIMOSSI TEMPORANEAMENTE: Middleware di utilità (da testare dopo)
 // router.use(apiRequestLogger);
 // router.use(validationLogger);
 // router.use(responseHandler);
@@ -62,8 +60,8 @@ router.get('/health', (_req, res) => {
   });
 });
 
-// RIMOSSI TEMPORANEAMENTE: Middleware per gestione errori (da testare dopo)
-// router.use(notFoundHandler);
-// router.use(apiErrorHandler);
+// FASE 2E: Middleware per gestione errori (sicuri)
+router.use(notFoundHandler);
+router.use(apiErrorHandler);
 
 export default router;
