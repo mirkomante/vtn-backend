@@ -33,9 +33,6 @@ COPY . .
 # Genera Prisma client
 RUN npx prisma generate
 
-# Esegui migrazioni database (solo se necessario)
-RUN npx prisma migrate deploy
-
 # Build TypeScript
 RUN npm run build
 
@@ -61,6 +58,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --chown=nextjs:nodejs src/public ./dist/public
 COPY --chown=nextjs:nodejs src/views ./dist/views
 
+# Copia script di avvio
+COPY --chown=nextjs:nodejs start.sh ./start.sh
+RUN chmod +x ./start.sh
+
 # Imposta utente non-root
 USER nextjs
 
@@ -74,5 +75,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 # Usa dumb-init per gestire i segnali correttamente
 ENTRYPOINT ["dumb-init", "--"]
 
-# Avvia l'applicazione
-CMD ["node", "dist/server.js"]
+# Avvia l'applicazione con migrazione
+CMD ["./start.sh"]
