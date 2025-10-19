@@ -9,25 +9,20 @@ import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
 import debugRoutes from './debug';
-import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
-import { validationLogger } from '../../../middlewares/api/validation';
-import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
-import { responseHandler } from '../../../middlewares/api/responseHandler';
+// TEMPORANEAMENTE RIMOSSI: Tutti i middleware API per test
+// import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
+// import { validationLogger } from '../../../middlewares/api/validation';
+// import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
+// import { responseHandler } from '../../../middlewares/api/responseHandler';
 
 const router = express.Router();
 
-// Middleware per trust proxy e logging
-router.use(trustProxyMiddleware);
-
-// Middleware legacy
-router.use(apiRequestLogger);
-router.use(validationLogger);
-
-// Middleware per gestione errori JSON
-router.use(jsonErrorHandler);
-
-// Middleware per risposte JSON strutturate
-router.use(responseHandler);
+// TEMPORANEAMENTE RIMOSSI: Tutti i middleware API per test
+// router.use(trustProxyMiddleware);
+// router.use(apiRequestLogger);
+// router.use(validationLogger);
+// router.use(jsonErrorHandler);
+// router.use(responseHandler);
 
 // Mount delle risorse
 router.use('/debug', debugRoutes);
@@ -63,8 +58,8 @@ router.get('/health', (_req, res) => {
   });
 });
 
-// Middleware per gestione errori (deve essere alla fine)
-router.use(notFoundHandler);
-router.use(apiErrorHandler);
+// TEMPORANEAMENTE RIMOSSI: Middleware per gestione errori per test
+// router.use(notFoundHandler);
+// router.use(apiErrorHandler);
 
 export default router;
