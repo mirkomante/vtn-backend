@@ -111,7 +111,22 @@ router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors,
             descrizione: true,
             prezzo: true,
             createdAt: true,
-            updatedAt: true
+            updatedAt: true,
+            servizi: {
+              select: {
+                servizioAccessorio: {
+                  select: {
+                    id: true,
+                    nome: true,
+                    descrizione: true,
+                    prezzo: true,
+                    inLista: true,
+                    createdAt: true,
+                    updatedAt: true
+                  }
+                }
+              }
+            }
           },
           orderBy: {
             nome: 'asc'
@@ -134,7 +149,7 @@ router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors,
       throw createNotFoundError('Categoria Menu Fisso', req.params.id);
     }
 
-    // Trasforma i dati per includere il conteggio dei menu fissi
+    // Trasforma i dati per includere il conteggio dei menu fissi e i servizi accessori
     const categoriaConDettagli = {
       id: categoria.id,
       nome: categoria.nome,
@@ -142,7 +157,10 @@ router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors,
       inLista: categoria.inLista,
       createdAt: categoria.createdAt,
       updatedAt: categoria.updatedAt,
-      menuFissi: categoria.menuFissi,
+      menuFissi: categoria.menuFissi.map(menu => ({
+        ...menu,
+        serviziAccessori: menu.servizi.map(servizio => servizio.servizioAccessorio)
+      })),
       menuFissiCount: categoria._count.menuFissi
     };
 
