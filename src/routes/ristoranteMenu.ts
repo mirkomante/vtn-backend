@@ -816,7 +816,7 @@ router.get('/piatti/nuovo', async (_req, res) => {
 // Route per creazione piatto
 router.post('/piatti/nuovo', async (req, res) => {
   try {
-    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
+    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, noUovo, soloMenuFissi } = req.body;
     
     // Crea il piatto
     const piatto = await prisma.piatto.create({
@@ -829,6 +829,7 @@ router.post('/piatti/nuovo', async (req, res) => {
         glutenFree: glutenFree === 'true' || glutenFree === true,
         noLatticini: noLatticini === 'true' || noLatticini === true,
         vegan: vegan === 'true' || vegan === true,
+        noUovo: noUovo === 'true' || noUovo === true,
         soloMenuFissi: soloMenuFissi === 'true' || soloMenuFissi === true
       }
     });
@@ -1041,7 +1042,7 @@ router.get('/piatti/modifica/:id', async (req, res) => {
 router.post('/piatti/modifica/:id', async (req, res) => {
   try {
     const piattoId = req.params.id;
-    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
+    const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, noUovo, soloMenuFissi } = req.body;
     
     // Verifica che il piatto esista
     const existingPiatto = await prisma.piatto.findFirst({
@@ -1068,6 +1069,7 @@ router.post('/piatti/modifica/:id', async (req, res) => {
         glutenFree: glutenFree === 'true' || glutenFree === true,
         noLatticini: noLatticini === 'true' || noLatticini === true,
         vegan: vegan === 'true' || vegan === true,
+        noUovo: noUovo === 'true' || noUovo === true,
         soloMenuFissi: soloMenuFissi === 'true' || soloMenuFissi === true
       }
     });
@@ -7053,7 +7055,7 @@ router.post('/servizi/modifica-massa/ajax', async (req, res) => {
 
 // Route AJAX per creazione piatto
 router.post('/piatti/nuovo/ajax', async (req, res) => {
-  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
+  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, noUovo, soloMenuFissi } = req.body;
   
   try {
     // Verifica se esiste già un piatto con lo stesso nome (case-insensitive)
@@ -7085,6 +7087,7 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
         glutenFree: glutenFree === 'on' || glutenFree === true,
         noLatticini: noLatticini === 'on' || noLatticini === true,
         vegan: vegan === 'on' || vegan === true,
+        noUovo: noUovo === 'on' || noUovo === true,
         soloMenuFissi: soloMenuFissi === 'on' || soloMenuFissi === true
       }
     });
@@ -7117,7 +7120,7 @@ router.post('/piatti/nuovo/ajax', async (req, res) => {
 
 // Route AJAX per modifica piatto
 router.post('/piatti/modifica/:id/ajax', async (req, res) => {
-  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
+  const { nome, descrizione, categoriaId, prezzo, allergeni, inLista, glutenFree, noLatticini, vegan, noUovo, soloMenuFissi } = req.body;
   const piattoId = req.params.id;
   
   try {
@@ -7163,6 +7166,7 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
         glutenFree: glutenFree === 'on' || glutenFree === true,
         noLatticini: noLatticini === 'on' || noLatticini === true,
         vegan: vegan === 'on' || vegan === true,
+        noUovo: noUovo === 'on' || noUovo === true,
         soloMenuFissi: soloMenuFissi === 'on' || soloMenuFissi === true
       }
     });
@@ -7200,7 +7204,7 @@ router.post('/piatti/modifica/:id/ajax', async (req, res) => {
 
 // Route AJAX per modifica massiva piatti
 router.post('/piatti/modifica-massa/ajax', async (req, res) => {
-  const { itemIds, categoriaId, prezzo, inLista, glutenFree, noLatticini, vegan, soloMenuFissi } = req.body;
+  const { itemIds, categoriaId, prezzo, inLista, glutenFree, noLatticini, vegan, noUovo, soloMenuFissi } = req.body;
   
   try {
     if (!itemIds || !Array.isArray(itemIds) || itemIds.length === 0) {
@@ -7234,6 +7238,10 @@ router.post('/piatti/modifica-massa/ajax', async (req, res) => {
     
     if (vegan !== undefined && vegan !== null) {
       updateData.vegan = vegan === 'on' || vegan === true;
+    }
+    
+    if (noUovo !== undefined && noUovo !== null) {
+      updateData.noUovo = noUovo === 'on' || noUovo === true;
     }
     
     if (soloMenuFissi !== undefined && soloMenuFissi !== null) {

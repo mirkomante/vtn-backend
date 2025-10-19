@@ -11,30 +11,24 @@
     "build": "tsc && npm run build:css",
     "build:css": "postcss src/public/css/tailwind.css -o src/public/css/styles.css",
     "watch:css": "postcss src/public/css/tailwind.css -o src/public/css/styles.css --watch",
-    
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:reset": "prisma migrate reset --force",
     "prisma:status": "prisma migrate status",
-    
     "setup": "npm run prisma:generate && npm run prisma:migrate:deploy && npm run health:check",
     "setup:dev": "npm run prisma:generate && npm run prisma:migrate:dev",
     "setup:reset": "npm run prisma:migrate:reset && npm run setup",
     "setup:full": "node scripts/setup.js",
-    
     "deploy": "npm run build && npm run setup && npm start",
     "deploy:check": "npm run build && npm run health:check",
     "deploy:full": "node scripts/deploy.js",
-    
     "health:check": "node scripts/health-check.js",
     "env:validate": "node scripts/validate-env.js",
-    
-    
     "postinstall": "npm run prisma:generate"
   },
   "dependencies": {
-    "@prisma/client": "^6.8.2",
+    "@prisma/client": "^6.17.1",
     "@types/connect-pg-simple": "^7.0.3",
     "@types/pg": "^8.15.2",
     "bcryptjs": "^2.4.3",

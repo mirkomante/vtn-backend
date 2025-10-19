@@ -2124,11 +2124,6 @@
       display: block;
     }
   }
-  .xl\:pr-96 {
-    @media (width >= 80rem) {
-      padding-right: calc(var(--spacing) * 96);
-    }
-  }
   .forced-colors\:appearance-auto {
     @media (forced-colors: active) {
       -webkit-appearance: auto;

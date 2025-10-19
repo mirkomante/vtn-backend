@@ -304,6 +304,17 @@ export const piattoFormData: FormDataSchema = {
     },
     {
       type: 'toggle',
+      name: 'noUovo',
+      id: 'noUovo',
+      label: 'No Uovo',
+      required: false,
+      value: false,
+      bulkEditable: true,
+      bulkLabel: 'Aggiorna opzione no uovo per tutti i piatti selezionati',
+      bulkRequired: false
+    },
+    {
+      type: 'toggle',
       name: 'soloMenuFissi',
       id: 'soloMenuFissi',
       label: 'Solo Menu Fissi',

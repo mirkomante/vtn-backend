@@ -33,6 +33,9 @@ COPY . .
 # Genera Prisma client
 RUN npx prisma generate
 
+# Esegui migrazioni database (solo se necessario)
+RUN npx prisma migrate deploy
+
 # Build TypeScript
 RUN npm run build
 

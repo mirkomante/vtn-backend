@@ -78,6 +78,7 @@ model Piatto {
   glutenFree    Boolean  @default(false)
   noLatticini   Boolean  @default(false)
   vegan         Boolean  @default(false)
+  noUovo        Boolean  @default(false)
   soloMenuFissi Boolean  @default(false)
   deletedAt     DateTime?
   createdAt     DateTime @default(now())
