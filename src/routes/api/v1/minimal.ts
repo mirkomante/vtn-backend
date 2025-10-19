@@ -1,5 +1,6 @@
 import express from 'express';
 import menuFissoRoutes from './menu-fisso';
+import piattiRoutes from './piatti'; // Added for Step 2
 
 const router = express.Router();
 
@@ -66,7 +67,22 @@ router.get('/test-step1', (_req, res) => {
   });
 });
 
+// STEP 2: Test import piatti
+router.get('/test-step2', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Step 2: piatti import test',
+    timestamp: new Date().toISOString(),
+    step: 2,
+    imported: 'piatti',
+    environment: process.env.NODE_ENV
+  });
+});
+
 // Mount del router menu-fisso
 router.use('/menu-fisso', menuFissoRoutes);
+
+// Mount del router piatti
+router.use('/piatti', piattiRoutes);
 
 export default router;
