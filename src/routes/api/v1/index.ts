@@ -8,24 +8,17 @@ import cocktailsRoutes from './cocktails';
 import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
-// import { apiRateLimiter } from '../../../middlewares/api/rateLimiter';
 import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
 import { validationLogger } from '../../../middlewares/api/validation';
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
 import { responseHandler } from '../../../middlewares/api/responseHandler';
-// import { requestLogger, errorLogger, performanceLogger, auditLogger } from '../../../middlewares/logging';
 
 const router = express.Router();
 
-// Middleware per trust proxy e logging (deve essere prima del rate limiting)
+// Middleware per trust proxy e logging
 router.use(trustProxyMiddleware);
 
-// Middleware di logging avanzato (temporaneamente disabilitato per debug)
-// router.use(requestLogger);
-// router.use(performanceLogger);
-// router.use(auditLogger);
-
-// Middleware legacy (da rimuovere gradualmente)
+// Middleware legacy
 router.use(apiRequestLogger);
 router.use(validationLogger);
 
@@ -34,9 +27,6 @@ router.use(jsonErrorHandler);
 
 // Middleware per risposte JSON strutturate
 router.use(responseHandler);
-
-// Middleware per rate limiting API v1 (temporaneamente disabilitato per debug)
-// router.use(apiRateLimiter);
 
 // Mount delle risorse
 router.use('/menu-fisso', menuFissoRoutes);

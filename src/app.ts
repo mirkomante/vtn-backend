@@ -90,27 +90,14 @@ import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
 import ristoranteMenuRoutes from './routes/ristoranteMenu';
 import apiV1Routes from './routes/api/v1';
-import apiV1MinimalRoutes from './routes/api/v1/minimal';
 
 // Health Check Endpoints (prima di tutto)
 app.get('/health', HealthCheckMiddleware.healthCheck);
 app.get('/health/ready', HealthCheckMiddleware.readinessCheck);
 app.get('/health/live', HealthCheckMiddleware.livenessCheck);
 
-// Endpoint di test semplice
-app.get('/test', (_req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Server is running',
-    timestamp: new Date().toISOString(),
-    port: config.server.port,
-    environment: config.server.nodeEnv
-  });
-});
-
 // API Routes (senza autenticazione)
 app.use('/api/v1', apiV1Routes);
-app.use('/api/v1-minimal', apiV1MinimalRoutes);
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
