@@ -96,6 +96,63 @@ app.get('/health', HealthCheckMiddleware.healthCheck);
 app.get('/health/ready', HealthCheckMiddleware.readinessCheck);
 app.get('/health/live', HealthCheckMiddleware.livenessCheck);
 
+// API Semplice per test (senza middleware API specifici)
+app.get('/api-simple/piatti', async (_req, res) => {
+  try {
+    console.log('[API-SIMPLE] Richiesta piatti ricevuta');
+    const piatti = await prisma.piatto.findMany({
+      where: { 
+        deletedAt: null, 
+        inLista: true, 
+        soloMenuFissi: false 
+      },
+      include: { 
+        categoria: {
+          select: {
+            id: true,
+            nome: true,
+            descrizione: true
+          }
+        }, 
+        allergeni: { 
+          include: { 
+            allergene: {
+              select: {
+                id: true,
+                nome: true,
+                descrizione: true
+              }
+            } 
+          } 
+        } 
+      },
+      orderBy: {
+        nome: 'asc'
+      }
+    });
+    
+    console.log(`[API-SIMPLE] Trovati ${piatti.length} piatti`);
+    res.json({ 
+      success: true, 
+      data: piatti,
+      meta: {
+        count: piatti.length,
+        timestamp: new Date().toISOString()
+      }
+    });
+  } catch (error) {
+    console.error('[API-SIMPLE] Errore:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: {
+        code: 'DATABASE_ERROR',
+        message: 'Errore nel recupero dei piatti',
+        details: error instanceof Error ? error.message : 'Errore sconosciuto'
+      }
+    });
+  }
+});
+
 // API Routes (senza autenticazione)
 app.use('/api/v1', apiV1Routes);
 
