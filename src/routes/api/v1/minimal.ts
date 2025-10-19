@@ -29,4 +29,28 @@ router.get('/rate-test', (_req, res) => {
   });
 });
 
+// Endpoint per testare la configurazione del rate limiting
+router.get('/rate-config', (_req, res) => {
+  try {
+    const { getRateLimitConfig } = require('../../../config/rateLimitConfig');
+    const config = getRateLimitConfig('api');
+    
+    res.status(200).json({
+      success: true,
+      message: 'Rate limiting config test',
+      timestamp: new Date().toISOString(),
+      config: config,
+      environment: process.env.NODE_ENV,
+      ip: _req.ip || 'undefined',
+      connectionRemoteAddress: _req.connection?.remoteAddress || 'undefined'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 export default router;
