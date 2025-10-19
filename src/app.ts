@@ -90,6 +90,7 @@ import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
 import ristoranteMenuRoutes from './routes/ristoranteMenu';
 import apiV1Routes from './routes/api/v1';
+import apiV1MinimalRoutes from './routes/api/v1/minimal';
 
 // Health Check Endpoints (prima di tutto)
 app.get('/health', HealthCheckMiddleware.healthCheck);
@@ -109,6 +110,7 @@ app.get('/test', (_req, res) => {
 
 // API Routes (senza autenticazione)
 app.use('/api/v1', apiV1Routes);
+app.use('/api/v1-minimal', apiV1MinimalRoutes);
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
