@@ -1,4 +1,5 @@
 import express from 'express';
+import menuFissoRoutes from './menu-fisso';
 
 const router = express.Router();
 
@@ -52,5 +53,20 @@ router.get('/rate-config', (_req, res) => {
     });
   }
 });
+
+// STEP 1: Test import menu-fisso
+router.get('/test-step1', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Step 1: menu-fisso import test',
+    timestamp: new Date().toISOString(),
+    step: 1,
+    imported: 'menu-fisso',
+    environment: process.env.NODE_ENV
+  });
+});
+
+// Mount del router menu-fisso
+router.use('/menu-fisso', menuFissoRoutes);
 
 export default router;
