@@ -30,6 +30,9 @@ RUN npm ci --silent && \
 # Copia sorgenti
 COPY . .
 
+# Copia script di avvio
+COPY start.js ./start.js
+
 # Genera Prisma client
 RUN npx prisma generate
 
@@ -58,9 +61,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --chown=nextjs:nodejs src/public ./dist/public
 COPY --chown=nextjs:nodejs src/views ./dist/views
 
-# Copia script di avvio
-COPY --chown=nextjs:nodejs start.sh ./start.sh
-RUN chmod +x ./start.sh
+# Copia script di avvio dal builder stage
+COPY --from=builder --chown=nextjs:nodejs /app/start.js ./start.js
 
 # Imposta utente non-root
 USER nextjs
@@ -76,4 +78,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
 ENTRYPOINT ["dumb-init", "--"]
 
 # Avvia l'applicazione con migrazione
-CMD ["./start.sh"]
+CMD ["node", "start.js"]
