@@ -502,6 +502,7 @@ export const vinoFormData: FormDataSchema = {
       required: false,
       placeholder: '750ml, 1L, etc.',
       errorMessage: 'La capacità deve essere un valore valido',
+      defaultValue: '75cl',
       bulkEditable: true,
       bulkLabel: 'Aggiorna capacità per tutti i vini selezionati',
       bulkPlaceholder: 'Nuova capacità (opzionale)',
@@ -657,7 +658,7 @@ export const vinoFormData: FormDataSchema = {
           } else {
             value = vino[field.name] || '';
           }
-        } else if (!isEdit && !isBulkEdit && field.type === 'toggle' && field.defaultValue !== undefined) {
+        } else if (!isEdit && !isBulkEdit && field.defaultValue !== undefined) {
           // Per i nuovi elementi, usa il defaultValue se disponibile
           value = field.defaultValue;
         }

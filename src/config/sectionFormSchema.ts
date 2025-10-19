@@ -21,7 +21,7 @@ export interface FormField {
   required?: boolean;
   placeholder?: string;
   value?: string | number | boolean;
-  defaultValue?: boolean;
+  defaultValue?: string | number | boolean;
   errorMessage?: string;
   min?: number;
   max?: number;
