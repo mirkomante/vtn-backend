@@ -49,6 +49,26 @@ router.use('/bevande', bevandeRoutes);
 router.use('/servizi', serviziRoutes);
 router.use('/categoria-menu-fisso', categoriaMenuFissoRoutes);
 
+// Endpoint di debug minimale (prima di tutti i middleware)
+router.get('/debug', (_req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'Debug endpoint working - no middleware',
+      timestamp: new Date().toISOString(),
+      version: 'v1-debug',
+      environment: process.env.NODE_ENV,
+      database: process.env.DATABASE_URL ? 'configured' : 'not configured'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // Endpoint di test semplice per API v1 (senza middleware per debug)
 router.get('/test', (_req, res) => {
   res.status(200).json({
