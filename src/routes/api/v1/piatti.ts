@@ -425,6 +425,10 @@ router.get('/categorie/ordine', piattiValidation.list, handleValidationErrors, a
           nome: piatto.nome,
           descrizione: piatto.descrizione,
           prezzo: piatto.prezzo,
+          glutenFree: piatto.glutenFree,
+          noLatticini: piatto.noLatticini,
+          vegan: piatto.vegan,
+          noUovo: piatto.noUovo,
           allergeni: piatto.allergeni.map(piattoAllergene => ({
             id: piattoAllergene.allergene.id,
             nome: piattoAllergene.allergene.nome,
