@@ -90,9 +90,6 @@ import adminRoutes from './routes/admin';
 import authRoutes from './routes/auth';
 import ristoranteMenuRoutes from './routes/ristoranteMenu';
 import apiV1Routes from './routes/api/v1';
-import apiV1SimpleRoutes from './routes/api/v1/simple';
-import apiStandaloneRoutes from './routes/api/standalone';
-import apiServer from './api-server';
 
 // Health Check Endpoints (prima di tutto)
 app.get('/health', HealthCheckMiddleware.healthCheck);
@@ -110,21 +107,8 @@ app.get('/test', (_req, res) => {
   });
 });
 
-// Endpoint API completamente isolato (prima di tutti i middleware)
-app.get('/api-test', (_req, res) => {
-  res.json({
-    success: true,
-    message: 'API test endpoint working - no middleware',
-    timestamp: new Date().toISOString(),
-    version: 'isolated'
-  });
-});
-
-// API Routes (senza autenticazione) - PRIMA di tutto
+// API Routes (senza autenticazione)
 app.use('/api/v1', apiV1Routes);
-app.use('/api/v1-simple', apiV1SimpleRoutes);
-app.use('/api/standalone', apiStandaloneRoutes);
-app.use('/api-server', apiServer);
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
