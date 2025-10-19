@@ -85,21 +85,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(jsonErrorHandler);
 
 // Routes
-console.log('🔍 [APP DEBUG] Inizio importazione routes...');
 import indexRoutes from './routes/index';
-console.log('🔍 [APP DEBUG] indexRoutes importato');
 import adminRoutes from './routes/admin';
-console.log('🔍 [APP DEBUG] adminRoutes importato');
 import authRoutes from './routes/auth';
-console.log('🔍 [APP DEBUG] authRoutes importato');
 import ristoranteMenuRoutes from './routes/ristoranteMenu';
-console.log('🔍 [APP DEBUG] ristoranteMenuRoutes importato');
-console.log('🔍 [APP DEBUG] Importazione apiV1Routes...');
 import apiV1Routes from './routes/api/v1';
-console.log('🔍 [APP DEBUG] apiV1Routes importato con successo');
 import apiV1MinimalRoutes from './routes/api/v1/minimal';
-console.log('🔍 [APP DEBUG] apiV1MinimalRoutes importato');
-console.log('🔍 [APP DEBUG] Tutte le routes importate con successo');
 
 // Health Check Endpoints (prima di tutto)
 app.get('/health', HealthCheckMiddleware.healthCheck);
@@ -118,13 +109,8 @@ app.get('/test', (_req, res) => {
 });
 
 // API Routes (senza autenticazione)
-console.log('🔍 [APP DEBUG] Importazione router API v1 completata');
-console.log('🔍 [APP DEBUG] Mounting router API v1 su /api/v1');
 app.use('/api/v1', apiV1Routes);
-console.log('🔍 [APP DEBUG] Router API v1 montato con successo');
-console.log('🔍 [APP DEBUG] Mounting router API v1-minimal su /api/v1-minimal');
 app.use('/api/v1-minimal', apiV1MinimalRoutes);
-console.log('🔍 [APP DEBUG] Router API v1-minimal montato con successo');
 
 // Le rotte di autenticazione devono essere definite prima delle rotte protette
 app.use('/auth', authRoutes);
