@@ -8,6 +8,7 @@ import cocktailsRoutes from './cocktails';
 import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
+import debugRoutes from './debug';
 import { trustProxyMiddleware, apiRequestLogger } from '../../../middlewares/api/trustProxy';
 import { validationLogger } from '../../../middlewares/api/validation';
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
@@ -29,6 +30,7 @@ router.use(jsonErrorHandler);
 router.use(responseHandler);
 
 // Mount delle risorse
+router.use('/debug', debugRoutes);
 router.use('/menu-fisso', menuFissoRoutes);
 router.use('/piatti', piattiRoutes);
 router.use('/vini', viniRoutes);
