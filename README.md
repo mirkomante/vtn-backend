@@ -1346,6 +1346,9 @@ Tutta la documentazione tecnica è stata centralizzata nella cartella `docs/` pe
 - **[Database Schema](./docs/guides/database-schema.md)** - Schema completo del database
 - **[Standard Messages](./docs/guides/standard-messages.md)** - Messaggi standardizzati del sistema
 
+### 👥 [Manuale Utente](./docs/manuale-admin.md)
+- **[Manuale Admin](./docs/manuale-admin.md)** - Guida completa per amministratori e utenti finali
+
 Per una panoramica completa della documentazione, consulta il [README della documentazione](./docs/README.md).
 
 ### Autenticazione Web

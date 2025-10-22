@@ -29,6 +29,11 @@ Guide e documentazione di riferimento per sviluppatori.
 - **[Database Schema](./guides/database-schema.md)** - Schema completo del database
 - **[Standard Messages](./guides/standard-messages.md)** - Messaggi standardizzati del sistema
 
+### 👥 [Manuale Utente](./manuale-admin.md)
+Manuale completo per amministratori e utenti finali.
+
+- **[Manuale Admin](./manuale-admin.md)** - Guida completa per la gestione del sistema
+
 ### 📋 [Changelog](./CHANGELOG.md)
 Registro delle modifiche e aggiornamenti del sistema.
 
@@ -49,6 +54,11 @@ Registro delle modifiche e aggiornamenti del sistema.
 1. **Leggi** [API Documentation](./api/) per endpoint disponibili
 2. **Consulta** [Response Format](./api/response-format.md) per formati dati
 3. **Riferisciti** a [Error Handling](./api/error-handling.md) per gestione errori
+
+### Per Amministratori e Utenti Finali
+1. **Inizia con** [Manuale Admin](./manuale-admin.md) per la gestione del sistema
+2. **Consulta** le sezioni specifiche per le funzionalità che ti interessano
+3. **Riferisciti** alla sezione Troubleshooting per problemi comuni
 
 ### Per Manutenzione
 1. **Aggiorna** la documentazione quando modifichi il codice
