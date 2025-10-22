@@ -80,8 +80,10 @@ Questa è la procedura **raccomandata** per aggiungere nuovi utenti al sistema.
    - Viene automaticamente reindirizzato al sistema
 
 3. **Sistema automatico**:
-   - Se è il primo utente del sistema → diventa **admin**
-   - Se esistono già admin → diventa **user** normale
+   - **Se è un nuovo utente**: Viene creato automaticamente nel sistema
+     - Se è il primo utente del sistema → diventa **admin**
+     - Se esistono già admin → diventa **user** normale
+   - **Se è un utente esistente**: Accede direttamente con il suo ruolo
    - I dati vengono estratti automaticamente da Google (nome, cognome, email, foto profilo)
 
 4. **Verifica** (opzionale):
@@ -94,6 +96,20 @@ Questa è la procedura **raccomandata** per aggiungere nuovi utenti al sistema.
 - ✅ **Dati automatici**: Nome, cognome, email e foto profilo importati automaticamente
 - ✅ **Sicurezza**: Password gestita da Google
 - ✅ **Facilità**: Un solo click per accedere
+
+#### ⚠️ Considerazioni di Sicurezza
+
+**Registrazione Automatica**: Il sistema attuale permette a **chiunque** con un account Google di registrarsi automaticamente. Non c'è un sistema di "whitelist" o approvazione preventiva.
+
+**Implicazioni**:
+- ✅ **Vantaggio**: Facilità d'uso massima per gli utenti
+- ⚠️ **Attenzione**: Qualsiasi persona con Google può accedere al sistema
+- 🔧 **Gestione**: Gli admin devono monitorare periodicamente la lista utenti e rimuovere account non autorizzati se necessario
+
+**Raccomandazioni**:
+- Controlla regolarmente la lista utenti in **Admin** → **Utenti**
+- Rimuovi account non autorizzati se necessario
+- Considera l'implementazione di una whitelist se la sicurezza è critica
 
 ### Aggiungere un Nuovo Utente Locale
 
@@ -385,6 +401,17 @@ Il sistema utilizza un sistema di notifiche "toast" per fornire feedback all'ute
 1. Verifica nella lista degli elementi
 2. Controlla nella sezione "Cancellati"
 3. Aggiorna la pagina
+
+#### "Utente non autorizzato ha accesso al sistema"
+
+**Causa**: Il sistema Google OAuth permette registrazione automatica a chiunque.
+
+**Soluzioni**:
+1. **Immediata**: Vai in **Admin** → **Utenti**
+2. **Identifica** l'utente non autorizzato
+3. **Elimina** l'account cliccando su "Elimina"
+4. **Preventiva**: Considera di disabilitare Google OAuth se la sicurezza è critica
+5. **Monitoraggio**: Controlla regolarmente la lista utenti per nuovi accessi non autorizzati
 
 #### "Errore durante il salvataggio"
 
