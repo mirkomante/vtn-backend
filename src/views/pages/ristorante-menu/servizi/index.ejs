@@ -30,33 +30,64 @@
     <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
   <% } %>
   
-  <%- include('../../../ui/tables/selectableTable', {
-    tableId: 'servizi-table',
-    tableData: tableData,
-    items: items,
-    tableConfig: {
-      idField: 'id',
-      labelField: 'nome',
-      detailUrl: '/ristorante-menu/servizi/dettagli/:id',
-      editUrl: '/ristorante-menu/servizi/modifica/:id',
-      bulkEditUrl: '/ristorante-menu/servizi/modifica-massa',
-      editMultipleButton: {
-        text: 'Modifica'
+  <% if (tableLayout === 'toggle') { %>
+    <%- include('../../../ui/tables/toggleTable', {
+      tableId: 'servizi-table',
+      tableData: tableData,
+      items: items,
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/servizi/dettagli/:id',
+        editUrl: '/ristorante-menu/servizi/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/servizi/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/servizi',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questo servizio?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} servizi?',
+        successMessage: 'Eliminati {count} servizio/i con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome,
+        entity: 'servizi'
       },
-      actionButton: {
-        text: 'Elimina',
-        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      pagination: typeof pagination !== 'undefined' ? pagination : undefined
+    }) %>
+  <% } else { %>
+    <%- include('../../../ui/tables/selectableTable', {
+      tableId: 'servizi-table',
+      tableData: tableData,
+      items: items,
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/servizi/dettagli/:id',
+        editUrl: '/ristorante-menu/servizi/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/servizi/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/servizi',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questo servizio?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} servizi?',
+        successMessage: 'Eliminati {count} servizio/i con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome
       },
-      endpoint: '/ristorante-menu/servizi',
-      method: 'DELETE',
-      confirmMessage: 'Sei sicuro di voler eliminare questo servizio?',
-      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} servizi?',
-      successMessage: 'Eliminati {count} servizio/i con successo',
-      errorMessage: 'Errore durante l\'eliminazione',
-      getDisplayValue: (item) => item.nome
-    },
-    pagination: typeof pagination !== 'undefined' ? pagination : undefined
-  }) %>
+      pagination: typeof pagination !== 'undefined' ? pagination : undefined
+    }) %>
+  <% } %>
 <% } %>
 
 <!-- Configurazione JavaScript per la tabella -->

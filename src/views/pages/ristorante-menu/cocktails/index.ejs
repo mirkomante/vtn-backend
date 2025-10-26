@@ -30,61 +30,120 @@
     <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
   <% } %>
   
-  <%- include('../../../ui/tables/selectableTable', {
-    tableId: 'cocktails-table',
-    tableData: tableData,
-    items: items,
-    showFilters: true,
-    filters: [
-      {
-        id: 'tipologia',
-        name: 'tipologia',
-        label: 'Tipologia',
-        type: 'select',
-        placeholder: 'Tutte le tipologie',
-        options: [
-          { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
-          ...tipologie.map(tipologia => ({
-            value: tipologia.id,
-            label: tipologia.nome,
-            selected: currentTipologiaFilter === tipologia.id
-          }))
-        ]
-      }
-    ],
-    hasActiveFilters: !!currentTipologiaFilter,
-    clearFiltersUrl: '/ristorante-menu/cocktails',
-    showEmptyMessage: isFilteredEmpty,
-    emptyMessage: {
-      title: 'Nessun cocktail trovato',
-      description: 'Non ci sono cocktails che corrispondono ai filtri applicati.',
-      icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>`
-    },
-    tableConfig: {
-      idField: 'id',
-      labelField: 'nome',
-      detailUrl: '/ristorante-menu/cocktails/dettagli/:id',
-      editUrl: '/ristorante-menu/cocktails/modifica/:id',
-      bulkEditUrl: '/ristorante-menu/cocktails/modifica-massa',
-      editMultipleButton: {
-        text: 'Modifica'
+  <% if (tableLayout === 'toggle') { %>
+    <%- include('../../../ui/tables/toggleTable', {
+      tableId: 'cocktails-table',
+      tableData: tableData,
+      items: items,
+      showFilters: true,
+      filters: [
+        {
+          id: 'tipologia',
+          name: 'tipologia',
+          label: 'Tipologia',
+          type: 'select',
+          placeholder: 'Tutte le tipologie',
+          options: [
+            { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
+            ...tipologie.map(tipologia => ({
+              value: tipologia.id,
+              label: tipologia.nome,
+              selected: currentTipologiaFilter === tipologia.id
+            }))
+          ]
+        }
+      ],
+      hasActiveFilters: !!currentTipologiaFilter,
+      clearFiltersUrl: '/ristorante-menu/cocktails',
+      showEmptyMessage: isFilteredEmpty,
+      emptyMessage: {
+        title: 'Nessun cocktail trovato',
+        description: 'Non ci sono cocktails che corrispondono ai filtri applicati.',
+        icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>`
       },
-      actionButton: {
-        text: 'Elimina',
-        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/cocktails/dettagli/:id',
+        editUrl: '/ristorante-menu/cocktails/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/cocktails/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/cocktails',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questo cocktail?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} cocktails?',
+        successMessage: 'Eliminati {count} cocktail/i con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome,
+        entity: 'cocktails'
       },
-      endpoint: '/ristorante-menu/cocktails',
-      method: 'DELETE',
-      confirmMessage: 'Sei sicuro di voler eliminare questo cocktail?',
-      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} cocktails?',
-      successMessage: 'Eliminati {count} cocktail/i con successo',
-      errorMessage: 'Errore durante l\'eliminazione',
-      getDisplayValue: (item) => item.nome
-    },
-    pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
-  }) %>
+      pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
+    }) %>
+  <% } else { %>
+    <%- include('../../../ui/tables/selectableTable', {
+      tableId: 'cocktails-table',
+      tableData: tableData,
+      items: items,
+      showFilters: true,
+      filters: [
+        {
+          id: 'tipologia',
+          name: 'tipologia',
+          label: 'Tipologia',
+          type: 'select',
+          placeholder: 'Tutte le tipologie',
+          options: [
+            { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
+            ...tipologie.map(tipologia => ({
+              value: tipologia.id,
+              label: tipologia.nome,
+              selected: currentTipologiaFilter === tipologia.id
+            }))
+          ]
+        }
+      ],
+      hasActiveFilters: !!currentTipologiaFilter,
+      clearFiltersUrl: '/ristorante-menu/cocktails',
+      showEmptyMessage: isFilteredEmpty,
+      emptyMessage: {
+        title: 'Nessun cocktail trovato',
+        description: 'Non ci sono cocktails che corrispondono ai filtri applicati.',
+        icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>`
+      },
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/cocktails/dettagli/:id',
+        editUrl: '/ristorante-menu/cocktails/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/cocktails/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/cocktails',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questo cocktail?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} cocktails?',
+        successMessage: 'Eliminati {count} cocktail/i con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome
+      },
+      pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
+    }) %>
+  <% } %>
 <% } %>
 
 <!-- Configurazione JavaScript per la tabella -->
