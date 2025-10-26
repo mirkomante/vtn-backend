@@ -2152,6 +2152,11 @@
     background-color: rgb(249 250 251);
   }
 }
+.toggle-table-row {
+  &:has(input[name$="-item"]:checked) .toggle-selection-bar {
+    display: block;
+  }
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
