@@ -1505,6 +1505,11 @@
       opacity: 100%;
     }
   }
+  .group-has-checked\/select-all\:opacity-100 {
+    &:is(:where(.group\/select-all):has(*:checked) *) {
+      opacity: 100%;
+    }
+  }
   .group-has-checked\/table\:flex {
     &:is(:where(.group\/table):has(*:checked) *) {
       display: flex;
@@ -1515,8 +1520,21 @@
       opacity: 100%;
     }
   }
+  .group-has-indeterminate\/select-all\:opacity-100 {
+    &:is(:where(.group\/select-all):has(*:indeterminate) *) {
+      opacity: 100%;
+    }
+  }
   .group-has-disabled\:stroke-gray-950\/25 {
     &:is(:where(.group):has(*:disabled) *) {
+      stroke: color-mix(in srgb, oklch(13% 0.028 261.692) 25%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        stroke: color-mix(in oklab, var(--color-gray-950) 25%, transparent);
+      }
+    }
+  }
+  .group-has-disabled\/select-all\:stroke-gray-950\/25 {
+    &:is(:where(.group\/select-all):has(*:disabled) *) {
       stroke: color-mix(in srgb, oklch(13% 0.028 261.692) 25%, transparent);
       @supports (color: color-mix(in lab, red, red)) {
         stroke: color-mix(in oklab, var(--color-gray-950) 25%, transparent);
@@ -1915,11 +1933,6 @@
       margin-left: calc(var(--spacing) * 4);
     }
   }
-  .sm\:ml-16 {
-    @media (width >= 40rem) {
-      margin-left: calc(var(--spacing) * 16);
-    }
-  }
   .sm\:block {
     @media (width >= 40rem) {
       display: block;
@@ -1964,11 +1977,6 @@
   .sm\:flex-auto {
     @media (width >= 40rem) {
       flex: auto;
-    }
-  }
-  .sm\:flex-none {
-    @media (width >= 40rem) {
-      flex: none;
     }
   }
   .sm\:grid-cols-2 {
@@ -2138,6 +2146,16 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+.toggle-table-row {
+  &:has(input[name$="-item"]:checked) {
+    background-color: rgb(249 250 251);
+  }
+}
+.toggle-table-row {
+  &:has(input[name$="-item"]:checked) .toggle-selection-bar {
+    display: block;
+  }
 }
 @property --tw-translate-x {
   syntax: "*";

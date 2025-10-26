@@ -1,0 +1,22 @@
+<div class="pt-5">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <!-- Filters se presenti -->
+      <% if (typeof filters !== 'undefined' && filters && filters.length > 0) { %>
+        <%- include('../filters/simpleFilter', { filters, hasActiveFilters, clearFiltersUrl }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <%- include('./toggleTableContent', {
+    tableId,
+    tableData,
+    items,
+    tableConfig,
+    showEmptyMessage: typeof showEmptyMessage !== 'undefined' ? showEmptyMessage : undefined,
+    emptyMessage: typeof emptyMessage !== 'undefined' ? emptyMessage : undefined
+  }) %>
+
+  <!-- Paginazione -->
+  <%- include('./pagination', { pagination: typeof pagination !== 'undefined' ? pagination : undefined }) %>
+</div>

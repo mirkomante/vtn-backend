@@ -16,6 +16,7 @@ const commonScripts = [
 const conditionalScripts: Record<string, string> = {
   'formManager': '/js/formManager.js',
   'selectableTable': '/js/selectableTable.js',
+  'toggleTable': '/js/toggleTable.js',
   'customFilters': '/js/customFilters.js',
   'pagination': '/js/pagination.js',
   'dynamicList': '/js/dynamicList.js'
@@ -25,6 +26,7 @@ const conditionalScripts: Record<string, string> = {
 const pageSpecificScripts: Record<string, string[]> = {
   'form': ['formManager', 'dynamicList'],
   'table': ['selectableTable', 'customFilters', 'pagination'],
+  'toggleTable': ['selectableTable', 'toggleTable', 'customFilters', 'pagination'],
   'bulkEdit': ['formManager'],
   'dashboard': []
 };
