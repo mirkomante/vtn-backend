@@ -82,7 +82,7 @@ export class ScriptManager {
   /**
    * Ottiene script di inizializzazione per tabelle
    */
-  public getTableInitScript(tableId: string): string {
+  public getTableInitScript(_tableId: string): string {
     return `
       <script>
         document.addEventListener('DOMContentLoaded', function() {
