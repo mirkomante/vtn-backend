@@ -3832,8 +3832,14 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
   const { nome, descrizione, inLista } = req.body;
   
   try {
-    const existingCategoria = await prisma.categoriaMenuFisso.findUnique({
-      where: { nome }
+    const existingCategoria = await prisma.categoriaMenuFisso.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingCategoria) {
@@ -4079,8 +4085,14 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
     }
 
     if (nome !== existingCategoria.nome) {
-      const categoriaWithSameName = await prisma.categoriaMenuFisso.findUnique({
-        where: { nome }
+      const categoriaWithSameName = await prisma.categoriaMenuFisso.findFirst({
+        where: { 
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
+          deletedAt: null
+        }
       });
 
       if (categoriaWithSameName) {
@@ -4429,8 +4441,14 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
   const { nome, descrizione, inLista } = req.body;
   
   try {
-    const existingCategoria = await prisma.categoriaPiatti.findUnique({
-      where: { nome }
+    const existingCategoria = await prisma.categoriaPiatti.findFirst({
+      where: { 
+        nome: { 
+          equals: nome, 
+          mode: 'insensitive' 
+        },
+        deletedAt: null
+      }
     });
 
     if (existingCategoria) {
@@ -4682,8 +4700,14 @@ router.post('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
     }
 
     if (nome !== existingCategoria.nome) {
-      const categoriaWithSameName = await prisma.categoriaPiatti.findUnique({
-        where: { nome }
+      const categoriaWithSameName = await prisma.categoriaPiatti.findFirst({
+        where: { 
+          nome: { 
+            equals: nome, 
+            mode: 'insensitive' 
+          },
+          deletedAt: null
+        }
       });
 
       if (categoriaWithSameName) {
