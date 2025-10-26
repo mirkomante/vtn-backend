@@ -4,19 +4,20 @@
 
 1. [Introduzione](#introduzione)
 2. [Accesso al Sistema](#accesso-al-sistema)
-3. [Gestione Utenti](#gestione-utenti)
+3. [Sistema di Ruoli e Permessi](#sistema-di-ruoli-e-permessi)
+4. [Gestione Utenti](#gestione-utenti)
    - [Aggiungere un Nuovo Utente con Google OAuth](#aggiungere-un-nuovo-utente-con-google-oauth)
    - [Aggiungere un Nuovo Utente Locale](#aggiungere-un-nuovo-utente-locale)
    - [Gestire Utenti Esistenti](#gestire-utenti-esistenti)
-4. [Gestione Menu Ristorante](#gestione-menu-ristorante)
+5. [Gestione Menu Ristorante](#gestione-menu-ristorante)
    - [Servizi Accessori](#servizi-accessori)
    - [Impostazioni](#impostazioni)
      - [Allergeni](#allergeni)
      - [Categorie Menu Fisso](#categorie-menu-fisso)
      - [Categorie Piatti](#categorie-piatti)
-5. [Gestione Elementi Cancellati](#gestione-elementi-cancellati)
-6. [Sistema di Notifiche](#sistema-di-notifiche)
-7. [Troubleshooting](#troubleshooting)
+6. [Gestione Elementi Cancellati](#gestione-elementi-cancellati)
+7. [Sistema di Notifiche](#sistema-di-notifiche)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -26,8 +27,18 @@ Benvenuto nel **Manuale d'Uso per Amministratori** del sistema VTN Backend. Ques
 
 ### Cosa Puoi Fare
 
-Come amministratore, hai accesso completo a:
+Il sistema utilizza un sistema di ruoli con due livelli principali:
+
+- **👑 ADMIN**: Accesso completo al sistema, inclusa la gestione utenti
+- **👤 USER**: Accesso completo al menu ristorante, senza gestione utenti
+
+**Come amministratore, hai accesso completo a:**
 - **Gestione Utenti**: Creazione e gestione di utenti del sistema
+- **Menu Ristorante**: Gestione completa del menu e delle configurazioni
+- **Impostazioni**: Configurazione di allergeni, categorie e servizi
+- **Recupero Dati**: Gestione degli elementi cancellati
+
+**Come utente normale, hai accesso a:**
 - **Menu Ristorante**: Gestione completa del menu e delle configurazioni
 - **Impostazioni**: Configurazione di allergeni, categorie e servizi
 - **Recupero Dati**: Gestione degli elementi cancellati
@@ -53,6 +64,147 @@ Come amministratore, hai accesso completo a:
 
 - **Google OAuth**: Clicca su "Accedi con Google" e usa il tuo account Google
 - **Autenticazione Locale**: Usa email e password configurate
+
+---
+
+## Sistema di Ruoli e Permessi
+
+### Panoramica del Sistema
+
+Il sistema VTN Backend utilizza un sistema di ruoli basato su due livelli principali:
+
+- **👑 ADMIN**: Accesso completo al sistema, inclusa la gestione utenti
+- **👤 USER**: Accesso completo al menu ristorante, senza gestione utenti
+
+### Assegnazione Automatica dei Ruoli
+
+#### Per Utenti Google OAuth
+
+Quando un utente con email `@vietnamonamour.com` accede per la prima volta:
+
+1. **Se è il primo utente del sistema** → diventa automaticamente **ADMIN**
+2. **Se esistono già admin** → diventa **USER** normale
+3. **Se è un utente esistente** → mantiene il suo ruolo attuale
+
+#### Per Utenti Locali
+
+Gli utenti locali vengono creati manualmente dagli amministratori con il ruolo specificato durante la creazione.
+
+### Permessi per Ruolo
+
+#### 👑 **Ruolo ADMIN**
+
+**Menu Disponibili:**
+- ✅ **Ristorante: Menu** - Accesso completo
+- ✅ **Admin** - Accesso completo
+
+**Funzionalità Disponibili:**
+- **Gestione Utenti**: Creazione, modifica, eliminazione di utenti
+- **Gestione Menu Ristorante**: Accesso completo a tutti i contenuti
+- **Gestione Impostazioni**: Configurazione completa del sistema
+- **Gestione Elementi Cancellati**: Ripristino ed eliminazione definitiva
+
+#### 👤 **Ruolo USER**
+
+**Menu Disponibili:**
+- ✅ **Ristorante: Menu** - Accesso completo
+- ❌ **Admin** - Accesso negato
+
+**Funzionalità Disponibili:**
+- **Gestione Menu Ristorante**: Accesso completo a tutti i contenuti
+- **Gestione Impostazioni**: Configurazione completa del sistema
+- **Gestione Elementi Cancellati**: Ripristino ed eliminazione definitiva
+
+### Operazioni Specifiche per Ruolo
+
+#### **Operazioni Disponibili per Entrambi i Ruoli**
+
+**Servizi Accessori:**
+- ✅ Creare nuovi servizi
+- ✅ Modificare servizi esistenti
+- ✅ Eliminare servizi (soft delete)
+- ✅ Modifica massiva di servizi
+- ✅ Visualizzare dettagli servizi
+
+**Impostazioni:**
+- ✅ **Allergeni**: CRUD completo
+- ✅ **Categorie Menu Fisso**: CRUD completo + modifica massiva
+- ✅ **Categorie Piatti**: CRUD completo + modifica massiva
+
+**Gestione Elementi Cancellati:**
+- ✅ Visualizzare elementi cancellati
+- ✅ Ripristinare elementi cancellati
+- ✅ Eliminazione definitiva di elementi cancellati
+
+#### **Operazioni Solo per ADMIN**
+
+**Gestione Utenti:**
+- ✅ Visualizzare lista utenti
+- ✅ Creare nuovi utenti (locali)
+- ✅ Modificare utenti esistenti
+- ✅ Cambiare ruoli utenti (user ↔ admin)
+- ✅ Eliminare utenti
+- ✅ Modifica massiva utenti
+
+### Controlli di Accesso
+
+#### **Middleware di Autenticazione**
+
+Il sistema implementa controlli di accesso a più livelli:
+
+1. **Autenticazione**: Verifica che l'utente sia loggato
+2. **Autorizzazione**: Verifica che l'utente abbia il ruolo necessario
+3. **Menu Access**: Filtra i menu visibili in base al ruolo
+
+#### **Controlli Specifici**
+
+- **Menu Admin**: Accessibile solo a utenti con ruolo `admin`
+- **Menu Ristorante**: Accessibile a tutti gli utenti autenticati
+- **Route Protette**: Middleware `isAdmin` per operazioni amministrative
+
+### Gestione dei Ruoli
+
+#### **Cambio Ruolo per Utenti Esistenti**
+
+Gli amministratori possono modificare il ruolo di qualsiasi utente:
+
+1. Vai in **Admin** → **Utenti**
+2. Clicca sul nome dell'utente da modificare
+3. Clicca su **"Modifica"**
+4. Cambia il campo **"Ruolo"**:
+   - `admin` - Accesso completo al sistema
+   - `user` - Accesso limitato al menu ristorante
+5. Clicca su **"Salva Modifiche"**
+
+#### **Modifica Massiva Ruoli**
+
+Per cambiare il ruolo di più utenti contemporaneamente:
+
+1. **Seleziona gli utenti** dalla lista
+2. Clicca su **"Modifica"**
+3. Seleziona il nuovo ruolo nel campo **"Ruolo"**
+4. Clicca su **"Salva Modifiche"**
+
+### Sicurezza e Best Practices
+
+#### **Raccomandazioni per Amministratori**
+
+- **Monitora regolarmente** la lista utenti per verificare accessi non autorizzati
+- **Assegna il ruolo admin** solo a personale autorizzato
+- **Rimuovi immediatamente** utenti che non dovrebbero avere accesso
+- **Documenta** i cambiamenti di ruolo per audit
+
+#### **Gestione Account Google**
+
+- **Revoca accesso Google** per dipendenti che lasciano l'azienda
+- **Monitora** gli accessi tramite log di Google Workspace
+- **Considera** l'implementazione di una whitelist se necessario
+
+#### **Backup e Recupero**
+
+- **Gli utenti eliminati** possono essere ripristinati dalla sezione "Cancellati"
+- **I ruoli modificati** vengono tracciati nei log del sistema
+- **Le modifiche** sono immediatamente effettive
 
 ---
 

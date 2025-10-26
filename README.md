@@ -1401,7 +1401,6 @@ Il sistema supporta due strategie di autenticazione:
 
 ### Tabelle
 - **selectableTable.ejs** - Tabelle con selezione multipla
-- **stickyHeader.ejs** - Tabelle con header fisso
 
 ### Navigazione
 - **actionNav.ejs** - Barra azioni
