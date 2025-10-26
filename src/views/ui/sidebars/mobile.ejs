@@ -35,9 +35,9 @@
             To: "opacity-0"
         -->
         <div class="absolute top-0 left-full flex w-16 justify-center pt-5">
-          <button type="button" class="-m-2.5 p-2.5" id="close-sidebar-button">
+          <button type="button" class="-m-2.5 p-3" id="close-sidebar-button">
             <span class="sr-only">Close sidebar</span>
-            <svg class="size-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+            <svg class="size-8 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           </button>
@@ -46,7 +46,7 @@
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
           <div class="flex h-16 shrink-0 items-center">
-            <img class="h-8 w-auto" src="/img/shou.png" alt="Vietnamonamour">
+            <img class="h-10 w-auto" src="/img/shou.png" alt="Vietnamonamour">
           </div>
           <nav class="flex flex-1 flex-col">
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -55,9 +55,9 @@
                   <% sectionMenu.forEach(item => { %>
                     <li>
                       <a href="<%= item.link %>" 
-                         class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold <%= currentPath === item.link ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' %>">
+                         class="group flex gap-x-3 rounded-md p-3 text-base/6 font-semibold <%= currentPath === item.link ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' %>">
                         <% if (item.icon && sectionIcons[item.icon]) { %>
-                          <svg class="size-6 shrink-0 <%= currentPath === item.link ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600' %>" 
+                          <svg class="size-8 shrink-0 <%= currentPath === item.link ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600' %>" 
                                fill="none" 
                                viewBox="<%= sectionIcons[item.icon].viewBox %>" 
                                stroke-width="1.5" 
@@ -69,7 +69,7 @@
                                   d="<%= sectionIcons[item.icon].path %>" />
                           </svg>
                         <% } else { %>
-                          <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">
+                          <span class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.75rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">
                             <%= item.label.charAt(0).toUpperCase() %>
                           </span>
                         <% } %>
@@ -85,8 +85,8 @@
                   <% mainMenu.forEach(item => { %>
                     <li>
                       <a href="<%= item.link %>" 
-                         class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold <%= currentPath === item.link ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' %>">
-                        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">
+                         class="group flex gap-x-3 rounded-md p-3 text-base/6 font-semibold <%= currentPath === item.link ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50' %>">
+                        <span class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.75rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">
                           <%= item.label.charAt(0).toUpperCase() %>
                         </span>
                         <span class="truncate"><%= item.label %></span>
@@ -96,12 +96,12 @@
                 </ul>
               </li>
               <li class="-mx-6 mt-auto">
-                <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-50">
+                <a href="#" class="flex items-center gap-x-4 px-6 py-3 text-base/6 font-semibold text-gray-900 hover:bg-gray-50">
                   <% if (user && user.profilePicture) { %>
                     <img class="size-8 rounded-full bg-gray-50" src="<%= user.profilePicture %>" alt="<%= user.name || 'User' %>">
                   <% } else { %>
                     <div class="size-8 rounded-full bg-gray-50 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title" aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink" class="size-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title" aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink" class="size-8">
                         <title>User</title>
                         <desc>A line styled icon from Orion Icon Library.</desc>
                         <path data-name="layer1" d="M46 26c0 6.1-3.4 11.5-7 14.8V44c0 2 1 5.1 11 7a15.5 15.5 0 0 1 12 11H2a13.4 13.4 0 0 1 11-11c10-1.8 12-5 12-7v-3.2c-3.6-3.3-7-8.6-7-14.8v-9.6C18 6 25.4 2 32 2s14 4 14 14.4z" fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
