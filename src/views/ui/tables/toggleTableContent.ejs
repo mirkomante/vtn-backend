@@ -51,7 +51,7 @@
           <tbody class="divide-y divide-gray-200 bg-white">
             <% if (items && items.length > 0) { %>
               <% items.forEach(item => { %>
-                <tr class="group has-checked:bg-gray-50" data-item-id="<%= item[tableConfig.idField] %>" data-type="<%= item.type || '' %>">
+                <tr class="group toggle-table-row" data-item-id="<%= item[tableConfig.idField] %>" data-type="<%= item.type || '' %>">
                   <td class="relative px-7 sm:w-12 sm:px-6">
                     <div class="absolute inset-y-0 left-0 hidden w-0.5 bg-indigo-600 group-has-checked:block"></div>
 

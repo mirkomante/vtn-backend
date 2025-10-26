@@ -8,4 +8,11 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
+}
+
+/* Evidenziazione righe per tabelle toggle - solo per checkbox di selezione */
+.toggle-table-row {
+  &:has(input[name$="-item"]:checked) {
+    background-color: rgb(249 250 251); /* bg-gray-50 */
+  }
 } 
