@@ -7,7 +7,7 @@
 <div>
   <div class="grid grid-cols-1 sm:hidden">
     <!-- Select per mobile -->
-    <select aria-label="Seleziona una sezione" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600">
+    <select aria-label="Seleziona una sezione" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-12 text-left text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
       <% sectionTabs.forEach(tab => { %>
         <option value="<%= tab.link %>" <%= currentPath === tab.link ? 'selected' : '' %>>
           <%= tab.label %>
