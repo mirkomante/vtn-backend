@@ -19,7 +19,8 @@ const conditionalScripts: Record<string, string> = {
   'toggleTable': '/js/toggleTable.js',
   'customFilters': '/js/customFilters.js',
   'pagination': '/js/pagination.js',
-  'dynamicList': '/js/dynamicList.js'
+  'dynamicList': '/js/dynamicList.js',
+  'menuFissoDropdown': '/js/menuFissoDropdown.js'
 };
 
 // Script specifici per tipo di pagina

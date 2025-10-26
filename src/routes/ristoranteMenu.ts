@@ -250,7 +250,7 @@ router.post('/servizi/nuovo', async (req, res) => {
         itemType: 'Servizio',
         backUrl: '/ristorante-menu/servizi',
         actionNavConfig,
-        scripts: scriptManager.getScriptsForPage('form'),
+        scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
         isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -291,7 +291,7 @@ router.post('/servizi/nuovo', async (req, res) => {
       itemType: 'Servizio',
       backUrl: '/ristorante-menu/servizi',
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -411,7 +411,7 @@ router.get('/servizi/modifica/:id', async (req, res) => {
       itemType: 'Servizio',
       detailUrl: `/ristorante-menu/servizi/dettagli/${servizio.id}`,
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -486,7 +486,7 @@ router.post('/servizi/modifica/:id', async (req, res) => {
           item: existingServizio,
           itemType: 'Servizio',
           detailUrl: `/ristorante-menu/servizi/dettagli/${existingServizio.id}`,
-          scripts: scriptManager.getScriptsForPage('form'),
+          scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
           breadcrumbs: [
             { label: 'Menu Ristorante', href: '/ristorante-menu' },
             { label: 'Servizi', href: '/ristorante-menu/servizi' },
@@ -533,7 +533,7 @@ router.post('/servizi/modifica/:id', async (req, res) => {
       item: existingServizio,
       itemType: 'Servizio',
       detailUrl: existingServizio ? `/ristorante-menu/servizi/dettagli/${servizioId}` : undefined,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Servizi', href: '/ristorante-menu/servizi' },
@@ -800,7 +800,7 @@ router.get('/piatti/nuovo', async (_req, res) => {
       formConfig: formConfig.formConfig,
       fields: formConfig.fields,
       buttons: formConfig.buttons,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       actionNavConfig,
       isInternalPage: true,
       breadcrumbs: [
@@ -865,7 +865,7 @@ router.post('/piatti/nuovo', async (req, res) => {
       formConfig: formConfig.formConfig,
       fields: formConfig.fields,
       buttons: formConfig.buttons,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       error: ['Errore durante la creazione del piatto'],
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1025,7 +1025,7 @@ router.get('/piatti/modifica/:id', async (req, res) => {
       item: piatto,
       itemType: 'Piatto',
       detailUrl: `/ristorante-menu/piatti/dettagli/${piatto.id}`,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       actionNavConfig,
       isInternalPage: true,
       breadcrumbs: [
@@ -1119,7 +1119,7 @@ router.post('/piatti/modifica/:id', async (req, res) => {
       item: existingPiatto,
       itemType: 'Piatto',
       detailUrl: existingPiatto ? `/ristorante-menu/piatti/dettagli/${req.params.id}` : undefined,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       error: ['Errore durante l\'aggiornamento del piatto'],
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -1196,7 +1196,7 @@ router.get('/piatti/modifica-massa', async (req, res) => {
       buttons: formConfig.buttons,
       selectedItems: piatti,
       itemType: 'Piatto',
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       actionNavConfig,
       isInternalPage: true,
       breadcrumbs: [
@@ -2003,7 +2003,7 @@ router.get('/vini/nuovo', async (_req, res) => {
       currentPath,
       formData,
       isEdit: false,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Vini', href: '/ristorante-menu/vini' },
@@ -2098,7 +2098,7 @@ router.get('/vini/modifica/:id', async (req, res) => {
       formData,
       isEdit: true,
       item: vino,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Vini', href: '/ristorante-menu/vini' },
@@ -2277,7 +2277,7 @@ router.get('/vini/modifica-massa', async (req, res) => {
       formData,
       selectedItems: vini,
       selectedCount: vini.length,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Vini', href: '/ristorante-menu/vini' },
@@ -2454,7 +2454,7 @@ router.get('/birre/nuovo', async (_req, res) => {
       currentPath,
       formData,
       isEdit: false,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Birre', href: '/ristorante-menu/birre' },
@@ -2535,7 +2535,7 @@ router.get('/birre/modifica/:id', async (req, res) => {
       formData,
       isEdit: true,
       item: birra,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Birre', href: '/ristorante-menu/birre' },
@@ -2699,7 +2699,7 @@ router.get('/birre/modifica-massa', async (req, res) => {
       formData,
       selectedItems: birre,
       selectedCount: birre.length,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Birre', href: '/ristorante-menu/birre' },
@@ -2894,7 +2894,7 @@ router.get('/menu-fissi/nuovo', async (_req, res) => {
       formConfig: formConfig.formConfig,
       fields: formConfig.fields,
       buttons: formConfig.buttons,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' },
@@ -3078,7 +3078,7 @@ router.get('/menu-fissi/modifica/:id', async (req, res) => {
       fields: formConfig.fields,
       buttons: formConfig.buttons,
       item: menuFisso,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' },
@@ -3159,7 +3159,7 @@ router.get('/menu-fissi/modifica-massa', async (req, res) => {
       fields: formConfig.fields,
       buttons: formConfig.buttons,
       selectedItems: menuFissi,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' },
@@ -3561,7 +3561,7 @@ router.get('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: `/ristorante-menu/impostazioni/allergeni/dettagli/${allergene.id}`,
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -3646,7 +3646,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/allergeni/modifica',
           actionNavConfig,
-          scripts: scriptManager.getScriptsForPage('form'),
+          scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
           isInternalPage: true,
           item: existingAllergene,
           formConfig,
@@ -3702,7 +3702,7 @@ router.post('/impostazioni/allergeni/modifica/:id', async (req, res) => {
       itemType: 'Allergene',
       detailUrl: existingAllergene ? `/ristorante-menu/impostazioni/allergeni/dettagli/${allergeneId}` : undefined,
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -3870,7 +3870,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
         itemType: 'Categoria Menu Fisso',
         backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
         actionNavConfig,
-        scripts: scriptManager.getScriptsForPage('form'),
+        scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
         isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -3912,7 +3912,7 @@ router.post('/impostazioni/categoria-menu-fisso/nuovo', async (req, res) => {
       itemType: 'Categoria Menu Fisso',
       backUrl: '/ristorante-menu/impostazioni/categoria-menu-fisso',
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -4032,7 +4032,7 @@ router.get('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) =
       itemType: 'Categoria Menu Fisso',
       detailUrl: `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoria.id}`,
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -4118,7 +4118,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
           sectionIcons,
           currentPath: '/ristorante-menu/impostazioni/categoria-menu-fisso/modifica',
           actionNavConfig,
-          scripts: scriptManager.getScriptsForPage('form'),
+          scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
           isInternalPage: true,
           item: existingCategoria,
           formConfig,
@@ -4173,7 +4173,7 @@ router.post('/impostazioni/categoria-menu-fisso/modifica/:id', async (req, res) 
       formConfig,
       itemType: 'Categoria Menu Fisso',
       detailUrl: existingCategoria ? `/ristorante-menu/impostazioni/categoria-menu-fisso/dettagli/${categoriaId}` : undefined,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -4479,7 +4479,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
         itemType: 'Categoria Piatti',
         backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
         actionNavConfig,
-        scripts: scriptManager.getScriptsForPage('form'),
+        scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
         isInternalPage: true,
         breadcrumbs: [
           { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -4521,7 +4521,7 @@ router.post('/impostazioni/categoria-piatti/nuovo', async (req, res) => {
       itemType: 'Categoria Piatti',
       backUrl: '/ristorante-menu/impostazioni/categoria-piatti',
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -4642,7 +4642,7 @@ router.get('/impostazioni/categoria-piatti/modifica/:id', async (req, res) => {
       itemType: 'Categoria Piatti',
       detailUrl: `/ristorante-menu/impostazioni/categoria-piatti/dettagli/${categoria.id}`,
       actionNavConfig,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       isInternalPage: true,
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
@@ -6272,7 +6272,7 @@ router.get('/impostazioni/nazioni/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/nazioni',
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -6329,7 +6329,7 @@ router.get('/impostazioni/nazioni/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/nazioni/dettagli/${nazione.id}`,
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -7935,7 +7935,7 @@ router.get('/liquori/nuovo', async (_req, res) => {
       sectionIcons,
       currentPath,
       formData,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Liquori', href: '/ristorante-menu/liquori' },
@@ -8014,7 +8014,7 @@ router.get('/liquori/modifica/:id', async (req, res) => {
       currentPath,
       formData,
       liquore,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Liquori', href: '/ristorante-menu/liquori' },
@@ -8178,7 +8178,7 @@ router.get('/liquori/modifica-massa', async (req, res) => {
       formData,
       selectedItems: liquori,
       selectedCount: liquori.length,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Liquori', href: '/ristorante-menu/liquori' },
@@ -8571,7 +8571,7 @@ router.get('/cocktails/nuovo', async (_req, res) => {
       sectionIcons,
       currentPath,
       formData,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
@@ -8651,7 +8651,7 @@ router.get('/cocktails/modifica/:id', async (req, res) => {
       currentPath,
       formData,
       item: cocktail,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
@@ -8813,7 +8813,7 @@ router.get('/cocktails/modifica-massa', async (req, res) => {
       formData,
       selectedItems: cocktails,
       selectedCount: cocktails.length,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Cocktails', href: '/ristorante-menu/cocktails' },
@@ -9170,7 +9170,7 @@ router.get('/bevande/nuovo', async (_req, res) => {
       sectionIcons,
       currentPath,
       formData,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Bevande', href: '/ristorante-menu/bevande' },
@@ -9250,7 +9250,7 @@ router.get('/bevande/modifica/:id', async (req, res) => {
       currentPath,
       formData,
       item: bevanda,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Bevande', href: '/ristorante-menu/bevande' },
@@ -9412,7 +9412,7 @@ router.get('/bevande/modifica-massa', async (req, res) => {
       formData,
       selectedItems: bevande,
       selectedCount: bevande.length,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Bevande', href: '/ristorante-menu/bevande' },
@@ -10173,7 +10173,7 @@ router.get('/impostazioni/regioni/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/regioni',
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -10250,7 +10250,7 @@ router.get('/impostazioni/regioni/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/regioni/dettagli/${regione.id}`,
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -10677,7 +10677,7 @@ router.get('/impostazioni/zone/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/zone',
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -10769,7 +10769,7 @@ router.get('/impostazioni/zone/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/zone/dettagli/${zona.id}`,
       actionNavConfig, // Passa la configurazione actionNav
       isInternalPage: true, // Aggiunto parametro mancante
-      scripts: scriptManager.getScriptsForPage('form'), // Aggiunto script per validazione form
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']), // Aggiunto script per validazione form
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -11180,7 +11180,7 @@ router.get('/impostazioni/tipologie-vino/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/tipologie-vino',
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -11240,7 +11240,7 @@ router.get('/impostazioni/tipologie-vino/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/tipologie-vino/dettagli/${tipologiaVino.id}`,
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -11593,7 +11593,7 @@ router.get('/impostazioni/tipologie-birra/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/tipologie-birra',
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -11653,7 +11653,7 @@ router.get('/impostazioni/tipologie-birra/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/tipologie-birra/dettagli/${tipologiaBirra.id}`,
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12006,7 +12006,7 @@ router.get('/impostazioni/tipologie-liquore/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/tipologie-liquore',
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12066,7 +12066,7 @@ router.get('/impostazioni/tipologie-liquore/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/tipologie-liquore/dettagli/${tipologiaLiquore.id}`,
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12419,7 +12419,7 @@ router.get('/impostazioni/tipologie-cocktail/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/tipologie-cocktail',
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12479,7 +12479,7 @@ router.get('/impostazioni/tipologie-cocktail/modifica/:id', async (req, res) => 
       backUrl: `/ristorante-menu/impostazioni/tipologie-cocktail/dettagli/${tipologiaCocktail.id}`,
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12832,7 +12832,7 @@ router.get('/impostazioni/tipologie-bevanda/nuovo', async (req, res) => {
       backUrl: '/ristorante-menu/impostazioni/tipologie-bevanda',
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },
@@ -12892,7 +12892,7 @@ router.get('/impostazioni/tipologie-bevanda/modifica/:id', async (req, res) => {
       backUrl: `/ristorante-menu/impostazioni/tipologie-bevanda/dettagli/${tipologiaBevanda.id}`,
       actionNavConfig,
       isInternalPage: true,
-      scripts: scriptManager.getScriptsForPage('form'),
+      scripts: scriptManager.getScriptsForPage('form', ['menuFissoDropdown']),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Impostazioni', href: '/ristorante-menu/impostazioni' },

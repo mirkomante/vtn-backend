@@ -1,5 +1,5 @@
 <!-- Section Heading con titolo, descrizione e tabs -->
-<div class="border-b border-gray-200 pb-5">
+        <div class="border-b border-gray-200 pb-8 sm:pb-5">
   <h1 class="text-2xl font-bold text-gray-900">
     <% if (typeof customTitle !== 'undefined' && customTitle) { %>
       <%= customTitle %>
@@ -8,6 +8,6 @@
     <% } %>
   </h1>
   <% if (typeof description !== 'undefined' && description) { %>
-    <p class="mt-2 text-sm text-gray-700"><%= description %></p>
+            <p class="mt-4 sm:mt-2 text-base sm:text-sm text-gray-700"><%= description %></p>
   <% } %>
 </div> 

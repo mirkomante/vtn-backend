@@ -319,6 +319,9 @@
   .left-4 {
     left: calc(var(--spacing) * 4);
   }
+  .left-12 {
+    left: calc(var(--spacing) * 12);
+  }
   .left-14 {
     left: calc(var(--spacing) * 14);
   }
@@ -1128,11 +1131,17 @@
   .pr-10 {
     padding-right: calc(var(--spacing) * 10);
   }
+  .pr-12 {
+    padding-right: calc(var(--spacing) * 12);
+  }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
   }
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
+  }
+  .pb-8 {
+    padding-bottom: calc(var(--spacing) * 8);
   }
   .pl-1 {
     padding-left: calc(var(--spacing) * 1);
@@ -1938,6 +1947,21 @@
       margin-top: calc(var(--spacing) * 0);
     }
   }
+  .sm\:mt-2 {
+    @media (width >= 40rem) {
+      margin-top: calc(var(--spacing) * 2);
+    }
+  }
+  .sm\:mt-8 {
+    @media (width >= 40rem) {
+      margin-top: calc(var(--spacing) * 8);
+    }
+  }
+  .sm\:mb-8 {
+    @media (width >= 40rem) {
+      margin-bottom: calc(var(--spacing) * 8);
+    }
+  }
   .sm\:ml-4 {
     @media (width >= 40rem) {
       margin-left: calc(var(--spacing) * 4);
@@ -1979,6 +2003,12 @@
       height: calc(var(--spacing) * 4);
     }
   }
+  .sm\:size-5 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 5);
+      height: calc(var(--spacing) * 5);
+    }
+  }
   .sm\:w-12 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 12);
@@ -2014,9 +2044,28 @@
       gap: calc(var(--spacing) * 4);
     }
   }
+  .sm\:space-x-3 {
+    @media (width >= 40rem) {
+      :where(& > :not(:last-child)) {
+        --tw-space-x-reverse: 0;
+        margin-inline-start: calc(calc(var(--spacing) * 3) * var(--tw-space-x-reverse));
+        margin-inline-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-x-reverse)));
+      }
+    }
+  }
   .sm\:px-0 {
     @media (width >= 40rem) {
       padding-inline: calc(var(--spacing) * 0);
+    }
+  }
+  .sm\:px-1 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 1);
+    }
+  }
+  .sm\:px-2 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 2);
     }
   }
   .sm\:px-6 {
@@ -2024,9 +2073,19 @@
       padding-inline: calc(var(--spacing) * 6);
     }
   }
+  .sm\:py-1 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 1);
+    }
+  }
   .sm\:pr-9 {
     @media (width >= 40rem) {
       padding-right: calc(var(--spacing) * 9);
+    }
+  }
+  .sm\:pb-5 {
+    @media (width >= 40rem) {
+      padding-bottom: calc(var(--spacing) * 5);
     }
   }
   .sm\:text-sm {
