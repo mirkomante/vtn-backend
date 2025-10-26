@@ -1,8 +1,8 @@
 <div class="mt-8 flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <div class="group/table relative">
-        <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white group-has-checked/table:flex sm:left-12">
+      <div class="relative">
+        <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white sm:left-12" id="<%= tableId %>-action-buttons">
           <button type="button" id="<%= tableId %>-editMultipleBtn" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" style="display: none;">
             Modifica
           </button>
@@ -30,7 +30,7 @@
           <thead>
             <tr>
               <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
-                <div class="group absolute top-1/2 left-4 -mt-2 grid size-4 grid-cols-1">
+                <div class="absolute top-1/2 left-4 -mt-2 grid size-4 grid-cols-1">
                   <input type="checkbox" 
                          id="<%= tableId %>-select-all" 
                          name="<%= tableId %>-select-all"

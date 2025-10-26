@@ -194,11 +194,8 @@ class TableSelectionManager {
     const row = checkbox.closest('tr');
     if (!row) return;
 
-    if (checkbox.checked) {
-      row.classList.add('table-row-selected');
-    } else {
-      row.classList.remove('table-row-selected');
-    }
+    // Non modifichiamo le classi CSS - lasciamo che Tailwind gestisca tutto
+    // Il sistema originale funziona già correttamente con group-has-checked
   }
 
   // Aggiorna lo stato generale della selezione
@@ -232,12 +229,14 @@ class TableSelectionManager {
 
   // Aggiorna la visibilità dei bottoni di azione
   updateActionButtonsVisibility(hasCheckedItems) {
-    const buttonsContainer = this.table.querySelector('.table-selection-buttons');
+    const buttonsContainer = document.getElementById(`${this.tableId}-action-buttons`);
     if (buttonsContainer) {
       if (hasCheckedItems) {
-        buttonsContainer.classList.add('table-selection-active');
+        buttonsContainer.classList.remove('hidden');
+        buttonsContainer.classList.add('flex');
       } else {
-        buttonsContainer.classList.remove('table-selection-active');
+        buttonsContainer.classList.remove('flex');
+        buttonsContainer.classList.add('hidden');
       }
     }
   }
