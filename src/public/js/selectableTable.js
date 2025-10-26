@@ -399,9 +399,14 @@ class TableSelectionManager {
     }
 
     // Conferma l'azione
-    const confirmMessage = checkedItems.length === 1 
-      ? (actionConfig.confirmMessage || 'Sei sicuro di voler eseguire questa azione?')
-      : (actionConfig.confirmMessageMultiple || `Sei sicuro di voler eseguire questa azione su ${checkedItems.length} elementi?`);
+    let confirmMessage;
+    if (checkedItems.length === 1) {
+      confirmMessage = actionConfig.confirmMessage || 'Sei sicuro di voler eseguire questa azione?';
+    } else {
+      const count = checkedItems.length;
+      confirmMessage = (actionConfig.confirmMessageMultiple || `Sei sicuro di voler eseguire questa azione su ${count} elementi?`)
+        .replace('{count}', count);
+    }
 
     showConfirmDialog(confirmMessage, () => {
       // Esegui l'azione
@@ -430,12 +435,53 @@ class TableSelectionManager {
         return;
       }
 
+      // Prepara i dati di base
+      let requestData = { itemIds };
+      
+      // Gestione speciale per il ripristino che ha bisogno di itemTypes
+      if (endpoint.includes('/restore')) {
+        try {
+          const itemTypes = [];
+          itemIds.forEach(id => {
+            const row = document.querySelector(`tr[data-item-id="${id}"]`);
+            if (row) {
+              const type = row.getAttribute('data-type');
+              if (type) {
+                itemTypes.push(type);
+              } else {
+                // Fallback: prova a mappare dal testo della seconda colonna
+                const cells = row.querySelectorAll('td');
+                if (cells.length > 1) {
+                  const typeCell = cells[1];
+                  const typeText = typeCell.textContent.trim();
+                  const typeMap = {
+                    'Categoria Piatti': 'categoria-piatti',
+                    'Categoria Menu Fisso': 'categoria-menu-fisso',
+                    'Allergene': 'allergene',
+                    'Piatto': 'piatto',
+                    'Servizio Accessorio': 'servizio-accessorio',
+                    'Menu Fisso': 'menu-fisso'
+                  };
+                  const mappedType = typeMap[typeText] || typeText;
+                  itemTypes.push(mappedType);
+                }
+              }
+            }
+          });
+          
+          requestData.itemTypes = itemTypes;
+        } catch (error) {
+          console.error('TableSelectionManager: Errore nel raccogliere i tipi:', error);
+        }
+      }
+
       const response = await fetch(endpoint, {
         method: method,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ itemIds })
+        credentials: 'same-origin',
+        body: JSON.stringify(requestData)
       });
 
       const result = await response.json();
