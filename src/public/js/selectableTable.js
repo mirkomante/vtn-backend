@@ -127,7 +127,7 @@ function showConfirmDialog(message, onConfirm) {
 class TableSelectionManager {
   constructor(tableId, config) {
     this.tableId = tableId;
-    this.config = config;
+    this.config = config || {}; // Protezione contro config undefined
     this.table = null;
     this.selectAllCheckbox = null;
     this.itemCheckboxes = [];

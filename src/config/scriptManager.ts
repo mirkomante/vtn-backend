@@ -86,8 +86,10 @@ export class ScriptManager {
     return `
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          if (typeof initializeSelectableTable === 'function') {
-            initializeSelectableTable('${tableId}');
+          // L'inizializzazione viene gestita automaticamente da initializeTables()
+          // che legge la configurazione da window[tableId + '-config']
+          if (typeof initializeTables === 'function') {
+            initializeTables();
           }
         });
       </script>

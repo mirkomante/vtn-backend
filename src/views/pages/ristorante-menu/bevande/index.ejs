@@ -30,61 +30,120 @@
     <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
   <% } %>
   
-  <%- include('../../../ui/tables/selectableTable', {
-    tableId: 'bevande-table',
-    tableData: tableData,
-    items: items,
-    showFilters: true,
-    filters: [
-      {
-        id: 'tipologia',
-        name: 'tipologia',
-        label: 'Tipologia',
-        type: 'select',
-        placeholder: 'Tutte le tipologie',
-        options: [
-          { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
-          ...tipologie.map(tipologia => ({
-            value: tipologia.id,
-            label: tipologia.nome,
-            selected: currentTipologiaFilter === tipologia.id
-          }))
-        ]
-      }
-    ],
-    hasActiveFilters: !!currentTipologiaFilter,
-    clearFiltersUrl: '/ristorante-menu/bevande',
-    showEmptyMessage: isFilteredEmpty,
-    emptyMessage: {
-      title: 'Nessuna bevanda trovata',
-      description: 'Non ci sono bevande che corrispondono ai filtri applicati.',
-      icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>`
-    },
-    tableConfig: {
-      idField: 'id',
-      labelField: 'nome',
-      detailUrl: '/ristorante-menu/bevande/dettagli/:id',
-      editUrl: '/ristorante-menu/bevande/modifica/:id',
-      bulkEditUrl: '/ristorante-menu/bevande/modifica-massa',
-      editMultipleButton: {
-        text: 'Modifica'
+  <% if (tableLayout === 'toggle') { %>
+    <%- include('../../../ui/tables/toggleTable', {
+      tableId: 'bevande-table',
+      tableData: tableData,
+      items: items,
+      showFilters: true,
+      filters: [
+        {
+          id: 'tipologia',
+          name: 'tipologia',
+          label: 'Tipologia',
+          type: 'select',
+          placeholder: 'Tutte le tipologie',
+          options: [
+            { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
+            ...tipologie.map(tipologia => ({
+              value: tipologia.id,
+              label: tipologia.nome,
+              selected: currentTipologiaFilter === tipologia.id
+            }))
+          ]
+        }
+      ],
+      hasActiveFilters: !!currentTipologiaFilter,
+      clearFiltersUrl: '/ristorante-menu/bevande',
+      showEmptyMessage: isFilteredEmpty,
+      emptyMessage: {
+        title: 'Nessuna bevanda trovata',
+        description: 'Non ci sono bevande che corrispondono ai filtri applicati.',
+        icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>`
       },
-      actionButton: {
-        text: 'Elimina',
-        classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/bevande/dettagli/:id',
+        editUrl: '/ristorante-menu/bevande/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/bevande/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/bevande',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questa bevanda?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} bevande?',
+        successMessage: 'Eliminate {count} bevanda/e con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome,
+        entity: 'bevande'
       },
-      endpoint: '/ristorante-menu/bevande',
-      method: 'DELETE',
-      confirmMessage: 'Sei sicuro di voler eliminare questa bevanda?',
-      confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} bevande?',
-      successMessage: 'Eliminate {count} bevanda/e con successo',
-      errorMessage: 'Errore durante l\'eliminazione',
-      getDisplayValue: (item) => item.nome
-    },
-    pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
-  }) %>
+      pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
+    }) %>
+  <% } else { %>
+    <%- include('../../../ui/tables/selectableTable', {
+      tableId: 'bevande-table',
+      tableData: tableData,
+      items: items,
+      showFilters: true,
+      filters: [
+        {
+          id: 'tipologia',
+          name: 'tipologia',
+          label: 'Tipologia',
+          type: 'select',
+          placeholder: 'Tutte le tipologie',
+          options: [
+            { value: '', label: 'Tutte le tipologie', selected: !currentTipologiaFilter },
+            ...tipologie.map(tipologia => ({
+              value: tipologia.id,
+              label: tipologia.nome,
+              selected: currentTipologiaFilter === tipologia.id
+            }))
+          ]
+        }
+      ],
+      hasActiveFilters: !!currentTipologiaFilter,
+      clearFiltersUrl: '/ristorante-menu/bevande',
+      showEmptyMessage: isFilteredEmpty,
+      emptyMessage: {
+        title: 'Nessuna bevanda trovata',
+        description: 'Non ci sono bevande che corrispondono ai filtri applicati.',
+        icon: `<svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>`
+      },
+      tableConfig: {
+        idField: 'id',
+        labelField: 'nome',
+        detailUrl: '/ristorante-menu/bevande/dettagli/:id',
+        editUrl: '/ristorante-menu/bevande/modifica/:id',
+        bulkEditUrl: '/ristorante-menu/bevande/modifica-massa',
+        editMultipleButton: {
+          text: 'Modifica'
+        },
+        actionButton: {
+          text: 'Elimina',
+          classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
+        },
+        endpoint: '/ristorante-menu/bevande',
+        method: 'DELETE',
+        confirmMessage: 'Sei sicuro di voler eliminare questa bevanda?',
+        confirmMessageMultiple: 'Sei sicuro di voler eliminare {count} bevande?',
+        successMessage: 'Eliminate {count} bevanda/e con successo',
+        errorMessage: 'Errore durante l\'eliminazione',
+        getDisplayValue: (item) => item.nome
+      },
+      pagination: (typeof pagination !== 'undefined' && pagination.totalPages > 1) ? pagination : undefined
+    }) %>
+  <% } %>
 <% } %>
 
 <!-- Configurazione JavaScript per la tabella -->

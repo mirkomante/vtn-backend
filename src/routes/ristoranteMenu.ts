@@ -1755,12 +1755,13 @@ router.get('/impostazioni/categoria-menu-fisso', async (req, res) => {
       ],
       successMessage,
       errorMessage,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(config.tableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       tableConfigJson: JSON.stringify(config.tableConfig),
-      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      ...(config.tableData.layout !== 'toggle' ? { tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId) } : {}),
       actionNavConfig,
       isInternalPage: false,
       pagination,
+      tableLayout: config.tableData.layout || 'default',
       ...config
     });
     return;
@@ -1909,6 +1910,7 @@ router.get('/vini', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: viniTableData,
+      tableLayout: viniTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -1916,7 +1918,7 @@ router.get('/vini', async (req, res) => {
       pagination,
       currentTipologiaFilter: tipologiaFilter,
       tipologie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(viniTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Vini', href: '/ristorante-menu/vini' }
@@ -2370,6 +2372,7 @@ router.get('/birre', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: birreTableData,
+      tableLayout: birreTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -2377,7 +2380,7 @@ router.get('/birre', async (req, res) => {
       pagination,
       currentTipologiaFilter: tipologiaFilter,
       tipologie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(birreTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Birre', href: '/ristorante-menu/birre' }
@@ -2797,6 +2800,7 @@ router.get('/menu-fissi', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: menuFissiTableData,
+      tableLayout: menuFissiTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -2804,7 +2808,7 @@ router.get('/menu-fissi', async (req, res) => {
       pagination,
       currentCategoriaFilter: categoriaFilter,
       categorie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(menuFissiTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Menu Fissi', href: '/ristorante-menu/menu-fissi' }
@@ -3234,12 +3238,13 @@ router.get('/impostazioni/categoria-piatti', async (req, res) => {
       ],
       successMessage,
       errorMessage,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(config.tableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       tableConfigJson: JSON.stringify(config.tableConfig),
-      tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId),
+      ...(config.tableData.layout !== 'toggle' ? { tableInitScript: scriptManager.getTableInitScript(config.tableConfig.tableId) } : {}),
       actionNavConfig,
       isInternalPage: false,
       pagination,
+      tableLayout: config.tableData.layout || 'default',
       ...config
     });
     return;
@@ -7850,6 +7855,7 @@ router.get('/liquori', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: liquoriTableData,
+      tableLayout: liquoriTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -7857,7 +7863,7 @@ router.get('/liquori', async (req, res) => {
       pagination,
       currentTipologiaFilter: tipologiaFilter,
       tipologie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(liquoriTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Liquori', href: '/ristorante-menu/liquori' }
@@ -8485,6 +8491,7 @@ router.get('/cocktails', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: cocktailsTableData,
+      tableLayout: cocktailsTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -8492,7 +8499,7 @@ router.get('/cocktails', async (req, res) => {
       pagination,
       currentTipologiaFilter: tipologiaFilter,
       tipologie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(cocktailsTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Cocktails', href: '/ristorante-menu/cocktails' }
@@ -9083,6 +9090,7 @@ router.get('/bevande', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: bevandeTableData,
+      tableLayout: bevandeTableData.layout || 'default',
       items,
       hasItems,
       isSectionEmpty,
@@ -9090,7 +9098,7 @@ router.get('/bevande', async (req, res) => {
       pagination,
       currentTipologiaFilter: tipologiaFilter,
       tipologie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(bevandeTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Bevande', href: '/ristorante-menu/bevande' }
@@ -13142,6 +13150,14 @@ router.post('/toggle/:entity/:id/ajax', async (req, res) => {
       },
       'menu-fissi': { 
         model: prisma.menuFisso, 
+        toggleableFields: ['inLista'] 
+      },
+      'categorie-menu-fisso': { 
+        model: prisma.categoriaMenuFisso, 
+        toggleableFields: ['inLista'] 
+      },
+      'categorie-piatti': { 
+        model: prisma.categoriaPiatti, 
         toggleableFields: ['inLista'] 
       }
     };

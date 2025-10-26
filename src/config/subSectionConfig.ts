@@ -27,7 +27,10 @@ export interface SubSectionConfig {
     fields: Array<{
       name: string;
       type?: string;
+      toggleable?: boolean;
     }>;
+    layout?: 'default' | 'toggle';
+    toggleableFields?: string[];
   };
   tableConfig: {
     tableId: string;
@@ -106,12 +109,10 @@ export const allergeniConfig: SubSectionConfig = {
     labelField: 'nome',
     detailUrl: '/ristorante-menu/impostazioni/allergeni/dettagli/:id',
     editUrl: '/ristorante-menu/impostazioni/allergeni/modifica/:id',
-    bulkEditUrl: undefined,
     actionButton: {
       text: 'Nuovo Allergene',
       href: '/ristorante-menu/impostazioni/allergeni/nuovo'
     },
-    editMultipleButton: undefined,
     deleteButton: {
       text: 'Elimina',
       classes: 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600'
@@ -605,8 +606,10 @@ export const categoriaMenuFissoConfig: SubSectionConfig = {
     fields: [
       { name: 'nome', type: 'text' },
       { name: 'descrizione', type: 'text' },
-      { name: 'inLista', type: 'boolean' }
-    ]
+      { name: 'inLista', type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
   },
   tableConfig: {
     tableId: 'categorie-menu-fisso-table',
@@ -723,8 +726,10 @@ export const categoriaPiattiConfig: SubSectionConfig = {
     fields: [
       { name: 'nome', type: 'text' },
       { name: 'descrizione', type: 'text' },
-      { name: 'inLista', type: 'boolean' }
-    ]
+      { name: 'inLista', type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
   },
   tableConfig: {
     tableId: 'categorie-piatti-table',

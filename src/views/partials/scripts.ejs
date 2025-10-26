@@ -21,7 +21,7 @@
 <% } %>
 
 <!-- Script di inizializzazione tabella se disponibile -->
-<% if (typeof tableInitScript !== 'undefined' && tableInitScript) { %>
+<% if (typeof tableInitScript !== 'undefined' && tableInitScript && (typeof tableLayout === 'undefined' || tableLayout !== 'toggle')) { %>
   <%- tableInitScript %>
 <% } %>
 

@@ -30,34 +30,65 @@
     <%- include('../../../ui/navigation/actionNav', actionNavConfig) %>
   <% } %>
   
-  <%- include('../../../ui/tables/selectableTable', {
-    tableId: tableConfig.tableId,
-    tableData: tableData,
-    items: items,
-    tableConfig: {
-      idField: tableConfig.idField,
-      labelField: tableConfig.labelField,
-      detailUrl: tableConfig.detailUrl,
-      editUrl: tableConfig.editUrl,
-      bulkEditUrl: tableConfig.bulkEditUrl,
-      editMultipleButton: tableConfig.editMultipleButton,
-      actionButton: tableConfig.deleteButton || tableConfig.actionButton,
-      endpoint: tableConfig.endpoint,
-      method: tableConfig.method,
-      confirmMessage: tableConfig.confirmMessage,
-      confirmMessageMultiple: tableConfig.confirmMessageMultiple,
-      successMessage: tableConfig.successMessage,
-      errorMessage: tableConfig.errorMessage,
-      getDisplayValue: tableConfig.getDisplayValue,
-      disableClickableNames: tableConfig.disableClickableNames
-    },
-    filters: typeof filters !== 'undefined' ? filters : undefined,
-    hasActiveFilters: typeof hasActiveFilters !== 'undefined' ? hasActiveFilters : false,
-    clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined,
-    pagination: typeof pagination !== 'undefined' ? pagination : undefined
-  }) %>
+  <% if (typeof tableLayout !== 'undefined' && tableLayout === 'toggle') { %>
+    <%- include('../../../ui/tables/toggleTable', {
+      tableId: tableConfig.tableId,
+      tableData: tableData,
+      items: items,
+      tableConfig: {
+        idField: tableConfig.idField,
+        labelField: tableConfig.labelField,
+        detailUrl: tableConfig.detailUrl,
+        editUrl: tableConfig.editUrl,
+        bulkEditUrl: tableConfig.bulkEditUrl,
+        editMultipleButton: tableConfig.editMultipleButton,
+        actionButton: tableConfig.deleteButton,
+        endpoint: tableConfig.endpoint,
+        method: tableConfig.method,
+        confirmMessage: tableConfig.confirmMessage,
+        confirmMessageMultiple: tableConfig.confirmMessageMultiple,
+        successMessage: tableConfig.successMessage,
+        errorMessage: tableConfig.errorMessage,
+        getDisplayValue: tableConfig.getDisplayValue,
+        disableClickableNames: tableConfig.disableClickableNames,
+        entity: tableConfig.tableId.replace('-table', '')
+      },
+      filters: typeof filters !== 'undefined' ? filters : undefined,
+      hasActiveFilters: typeof hasActiveFilters !== 'undefined' ? hasActiveFilters : false,
+      clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined,
+      pagination: typeof pagination !== 'undefined' ? pagination : undefined
+    }) %>
+  <% } else { %>
+    <%- include('../../../ui/tables/selectableTable', {
+      tableId: tableConfig.tableId,
+      tableData: tableData,
+      items: items,
+      tableConfig: {
+        idField: tableConfig.idField,
+        labelField: tableConfig.labelField,
+        detailUrl: tableConfig.detailUrl,
+        editUrl: tableConfig.editUrl,
+        ...(tableConfig.bulkEditUrl ? { bulkEditUrl: tableConfig.bulkEditUrl } : {}),
+        ...(tableConfig.editMultipleButton ? { editMultipleButton: tableConfig.editMultipleButton } : {}),
+        actionButton: tableConfig.deleteButton,
+        endpoint: tableConfig.endpoint,
+        method: tableConfig.method,
+        confirmMessage: tableConfig.confirmMessage,
+        confirmMessageMultiple: tableConfig.confirmMessageMultiple,
+        successMessage: tableConfig.successMessage,
+        errorMessage: tableConfig.errorMessage,
+        getDisplayValue: tableConfig.getDisplayValue,
+        disableClickableNames: tableConfig.disableClickableNames
+      },
+      filters: typeof filters !== 'undefined' ? filters : undefined,
+      hasActiveFilters: typeof hasActiveFilters !== 'undefined' ? hasActiveFilters : false,
+      clearFiltersUrl: typeof clearFiltersUrl !== 'undefined' ? clearFiltersUrl : undefined,
+      pagination: typeof pagination !== 'undefined' ? pagination : undefined
+    }) %>
+  <% } %>
 <% } %>
 
+<% if (typeof tableLayout === 'undefined' || tableLayout !== 'toggle') { %>
 <!-- Configurazione JavaScript per la tabella -->
 <script>
   window['<%= tableConfig.tableId %>-config'] = {
@@ -69,6 +100,7 @@
     bulkEditUrl: '<%= tableConfig.bulkEditUrl %>',
     editMultipleButton: <%- JSON.stringify(tableConfig.editMultipleButton || null) %>,
     actionButton: <%- JSON.stringify(tableConfig.deleteButton || tableConfig.actionButton || null) %>,
+    actionButtons: <%- JSON.stringify(tableConfig.deleteButton || tableConfig.actionButton ? [tableConfig.deleteButton || tableConfig.actionButton] : []) %>,
     endpoint: '<%= tableConfig.endpoint %>',
     method: '<%= tableConfig.method %>',
     confirmMessage: '<%= tableConfig.confirmMessage %>',
@@ -77,4 +109,5 @@
     errorMessage: '<%= tableConfig.errorMessage %>',
     disableClickableNames: <%= typeof tableConfig.disableClickableNames !== 'undefined' ? tableConfig.disableClickableNames : 'false' %>
   };
-</script> 
+</script>
+<% } %> 

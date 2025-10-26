@@ -18,13 +18,11 @@ export const utentiTableData: TableDataSchema = {
 export const serviziTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
-        { label: 'Descrizione', sort: false, name: 'descrizione', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
-        { name: 'descrizione', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
         { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
     ],
@@ -54,25 +52,22 @@ export const menuFissiTableData: TableDataSchema = {
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Categoria', sort: true, name: 'categoria_nome', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
-        { label: 'Piatti', sort: false, name: 'piatti_count', mobile: false },
-        { label: 'Servizi', sort: false, name: 'servizi_count', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'categoria_nome', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'piatti_count', label: false, edit: false, type: 'text' },
-        { name: 'servizi_count', label: false, edit: false, type: 'text' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const viniTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Tipologia', sort: true, name: 'tipologia_nome', mobile: false },
-        { label: 'Nazione', sort: true, name: 'nazione_nome', mobile: false },
         { label: 'Prezzo Bottiglia', sort: true, name: 'prezzo', mobile: false },
         { label: 'Prezzo Calice', sort: true, name: 'prezzoCalice', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
@@ -80,55 +75,46 @@ export const viniTableData: TableDataSchema = {
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'tipologia_nome', label: false, edit: false, type: 'text' },
-        { name: 'nazione_nome', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
         { name: 'prezzoCalice', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const birreTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Tipologia', sort: true, name: 'tipologia_nome', mobile: false },
-        { label: 'Nazione', sort: true, name: 'nazione_nome', mobile: false },
-        { label: 'Grado', sort: true, name: 'grado', mobile: false },
-        { label: 'Capacità', sort: true, name: 'capacita', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'tipologia_nome', label: false, edit: false, type: 'text' },
-        { name: 'nazione_nome', label: false, edit: false, type: 'text' },
-        { name: 'grado', label: false, edit: false, type: 'text' },
-        { name: 'capacita', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const liquoriTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Tipologia', sort: true, name: 'tipologia_nome', mobile: false },
-        { label: 'Nazione', sort: true, name: 'nazione_nome', mobile: false },
-        { label: 'Grado', sort: true, name: 'grado', mobile: false },
-        { label: 'Invecchiamento', sort: true, name: 'invecchiamento', mobile: false },
-        { label: 'Capacità', sort: true, name: 'capacita', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'tipologia_nome', label: false, edit: false, type: 'text' },
-        { name: 'nazione_nome', label: false, edit: false, type: 'text' },
-        { name: 'grado', label: false, edit: false, type: 'text' },
-        { name: 'invecchiamento', label: false, edit: false, type: 'text' },
-        { name: 'capacita', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const elementiCancellatiTableData: TableDataSchema = {
@@ -152,32 +138,32 @@ export const cocktailsTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Tipologia', sort: true, name: 'tipologia_nome', mobile: false },
-        { label: 'Nazione', sort: true, name: 'nazione_nome', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'tipologia_nome', label: false, edit: false, type: 'text' },
-        { name: 'nazione_nome', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const bevandeTableData: TableDataSchema = {
     tableHeads: [
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Tipologia', sort: true, name: 'tipologia_nome', mobile: false },
-        { label: 'Nazione', sort: true, name: 'nazione_nome', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'tipologia_nome', label: false, edit: false, type: 'text' },
-        { name: 'nazione_nome', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
