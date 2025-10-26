@@ -1,9 +1,9 @@
 <div class="mt-8 flow-root">
   <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-      <div class="table-selection-container">
-        <div class="table-selection-buttons">
-          <button type="button" id="<%= tableId %>-editMultipleBtn" class="table-action-button table-action-button-edit" style="display: none;">
+      <div class="group/table relative">
+        <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white group-has-checked/table:flex sm:left-12">
+          <button type="button" id="<%= tableId %>-editMultipleBtn" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" style="display: none;">
             Modifica
           </button>
           
@@ -12,7 +12,7 @@
             <% tableConfig.actionButtons.forEach((button, index) => { %>
               <button type="button" 
                       id="<%= tableId %>-actionBtn-<%= index %>" 
-                      class="table-action-button <%= button.classes || 'table-action-button-delete' %>"
+                      class="inline-flex items-center rounded-sm px-2 py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= button.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>"
                       data-button-index="<%= index %>">
                 <%= button.text || 'Azione' %>
               </button>
@@ -20,7 +20,7 @@
           <% } else if (tableConfig.actionButton) { %>
             <!-- Fallback per compatibilità con configurazione singola -->
             <button type="button" id="<%= tableId %>-actionSelectedBtn" 
-                    class="table-action-button <%= tableConfig.actionButton.classes || 'table-action-button-delete' %>">
+                    class="inline-flex items-center rounded-sm px-2 py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= tableConfig.actionButton.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>">
               <%= tableConfig.actionButton.text || 'Elimina' %>
             </button>
           <% } %>
@@ -30,14 +30,14 @@
           <thead>
             <tr>
               <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
-                <div class="table-checkbox-selection">
+                <div class="group absolute top-1/2 left-4 -mt-2 grid size-4 grid-cols-1">
                   <input type="checkbox" 
                          id="<%= tableId %>-select-all" 
                          name="<%= tableId %>-select-all"
-                         class="table-checkbox-selection-input" />
-                  <svg viewBox="0 0 14 14" fill="none" class="table-checkbox-selection-icon">
-                    <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="checkmark" />
-                    <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="indeterminate" />
+                         class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
+                  <svg viewBox="0 0 14 14" fill="none" class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25">
+                    <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-checked:opacity-100" />
+                    <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-indeterminate:opacity-100" />
                   </svg>
                 </div>
               </th>
@@ -51,24 +51,24 @@
           <tbody class="divide-y divide-gray-200 bg-white">
             <% if (items && items.length > 0) { %>
               <% items.forEach(item => { %>
-                <tr class="table-row-selection" data-item-id="<%= item[tableConfig.idField] %>" data-type="<%= item.type || '' %>">
+                <tr class="group has-checked:bg-gray-50" data-item-id="<%= item[tableConfig.idField] %>" data-type="<%= item.type || '' %>">
                   <td class="relative px-7 sm:w-12 sm:px-6">
-                    <div class="table-row-selection-indicator"></div>
+                    <div class="absolute inset-y-0 left-0 hidden w-0.5 bg-indigo-600 group-has-checked:block"></div>
 
-                    <div class="table-checkbox-selection">
+                    <div class="group absolute top-1/2 left-4 -mt-2 grid size-4 grid-cols-1">
                       <input type="checkbox" 
                              id="<%= tableId %>-item-<%= item[tableConfig.idField] %>"
                              name="<%= tableId %>-item"
                              value="<%= item[tableConfig.idField] %>"
-                             class="table-checkbox-selection-input" />
-                      <svg viewBox="0 0 14 14" fill="none" class="table-checkbox-selection-icon">
-                        <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="checkmark" />
-                        <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="indeterminate" />
+                             class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
+                      <svg viewBox="0 0 14 14" fill="none" class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25">
+                        <path d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-checked:opacity-100" />
+                        <path d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 group-has-indeterminate:opacity-100" />
                       </svg>
                     </div>
                   </td>
                   <% tableData.fields.forEach((field, index) => { %>
-                    <td class="<%= !tableData.tableHeads[index].mobile ? 'hidden sm:table-cell' : '' %> px-3 py-4 text-sm whitespace-nowrap text-gray-500 <%= field.name === tableConfig.labelField ? 'table-label-selection' : '' %>">
+                    <td class="<%= !tableData.tableHeads[index].mobile ? 'hidden sm:table-cell' : '' %> px-3 py-4 text-sm whitespace-nowrap text-gray-500 <%= field.name === tableConfig.labelField ? 'font-medium text-gray-900 group-has-checked:text-indigo-600' : '' %>">
                       <% if (field.name === tableConfig.labelField) { %>
                         <% if (tableConfig.disableClickableNames) { %>
                           <span class="text-gray-900">

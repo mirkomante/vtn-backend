@@ -2,6 +2,8 @@ export interface TableDataSchema {
     tableHeads: TableHeader[];
     fields: TableField[];
     labels?: TableLabel[];
+    layout?: 'default' | 'toggle';
+    toggleableFields?: string[];
 }
 
 export interface TableHeader {
@@ -16,6 +18,7 @@ export interface TableField {
     label: boolean;
     edit: boolean;
     type: string;
+    toggleable?: boolean;
 }
 export interface TableLabel {
     name: string;

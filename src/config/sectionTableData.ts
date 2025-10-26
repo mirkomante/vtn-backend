@@ -26,8 +26,10 @@ export const serviziTableData: TableDataSchema = {
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'descrizione', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const piattiTableData: TableDataSchema = {
@@ -35,26 +37,16 @@ export const piattiTableData: TableDataSchema = {
         { label: 'Nome', sort: true, name: 'nome', mobile: true },
         { label: 'Categoria', sort: true, name: 'categoria_nome', mobile: false },
         { label: 'Prezzo', sort: true, name: 'prezzo', mobile: false },
-        { label: 'Allergeni', sort: false, name: 'allergeni_count', mobile: false },
-        { label: 'Gluten Free', sort: true, name: 'glutenFree', mobile: false },
-        { label: 'No Latticini', sort: true, name: 'noLatticini', mobile: false },
-        { label: 'Vegan', sort: true, name: 'vegan', mobile: false },
-        { label: 'No Uovo', sort: true, name: 'noUovo', mobile: false },
-        { label: 'Solo Menu Fissi', sort: true, name: 'soloMenuFissi', mobile: false },
         { label: 'In Lista', sort: true, name: 'inLista', mobile: false }
     ],
     fields: [
         { name: 'nome', label: true, edit: false, type: 'text' },
         { name: 'categoria_nome', label: false, edit: false, type: 'text' },
         { name: 'prezzo', label: false, edit: false, type: 'currency' },
-        { name: 'allergeni_count', label: false, edit: false, type: 'text' },
-        { name: 'glutenFree', label: false, edit: false, type: 'boolean' },
-        { name: 'noLatticini', label: false, edit: false, type: 'boolean' },
-        { name: 'vegan', label: false, edit: false, type: 'boolean' },
-        { name: 'noUovo', label: false, edit: false, type: 'boolean' },
-        { name: 'soloMenuFissi', label: false, edit: false, type: 'boolean' },
-        { name: 'inLista', label: false, edit: false, type: 'boolean' }
-    ]
+        { name: 'inLista', label: false, edit: false, type: 'boolean', toggleable: true }
+    ],
+    layout: 'toggle',
+    toggleableFields: ['inLista']
 }
 
 export const menuFissiTableData: TableDataSchema = {

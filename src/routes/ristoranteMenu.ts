@@ -152,7 +152,6 @@ router.get('/servizi', async (req, res) => {
       sectionMenu,
       sectionIcons,
       currentPath,
-      scripts: scriptManager.getScriptsForPage('table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Servizi', href: '/ristorante-menu/servizi' }
@@ -161,8 +160,11 @@ router.get('/servizi', async (req, res) => {
       hasItems: totalItems > 0,
       pagination,
       tableData: serviziTableData,
+      tableLayout: serviziTableData.layout || 'default',
+      entity: 'servizi',
       success: successMessage ? [successMessage] : undefined,
       error: errorMessage,
+      scripts: scriptManager.getScriptsForPage(serviziTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       actionNavConfig,
       emptyState: {
         title: 'Nessun servizio disponibile',
@@ -713,6 +715,8 @@ router.get('/piatti', async (req, res) => {
       sectionIcons,
       currentPath,
       tableData: piattiTableData,
+      tableLayout: piattiTableData.layout || 'default',
+      entity: 'piatti',
       items,
       hasItems,
       isSectionEmpty,
@@ -720,7 +724,7 @@ router.get('/piatti', async (req, res) => {
       pagination,
       currentCategoriaFilter: categoriaFilter,
       categorie,
-      scripts: scriptManager.getScriptsForPage('table'),
+      scripts: scriptManager.getScriptsForPage(piattiTableData.layout === 'toggle' ? 'toggleTable' : 'table'),
       breadcrumbs: [
         { label: 'Menu Ristorante', href: '/ristorante-menu' },
         { label: 'Piatti', href: '/ristorante-menu/piatti' }
@@ -13087,6 +13091,119 @@ router.delete('/impostazioni/tipologie-bevanda', async (req, res) => {
       message: 'Si è verificato un errore durante la cancellazione' 
     });
     return;
+  }
+});
+
+// === ENDPOINT GENERALIZZATO PER TOGGLE ===
+
+// Route AJAX per toggle generalizzato di campi booleani
+router.post('/toggle/:entity/:id/ajax', async (req, res) => {
+  try {
+    const { entity, id } = req.params;
+    const { field, value } = req.body;
+    
+    // Validazione parametri
+    if (!field || value === undefined) {
+      return res.json({ 
+        success: false, 
+        message: 'Campo e valore richiesti' 
+      });
+    }
+    
+    // Mappa delle entità supportate con i loro campi toggleable
+    const entityMap: { [key: string]: { model: any, toggleableFields: string[] } } = {
+      'piatti': { 
+        model: prisma.piatto, 
+        toggleableFields: ['inLista', 'glutenFree', 'noLatticini', 'vegan', 'noUovo', 'soloMenuFissi'] 
+      },
+      'birre': { 
+        model: prisma.birra, 
+        toggleableFields: ['inLista'] 
+      },
+      'liquori': { 
+        model: prisma.liquore, 
+        toggleableFields: ['inLista'] 
+      },
+      'vini': { 
+        model: prisma.vino, 
+        toggleableFields: ['inLista'] 
+      },
+      'cocktails': { 
+        model: prisma.cocktail, 
+        toggleableFields: ['inLista'] 
+      },
+      'bevande': { 
+        model: prisma.bevanda, 
+        toggleableFields: ['inLista'] 
+      },
+      'servizi': { 
+        model: prisma.servizioAccessorio, 
+        toggleableFields: ['inLista'] 
+      },
+      'menu-fissi': { 
+        model: prisma.menuFisso, 
+        toggleableFields: ['inLista'] 
+      }
+    };
+    
+    // Verifica che l'entità sia supportata
+    const entityConfig = entityMap[entity];
+    if (!entityConfig) {
+      return res.json({ 
+        success: false, 
+        message: `Entità '${entity}' non supportata` 
+      });
+    }
+    
+    // Verifica che il campo sia toggleable per questa entità
+    if (!entityConfig.toggleableFields.includes(field)) {
+      return res.json({ 
+        success: false, 
+        message: `Campo '${field}' non modificabile per ${entity}` 
+      });
+    }
+    
+    // Verifica che il record esista e non sia cancellato
+    const existingRecord = await entityConfig.model.findFirst({
+      where: { 
+        id: id,
+        deletedAt: null
+      }
+    });
+    
+    if (!existingRecord) {
+      return res.json({ 
+        success: false, 
+        message: 'Record non trovato o già cancellato' 
+      });
+    }
+    
+    // Aggiorna il record
+    await entityConfig.model.update({
+      where: { 
+        id: id,
+        deletedAt: null
+      },
+      data: { [field]: value }
+    });
+    
+    return res.json({ 
+      success: true, 
+      message: `${entity} aggiornato con successo`,
+      data: { 
+        field, 
+        value,
+        entity,
+        id
+      }
+    });
+    
+  } catch (error) {
+    console.error('Errore nel toggle:', error);
+    return res.json({ 
+      success: false, 
+      message: 'Errore durante l\'aggiornamento' 
+    });
   }
 });
 
