@@ -44,6 +44,82 @@ function showInfoToastLocal(message) {
   }
 }
 
+// Funzione per mostrare dialog di conferma con toast
+function showConfirmDialog(message, onConfirm) {
+  // Crea un overlay per il dialog di conferma
+  const overlay = document.createElement('div');
+  overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+  overlay.id = 'confirm-overlay';
+  
+  // Determina il tipo di toast in base al messaggio
+  const isDestructive = message.includes('ATTENZIONE') || message.includes('irreversibile');
+  const toastType = isDestructive ? 'warning' : 'info';
+  
+  // Crea il dialog di conferma
+  const dialog = document.createElement('div');
+  dialog.className = 'bg-white rounded-lg shadow-xl p-6 max-w-md mx-4';
+  dialog.innerHTML = `
+    <div class="flex items-start">
+      <div class="flex-shrink-0">
+        ${isDestructive ? `
+          <svg class="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+          </svg>
+        ` : `
+          <svg class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        `}
+      </div>
+      <div class="ml-3 w-0 flex-1">
+        <h3 class="text-lg font-medium text-gray-900">
+          ${isDestructive ? 'Conferma Azione' : 'Conferma'}
+        </h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500">${message}</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 flex justify-end space-x-3">
+      <button type="button" id="confirm-cancel" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        Annulla
+      </button>
+      <button type="button" id="confirm-ok" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${isDestructive ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500' : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500'}">
+        Conferma
+      </button>
+    </div>
+  `;
+  
+  overlay.appendChild(dialog);
+  document.body.appendChild(overlay);
+  
+  // Event listeners per i bottoni
+  const cancelBtn = dialog.querySelector('#confirm-cancel');
+  const confirmBtn = dialog.querySelector('#confirm-ok');
+  
+  const cleanup = () => {
+    document.body.removeChild(overlay);
+  };
+  
+  cancelBtn.addEventListener('click', cleanup);
+  confirmBtn.addEventListener('click', () => {
+    cleanup();
+    onConfirm();
+  });
+  
+  // Chiudi con ESC
+  const handleKeydown = (e) => {
+    if (e.key === 'Escape') {
+      cleanup();
+      document.removeEventListener('keydown', handleKeydown);
+    }
+  };
+  document.addEventListener('keydown', handleKeydown);
+  
+  // Focus sul bottone di conferma
+  setTimeout(() => confirmBtn.focus(), 100);
+}
+
 // ========================================
 // CLASSE PRINCIPALE PER GESTIONE SELEZIONE TABELLE
 // ========================================
@@ -282,7 +358,7 @@ class TableSelectionManager {
       // Modifica singola
       if (!this.config.editUrl) {
         console.error('TableSelectionManager: editUrl non configurato');
-        alert('Errore: URL di modifica singola non configurato');
+        showErrorToastLocal('Errore: URL di modifica singola non configurato');
         return;
       }
       
@@ -292,7 +368,7 @@ class TableSelectionManager {
       // Modifica multipla
       if (!this.config.bulkEditUrl) {
         console.error('TableSelectionManager: bulkEditUrl non configurato');
-        alert('Errore: URL di modifica multipla non configurato');
+        showErrorToastLocal('Errore: URL di modifica multipla non configurato');
         return;
       }
       
@@ -327,17 +403,24 @@ class TableSelectionManager {
       ? (actionConfig.confirmMessage || 'Sei sicuro di voler eseguire questa azione?')
       : (actionConfig.confirmMessageMultiple || `Sei sicuro di voler eseguire questa azione su ${checkedItems.length} elementi?`);
 
-    if (!confirm(confirmMessage)) {
-      return;
-    }
-
-    // Esegui l'azione
-    this.executeAction(actionConfig, itemIds);
+    showConfirmDialog(confirmMessage, () => {
+      // Esegui l'azione
+      this.executeAction(actionConfig, itemIds);
+    });
   }
 
   // Esegue l'azione specificata
   async executeAction(actionConfig, itemIds) {
     try {
+      // Mostra indicatore di caricamento
+      showInfoToastLocal('Esecuzione in corso...');
+      
+      // Disabilita temporaneamente i bottoni per evitare click multipli
+      this.actionButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      });
+
       const endpoint = actionConfig.endpoint || this.config.endpoint;
       const method = actionConfig.method || this.config.method || 'POST';
       
@@ -368,6 +451,12 @@ class TableSelectionManager {
     } catch (error) {
       console.error('TableSelectionManager: Errore durante l\'esecuzione dell\'azione:', error);
       showErrorToastLocal('Errore di connessione');
+    } finally {
+      // Riabilita i bottoni
+      this.actionButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
     }
   }
 
