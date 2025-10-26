@@ -438,8 +438,8 @@ class TableSelectionManager {
       // Prepara i dati di base
       let requestData = { itemIds };
       
-      // Gestione speciale per il ripristino che ha bisogno di itemTypes
-      if (endpoint.includes('/restore')) {
+      // Gestione speciale per ripristino ed eliminazione definitiva che hanno bisogno di itemTypes
+      if (endpoint.includes('/restore') || endpoint.includes('/permanent-delete')) {
         try {
           const itemTypes = [];
           itemIds.forEach(id => {
