@@ -1515,6 +1515,11 @@
       opacity: 100%;
     }
   }
+  .group-has-checked\/select-all\:opacity-100 {
+    &:is(:where(.group\/select-all):has(*:checked) *) {
+      opacity: 100%;
+    }
+  }
   .group-has-checked\/table\:flex {
     &:is(:where(.group\/table):has(*:checked) *) {
       display: flex;
@@ -1525,8 +1530,21 @@
       opacity: 100%;
     }
   }
+  .group-has-indeterminate\/select-all\:opacity-100 {
+    &:is(:where(.group\/select-all):has(*:indeterminate) *) {
+      opacity: 100%;
+    }
+  }
   .group-has-disabled\:stroke-gray-950\/25 {
     &:is(:where(.group):has(*:disabled) *) {
+      stroke: color-mix(in srgb, oklch(13% 0.028 261.692) 25%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        stroke: color-mix(in oklab, var(--color-gray-950) 25%, transparent);
+      }
+    }
+  }
+  .group-has-disabled\/select-all\:stroke-gray-950\/25 {
+    &:is(:where(.group\/select-all):has(*:disabled) *) {
       stroke: color-mix(in srgb, oklch(13% 0.028 261.692) 25%, transparent);
       @supports (color: color-mix(in lab, red, red)) {
         stroke: color-mix(in oklab, var(--color-gray-950) 25%, transparent);
