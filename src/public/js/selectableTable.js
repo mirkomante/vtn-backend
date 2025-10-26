@@ -435,7 +435,7 @@ class TableSelectionManager {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ids: itemIds })
+        body: JSON.stringify({ itemIds })
       });
 
       const result = await response.json();
