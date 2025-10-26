@@ -526,6 +526,9 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
   .h-12 {
     height: calc(var(--spacing) * 12);
   }
@@ -1162,6 +1165,10 @@
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
   }
+  .text-base\/6 {
+    font-size: var(--text-base);
+    line-height: calc(var(--spacing) * 6);
+  }
   .text-lg {
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
@@ -1181,6 +1188,9 @@
   .text-xs\/6 {
     font-size: var(--text-xs);
     line-height: calc(var(--spacing) * 6);
+  }
+  .text-\[0\.75rem\] {
+    font-size: 0.75rem;
   }
   .text-\[0\.625rem\] {
     font-size: 0.625rem;
