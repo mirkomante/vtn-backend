@@ -1,9 +1,9 @@
 <div class="mt-8 flow-root">
-  <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+  <div class="-mx-2 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
       <div class="relative">
-        <div class="absolute top-0 left-14 hidden h-12 items-center space-x-3 bg-white sm:left-12" id="<%= tableId %>-action-buttons">
-          <button type="button" id="<%= tableId %>-editMultipleBtn" class="inline-flex items-center rounded-sm bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" style="display: none;">
+        <div class="absolute top-0 left-12 hidden h-12 items-center space-x-4 sm:space-x-3 bg-white sm:left-12" id="<%= tableId %>-action-buttons">
+          <button type="button" id="<%= tableId %>-editMultipleBtn" class="inline-flex items-center rounded-sm bg-white px-3 py-1.5 sm:px-2 sm:py-1 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" style="display: none;">
             Modifica
           </button>
           
@@ -12,7 +12,7 @@
             <% tableConfig.actionButtons.forEach((button, index) => { %>
               <button type="button" 
                       id="<%= tableId %>-actionBtn-<%= index %>" 
-                      class="inline-flex items-center rounded-sm px-2 py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= button.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>"
+                      class="inline-flex items-center rounded-sm px-3 py-1.5 sm:px-2 sm:py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= button.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>"
                       data-button-index="<%= index %>">
                 <%= button.text || 'Azione' %>
               </button>
@@ -20,7 +20,7 @@
           <% } else if (tableConfig.actionButton) { %>
             <!-- Fallback per compatibilità con configurazione singola -->
             <button type="button" id="<%= tableId %>-actionSelectedBtn" 
-                    class="inline-flex items-center rounded-sm px-2 py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= tableConfig.actionButton.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>">
+                    class="inline-flex items-center rounded-sm px-3 py-1.5 sm:px-2 sm:py-1 text-sm font-semibold shadow-xs ring-1 ring-inset disabled:cursor-not-allowed disabled:opacity-30 <%= tableConfig.actionButton.classes || 'bg-red-600 text-white ring-red-600 hover:bg-red-700 disabled:hover:bg-red-600' %>">
               <%= tableConfig.actionButton.text || 'Elimina' %>
             </button>
           <% } %>

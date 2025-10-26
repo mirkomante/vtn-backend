@@ -32,11 +32,11 @@
     </div>
   
     <main class="lg:pl-72">
-      <div class="px-8 py-6 sm:px-6 lg:px-8">
+      <div class="px-6 py-6 sm:px-6 lg:px-8">
         
         <!-- Breadcrumbs se presenti (sempre in cima) -->
         <% if (typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 0) { %>
-          <div class="mb-8">
+          <div class="mb-6 sm:mb-8">
             <%- include('../ui/breadcrumbs/simpleWithChevrons', { breadcrumbs }) %>
           </div>
         <% } %>
@@ -50,7 +50,7 @@
         <% } %>
 
         <!-- Main content area -->
-        <div class="mt-8">
+        <div class="mt-6 sm:mt-8">
           <%- body %>
         </div>
         
