@@ -2,7 +2,8 @@ import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { menuFissoValidation } from '../../../middlewares/api/validationSchemas';
-import { createNotFoundError } from '../../../middlewares/api/errorHandler';
+import { ApiErrorClass, createNotFoundError } from '../../../middlewares/api/errorHandler';
+import { ErrorCode } from '../../../middlewares/api/errorTypes';
 
 const router = express.Router();
 
@@ -135,6 +136,18 @@ router.get('/:id', menuFissoValidation.getById, handleValidationErrors, async (r
     });
   } catch (error) {
     console.error('Errore nel recupero del menu fisso:', error);
+
+    if (error instanceof ApiErrorClass && error.code === ErrorCode.NOT_FOUND) {
+      res.status(404).json({
+        success: false,
+        error: {
+          code: error.code,
+          message: error.message
+        }
+      });
+      return;
+    }
+
     res.status(500).json({
       success: false,
       error: {

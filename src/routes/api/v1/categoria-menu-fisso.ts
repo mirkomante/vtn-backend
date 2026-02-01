@@ -2,7 +2,8 @@ import express, { Request, Response } from 'express';
 import { prisma } from '../../../app';
 import { handleValidationErrors } from '../../../middlewares/api/validation';
 import { categoriaMenuFissoValidation } from '../../../middlewares/api/validationSchemas';
-import { createNotFoundError } from '../../../middlewares/api/errorHandler';
+import { ApiErrorClass, createNotFoundError } from '../../../middlewares/api/errorHandler';
+import { ErrorCode } from '../../../middlewares/api/errorTypes';
 
 const router = express.Router();
 
@@ -173,14 +174,13 @@ router.get('/:id', categoriaMenuFissoValidation.getById, handleValidationErrors,
     });
   } catch (error) {
     console.error('Errore nel recupero della categoria menu fisso:', error);
-    
-    const err = error as Error;
-    if (err.name === 'NotFoundError') {
+
+    if (error instanceof ApiErrorClass && error.code === ErrorCode.NOT_FOUND) {
       res.status(404).json({
         success: false,
         error: {
-          code: 'NOT_FOUND',
-          message: err.message
+          code: error.code,
+          message: error.message
         }
       });
       return;
