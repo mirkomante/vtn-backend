@@ -1,0 +1,67 @@
+---
+description: API response formats and error handling standards
+globs: src/routes/api/**/*.ts, src/middlewares/**/*.ts
+alwaysApply: false
+---
+
+# API Standards (V1)
+
+## Response Format
+All API responses must follow the standard envelope structure.
+
+### Success Response
+```json
+{
+  "success": true,
+  "data": { ... }, // Object or Array
+  "meta": { ... }  // Optional: pagination, counts
+}
+```
+
+### Error Response
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human readable message",
+    "details": [ ... ] // Optional validation errors
+  }
+}
+```
+
+## Implementation
+
+### Using Response Handler
+Use the `responseHandler` middleware utility (if available) or standard helper functions to ensure consistency.
+
+```typescript
+// ✅ CORRECT
+res.json({
+  success: true,
+  data: result
+});
+
+// ❌ INCORRECT
+res.json(result);
+```
+
+### Error Handling
+Throw typed errors or pass to `next(err)` for the centralized error handler to process.
+
+```typescript
+// Validation Error
+if (!valid) {
+  throw new ValidationError('Invalid input');
+}
+
+// Not Found
+if (!item) {
+  throw new NotFoundError('Item not found');
+}
+```
+
+## Route Structure
+- `/api/v1/resource` (List)
+- `/api/v1/resource/:id` (Detail)
+- Use standard HTTP methods: GET, POST, PUT, DELETE.

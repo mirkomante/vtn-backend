@@ -1,0 +1,62 @@
+---
+description: Enforce Soft Delete patterns across the application
+globs: **/*.ts
+alwaysApply: false
+---
+
+# Soft Delete Pattern
+
+This project uses a "Soft Delete" mechanism for data integrity. Records are rarely physically deleted.
+
+## Database Schema
+Models typically have:
+```prisma
+model Example {
+  // ...
+  deletedAt DateTime?
+}
+```
+
+## Reading Data
+**ALWAYS** exclude deleted items unless explicitly requested (e.g., in "Trash" views).
+
+```typescript
+// ✅ CORRECT
+const items = await prisma.item.findMany({
+  where: {
+    deletedAt: null
+  }
+});
+
+// ❌ INCORRECT (Will return deleted items)
+const items = await prisma.item.findMany();
+```
+
+## Deleting Data
+**NEVER** use `delete()` or `deleteMany()` for standard user actions. Use `update()` to set `deletedAt`.
+
+```typescript
+// ✅ CORRECT (Soft Delete)
+await prisma.item.update({
+  where: { id },
+  data: { deletedAt: new Date() }
+});
+
+// ❌ INCORRECT (Hard Delete - Only for admin cleanup)
+await prisma.item.delete({
+  where: { id }
+});
+```
+
+## Restoring Data
+To restore an item, set `deletedAt` to `null`.
+
+```typescript
+await prisma.item.update({
+  where: { id },
+  data: { deletedAt: null }
+});
+```
+
+## Cascading Soft Deletes
+When soft-deleting a parent entity (e.g., Category), ensure you check for active children or soft-delete them as well, depending on business logic.

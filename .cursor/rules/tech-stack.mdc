@@ -1,0 +1,43 @@
+---
+description: Tech stack and core architectural principles for VTN Backend
+alwaysApply: true
+---
+
+# VTN Backend - Tech Stack & Core Principles
+
+## Tech Stack
+- **Runtime**: Node.js
+- **Framework**: Express.js with TypeScript
+- **Database**: PostgreSQL with Prisma ORM
+- **Frontend**: Server-side rendering with EJS, styled with Tailwind CSS
+- **Authentication**: Passport.js (Local + Google OAuth)
+- **State Management**: Express Sessions (PostgreSQL store)
+
+## Core Architectural Principles
+
+### 1. Centralized Configuration
+- **Forms**: Managed via `FormManager` and config files in `src/config/*FormData.ts`.
+- **Tables**: Managed via `SelectableTable` and config files in `src/config/*TableData.ts`.
+- **Detail Views**: Managed via `DetailViewConfig` in `src/config/detailViewConfig.ts`.
+- **Sub-sections**: Configured in `src/config/subSectionConfig.ts`.
+
+### 2. Soft Delete
+- **Pervasive**: Almost all database models use `deletedAt: DateTime?`.
+- **Querying**: Always filter `where: { deletedAt: null }` for active records unless specifically querying deleted items.
+- **Deletion**: Use `update({ data: { deletedAt: new Date() } })` instead of `delete()`.
+- **Hard Delete**: Only performed via specific administrative endpoints with double confirmation.
+
+### 3. API & Responses
+- **Format**: All API responses must follow the standard JSON envelope (see `api-standards.mdc`).
+- **Error Handling**: Use the centralized error handler middleware.
+- **AJAX**: The frontend relies heavily on AJAX for form submissions and table actions, handled by `FormManager` and `ajaxRoutes.ts`.
+
+### 4. UI Components
+- **Toast System**: Use `showToast()` for user feedback.
+- **Modals/Confirmations**: Use the built-in confirmation dialogs in `SelectableTable` logic.
+
+## Directory Structure Key
+- `src/config/`: The "Brain" of the UI configuration. Check here first for form/table definitions.
+- `src/views/ui/`: Reusable EJS components.
+- `src/routes/api/v1/`: REST API endpoints.
+- `src/routes/`: Web interface routes (rendering EJS).

@@ -1,0 +1,82 @@
+---
+description: Rules for using the Centralized UI System (Forms, Tables, Detail Views)
+globs: src/**/*.ts, src/**/*.ejs, src/**/*.js
+alwaysApply: false
+---
+
+# Centralized UI Architecture
+
+The project uses a configuration-driven approach for UI components to ensure consistency.
+
+## 1. Forms (FormManager)
+Do not write raw HTML forms with custom submit handlers. Use the `FormManager` system.
+
+### Configuration
+Define form structure in `src/config/*FormData.ts`:
+```typescript
+export const myEntityFormData: FormSection = {
+  fields: [
+    { name: 'fieldName', label: 'Label', type: 'text', required: true },
+    // types: text, email, password, number, select, textarea, toggle, checkbox, radio
+  ]
+};
+```
+
+### Rendering
+Use `simpleGenericForm.ejs`:
+```ejs
+<%- include('../../../ui/forms/simpleGenericForm', {
+  formId: 'my-form',
+  formData: myEntityFormData,
+  action: '/path/to/action',
+  method: 'POST',
+  isAjax: true // Enables FormManager AJAX handling
+}) %>
+```
+
+## 2. Tables (SelectableTable)
+Use `SelectableTable` for lists. It supports sorting, bulk actions, and pagination.
+
+### Configuration
+Define columns in `src/config/*TableData.ts`.
+
+### Rendering
+Use `selectableTable.ejs`:
+```ejs
+<%- include('../../../ui/tables/selectableTable', {
+  tableConfig: {
+    idField: 'id',
+    labelField: 'name',
+    endpoint: '/api/resource', // For AJAX actions
+    // ... actions configuration
+  },
+  tableData: myTableData,
+  items: items
+}) %>
+```
+
+## 3. Detail Views
+Do not hardcode detail pages. Use the centralized Detail View system.
+
+### Configuration
+Define in `src/config/detailViewConfig.ts`:
+```typescript
+export const myEntityDetailViewConfig: DetailViewConfig = {
+  fields: [
+    { name: 'price', label: 'Price', type: 'currency', format: { currency: { symbol: '€', decimals: 2 } } }
+  ],
+  layout: 'default'
+};
+```
+
+### Rendering
+Use `genericDetailView.ejs`:
+```ejs
+<%- include('../../../ui/detailViews/genericDetailView', {
+  item: item,
+  config: myEntityDetailViewConfig
+}) %>
+```
+
+## 4. Sub-sections
+For nested resources (e.g., Settings > Allergens), use `subSectionConfig.ts`. This drives the `subSection.ejs` view which automatically renders the table, empty state, and actions based on config.

@@ -1466,6 +1466,19 @@ CMD ["npm", "start"]
 4. Push al branch
 5. Crea una Pull Request
 
+## 🤖 AI Development
+
+Questo progetto è ottimizzato per l'assistenza AI (Cursor).
+
+### Regole Cursor (.cursor/rules)
+Il progetto include un set di regole `.mdc` nella cartella `.cursor/rules/` che guidano l'AI su:
+- **Tech Stack**: Architettura e tecnologie utilizzate.
+- **Soft Delete**: Pattern obbligatorio per la cancellazione dei dati.
+- **Centralized UI**: Utilizzo dei sistemi di configurazione per Form, Tabelle e Viste.
+- **API Standards**: Formati di risposta e gestione errori.
+
+Quando si utilizza Cursor, queste regole vengono caricate automaticamente per garantire che il codice generato sia conforme agli standard del progetto.
+
 ## Licenza
 
 Questo progetto è sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
