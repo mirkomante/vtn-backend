@@ -1,5 +1,50 @@
 # Changelog VTN Backend
 
+## [1.2.0] - 2026-02-04
+
+### 🆕 Aggiunto
+- **Query Parameter `?all=true`** per tutti gli endpoint con campo `inLista`
+  - Permette di accedere a tutti i record, inclusi quelli con `inLista = false`
+  - Mantiene compatibilità con il frontend esistente (comportamento di default invariato)
+  - Utile per integrazioni esterne che necessitano di tutti i dati
+
+- **10 Nuovi Endpoint Lookup**:
+  - `GET /api/v1/allergeni` - Lista tutti gli allergeni
+  - `GET /api/v1/nazioni` - Lista tutte le nazioni
+  - `GET /api/v1/regioni` - Lista tutte le regioni (con filtro `?nazioneId`)
+  - `GET /api/v1/zone` - Lista tutte le zone (con filtri `?regioneId`, `?nazioneId`)
+  - `GET /api/v1/tipologie-vino` - Lista tipologie vino
+  - `GET /api/v1/tipologie-birra` - Lista tipologie birra
+  - `GET /api/v1/tipologie-liquore` - Lista tipologie liquore
+  - `GET /api/v1/tipologie-cocktail` - Lista tipologie cocktail
+  - `GET /api/v1/tipologie-bevanda` - Lista tipologie bevanda
+  - `GET /api/v1/categorie-piatti` - Lista categorie piatti (con supporto `?all=true`)
+
+### 🔄 Modificato
+- **Endpoint esistenti** ora supportano `?all=true`:
+  - `/api/v1/piatti` (e tutti i sotto-endpoint)
+  - `/api/v1/vini` (e tutti i sotto-endpoint)
+  - `/api/v1/birre` (e tutti i sotto-endpoint)
+  - `/api/v1/liquori` (e tutti i sotto-endpoint)
+  - `/api/v1/cocktails` (e tutti i sotto-endpoint)
+  - `/api/v1/bevande` (e tutti i sotto-endpoint)
+  - `/api/v1/menu-fisso` (e tutti i sotto-endpoint)
+  - `/api/v1/servizi`
+  - `/api/v1/categoria-menu-fisso`
+
+### 📚 Documentazione
+- Aggiornata documentazione API con nuovi endpoint
+- Aggiunta sezione "Query Parameter `all`" per spiegare il comportamento
+- Documentati tutti i nuovi endpoint lookup con esempi di risposta
+- Aggiornato changelog
+
+### 🧪 Compatibilità
+- **Retrocompatibilità totale**: Il comportamento di default rimane invariato
+- Chiamate senza `?all=true` continuano a filtrare per `inLista = true`
+- Nessun breaking change per il frontend esistente
+
+---
+
 ## [1.1.2] - 2024-12-19
 
 ### 🔄 Modificato

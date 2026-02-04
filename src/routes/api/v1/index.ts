@@ -8,6 +8,17 @@ import cocktailsRoutes from './cocktails';
 import bevandeRoutes from './bevande';
 import serviziRoutes from './servizi';
 import categoriaMenuFissoRoutes from './categoria-menu-fisso';
+// Nuovi endpoint lookup
+import allergeniRoutes from './allergeni';
+import nazioniRoutes from './nazioni';
+import regioniRoutes from './regioni';
+import zoneRoutes from './zone';
+import tipologieVinoRoutes from './tipologie-vino';
+import tipologieBirraRoutes from './tipologie-birra';
+import tipologieLiquoreRoutes from './tipologie-liquore';
+import tipologieCocktailRoutes from './tipologie-cocktail';
+import tipologieBevandaRoutes from './tipologie-bevanda';
+import categoriePiattiRoutes from './categorie-piatti';
 // Middleware API
 import { apiErrorHandler, notFoundHandler, jsonErrorHandler } from '../../../middlewares/api/errorHandler';
 import { apiRequestLogger } from '../../../middlewares/api/trustProxy';
@@ -32,6 +43,17 @@ router.use('/cocktails', cocktailsRoutes);
 router.use('/bevande', bevandeRoutes);
 router.use('/servizi', serviziRoutes);
 router.use('/categoria-menu-fisso', categoriaMenuFissoRoutes);
+// Nuovi endpoint lookup
+router.use('/allergeni', allergeniRoutes);
+router.use('/nazioni', nazioniRoutes);
+router.use('/regioni', regioniRoutes);
+router.use('/zone', zoneRoutes);
+router.use('/tipologie-vino', tipologieVinoRoutes);
+router.use('/tipologie-birra', tipologieBirraRoutes);
+router.use('/tipologie-liquore', tipologieLiquoreRoutes);
+router.use('/tipologie-cocktail', tipologieCocktailRoutes);
+router.use('/tipologie-bevanda', tipologieBevandaRoutes);
+router.use('/categorie-piatti', categoriePiattiRoutes);
 
 // Endpoint di health check per l'API v1
 router.get('/health', (_req, res) => {

@@ -7,13 +7,16 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/birre - Lista tutte le birre
-router.get('/', birreValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/', birreValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const birre = await prisma.birra.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -75,7 +78,7 @@ router.get('/', birreValidation.list, handleValidationErrors, async (_req: Reque
 });
 
 // GET /api/v1/birre/raggruppati-per-tipologia - Birre raggruppate per tipologia
-router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di birre
     const tipologieBirre = await prisma.tipologiaBirra.findMany({
@@ -87,15 +90,20 @@ router.get('/raggruppati-per-tipologia', birreValidation.list, handleValidationE
       }
     });
 
+    // Costruisci condizione WHERE per birre
+    const buildBirraWhere = (tipologiaId: string) => {
+      const where: any = { tipologiaId, deletedAt: null };
+      if (req.query.all !== 'true') {
+        where.inLista = true;
+      }
+      return where;
+    };
+
     // Recupera tutte le birre raggruppate per tipologia
     const birrePerTipologia = await Promise.all(
       tipologieBirre.map(async (tipologia) => {
         const birre = await prisma.birra.findMany({
-          where: {
-            tipologiaId: tipologia.id,
-            deletedAt: null,
-            inLista: true
-          },
+          where: buildBirraWhere(tipologia.id),
           include: {
             nazione: {
               select: {
@@ -228,12 +236,17 @@ router.get('/:id', birreValidation.getById, handleValidationErrors, async (req: 
 // GET /api/v1/birre/nazione/:nazioneId - Birre per nazione
 router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      nazioneId: req.params.nazioneId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const birre = await prisma.birra.findMany({
-      where: {
-        nazioneId: req.params.nazioneId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -297,12 +310,17 @@ router.get('/nazione/:nazioneId', birreValidation.getByNation, handleValidationE
 // GET /api/v1/birre/tipologia/:tipologiaId - Birre per tipologia
 router.get('/tipologia/:tipologiaId', birreValidation.getByType, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      tipologiaId: req.params.tipologiaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const birre = await prisma.birra.findMany({
-      where: {
-        tipologiaId: req.params.tipologiaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {

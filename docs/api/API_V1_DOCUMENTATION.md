@@ -62,6 +62,32 @@ L'API implementa rate limiting per proteggere contro abusi:
 
 ---
 
+## 🔄 Query Parameter `all` - Accesso Dati Completi
+
+Tutti gli endpoint che hanno il campo `inLista` supportano il parametro query `?all=true` per accedere a tutti i record, inclusi quelli con `inLista = false`.
+
+### Comportamento
+
+| Chiamata | Risultato |
+|----------|-----------|
+| `GET /api/v1/piatti` | Solo elementi con `inLista = true` (default, compatibile frontend) |
+| `GET /api/v1/piatti?all=true` | Tutti gli elementi (inclusi `inLista = false`) |
+
+### Endpoint che supportano `?all=true`
+
+- `/api/v1/piatti` (e sotto-endpoint)
+- `/api/v1/vini` (e sotto-endpoint)
+- `/api/v1/birre` (e sotto-endpoint)
+- `/api/v1/liquori` (e sotto-endpoint)
+- `/api/v1/cocktails` (e sotto-endpoint)
+- `/api/v1/bevande` (e sotto-endpoint)
+- `/api/v1/menu-fisso` (e sotto-endpoint)
+- `/api/v1/servizi`
+- `/api/v1/categorie-piatti`
+- `/api/v1/categoria-menu-fisso`
+
+---
+
 ## 🍽️ Endpoint Piatti
 
 ### `GET /api/v1/piatti`
@@ -70,9 +96,12 @@ Lista tutti i piatti attivi del ristorante.
 
 **Comportamento**: 
 - Esclude automaticamente i piatti con `soloMenuFissi = true`
-- Include solo i piatti visibili nel menu pubblico
+- Include solo i piatti visibili nel menu pubblico (default: `inLista = true`)
 
-**Parametri**: Nessuno
+**Parametri Query**:
+- `all` (optional): Se `true`, include anche elementi con `inLista = false`
+- `categoriaId` (optional): Filtra per categoria
+- `allergeneId` (optional): Filtra per allergene
 
 **Risposta**:
 ```json
@@ -1318,6 +1347,270 @@ Lista tutti i servizi accessori attivi.
 
 ---
 
+## 📚 Endpoint Lookup (Entità di Riferimento)
+
+Questi endpoint forniscono accesso alle entità di lookup utilizzate come riferimenti nelle altre entità.
+
+---
+
+### 🚨 Allergeni
+
+#### `GET /api/v1/allergeni`
+
+Lista tutti gli allergeni.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-allergene-1",
+      "nome": "Glutine",
+      "descrizione": "Cereali contenenti glutine",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/allergeni/:id`
+
+Dettagli di un allergene specifico.
+
+**Parametri**:
+- `id` (path): UUID dell'allergene
+
+---
+
+### 🌍 Nazioni
+
+#### `GET /api/v1/nazioni`
+
+Lista tutte le nazioni.
+
+**Parametri**: Nessuno
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-nazione-1",
+      "nome": "Italia",
+      "sigla": "IT",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/nazioni/:id`
+
+Dettagli di una nazione specifica.
+
+---
+
+### 🗺️ Regioni
+
+#### `GET /api/v1/regioni`
+
+Lista tutte le regioni.
+
+**Parametri Query**:
+- `nazioneId` (optional): Filtra per nazione
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-regione-1",
+      "nome": "Toscana",
+      "nazioneId": "uuid-nazione-1",
+      "nazione": {
+        "id": "uuid-nazione-1",
+        "nome": "Italia",
+        "sigla": "IT"
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/regioni/:id`
+
+Dettagli di una regione specifica.
+
+---
+
+### 📍 Zone
+
+#### `GET /api/v1/zone`
+
+Lista tutte le zone.
+
+**Parametri Query**:
+- `regioneId` (optional): Filtra per regione
+- `nazioneId` (optional): Filtra per nazione
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-zona-1",
+      "nome": "Chianti",
+      "regioneId": "uuid-regione-1",
+      "nazioneId": "uuid-nazione-1",
+      "regione": {
+        "id": "uuid-regione-1",
+        "nome": "Toscana"
+      },
+      "nazione": {
+        "id": "uuid-nazione-1",
+        "nome": "Italia",
+        "sigla": "IT"
+      },
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/zone/:id`
+
+Dettagli di una zona specifica.
+
+---
+
+### 🏷️ Tipologie
+
+#### `GET /api/v1/tipologie-vino`
+
+Lista tutte le tipologie di vino.
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-tipologia-1",
+      "nome": "Rosso",
+      "descrizione": "Vini rossi",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/tipologie-vino/:id`
+
+Dettagli di una tipologia vino specifica.
+
+#### `GET /api/v1/tipologie-birra`
+
+Lista tutte le tipologie di birra.
+
+#### `GET /api/v1/tipologie-birra/:id`
+
+Dettagli di una tipologia birra specifica.
+
+#### `GET /api/v1/tipologie-liquore`
+
+Lista tutte le tipologie di liquore.
+
+#### `GET /api/v1/tipologie-liquore/:id`
+
+Dettagli di una tipologia liquore specifica.
+
+#### `GET /api/v1/tipologie-cocktail`
+
+Lista tutte le tipologie di cocktail.
+
+#### `GET /api/v1/tipologie-cocktail/:id`
+
+Dettagli di una tipologia cocktail specifica.
+
+#### `GET /api/v1/tipologie-bevanda`
+
+Lista tutte le tipologie di bevanda analcolica.
+
+#### `GET /api/v1/tipologie-bevanda/:id`
+
+Dettagli di una tipologia bevanda specifica.
+
+---
+
+### 🍽️ Categorie Piatti
+
+#### `GET /api/v1/categorie-piatti`
+
+Lista tutte le categorie piatti.
+
+**Parametri Query**:
+- `all` (optional): Se `true`, include anche categorie con `inLista = false`
+
+**Risposta**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid-categoria-1",
+      "nome": "Primi Piatti",
+      "descrizione": "Pasta e risotti",
+      "inLista": true,
+      "piattiCount": 12,
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "meta": {
+    "count": 1,
+    "timestamp": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+#### `GET /api/v1/categorie-piatti/:id`
+
+Dettagli di una categoria piatti specifica.
+
+---
+
 ## Health Check
 
 ### `GET /api/v1/health`
@@ -1592,6 +1885,21 @@ function validateApiResponse(data) {
 ---
 
 ## Changelog
+
+### v1.2.0 (2026-02-04)
+- ✅ **Nuovo**: Query parameter `?all=true` per accedere a tutti i dati (inclusi `inLista = false`)
+- ✅ **Nuovo**: Endpoint `/api/v1/allergeni` - Lista e dettaglio allergeni
+- ✅ **Nuovo**: Endpoint `/api/v1/nazioni` - Lista e dettaglio nazioni
+- ✅ **Nuovo**: Endpoint `/api/v1/regioni` - Lista e dettaglio regioni (con filtro nazioneId)
+- ✅ **Nuovo**: Endpoint `/api/v1/zone` - Lista e dettaglio zone (con filtri regioneId, nazioneId)
+- ✅ **Nuovo**: Endpoint `/api/v1/tipologie-vino` - Lista e dettaglio tipologie vino
+- ✅ **Nuovo**: Endpoint `/api/v1/tipologie-birra` - Lista e dettaglio tipologie birra
+- ✅ **Nuovo**: Endpoint `/api/v1/tipologie-liquore` - Lista e dettaglio tipologie liquore
+- ✅ **Nuovo**: Endpoint `/api/v1/tipologie-cocktail` - Lista e dettaglio tipologie cocktail
+- ✅ **Nuovo**: Endpoint `/api/v1/tipologie-bevanda` - Lista e dettaglio tipologie bevanda
+- ✅ **Nuovo**: Endpoint `/api/v1/categorie-piatti` - Lista e dettaglio categorie piatti
+- ✅ **Migliorato**: Tutti gli endpoint esistenti ora supportano `?all=true` per bypassare il filtro `inLista`
+- ✅ **Mantenuto**: Compatibilità totale con il frontend esistente (comportamento di default invariato)
 
 ### v1.1.1 (2024-01-15)
 - ✅ **Corretto**: Documentazione API bevande completamente rivista

@@ -7,13 +7,16 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/liquori - Lista tutti i liquori
-router.get('/', liquoriValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/', liquoriValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const liquori = await prisma.liquore.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -76,7 +79,7 @@ router.get('/', liquoriValidation.list, handleValidationErrors, async (_req: Req
 });
 
 // GET /api/v1/liquori/raggruppati-per-tipologia - Liquori raggruppati per tipologia
-router.get('/raggruppati-per-tipologia', liquoriValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/raggruppati-per-tipologia', liquoriValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di liquori
     const tipologieLiquori = await prisma.tipologiaLiquore.findMany({
@@ -88,15 +91,20 @@ router.get('/raggruppati-per-tipologia', liquoriValidation.list, handleValidatio
       }
     });
 
+    // Costruisci condizione WHERE per liquori
+    const buildLiquoreWhere = (tipologiaId: string) => {
+      const where: any = { tipologiaId, deletedAt: null };
+      if (req.query.all !== 'true') {
+        where.inLista = true;
+      }
+      return where;
+    };
+
     // Recupera tutti i liquori raggruppati per tipologia
     const liquoriPerTipologia = await Promise.all(
       tipologieLiquori.map(async (tipologia) => {
         const liquori = await prisma.liquore.findMany({
-          where: {
-            tipologiaId: tipologia.id,
-            deletedAt: null,
-            inLista: true
-          },
+          where: buildLiquoreWhere(tipologia.id),
           include: {
             nazione: {
               select: {
@@ -231,12 +239,17 @@ router.get('/:id', liquoriValidation.getById, handleValidationErrors, async (req
 // GET /api/v1/liquori/nazione/:nazioneId - Liquori per nazione
 router.get('/nazione/:nazioneId', liquoriValidation.getByNation, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      nazioneId: req.params.nazioneId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const liquori = await prisma.liquore.findMany({
-      where: {
-        nazioneId: req.params.nazioneId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -301,12 +314,17 @@ router.get('/nazione/:nazioneId', liquoriValidation.getByNation, handleValidatio
 // GET /api/v1/liquori/tipologia/:tipologiaId - Liquori per tipologia
 router.get('/tipologia/:tipologiaId', liquoriValidation.getByType, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      tipologiaId: req.params.tipologiaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const liquori = await prisma.liquore.findMany({
-      where: {
-        tipologiaId: req.params.tipologiaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {

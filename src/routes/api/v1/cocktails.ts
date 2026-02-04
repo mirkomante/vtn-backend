@@ -7,13 +7,16 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/cocktails - Lista tutti i cocktails
-router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/', cocktailsValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const cocktails = await prisma.cocktail.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -73,7 +76,7 @@ router.get('/', cocktailsValidation.list, handleValidationErrors, async (_req: R
 });
 
 // GET /api/v1/cocktails/raggruppati-per-tipologia - Cocktails raggruppati per tipologia
-router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di cocktails
     const tipologieCocktails = await prisma.tipologiaCocktail.findMany({
@@ -85,15 +88,20 @@ router.get('/raggruppati-per-tipologia', cocktailsValidation.list, handleValidat
       }
     });
 
+    // Costruisci condizione WHERE per cocktails
+    const buildCocktailWhere = (tipologiaId: string) => {
+      const where: any = { tipologiaId, deletedAt: null };
+      if (req.query.all !== 'true') {
+        where.inLista = true;
+      }
+      return where;
+    };
+
     // Recupera tutti i cocktails raggruppati per tipologia
     const cocktailsPerTipologia = await Promise.all(
       tipologieCocktails.map(async (tipologia) => {
         const cocktails = await prisma.cocktail.findMany({
-          where: {
-            tipologiaId: tipologia.id,
-            deletedAt: null,
-            inLista: true
-          },
+          where: buildCocktailWhere(tipologia.id),
           include: {
             nazione: {
               select: {
@@ -221,12 +229,17 @@ router.get('/:id', cocktailsValidation.getById, handleValidationErrors, async (r
 // GET /api/v1/cocktails/nazione/:nazioneId - Cocktails per nazione
 router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      nazioneId: req.params.nazioneId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const cocktails = await prisma.cocktail.findMany({
-      where: {
-        nazioneId: req.params.nazioneId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -288,12 +301,17 @@ router.get('/nazione/:nazioneId', cocktailsValidation.getByNation, handleValidat
 // GET /api/v1/cocktails/tipologia/:tipologiaId - Cocktails per tipologia
 router.get('/tipologia/:tipologiaId', cocktailsValidation.getByType, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      tipologiaId: req.params.tipologiaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const cocktails = await prisma.cocktail.findMany({
-      where: {
-        tipologiaId: req.params.tipologiaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {

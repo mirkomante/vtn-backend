@@ -7,13 +7,16 @@ import { createNotFoundError } from '../../../middlewares/api/errorHandler';
 const router = express.Router();
 
 // GET /api/v1/servizi - Lista tutti i servizi accessori
-router.get('/', serviziValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/', serviziValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const servizi = await prisma.servizioAccessorio.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       orderBy: {
         nome: 'asc'
       }

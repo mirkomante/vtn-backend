@@ -10,11 +10,14 @@ const router = express.Router();
 // GET /api/v1/vini - Lista tutti i vini
 router.get('/', viniValidation.list, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const vini = await prisma.vino.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -82,7 +85,7 @@ router.get('/', viniValidation.list, handleValidationErrors, async (req: Request
 });
 
 // GET /api/v1/vini/raggruppati-per-tipologia - Vini raggruppati per tipologia
-router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
     // Recupera tutte le tipologie di vini
     const tipologieVini = await prisma.tipologiaVino.findMany({
@@ -94,15 +97,20 @@ router.get('/raggruppati-per-tipologia', viniValidation.list, handleValidationEr
       }
     });
 
+    // Costruisci condizione WHERE per vini
+    const buildVinoWhere = (tipologiaId: string) => {
+      const where: any = { tipologiaId, deletedAt: null };
+      if (req.query.all !== 'true') {
+        where.inLista = true;
+      }
+      return where;
+    };
+
     // Recupera tutti i vini raggruppati per tipologia
     const viniPerTipologia = await Promise.all(
       tipologieVini.map(async (tipologia) => {
         const vini = await prisma.vino.findMany({
-          where: {
-            tipologiaId: tipologia.id,
-            deletedAt: null,
-            inLista: true
-          },
+          where: buildVinoWhere(tipologia.id),
           include: {
             nazione: {
               select: {
@@ -240,12 +248,17 @@ router.get('/:id', viniValidation.getById, handleValidationErrors, async (req: R
 // GET /api/v1/vini/nazione/:nazioneId - Vini per nazione
 router.get('/nazione/:nazioneId', viniValidation.getByNation, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+    const where: any = {
+      nazioneId: req.params.nazioneId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const vini = await prisma.vino.findMany({
-      where: {
-        nazioneId: req.params.nazioneId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {
@@ -298,12 +311,17 @@ router.get('/nazione/:nazioneId', viniValidation.getByNation, handleValidationEr
 // GET /api/v1/vini/tipologia/:tipologiaId - Vini per tipologia
 router.get('/tipologia/:tipologiaId', viniValidation.getByType, handleValidationErrors, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+    const where: any = {
+      tipologiaId: req.params.tipologiaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const vini = await prisma.vino.findMany({
-      where: {
-        tipologiaId: req.params.tipologiaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         nazione: {
           select: {

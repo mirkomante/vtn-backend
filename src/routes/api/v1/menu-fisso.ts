@@ -8,13 +8,16 @@ import { ErrorCode } from '../../../middlewares/api/errorTypes';
 const router = express.Router();
 
 // GET /api/v1/menu-fisso - Lista tutti i menu fissi
-router.get('/', menuFissoValidation.list, handleValidationErrors, async (_req: Request, res: Response): Promise<void> => {
+router.get('/', menuFissoValidation.list, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = { deletedAt: null };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const menuFissi = await prisma.menuFisso.findMany({
-      where: {
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         categoria: {
           select: {
@@ -161,12 +164,17 @@ router.get('/:id', menuFissoValidation.getById, handleValidationErrors, async (r
 // GET /api/v1/menu-fisso/categoria/:categoriaId - Menu fissi per categoria
 router.get('/categoria/:categoriaId', menuFissoValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      categoriaId: req.params.categoriaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const menuFissi = await prisma.menuFisso.findMany({
-      where: {
-        categoriaId: req.params.categoriaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         categoria: {
           select: {
@@ -229,12 +237,17 @@ router.get('/categoria/:categoriaId', menuFissoValidation.getByCategory, handleV
 // GET /api/v1/menu-fisso/categoria/:categoriaId/dettagli - Menu fissi per categoria con allergeni
 router.get('/categoria/:categoriaId/dettagli', menuFissoValidation.getByCategory, handleValidationErrors, async (req: Request, res: Response): Promise<void> => {
   try {
+    const where: any = {
+      categoriaId: req.params.categoriaId,
+      deletedAt: null
+    };
+    // Applica filtro inLista solo se all !== 'true'
+    if (req.query.all !== 'true') {
+      where.inLista = true;
+    }
+
     const menuFissi = await prisma.menuFisso.findMany({
-      where: {
-        categoriaId: req.params.categoriaId,
-        deletedAt: null,
-        inLista: true
-      },
+      where,
       include: {
         categoria: {
           select: {
