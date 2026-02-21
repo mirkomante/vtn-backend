@@ -1,0 +1,36 @@
+---
+description: Database Schema Patterns and Conventions (Prisma)
+globs: prisma/schema.prisma, src/**/*.ts
+alwaysApply: false
+---
+
+# Database Schema & Patterns
+
+## Core Conventions
+1.  **ORM**: Prisma.
+2.  **IDs**: String UUIDs (`@id @default(uuid())`) are used for almost all models.
+3.  **Naming**:
+    *   Models: PascalCase (e.g., `MenuFisso`).
+    *   Tables: snake_case (mapped via `@@map("menu_fisso")`).
+    *   Fields: camelCase.
+
+## Soft Delete Pattern
+*   **Field**: `deletedAt DateTime?` exists on almost all entities.
+*   **Rule**: NEVER use `delete()` or `deleteMany()` for standard operations.
+*   **Action**: Use `update({ data: { deletedAt: new Date() } })`.
+*   **Querying**: Always include `where: { deletedAt: null }` to fetch active records.
+*   **Hard Delete**: Reserved for specific admin tools (`permanent-delete` endpoints).
+
+## Key Relationships
+*   **MenuFisso**: Central entity connecting to `Piatto` and `ServizioAccessorio`.
+    *   Uses **Explicit Join Tables**: `MenuFissoPiatto`, `MenuFissoServizioAccessorio`.
+    *   This allows storing metadata on the relationship (e.g., `createdAt`).
+*   **Geography**: `Nazione` (1) -> `Regione` (n) -> `Zona` (n).
+    *   Used for categorizing Wines (`Vino`).
+*   **Beverages**: Polymorphic-like structure but with concrete tables: `Vino`, `Birra`, `Liquore`, `Cocktail`, `Bevanda`.
+    *   Each has a `Tipologia*` relation (e.g., `TipologiaVino`).
+
+## Migration Workflow
+1.  Edit `prisma/schema.prisma`.
+2.  Run `npm run prisma:migrate` (dev) or `npx prisma migrate deploy` (prod).
+3.  **Do not** manually edit the SQL migrations unless necessary for data backfilling.

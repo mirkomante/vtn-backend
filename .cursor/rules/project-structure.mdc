@@ -1,0 +1,41 @@
+---
+description: Map of the Project Structure and Key Directories
+globs: **/*
+alwaysApply: true
+---
+
+# Project Structure & Navigation
+
+The project follows a strict separation of concerns, heavily relying on **Centralized Configuration**.
+
+## The "Brain" (Configuration) - `src/config/`
+*   **UI Definitions**: This is where Forms, Tables, and Detail Views are defined.
+    *   `*FormData.ts`: Definitions for forms (fields, validation).
+    *   `*TableData.ts`: Definitions for table columns.
+    *   `detailViewConfig.ts`: Definitions for read-only detail views.
+    *   `subSectionConfig.ts`: Configuration for nested resources (e.g., settings).
+*   **Logic Config**: `auth.ts`, `scriptManager.ts`.
+
+## The "Body" (Views) - `src/views/`
+*   **`ui/`**: Reusable components (The "Organs").
+    *   `forms/simpleGenericForm.ejs`: Renders forms based on `*FormData.ts`.
+    *   `tables/selectableTable.ejs`: Renders tables based on `*TableData.ts`.
+    *   `detailViews/genericDetailView.ejs`: Renders details based on `detailViewConfig.ts`.
+*   **`pages/`**: Specific page templates. These often just include the UI components with specific data.
+*   **`layouts/`**: `default.ejs`, `main.ejs`, `sections.ejs`.
+
+## The "Nervous System" (Routes) - `src/routes/`
+*   **`api/v1/`**: JSON REST API endpoints.
+*   **`ristoranteMenu.ts`**: Main controller for the restaurant menu feature.
+*   **`admin.ts`**: Admin user management.
+
+## The "Memory" (Database) - `prisma/`
+*   `schema.prisma`: The single source of truth for the data model.
+*   **Conventions**:
+    *   Models are PascalCase (e.g., `ServizioAccessorio`).
+    *   Tables are mapped to snake_case (e.g., `servizi_accessori`).
+    *   UUIDs are used for IDs.
+
+## Key Flows
+1.  **Rendering a Page**: Route -> Fetch Data (Prisma) -> Load Config (`src/config`) -> Render View (`src/views`) passing both Data and Config.
+2.  **Submitting a Form**: Form (AJAX) -> Route (`ajaxRoutes.ts` mapping) -> Controller -> Prisma -> JSON Response -> Frontend Toast.

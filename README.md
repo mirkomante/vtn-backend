@@ -1476,6 +1476,11 @@ Il progetto include un set di regole `.mdc` nella cartella `.cursor/rules/` che 
 - **Soft Delete**: Pattern obbligatorio per la cancellazione dei dati.
 - **Centralized UI**: Utilizzo dei sistemi di configurazione per Form, Tabelle e Viste.
 - **API Standards**: Formati di risposta e gestione errori.
+- **Authentication**: Gestione strategie Local e Google OAuth.
+- **Script Management**: Gestione centralizzata degli script client-side.
+- **Database**: Pattern Prisma e struttura del database.
+
+Per maggiori dettagli, consultare [AI Agents Documentation](./docs/AI_AGENTS.md).
 
 Quando si utilizza Cursor, queste regole vengono caricate automaticamente per garantire che il codice generato sia conforme agli standard del progetto.
 

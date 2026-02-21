@@ -1,0 +1,44 @@
+---
+description: Rules for the Authentication System (Passport.js, Local, Google OAuth)
+globs: src/config/auth.ts, src/config/passport.ts, src/routes/auth.ts, src/middlewares/auth.ts
+alwaysApply: false
+---
+
+# Authentication System
+
+The project uses **Passport.js** with a dual-strategy approach.
+
+## Strategies
+
+1.  **Local Strategy**: Email/Password.
+    *   Enabled via `AUTH_LOCAL_ENABLED=true` in `.env`.
+    *   Uses `bcryptjs` for hashing (12 rounds).
+    *   User model fields: `email`, `password`.
+
+2.  **Google OAuth Strategy**:
+    *   Enabled via `AUTH_GOOGLE_ENABLED=true` in `.env`.
+    *   Uses `passport-google-oauth20`.
+    *   User model fields: `googleId`, `email`, `profilePicture`.
+    *   **Crucial**: The callback URL must be absolute and match the Google Cloud Console configuration.
+
+## Configuration
+
+*   **Central Config**: `src/config/auth.ts` controls which strategies are active based on env vars.
+*   **Passport Config**: `src/config/passport.ts` contains the strategy implementation.
+*   **Session Store**: `connect-pg-simple` stores sessions in the PostgreSQL database (`session` table).
+
+## Middleware
+
+*   `isAuthenticated`: Checks `req.isAuthenticated()`. Redirects to `/auth/login` if false.
+*   `isAdmin`: Checks `req.user.role === 'admin'`.
+
+## User Model
+
+*   Users can have `authProvider` set to 'local' or 'google'.
+*   The `role` field determines permissions (default: 'user').
+*   **Soft Delete**: Users have `deletedAt`. Inactive users cannot log in.
+
+## Best Practices
+
+*   **Environment Variables**: NEVER hardcode client IDs or secrets.
+*   **Conditional UI**: The login page (`src/views/auth/login.ejs`) dynamically shows/hides login buttons based on `authConfig`.

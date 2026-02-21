@@ -1,0 +1,46 @@
+---
+description: Rules for Client-Side Script Management (ScriptManager)
+globs: src/views/**/*.ejs, src/config/scriptManager.ts
+alwaysApply: true
+---
+
+# Script Management System
+
+**DO NOT** use `express-ejs-layouts`'s `extractScripts` or `defineContent('scripts')`.
+**DO NOT** write inline `<script>` tags in views unless absolutely necessary for page-specific config.
+
+Use the **ScriptManager** system to handle client-side JavaScript.
+
+## Architecture
+
+1.  **Central Config**: `src/config/scriptManager.ts` defines:
+    *   `commonScripts`: Loaded on every page (e.g., toast, sidebar).
+    *   `conditionalScripts`: Loaded only when requested (e.g., formManager, selectableTable).
+    *   `pageSpecificScripts`: Groups of scripts for specific page types (e.g., 'table', 'form').
+
+2.  **Injection**:
+    *   In your route handler (Controller), fetch the scripts:
+        ```typescript
+        import { scriptManager } from '../config/scriptManager';
+        
+        res.render('my-view', {
+          // ...
+          scripts: scriptManager.getScriptsForPage('table'), // or 'form', 'dashboard'
+        });
+        ```
+
+3.  **Rendering**:
+    *   The layout (`src/views/layouts/*.ejs`) includes `<%- include('../partials/scripts') %>`.
+    *   `scripts.ejs` iterates over the `scripts` array passed from the controller.
+
+## Common Script Groups
+
+*   `'form'`: Includes `formManager.js` (for generic forms).
+*   `'table'`: Includes `selectableTable.js` and `customFilters.js`.
+*   `'bulkEdit'`: Includes `formManager.js`.
+
+## Adding New Scripts
+
+1.  Add the script file to `src/public/js/`.
+2.  Register it in `src/config/scriptManager.ts` under `conditionalScripts`.
+3.  Add it to a group in `pageSpecificScripts` OR request it manually in the controller.
